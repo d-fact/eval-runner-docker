@@ -1,0 +1,999 @@
+===== Git History Slicing Toolkit =====
+   ______ _____  __ _                  
+  / ____// ___/ / /(_)_____ ___   _____
+ / /     \__ \ / // // ___// _ \ / ___/
+/ /___  ___/ // // // /__ /  __// /
+\____/ /____//_//_/ \___/ \___//_/
+
+=======================================
+[DEBUG] Original |H|: 115
+[OUTPUT] Computing FUNC & COMP set ... 
+[OUTPUT] Running coverage analysis ...
+[DEBUG] FULL
+[DEBUG] 15 classes have been analyzed.
+[DEBUG] Analyzing package: org/apache/commons/csv ...
+[DEBUG] 	File: CSVFormat.java ...
+[DEBUG] 	File: ExtendedBufferedReader.java ...
+[DEBUG] 	File: Constants.java ...
+[DEBUG] 	File: Token.java ...
+[DEBUG] 	File: Assertions.java ...
+[DEBUG] 	File: CSVRecord.java ...
+[DEBUG] 	File: QuoteMode.java ...
+[DEBUG] 	File: CSVPrinter.java ...
+[DEBUG] 	File: CSVParser.java ...
+[DEBUG] 	File: Lexer.java ...
+[DEBUG] Drawing static call graph ...
+[OUTPUT] Scanning class files ...
+[DEBUG] 0 Reading class file: CSVPrinter.class
+[DEBUG] 1 Reading class file: CSVParser$2.class
+[DEBUG] 2 Reading class file: Constants.class
+[DEBUG] 3 Reading class file: Token.class
+[DEBUG] 4 Reading class file: QuoteMode.class
+[DEBUG] 5 Reading class file: CSVParser.class
+[DEBUG] 6 Reading class file: CSVPrinter$1.class
+[DEBUG] 7 Reading class file: Assertions.class
+[DEBUG] 8 Reading class file: Token$Type.class
+[DEBUG] 9 Reading class file: Lexer.class
+[DEBUG] 10 Reading class file: ExtendedBufferedReader.class
+[DEBUG] 11 Reading class file: CSVFormat$Predefined.class
+[DEBUG] 12 Reading class file: CSVRecord.class
+[DEBUG] 13 Reading class file: CSVFormat.class
+[DEBUG] 14 Reading class file: CSVParser$1.class
+[DEBUG] 1: Done: org.apache.commons.csv.ExtendedBufferedReader
+[DEBUG] 2: Done: org.apache.commons.csv.Token
+[DEBUG] 3: Done: org.apache.commons.csv.CSVFormat
+[DEBUG] 4: Done: org.apache.commons.csv.QuoteMode
+[DEBUG] 5: Done: org.apache.commons.csv.CSVPrinter
+[DEBUG] 6: Done: org.apache.commons.csv.Token.Type
+[DEBUG] 7: Done: org.apache.commons.csv.Constants
+[DEBUG] 8: Done: org.apache.commons.csv.CSVRecord
+[DEBUG] 9: Done: org.apache.commons.csv.CSVParser
+[DEBUG] 10: Done: org.apache.commons.csv.Lexer
+[DEBUG] 11: Done: org.apache.commons.csv.Assertions
+[DEBUG] 12: Done: org.apache.commons.csv.CSVFormat.Predefined
+[DEBUG] Adding to touch set ...
+[DEBUG] Test: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean)
+Test: org.apache.commons.csv.CSVFormat.validate()
+Test: org.apache.commons.csv.Token.content : StringBuilder
+Test: org.apache.commons.csv.CSVFormat
+Test: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat)
+Test: org.apache.commons.csv.QuoteMode.QuoteMode()
+Test: org.apache.commons.csv.CSVFormat.withEscape(Character)
+Test: org.apache.commons.csv.ExtendedBufferedReader.getLastChar()
+Test: org.apache.commons.csv.Lexer.isCommentStart(int)
+Test: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean)
+Test: org.apache.commons.csv.CSVPrinter.newRecord : boolean
+Test: org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int)
+Test: org.apache.commons.csv.Token.Type
+Test: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames()
+Test: org.apache.commons.csv.CSVPrinter.printAndEscape(CharSequence,int,int)
+Test: org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token)
+Test: org.apache.commons.csv.CSVPrinter.printAndQuote(Object,CharSequence,int,int)
+Test: org.apache.commons.csv.CSVParser.reusableToken : Token
+Test: org.apache.commons.csv.CSVParser.nextRecord()
+Test: org.apache.commons.csv.Lexer.isStartOfLine(int)
+Test: org.apache.commons.csv.Token.Token()
+Test: org.apache.commons.csv.Lexer
+Test: org.apache.commons.csv.Lexer.getCurrentLineNumber()
+Test: org.apache.commons.csv.CSVFormat.withRecordSeparator(String)
+Test: org.apache.commons.csv.CSVFormat.isQuoteCharacterSet()
+Test: org.apache.commons.csv.CSVFormat.isLineBreak(Character)
+Test: org.apache.commons.csv.ExtendedBufferedReader.isClosed()
+Test: org.apache.commons.csv.CSVRecord.size()
+Test: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean)
+Test: org.apache.commons.csv.Assertions
+Test: org.apache.commons.csv.CSVFormat.getQuoteCharacter()
+Test: org.apache.commons.csv.ExtendedBufferedReader
+Test: org.apache.commons.csv.Constants
+Test: org.apache.commons.csv.CSVFormat.EXCEL : CSVFormat
+Test: org.apache.commons.csv.Lexer.isQuoteChar(int)
+Test: org.apache.commons.csv.Constants.DOUBLE_QUOTE_CHAR : Character
+Test: org.apache.commons.csv.ExtendedBufferedReader.lastChar : int
+Test: org.apache.commons.csv.Lexer.isEscape(int)
+Test: org.apache.commons.csv.Token
+Test: org.apache.commons.csv.CSVFormat.getHeaderComments()
+Test: org.apache.commons.csv.CSVFormat.getEscapeCharacter()
+Test: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat
+Test: org.apache.commons.csv.CSVParser.initializeHeader()
+Test: org.apache.commons.csv.CSVFormat.toStringArray(Object[])
+Test: org.apache.commons.csv.CSVFormat.getIgnoreEmptyLines()
+Test: org.apache.commons.csv.CSVFormat.withTrailingDelimiter()
+Test: org.apache.commons.csv.Token.type : Token.Type
+Test: org.apache.commons.csv.Token.Type.INVALID : Type
+Test: org.apache.commons.csv.CSVPrinter.print(Object)
+Test: org.apache.commons.csv.CSVParser
+Test: org.apache.commons.csv.CSVFormat.getNullString()
+Test: org.apache.commons.csv.CSVParser.iterator()
+Test: org.apache.commons.csv.CSVFormat.getDelimiter()
+Test: org.apache.commons.csv.Lexer.mapNullToDisabled(Character)
+Test: org.apache.commons.csv.CSVFormat.isLineBreak(char)
+Test: org.apache.commons.csv.CSVFormat.TDF : CSVFormat
+Test: org.apache.commons.csv.CSVPrinter.println()
+Test: org.apache.commons.csv.QuoteMode.ALL : QuoteMode
+Test: org.apache.commons.csv.Token.Type.EOF : Type
+Test: org.apache.commons.csv.Lexer.Lexer(CSVFormat,ExtendedBufferedReader)
+Test: org.apache.commons.csv.CSVFormat.getSkipHeaderRecord()
+Test: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat
+Test: org.apache.commons.csv.ExtendedBufferedReader.read()
+Test: org.apache.commons.csv.CSVFormat.getRecordSeparator()
+Test: org.apache.commons.csv.CSVFormat.withQuote(Character)
+Test: org.apache.commons.csv.Token.reset()
+Test: org.apache.commons.csv.CSVFormat.getIgnoreSurroundingSpaces()
+Test: org.apache.commons.csv.QuoteMode
+Test: org.apache.commons.csv.CSVRecord.EMPTY_STRING_ARRAY : String[]
+Test: org.apache.commons.csv.Lexer.getCharacterPosition()
+Test: org.apache.commons.csv.CSVFormat.isEscapeCharacterSet()
+Test: org.apache.commons.csv.Token.Type.COMMENT : Type
+Test: org.apache.commons.csv.QuoteMode.MINIMAL : QuoteMode
+Test: org.apache.commons.csv.CSVParser.addRecordValue(boolean)
+Test: org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode)
+Test: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat,long,long)
+Test: org.apache.commons.csv.ExtendedBufferedReader.getPosition()
+Test: org.apache.commons.csv.Lexer.readEndOfLine(int)
+Test: org.apache.commons.csv.Lexer.isClosed()
+Test: org.apache.commons.csv.CSVFormat.withRecordSeparator(char)
+Test: org.apache.commons.csv.CSVFormat.withHeader(String...)
+Test: org.apache.commons.csv.CSVRecord
+Test: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces()
+Test: org.apache.commons.csv.CSVParser.isClosed()
+Test: org.apache.commons.csv.CSVRecord.get(String)
+Test: org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber()
+Test: org.apache.commons.csv.CSVParser.record : List
+Test: org.apache.commons.csv.Lexer.isEndOfFile(int)
+Test: org.apache.commons.csv.CSVFormat.getTrailingDelimiter()
+Test: org.apache.commons.csv.CSVFormat.withTrailingDelimiter(boolean)
+Test: org.apache.commons.csv.Assertions.notNull(Object,String)
+Test: org.apache.commons.csv.CSVPrinter.printRecord(Object...)
+Test: org.apache.commons.csv.Token.Type.Type()
+Test: org.apache.commons.csv.CSVFormat.withTrim(boolean)
+Test: org.apache.commons.csv.ExtendedBufferedReader.ExtendedBufferedReader(Reader)
+Test: org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.withEscape(char)
+Test: org.apache.commons.csv.CSVFormat.withDelimiter(char)
+Test: org.apache.commons.csv.CSVFormat.withQuote(char)
+Test: org.apache.commons.csv.Lexer.isDelimiter(int)
+Test: org.apache.commons.csv.CSVFormat.getHeader()
+Test: org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase()
+Test: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean)
+Test: org.apache.commons.csv.CSVFormat.withNullString(String)
+Test: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord()
+Test: org.apache.commons.csv.ExtendedBufferedReader.lookAhead()
+Test: org.apache.commons.csv.QuoteMode.NON_NUMERIC : QuoteMode
+Test: org.apache.commons.csv.CSVRecord.CSVRecord(String[],Map<String, Integer>,String,long,long)
+Test: org.apache.commons.csv.CSVFormat.RFC4180 : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.parse(Reader)
+Test: org.apache.commons.csv.CSVFormat.getQuoteMode()
+Test: org.apache.commons.csv.Lexer.nextToken(Token)
+Test: org.apache.commons.csv.CSVFormat.getCommentMarker()
+Test: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean)
+Test: org.apache.commons.csv.CSVPrinter
+Test: org.apache.commons.csv.Token.Type.TOKEN : Type
+Test: org.apache.commons.csv.CSVFormat.getTrim()
+Test: org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat)
+Test: org.apache.commons.csv.QuoteMode.NONE : QuoteMode
+Test: org.apache.commons.csv.CSVPrinter.close()
+Test: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.withTrim()
+Test: org.apache.commons.csv.Lexer.parseSimpleToken(Token,int)
+Test: org.apache.commons.csv.Token.Type.EORECORD : Type
+Comp: org.apache.commons.csv.Lexer.isEscape(int)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getLastChar()
+Comp: org.apache.commons.csv.CSVFormat.quoteCharacter : Character
+Comp: org.apache.commons.csv.Token.Type.COMMENT : Type
+Comp: org.apache.commons.csv.CSVFormat.recordSeparator : String
+Comp: org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token)
+Comp: org.apache.commons.csv.Token.isReady : boolean
+Comp: org.apache.commons.csv.CSVParser.characterOffset : long
+Comp: org.apache.commons.csv.Token.Type.TOKEN : Type
+Comp: org.apache.commons.csv.Constants.DOUBLE_QUOTE_CHAR : Character
+Comp: org.apache.commons.csv.CSVPrinter.printAndEscape(CharSequence,int,int)
+Comp: org.apache.commons.csv.CSVPrinter.printComment(String)
+Comp: org.apache.commons.csv.CSVFormat.trailingDelimiter : boolean
+Comp: org.apache.commons.csv.CSVFormat.withHeader(String[])
+Comp: org.apache.commons.csv.ExtendedBufferedReader.eolCounter : long
+Comp: org.apache.commons.csv.CSVFormat.nullString : String
+Comp: org.apache.commons.csv.Lexer.commentStart : char
+Comp: org.apache.commons.csv.Token.Type.INVALID : Type
+Comp: org.apache.commons.csv.CSVPrinter.printRecord(Object[])
+Comp: org.apache.commons.csv.CSVFormat.delimiter : char
+Comp: org.apache.commons.csv.CSVFormat.getNullString()
+Comp: org.apache.commons.csv.CSVParser.2.$SwitchMap$org$apache$commons$csv$Token$Type : int[]
+Comp: org.apache.commons.csv.CSVFormat.withTrim(boolean)
+Comp: org.apache.commons.csv.CSVFormat.escapeCharacter : Character
+Comp: org.apache.commons.csv.CSVFormat.getAllowMissingColumnNames()
+Comp: org.apache.commons.csv.Lexer.isCommentStart(int)
+Comp: org.apache.commons.csv.CSVPrinter.1.$SwitchMap$org$apache$commons$csv$QuoteMode : int[]
+Comp: org.apache.commons.csv.CSVFormat.getTrim()
+Comp: org.apache.commons.csv.Lexer.ignoreSurroundingSpaces : boolean
+Comp: org.apache.commons.csv.ExtendedBufferedReader.lastChar : int
+Comp: org.apache.commons.csv.QuoteMode.NON_NUMERIC : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.EXCEL : CSVFormat
+Comp: org.apache.commons.csv.CSVRecord.size()
+Comp: org.apache.commons.csv.CSVFormat.withEscape(char)
+Comp: org.apache.commons.csv.Lexer.Lexer(CSVFormat,ExtendedBufferedReader)
+Comp: org.apache.commons.csv.CSVFormat.getEscapeCharacter()
+Comp: org.apache.commons.csv.CSVRecord.values()
+Comp: org.apache.commons.csv.Lexer.getCurrentLineNumber()
+Comp: org.apache.commons.csv.CSVFormat.getRecordSeparator()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.closed : boolean
+Comp: org.apache.commons.csv.Token.type : Type
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber()
+Comp: char[]
+Comp: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean)
+Comp: org.apache.commons.csv.Lexer.nextToken(Token)
+Comp: org.apache.commons.csv.CSVFormat.Predefined
+Comp: org.apache.commons.csv.ExtendedBufferedReader.position : long
+Comp: org.apache.commons.csv.CSVParser.record : List
+Comp: org.apache.commons.csv.CSVFormat.Predefined[]
+Comp: org.apache.commons.csv.Lexer.isClosed()
+Comp: org.apache.commons.csv.CSVParser.headerMap : Map
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getPosition()
+Comp: org.apache.commons.csv.Token.Type.EOF : Type
+Comp: org.apache.commons.csv.CSVFormat.RFC4180 : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.isEscapeCharacterSet()
+Comp: org.apache.commons.csv.Lexer.delimiter : char
+Comp: org.apache.commons.csv.CSVFormat.withRecordSeparator(char)
+Comp: org.apache.commons.csv.CSVFormat.getCommentMarker()
+Comp: org.apache.commons.csv.Token.Type.ordinal()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.readLine()
+Comp: org.apache.commons.csv.CSVFormat.withTrailingDelimiter(boolean)
+Comp: org.apache.commons.csv.QuoteMode.ordinal()
+Comp: org.apache.commons.csv.Token.Type[]
+Comp: org.apache.commons.csv.CSVPrinter.println()
+Comp: org.apache.commons.csv.Lexer.readEndOfLine(int)
+Comp: org.apache.commons.csv.CSVFormat.withRecordSeparator(String)
+Comp: org.apache.commons.csv.Token
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean)
+Comp: org.apache.commons.csv.CSVPrinter.out : Appendable
+Comp: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat
+Comp: org.apache.commons.csv.CSVParser.iterator()
+Comp: org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.withQuote(Character)
+Comp: org.apache.commons.csv.CSVFormat.quoteMode : QuoteMode
+Comp: org.apache.commons.csv.Lexer
+Comp: org.apache.commons.csv.CSVFormat.header : String[]
+Comp: org.apache.commons.csv.CSVPrinter.printAndQuote(Object,CharSequence,int,int)
+Comp: org.apache.commons.csv.CSVFormat.getQuoteCharacter()
+Comp: org.apache.commons.csv.Lexer.readEscape()
+Comp: org.apache.commons.csv.CSVFormat.isCommentMarkerSet()
+Comp: org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.read()
+Comp: org.apache.commons.csv.CSVFormat.withNullString(String)
+Comp: org.apache.commons.csv.CSVFormat.ignoreSurroundingSpaces : boolean
+Comp: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat)
+Comp: org.apache.commons.csv.CSVFormat.isQuoteCharacterSet()
+Comp: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean)
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreSurroundingSpaces()
+Comp: org.apache.commons.csv.CSVFormat.allowMissingColumnNames : boolean
+Comp: org.apache.commons.csv.Lexer.quoteChar : char
+Comp: org.apache.commons.csv.CSVParser.lexer : Lexer
+Comp: org.apache.commons.csv.CSVFormat.getDelimiter()
+Comp: org.apache.commons.csv.QuoteMode.NONE : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord()
+Comp: org.apache.commons.csv.CSVRecord.characterPosition : long
+Comp: org.apache.commons.csv.CSVFormat.toStringArray(Object[])
+Comp: org.apache.commons.csv.CSVParser.reusableToken : Token
+Comp: org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat)
+Comp: org.apache.commons.csv.Token.reset()
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase()
+Comp: org.apache.commons.csv.CSVRecord.recordNumber : long
+Comp: org.apache.commons.csv.CSVFormat
+Comp: org.apache.commons.csv.CSVRecord.values : String[]
+Comp: org.apache.commons.csv.CSVRecord
+Comp: org.apache.commons.csv.CSVFormat.parse(Reader)
+Comp: org.apache.commons.csv.QuoteMode[]
+Comp: org.apache.commons.csv.ExtendedBufferedReader.lookAhead()
+Comp: org.apache.commons.csv.CSVFormat.ignoreEmptyLines : boolean
+Comp: org.apache.commons.csv.CSVPrinter.format : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.skipHeaderRecord : boolean
+Comp: org.apache.commons.csv.Lexer.reader : ExtendedBufferedReader
+Comp: org.apache.commons.csv.CSVFormat.withDelimiter(char)
+Comp: org.apache.commons.csv.Lexer.mapNullToDisabled(Character)
+Comp: org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int)
+Comp: org.apache.commons.csv.QuoteMode.MINIMAL : QuoteMode
+Comp: org.apache.commons.csv.CSVPrinter.trim(CharSequence)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.isClosed()
+Comp: org.apache.commons.csv.Lexer.isWhitespace(int)
+Comp: org.apache.commons.csv.CSVRecord.get(String)
+Comp: org.apache.commons.csv.CSVParser.addRecordValue(boolean)
+Comp: org.apache.commons.csv.CSVFormat.withHeader(Class)
+Comp: org.apache.commons.csv.Lexer.isMetaChar(int)
+Comp: org.apache.commons.csv.CSVParser
+Comp: org.apache.commons.csv.Lexer.ignoreEmptyLines : boolean
+Comp: org.apache.commons.csv.Assertions
+Comp: org.apache.commons.csv.CSVPrinter.print(Object)
+Comp: org.apache.commons.csv.QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.getHeader()
+Comp: org.apache.commons.csv.CSVPrinter
+Comp: org.apache.commons.csv.CSVFormat.commentMarker : Character
+Comp: org.apache.commons.csv.Constants
+Comp: org.apache.commons.csv.ExtendedBufferedReader.ExtendedBufferedReader(Reader)
+Comp: org.apache.commons.csv.CSVParser.nextRecord()
+Comp: org.apache.commons.csv.CSVParser.recordNumber : long
+Comp: org.apache.commons.csv.CSVRecord.comment : String
+Comp: org.apache.commons.csv.QuoteMode.ALL : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.getTrailingDelimiter()
+Comp: org.apache.commons.csv.Lexer.trimTrailingSpaces(StringBuilder)
+Comp: org.apache.commons.csv.CSVRecord.get(Enum)
+Comp: org.apache.commons.csv.CSVFormat.validate()
+Comp: org.apache.commons.csv.CSVFormat.headerComments : String[]
+Comp: org.apache.commons.csv.CSVRecord.EMPTY_STRING_ARRAY : String[]
+Comp: org.apache.commons.csv.Lexer.getCharacterPosition()
+Comp: org.apache.commons.csv.Lexer.isQuoteChar(int)
+Comp: org.apache.commons.csv.CSVParser.isClosed()
+Comp: org.apache.commons.csv.Token.Type
+Comp: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.trim : boolean
+Comp: org.apache.commons.csv.Token.content : StringBuilder
+Comp: org.apache.commons.csv.CSVFormat.getSkipHeaderRecord()
+Comp: org.apache.commons.csv.Token.Token()
+Comp: org.apache.commons.csv.CSVParser.1.{...}
+Comp: org.apache.commons.csv.CSVPrinter.close()
+Comp: org.apache.commons.csv.CSVFormat.TDF : CSVFormat
+Comp: org.apache.commons.csv.Lexer.parseSimpleToken(Token,int)
+Comp: org.apache.commons.csv.Lexer.isEndOfFile(int)
+Comp: org.apache.commons.csv.CSVFormat.getHeaderComments()
+Comp: org.apache.commons.csv.Lexer.isDelimiter(int)
+Comp: org.apache.commons.csv.CSVRecord.CSVRecord(String[],Map,String,long,long)
+Comp: org.apache.commons.csv.Lexer.isStartOfLine(int)
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean)
+Comp: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat,long,long)
+Comp: org.apache.commons.csv.ExtendedBufferedReader
+Comp: org.apache.commons.csv.CSVPrinter.newRecord : boolean
+Comp: org.apache.commons.csv.CSVFormat.isLineBreak(char)
+Comp: org.apache.commons.csv.CSVFormat.ignoreHeaderCase : boolean
+Comp: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean)
+Comp: org.apache.commons.csv.CSVFormat.isLineBreak(Character)
+Comp: org.apache.commons.csv.CSVParser.format : CSVFormat
+Comp: org.apache.commons.csv.CSVParser.getCurrentLineNumber()
+Comp: org.apache.commons.csv.CSVFormat.getQuoteMode()
+Comp: org.apache.commons.csv.Lexer.escape : char
+Comp: org.apache.commons.csv.CSVFormat.withEscape(Character)
+Comp: org.apache.commons.csv.Assertions.notNull(Object,String)
+Comp: org.apache.commons.csv.CSVParser.initializeHeader()
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreEmptyLines()
+Comp: org.apache.commons.csv.Token.Type.EORECORD : Type
+Comp: org.apache.commons.csv.CSVRecord.mapping : Map
+
+
+[OUTPUT] Initial |S| = 115
+[OUTPUT] Analysing Commits ... 
+[DEBUG] === Inspecting commit: 4dc151d1 : [7310e5c Document release 1.3 for github contributors] README.md ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2f39282e : [ffb3c49 Fix incorrect link names in main navigation] src/site/site.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 34969ef4 : [a351eea Note release date of release 1.3 in changes.xml] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6ca3d7fa : [8a79e74 Bump development version after release 1.3] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 41bf3e3b : [b502c5a Sort 1 method into place.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: e6b36230 : [8b24cd1 [CSV-181] Make CSVPrinter.print(Object) GC-free.] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVPrinter.print(Object) : org.apache.commons.csv.CSVPrinter.print(Object) : (114, 133) --> (114, 134)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVPrinter.trim(CharSequence) : org.apache.commons.csv.CSVPrinter : (136, 151)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 49ed75ae : [8b24cd1 [CSV-181] Make CSVPrinter.print(Object) GC-free.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 81846d7b : [7688fbc Update site navigation for release 1.3] src/site/site.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2fe6f058 : [b322e2f Sort methods in alphabetic order] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: cd67a9f4 : [5c13854 Add missing since tags] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1c7aa7a7 : [0bbc5be Prepare release 1.3] src/site/xdoc/index.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 99211482 : [0bbc5be Prepare release 1.3] src/site/xdoc/download_csv.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5a8f01f2 : [0bbc5be Prepare release 1.3] RELEASE-NOTES.txt ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3a878f1c : [ffb7054 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/Lexer.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Lexer.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: dd9e98c0 : [ffb7054 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 03251018 : [4e8c781 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 393771c1 : [cf1460b Simplify boolean expression: emptyHeader will always be true when reached.] src/main/java/org/apache/commons/csv/CSVParser.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVParser.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVParser.initializeHeader() : org.apache.commons.csv.CSVParser.initializeHeader() : (372, 416) --> (372, 415)
+[DEBUG] 
+[DEBUG] === Inspecting commit: d5e734af : [4901f1c Checkstyle: Operator should be on the previous line] src/main/java/org/apache/commons/csv/CSVParser.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVParser.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 81aceed8 : [d9d6a8f Make parameters final] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean) : org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean) : (469, 529) --> (469, 529)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 37fd9673 : [562b277 Checkstyle: Line is too long] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6c8f0de6 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/Constants.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Constants.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 841eac7b : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0bdefbe5 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: c7f11c60 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/Assertions.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Assertions.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 155c3efa : [da77daf Add test CSV file for issue CSV-167 to RAT ignore (like all the other test CSV files)] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: db71cfb3 : [554af4b Access test data using the classloader instead of defining a file handle] src/test/java/org/apache/commons/csv/bugs/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 245d1dce : [f99b7e7 Add missing license header] src/test/java/org/apache/commons/csv/bugs/JiraCsv164Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5ebc47ca : [357562b New structure for the user guide using subsections. More documentation on how to define headers.] src/site/xdoc/user-guide.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 730e7bfd : [3a3b483 Drop senseless assertion] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d811c29f : [42afea8 Organize imports, don't use wildcard imports] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: f8ddebc2 : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d76838fc : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withFirstRecordAsHeader() : org.apache.commons.csv.CSVFormat : (1077, 1094)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2a0fd7f7 : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5db874e1 : [1813f26 Add missing @since tag] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 26298135 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/bugs/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1fd9d437 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/bugs/JiraCsv164Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 737c9cb6 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6061c37a : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 240c854c : [20eac69 Delegate to withHeader(String[]) instead of calling the long constructor directly] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : (1107, 1145) --> (1107, 1143)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 59c2dece : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5d5ca6f9 : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withHeader(Class<? extends Enum<?>>) : org.apache.commons.csv.CSVFormat : (1176, 1207)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 10959b3c : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d5668655 : [04b3645 Drop modifiers which are implied by the context] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 59a864c1 : [b8f37e2 Fix JavaDoc errors] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 52cac991 : [63ddb09 Remove trailing white spaces] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: d6a73aa4 : [8cf9ff2 Update to latest commons-parent pom] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: fe36c76a : [0123e27 Remove unused site documentation files] src/site/xdoc/examples.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d1fe3f9e : [0123e27 Remove unused site documentation files] src/site/xdoc/cvs-usage.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 71a07a24 : [e802fe1 Update tests from Apache Commons IO 2.4 to 2.5.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: cb9ffc09 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b96ccd17 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/test/java/org/apache/commons/csv/CSVParserTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 73c5b967 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVPrinter.print(Object) : org.apache.commons.csv.CSVPrinter.print(Object) : (114, 132) --> (114, 133)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVPrinter.println() : org.apache.commons.csv.CSVPrinter.println() : (347, 359) --> (348, 363)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9c9f4d0e : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVParser.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVParser.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVParser.nextRecord() : org.apache.commons.csv.CSVParser.nextRecord() : (483, 533) --> (487, 537)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVParser.addRecordValue(boolean) : org.apache.commons.csv.CSVParser : (289, 297)
+[DEBUG] Delete: METHOD: org.apache.commons.csv.CSVParser.addRecordValue() : org.apache.commons.csv.CSVParser : (289, 293)
+[DEBUG] 
+[DEBUG] === Inspecting commit: b0a5546f : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean) : org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean) : (1292, 1305) --> (1386, 1399)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean) : org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean) : (1162, 1174) --> (1258, 1270)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : (1011, 1049) --> (1107, 1145)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withRecordSeparator(String) : org.apache.commons.csv.CSVFormat.withRecordSeparator(String) : (1259, 1278) --> (1353, 1372)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withDelimiter(char) : org.apache.commons.csv.CSVFormat.withDelimiter(char) : (932, 948) --> (1028, 1044)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean) : org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean) : (1137, 1149) --> (1233, 1245)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.newFormat(char) : org.apache.commons.csv.CSVFormat.newFormat(char) : (330, 352) --> (400, 423)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode) : org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode) : (1228, 1240) --> (1322, 1334)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withNullString(String) : org.apache.commons.csv.CSVFormat.withNullString(String) : (1176, 1195) --> (1272, 1289)
+[DEBUG] Update: FIELD: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat : org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat : (198, 213) --> (210, 220)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withCommentMarker(Character) : org.apache.commons.csv.CSVFormat.withCommentMarker(Character) : (912, 930) --> (1008, 1026)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withEscape(Character) : org.apache.commons.csv.CSVFormat.withEscape(Character) : (963, 979) --> (1059, 1075)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeaderComments(Object...) : org.apache.commons.csv.CSVFormat.withHeaderComments(Object...) : (1080, 1099) --> (1176, 1195)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withQuote(Character) : org.apache.commons.csv.CSVFormat.withQuote(Character) : (1210, 1226) --> (1304, 1320)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean) : org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean) : (1112, 1124) --> (1208, 1220)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeader(String...) : org.apache.commons.csv.CSVFormat.withHeader(String...) : (1051, 1078) --> (1147, 1174)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean) : org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean) : (883, 895) --> (979, 991)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.getTrailingDelimiter() : org.apache.commons.csv.CSVFormat : (750, 757)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean) : org.apache.commons.csv.CSVFormat : (469, 528)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withTrailingDelimiter(boolean) : org.apache.commons.csv.CSVFormat : (1424, 1436)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withTrim(boolean) : org.apache.commons.csv.CSVFormat : (1401, 1413)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withTrailingDelimiter() : org.apache.commons.csv.CSVFormat : (1415, 1422)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withTrim() : org.apache.commons.csv.CSVFormat : (1438, 1445)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.getTrim() : org.apache.commons.csv.CSVFormat : (759, 766)
+[DEBUG] Delete: METHOD: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean) : org.apache.commons.csv.CSVFormat : (394, 448)
+[DEBUG] Insert: FIELD: org.apache.commons.csv.CSVFormat.trailingDelimiter : boolean : org.apache.commons.csv.CSVFormat : (465, 465)
+[DEBUG] Insert: FIELD: org.apache.commons.csv.CSVFormat.trim : boolean : org.apache.commons.csv.CSVFormat : (467, 467)
+[DEBUG] Insert: FIELD: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat : org.apache.commons.csv.CSVFormat : (260, 285)
+[DEBUG] Insert: FIELD: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat : org.apache.commons.csv.CSVFormat : (287, 311)
+[DEBUG] 
+[DEBUG] === Inspecting commit: d650d778 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b1c0b43a : [1039950 Sort members.] src/test/java/org/apache/commons/csv/CSVParserTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d787e5e8 : [4d2155f [CSV-175] Add PIPE char for Informix WIP.] src/main/java/org/apache/commons/csv/Constants.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Constants.java ---
+[DEBUG] Insert: FIELD: org.apache.commons.csv.Constants.PIPE : char : org.apache.commons.csv.Constants : (69, 69)
+[DEBUG] Delete: FIELD: org.apache.commons.csv.Constants.PIPE : String : org.apache.commons.csv.Constants : (69, 69)
+[DEBUG] 
+[DEBUG] === Inspecting commit: f162972e : [4ca7b7a [CSV-175] Add PIPE char for Informix WIP.] src/main/java/org/apache/commons/csv/Constants.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Constants.java ---
+[DEBUG] Insert: FIELD: org.apache.commons.csv.Constants.PIPE : String : org.apache.commons.csv.Constants : (69, 69)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 73949aa2 : [2210c0b Sort members.] src/main/java/org/apache/commons/csv/Constants.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Constants.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 362f5916 : [0685c84 Format nits.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0b200be3 : [a4c1a85 Sort members.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 82f7d1b2 : [ad38b2d Use final.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0f0ae847 : [ad38b2d Use final.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 17d34f13 : [dd2cd54 CSV-167] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 15351e98 : [409feb2 Doc] src/main/java/org/apache/commons/csv/CSVRecord.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVRecord.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8ee6d10d : [72f78cc Oops, forgot to commit this] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4bb94c23 : [2465f5e CSV-167 Rename method and update Javadoc to correspond with reality] src/main/java/org/apache/commons/csv/CSVRecord.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVRecord.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVRecord.hasComment() : org.apache.commons.csv.CSVRecord : (164, 172)
+[DEBUG] Delete: METHOD: org.apache.commons.csv.CSVRecord.isComment() : org.apache.commons.csv.CSVRecord : (164, 172)
+[DEBUG] 
+[DEBUG] === Inspecting commit: cdbcce09 : [51049fd Fix test] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 81d9fc75 : [51b4bf3 Ignore experimental tests.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d3737b6d : [c26c858 Update copyright for 2016 in NOTICE.txt] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2abe6afe : [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3db06a15 : [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 51e74644 : [8861157 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 21a2fe7b : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3f234f27 : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int) : org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int) : (134, 148) --> (134, 150)
+[DEBUG] 
+[DEBUG] === Inspecting commit: da5f386f : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Update: FIELD: org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat : org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat : (294, 318) --> (294, 324)
+[DEBUG] 
+[DEBUG] === Inspecting commit: aee058fd : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: e7f5831f : [913e4a8 Better Javadoc.] src/main/java/org/apache/commons/csv/Constants.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Constants.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9436e73b : [70185ba Copyright 2002-2016 The Apache Software Foundation.] NOTICE.txt ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 37fab9ff : [5206b2a [CSV-169] The null string should be case-sensitive when reading records. Also simplify branch test.] src/main/java/org/apache/commons/csv/CSVParser.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVParser.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVParser.addRecordValue() : org.apache.commons.csv.CSVParser.addRecordValue() : (289, 297) --> (289, 293)
+[DEBUG] 
+[DEBUG] === Inspecting commit: aaf8e0da : [5206b2a [CSV-169] The null string should be case-sensitive when reading records. Also simplify branch test.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: c35e230b : [446eaf8 Format.] src/test/java/org/apache/commons/csv/Utils.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: ce491e7a : [c52b1f0 FindBugs: Avoid possible NPE.] src/test/java/org/apache/commons/csv/CSVFileParserTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 975b2202 : [453cfcb Use final.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: bf73c390 : [453cfcb Use final.] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 79795fbc : [453cfcb Use final.] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 22a4c812 : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/test/resources/csv-167/sample1.csv ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0465b3aa : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b09c1ce2 : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/main/java/org/apache/commons/csv/CSVRecord.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVRecord.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVRecord.isComment() : org.apache.commons.csv.CSVRecord : (164, 172)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 74969499 : [ce9768f Update javancss-maven-plugin 2.0 -> 2.1.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6165ae83 : [fbc6196 findbugs-maven-plugin 3.0.2 -> 3.0.3.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1ad280ca : [6b069cf Fix PMDs: Unnecessary use of fully qualified name 'Constants.END_OF_STREAM' due to existing static import 'org.apache.commons.csv.Constants.END_OF_STREAM'.] src/main/java/org/apache/commons/csv/Lexer.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Lexer.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.Lexer.parseSimpleToken(Token,int) : org.apache.commons.csv.Lexer.parseSimpleToken(Token,int) : (167, 218) --> (167, 218)
+[DEBUG] Update: METHOD: org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token) : org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token) : (220, 289) --> (220, 289)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 54d20b1e : [290fdff Update maven-pmd-plugin 3.5 -> 3.6.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2613efba : [af94955 maven-checkstyle-plugin 2.16 -> 2.17.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 587f21d1 : [65cc3ed Collect the DOAPs] doap_csv.rdf ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 11e56785 : [e7d9ab0 TODO.] src/main/java/org/apache/commons/csv/Assertions.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/Assertions.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3fda8862 : [e0f022e More tests.] src/test/java/org/apache/commons/csv/CSVParserTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: ce54d016 : [bae5752 commons-parent 38 -> 39.] pom.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 340da44a : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/test/java/org/apache/commons/csv/CSVParserTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: bc6764b5 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVParser.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVParser.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVParser.initializeHeader() : org.apache.commons.csv.CSVParser.initializeHeader() : (371, 413) --> (372, 416)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4d96f4c8 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVFormat.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVFormat.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean) : org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean) : (1233, 1246) --> (1275, 1288)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean) : org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean) : (1103, 1115) --> (1120, 1132)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData) : (982, 1019) --> (999, 1036)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withRecordSeparator(String) : org.apache.commons.csv.CSVFormat.withRecordSeparator(String) : (1200, 1219) --> (1242, 1261)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withDelimiter(char) : org.apache.commons.csv.CSVFormat.withDelimiter(char) : (876, 892) --> (893, 909)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.newFormat(char) : org.apache.commons.csv.CSVFormat.newFormat(char) : (343, 365) --> (344, 366)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode) : org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode) : (1169, 1181) --> (1211, 1223)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.toString() : org.apache.commons.csv.CSVFormat.toString() : (748, 788) --> (762, 805)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withNullString(String) : org.apache.commons.csv.CSVFormat.withNullString(String) : (1117, 1136) --> (1159, 1178)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.hashCode() : org.apache.commons.csv.CSVFormat.hashCode() : (657, 674) --> (670, 688)
+[DEBUG] Update: FIELD: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat : org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat : (214, 229) --> (215, 232)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withCommentMarker(Character) : org.apache.commons.csv.CSVFormat.withCommentMarker(Character) : (856, 874) --> (873, 891)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withEscape(Character) : org.apache.commons.csv.CSVFormat.withEscape(Character) : (907, 923) --> (924, 940)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeaderComments(Object...) : org.apache.commons.csv.CSVFormat.withHeaderComments(Object...) : (1021, 1040) --> (1038, 1057)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withQuote(Character) : org.apache.commons.csv.CSVFormat.withQuote(Character) : (1151, 1167) --> (1193, 1209)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean) : org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean) : (1078, 1090) --> (1095, 1107)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withHeader(String...) : org.apache.commons.csv.CSVFormat.withHeader(String...) : (925, 951) --> (942, 968)
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean) : org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean) : (1053, 1065) --> (1070, 1082)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean) : org.apache.commons.csv.CSVFormat : (380, 434)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean) : org.apache.commons.csv.CSVFormat : (1145, 1157)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase() : org.apache.commons.csv.CSVFormat : (609, 616)
+[DEBUG] Insert: METHOD: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase() : org.apache.commons.csv.CSVFormat : (1134, 1143)
+[DEBUG] Delete: METHOD: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean) : org.apache.commons.csv.CSVFormat : (379, 430)
+[DEBUG] Insert: FIELD: org.apache.commons.csv.CSVFormat.ignoreHeaderCase : boolean : org.apache.commons.csv.CSVFormat : (213, 213)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5c223da7 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b5052ab8 : [2f76dfa Add github badges to README.md instead of CONTRIBUTING.md] README.md ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a911227f : [2f76dfa Add github badges to README.md instead of CONTRIBUTING.md] CONTRIBUTING.md ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4e59b022 : [c20cd95 Add badges for github.] CONTRIBUTING.md ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a8a1bc4d : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 7a73f4a1 : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/main/java/org/apache/commons/csv/CSVPrinter.java ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/csv/CSVPrinter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat) : org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat) : (45, 79) --> (45, 79)
+[DEBUG] 
+[DEBUG] === Inspecting commit: a1708f44 : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a5511a52 : [1d5dfcb Test CSV-154.] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: edb61aea : [68c74f6 Test CSV-154.] src/test/java/org/apache/commons/csv/CSVFormatTest.java ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4dcb0243 : [e7ccb14 Version 1.2.] src/changes/changes.xml ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3e00abc1 : [5ed84eb Version 1.2.] README.md ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a1312fa9 : [d641efa Version 1.2.] doap_csv.rdf ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2d84142d : [7dbb8d4 Typos.] RELEASE-NOTES.txt ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8ca16b44 : [816abc0 Update POM version from 1.2-SNAPSHOT to 1.3-SNAPSHOT.] pom.xml ===
+[DEBUG] 
+
+[OUTPUT] Analysing Hunk Dependency ... 
+[DEBUG] Done: [8b24cd1 [CSV-181] Make CSVPrinter.print(Object) GC-free.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+[DEBUG] Done: [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+[DEBUG] Done: [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+[DEBUG] Done: [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+[DEBUG] Done: [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [a4c1a85 Sort members.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [0685c84 Format nits.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [453cfcb Use final.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [d9d6a8f Make parameters final] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [562b277 Checkstyle: Line is too long] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Done: [cf1460b Simplify boolean expression: emptyHeader will always be true when reached.] src/main/java/org/apache/commons/csv/CSVParser.java
+[DEBUG] Done: [6b069cf Fix PMDs: Unnecessary use of fully qualified name 'Constants.END_OF_STREAM' due to existing static import 'org.apache.commons.csv.Constants.END_OF_STREAM'.] src/main/java/org/apache/commons/csv/Lexer.java
+[DEBUG] Done: [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVParser.java
+[DEBUG] Done: [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVParser.java
+[DEBUG] Done: [5206b2a [CSV-169] The null string should be case-sensitive when reading records. Also simplify branch test.] src/main/java/org/apache/commons/csv/CSVParser.java
+[DEBUG] Done: [20eac69 Delegate to withHeader(String[]) instead of calling the long constructor directly] src/main/java/org/apache/commons/csv/CSVFormat.java
+[DEBUG] Hunk depends on: 37fd9673 : [562b277 Checkstyle: Line is too long] src/main/java/org/apache/commons/csv/CSVFormat.java : added back.
+[DEBUG] Hunk depends on: 362f5916 : [0685c84 Format nits.] src/main/java/org/apache/commons/csv/CSVFormat.java : added back.
+[DEBUG] Hunk depends on: 0b200be3 : [a4c1a85 Sort members.] src/main/java/org/apache/commons/csv/CSVFormat.java : added back.
+[DEBUG] Hunk depends on: 2abe6afe : [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/main/java/org/apache/commons/csv/CSVFormat.java : added back.
+[DEBUG] Hunk depends on: 79795fbc : [453cfcb Use final.] src/main/java/org/apache/commons/csv/CSVFormat.java : added back.
+[DEBUG] src/main/java/org/apache/commons/csv/CSVFormat.java : d76838fc48927c65b7a085c468adcf4aea961733
+[DEBUG] src/main/java/org/apache/commons/csv/CSVRecord.java : inconsistent!
+[DEBUG] src/main/java/org/apache/commons/csv/Constants.java : inconsistent!
+
+[DEBUG] Original |H| 115
+[DEBUG] Tracker:
+[
+8ca16b44062faae81cfa3dcc88206fb584ffb502 : []
+2d84142d326790536036d07ce78d4c6a1e90f377 : []
+a1312fa98f1e26f3d7aab4e9567a6d4a039201f5 : []
+3e00abc1b770a89dac05c2657c30d79299768412 : []
+4dcb0243701467a7392bf17d22f7d13bd17675b7 : []
+edb61aeaf478569595bae6bb5d74d85f01862b35 : []
+a5511a52143c063d36893c71027f2d79da0ec736 : []
+a1708f44c9ce61150d7750c6ca8cea7ce0450704 : []
+7a73f4a11082ae3411cef73b64ab8f1f8766418b : [[org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat):UPD,TEST]]
+a8a1bc4dc7228d699fe7270235fa96386233c962 : []
+4e59b022a19265b5c928eba836313ef2e0c340a2 : []
+a911227f18675ecaffc80c80e7e174626941c203 : []
+b5052ab874f991faea439f40418d5a5ab2737e80 : []
+5c223da7343fbe707716de7f3f73136d4f5d12e5 : []
+4d96f4c80fdb02883771609079e799f1602f8edc : [[org.apache.commons.csv.CSVFormat.withDelimiter(char):UPD,TEST], [org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase():INS,DROP], [org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean):INS,DROP], [org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat:UPD,TEST], [org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode):UPD,TEST], [org.apache.commons.csv.CSVFormat.hashCode():UPD,DROP], [org.apache.commons.csv.CSVFormat.newFormat(char):UPD,DROP], [org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.withNullString(String):UPD,TEST], [org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean):INS,TEST], [org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.withHeaderComments(Object...):UPD,DROP], [org.apache.commons.csv.CSVFormat.withHeader(String...):UPD,TEST], [org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.withCommentMarker(Character):UPD,DROP], [org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.toString():UPD,DROP], [org.apache.commons.csv.CSVFormat.withEscape(Character):UPD,TEST], [org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData):UPD,TEST], [org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase():INS,TEST], [org.apache.commons.csv.CSVFormat.withRecordSeparator(String):UPD,TEST], [org.apache.commons.csv.CSVFormat.withQuote(Character):UPD,TEST], [org.apache.commons.csv.CSVFormat.ignoreHeaderCase : boolean:INS,COMP], [org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean):DEL,DROP]]
+bc6764b5b4fa30f0df4a6bcf7adbc28e4cfc99b3 : [[org.apache.commons.csv.CSVParser.initializeHeader():UPD,TEST]]
+340da44a3ccbcfe10923f8682fc022b23c8a2d2e : []
+ce54d01654ea4037c931435238d57cdc2cdeb822 : []
+3fda88628c752efb9e257fe447b92a245121ddaa : []
+11e56785cee1bc9c00511e5c4986be3a66ec7642 : []
+587f21d158e33bdaa9b1066630dfb4da292f371b : []
+2613efba28ed66df3c84e1d65dda791813ccbca6 : []
+54d20b1eeb9dc068d82993bfec204723d7edbd2c : []
+1ad280ca3d5f0c8eb0ede1bc162e40a791435683 : [[org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token):UPD,TEST], [org.apache.commons.csv.Lexer.parseSimpleToken(Token,int):UPD,TEST]]
+6165ae837afe2956e0d6ebc5d54f24f187ebf399 : []
+749694992cdc5ccd692dfcb3ea83704481a39ad9 : []
+b09c1ce2bb1fab765b1297d0e4b9a0c204ccea3b : [[org.apache.commons.csv.CSVRecord.isComment():INS,DROP]]
+0465b3aa265db513904ec69a7bfbba8e3b2514e8 : []
+22a4c81248aba313b46360828b3f3d2f1862db80 : []
+79795fbcec690bb52c0ccc9ab581ea56a4739f09 : []
+bf73c3907f508e2d81d625e0e033e45f9ec0420b : []
+975b22025405a8ef021ee84158f79ef368245b04 : []
+ce491e7a34c850f98e5b582225506aada5ae9804 : []
+c35e230bf7075373020438ddcea2f1431186a556 : []
+aaf8e0daf4f7b382a18bb0b5b862e7ac57de84ce : []
+37fab9ff505e9894cdcde6b6474993d6ac87aa3e : [[org.apache.commons.csv.CSVParser.addRecordValue():UPD,TEST]]
+9436e73b589071ed0ca76c089e9893041d7a761e : []
+e7f5831f3f3acfaf113cbbfe3aa88d7cc264c2e2 : []
+aee058fdccfa730edb50c53c972a0cbb80556446 : []
+da5f386fbc569190bf75896a76ca3de58f0ef86a : [[org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat:UPD,TEST]]
+3f234f2716361081d7a1f008fd0fe1299765f5c8 : [[org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int):UPD,TEST]]
+21a2fe7b8d7b18c8cb499f5261b43e38e35c2e62 : []
+51e74644790cc9a26c9d915628db17ed84e2402a : []
+3db06a15ce5d7e1af56b475ede9dfb2039e9e275 : []
+2abe6afe5082851794053ff8e5294b278588f3fd : []
+d3737b6d9c4106d8269a394cb81920bc608faa1c : []
+81d9fc754ff195f3e5fa7c848168d1c875815d65 : []
+cdbcce097fcb8925bb53cbff8e6d998559fbd470 : []
+4bb94c2366d1afa9bd665efc9729e1adb045b4d9 : [[org.apache.commons.csv.CSVRecord.hasComment():INS,DROP], [org.apache.commons.csv.CSVRecord.isComment():DEL,DROP]]
+8ee6d10dc3279d05abaec1780b11764cda5053c8 : []
+15351e9827fe44c02a32e4bbbb863e630418dae3 : []
+17d34f136e64a1984f7512fbe50f6d7c4126cfe9 : []
+0f0ae8479e1267ea80227aed0acdb4f54310385d : []
+82f7d1b28799f8e00d1164c5aa2db0f5afa50c7d : []
+0b200be33ee5a2cf9c8c869695ef9d37771d323b : []
+362f59168627e2bc6fc0b0949b1620740d89e85b : []
+73949aa265693e566165ae4547e4e778c529e8c9 : []
+f162972ed8c52317d9cf1356c3fa6d52bba09d10 : [[org.apache.commons.csv.Constants.PIPE : String:INS,DROP]]
+d787e5e8f64a218b0acd942f30c439ba36a94e41 : [[org.apache.commons.csv.Constants.PIPE : String:DEL,DROP], [org.apache.commons.csv.Constants.PIPE : char:INS,DROP]]
+b1c0b43a3f86b711c258a44920edf3dd9551a104 : []
+d650d778d7c84c2989ef45ea26d9993330409ff8 : []
+b0a5546f80854c56ab669c1b80407cb60fd8ff3d : [[org.apache.commons.csv.CSVFormat.withTrim(boolean):INS,TEST], [org.apache.commons.csv.CSVFormat.newFormat(char):UPD,DROP], [org.apache.commons.csv.CSVFormat.withRecordSeparator(String):UPD,TEST], [org.apache.commons.csv.CSVFormat.withEscape(Character):UPD,TEST], [org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat:INS,TEST], [org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat:UPD,TEST], [org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.getTrim():INS,TEST], [org.apache.commons.csv.CSVFormat.withDelimiter(char):UPD,TEST], [org.apache.commons.csv.CSVFormat.withTrailingDelimiter(boolean):INS,TEST], [org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean):DEL,DROP], [org.apache.commons.csv.CSVFormat.withHeaderComments(Object...):UPD,DROP], [org.apache.commons.csv.CSVFormat.trim : boolean:INS,COMP], [org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.trailingDelimiter : boolean:INS,COMP], [org.apache.commons.csv.CSVFormat.withCommentMarker(Character):UPD,DROP], [org.apache.commons.csv.CSVFormat.withNullString(String):UPD,TEST], [org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean):UPD,DROP], [org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData):UPD,TEST], [org.apache.commons.csv.CSVFormat.withTrailingDelimiter():INS,TEST], [org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat:INS,TEST], [org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.getTrailingDelimiter():INS,TEST], [org.apache.commons.csv.CSVFormat.withHeader(String...):UPD,TEST], [org.apache.commons.csv.CSVFormat.withQuote(Character):UPD,TEST], [org.apache.commons.csv.CSVFormat.withTrim():INS,TEST], [org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode):UPD,TEST], [org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean):UPD,TEST], [org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean):INS,TEST]]
+9c9f4d0efa235ca797427c1f73b9682061b30edf : [[org.apache.commons.csv.CSVParser.nextRecord():UPD,TEST], [org.apache.commons.csv.CSVParser.addRecordValue():DEL,DROP], [org.apache.commons.csv.CSVParser.addRecordValue(boolean):INS,TEST]]
+73c5b96798a58cdaa5b6fc79689f333a8f2cf48f : [[org.apache.commons.csv.CSVPrinter.print(Object):UPD,TEST], [org.apache.commons.csv.CSVPrinter.println():UPD,TEST]]
+b96ccd175b9dd6a0d4fc6ba2ccfefe4d378bf9e3 : []
+cb9ffc091cdd210948b979291305d79db6797f00 : []
+71a07a24ba834bcfb14260b3da8f997f6b386c01 : []
+d1fe3f9e13d935c94116f79acf8435fa3556b397 : []
+fe36c76a10dc22508b13dc004f39a9764b53ec5d : []
+d6a73aa4ca7bcf5c622572c5e865a1dc783c50fb : []
+52cac991339ebe72aa22ad41b309db8b636ae231 : []
+59a864c1fcf398988679676642b087c16c6ed93b : []
+d5668655bb69ad0f1803371484e8fbd1f1d9cec0 : []
+10959b3c0f108f125c7aefed15a4410576443698 : []
+5d5ca6f968fefe2b16cfefbae67e22f7c428fe09 : [[org.apache.commons.csv.CSVFormat.withHeader(Class<? extends Enum<?>>):INS,TEST]]
+59c2decefad54d763270adbbce8494cfc61f8194 : []
+240c854c5708d99c9d868e315abdec66004c10ec : [[org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData):UPD,TEST]]
+6061c37a8afc43293cbc9833742376d53c283451 : []
+737c9cb60e7bc6f88f9d331467db22b455c7981d : []
+1fd9d43756de36de16d1a6f4f0183d7d7b707c34 : []
+26298135890a741962413f05302dede0d53e8743 : []
+5db874e114e0c98a23c8ae9bc73b65622c988b30 : []
+2a0fd7f78b5c62714eeb8d24d4fc2a79c6eb6ea1 : []
+d76838fc48927c65b7a085c468adcf4aea961733 : [[org.apache.commons.csv.CSVFormat.withFirstRecordAsHeader():INS,DROP]]
+f8ddebc222ba6c720f6cf3f98af3f23238bc80cb : []
+d811c29fd298f709f482d3beca57b8d9711dc53c : []
+730e7bfd680e46005def60fc84bc6268dc3a153c : []
+5ebc47ca7d8103d0dba53526be1af9b31b6a2af5 : []
+245d1dcedfadcc17851d98f9e3a0da3ce57de7ae : []
+db71cfb38dbd4065b0644ed995b0298313bbd8e9 : []
+155c3efa19841dfadbecd7ea861c2c28bec9483a : []
+c7f11c60f3143643f05fa8a9f8634c4c60651651 : []
+0bdefbe52420c313331dccee2b1b57a404420cbc : []
+841eac7b008b97d2a738a80af56502fdd1a78ebf : []
+6c8f0de6e8f457a4503c87e5bd2477e4f584d73e : []
+37fd9673ee60c17eee6e047e6a7ee9c6283d9983 : []
+81aceed8d4c478be30161dac3bf1a218eb64cb86 : [[org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean):UPD,TEST]]
+d5e734afe1bd241502c75fbfbf6932c61414d7b1 : []
+393771c16c949926022cd031658f7cbe701ccfcc : [[org.apache.commons.csv.CSVParser.initializeHeader():UPD,TEST]]
+0325101828985729790745e79517d43e189a55f0 : []
+dd9e98c0c2e31eeb7364c1a3ee9c8e616095e88c : []
+3a878f1cf8a1d0ffde4f11058f57a5cfbc8ef7a1 : []
+5a8f01f295f7171a83e7e8f2159cacd3492fcbdf : []
+9921148204226ffe7a2d431b7255bd39bb1a824a : []
+1c7aa7a79e8d1eeca3120d843aea7b8cc9187da1 : []
+cd67a9f4347179d17776c24e21cb80158667e876 : []
+2fe6f0585df28b41cb67ba974311403abf1a9ae0 : []
+81846d7ba0899f9937f2ef5e16cdde2d921869c9 : []
+49ed75ae4328f90e60640977d2c779d73e951da1 : []
+e6b3623063fdea7c7e36ee12afd5b43ec9589773 : [[org.apache.commons.csv.CSVPrinter.print(Object):UPD,TEST], [org.apache.commons.csv.CSVPrinter.trim(CharSequence):INS,COMP]]
+41bf3e3b901f30433c02bc516042ef816381f8a0 : []
+6ca3d7fab3cad7c5c4f9cbfdd9c4d47f2167872a : []
+34969ef40500ea09eb65a0f03a861062e8bed85f : []
+2f39282e20ce2e4aa0ca796cf0b7ad86de0a141b : []
+4dc151d14b7060d4babb8cc8fec14f328497890c : []
+]
+[OUTPUT] Results:
+DROP: 4dc151d1 : [7310e5c Document release 1.3 for github contributors] README.md
+DROP: 2f39282e : [ffb3c49 Fix incorrect link names in main navigation] src/site/site.xml
+DROP: 34969ef4 : [a351eea Note release date of release 1.3 in changes.xml] src/changes/changes.xml
+DROP: 6ca3d7fa : [8a79e74 Bump development version after release 1.3] pom.xml
+DROP: 41bf3e3b : [b502c5a Sort 1 method into place.] src/main/java/org/apache/commons/csv/CSVFormat.java
+TEST: e6b36230 : [8b24cd1 [CSV-181] Make CSVPrinter.print(Object) GC-free.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+DROP: 49ed75ae : [8b24cd1 [CSV-181] Make CSVPrinter.print(Object) GC-free.] src/changes/changes.xml
+DROP: 81846d7b : [7688fbc Update site navigation for release 1.3] src/site/site.xml
+DROP: 2fe6f058 : [b322e2f Sort methods in alphabetic order] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: cd67a9f4 : [5c13854 Add missing since tags] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 1c7aa7a7 : [0bbc5be Prepare release 1.3] src/site/xdoc/index.xml
+DROP: 99211482 : [0bbc5be Prepare release 1.3] src/site/xdoc/download_csv.xml
+DROP: 5a8f01f2 : [0bbc5be Prepare release 1.3] RELEASE-NOTES.txt
+DROP: 3a878f1c : [ffb7054 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/Lexer.java
+DROP: dd9e98c0 : [ffb7054 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java
+DROP: 03251018 : [4e8c781 PMD: Remove useless parentheses] src/main/java/org/apache/commons/csv/CSVPrinter.java
+TEST: 393771c1 : [cf1460b Simplify boolean expression: emptyHeader will always be true when reached.] src/main/java/org/apache/commons/csv/CSVParser.java
+DROP: d5e734af : [4901f1c Checkstyle: Operator should be on the previous line] src/main/java/org/apache/commons/csv/CSVParser.java
+TEST: 81aceed8 : [d9d6a8f Make parameters final] src/main/java/org/apache/commons/csv/CSVFormat.java
+HUNK: 37fd9673 : [562b277 Checkstyle: Line is too long] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 6c8f0de6 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/Constants.java
+DROP: 841eac7b : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/CSVPrinter.java
+DROP: 0bdefbe5 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: c7f11c60 : [3568bba Checkstyle: Line has trailing spaces] src/main/java/org/apache/commons/csv/Assertions.java
+DROP: 155c3efa : [da77daf Add test CSV file for issue CSV-167 to RAT ignore (like all the other test CSV files)] pom.xml
+DROP: db71cfb3 : [554af4b Access test data using the classloader instead of defining a file handle] src/test/java/org/apache/commons/csv/bugs/JiraCsv167Test.java
+DROP: 245d1dce : [f99b7e7 Add missing license header] src/test/java/org/apache/commons/csv/bugs/JiraCsv164Test.java
+DROP: 5ebc47ca : [357562b New structure for the user guide using subsections. More documentation on how to define headers.] src/site/xdoc/user-guide.xml
+DROP: 730e7bfd : [3a3b483 Drop senseless assertion] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+DROP: d811c29f : [42afea8 Organize imports, don't use wildcard imports] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+DROP: f8ddebc2 : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+DROP: d76838fc : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 2a0fd7f7 : [b6f0655 CSV-179: Add shortcut method for using first record as header to CSVFormat] src/changes/changes.xml
+DROP: 5db874e1 : [1813f26 Add missing @since tag] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 26298135 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/bugs/JiraCsv167Test.java
+DROP: 1fd9d437 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/bugs/JiraCsv164Test.java
+DROP: 737c9cb6 : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: 6061c37a : [9ab47dc Move tests for specific issues to own package] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+TEST: 240c854c : [20eac69 Delegate to withHeader(String[]) instead of calling the long constructor directly] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 59c2dece : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+TEST: 5d5ca6f9 : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 10959b3c : [4def868 CSV-180: Add withHeader(Class<? extends Enum>) to CSVFormat] src/changes/changes.xml
+DROP: d5668655 : [04b3645 Drop modifiers which are implied by the context] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 59a864c1 : [b8f37e2 Fix JavaDoc errors] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 52cac991 : [63ddb09 Remove trailing white spaces] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: d6a73aa4 : [8cf9ff2 Update to latest commons-parent pom] pom.xml
+DROP: fe36c76a : [0123e27 Remove unused site documentation files] src/site/xdoc/examples.xml
+DROP: d1fe3f9e : [0123e27 Remove unused site documentation files] src/site/xdoc/cvs-usage.xml
+DROP: 71a07a24 : [e802fe1 Update tests from Apache Commons IO 2.4 to 2.5.] pom.xml
+DROP: cb9ffc09 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+DROP: b96ccd17 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/test/java/org/apache/commons/csv/CSVParserTest.java
+TEST: 73c5b967 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+TEST: 9c9f4d0e : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVParser.java
+TEST: b0a5546f : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: d650d778 : [16b9e2c [CSV-175] Support for ignoring trailing delimiter. [CSV-177] Support trimming leading and trailing blanks. [CSV-178] Create default formats for Informix UNLOAD and UNLOAD CSV.] src/changes/changes.xml
+DROP: b1c0b43a : [1039950 Sort members.] src/test/java/org/apache/commons/csv/CSVParserTest.java
+DROP: d787e5e8 : [4d2155f [CSV-175] Add PIPE char for Informix WIP.] src/main/java/org/apache/commons/csv/Constants.java
+DROP: f162972e : [4ca7b7a [CSV-175] Add PIPE char for Informix WIP.] src/main/java/org/apache/commons/csv/Constants.java
+DROP: 73949aa2 : [2210c0b Sort members.] src/main/java/org/apache/commons/csv/Constants.java
+HUNK: 362f5916 : [0685c84 Format nits.] src/main/java/org/apache/commons/csv/CSVFormat.java
+HUNK: 0b200be3 : [a4c1a85 Sort members.] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 82f7d1b2 : [ad38b2d Use final.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: 0f0ae847 : [ad38b2d Use final.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+DROP: 17d34f13 : [dd2cd54 CSV-167] src/changes/changes.xml
+DROP: 15351e98 : [409feb2 Doc] src/main/java/org/apache/commons/csv/CSVRecord.java
+DROP: 8ee6d10d : [72f78cc Oops, forgot to commit this] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: 4bb94c23 : [2465f5e CSV-167 Rename method and update Javadoc to correspond with reality] src/main/java/org/apache/commons/csv/CSVRecord.java
+DROP: cdbcce09 : [51049fd Fix test] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: 81d9fc75 : [51b4bf3 Ignore experimental tests.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+DROP: d3737b6d : [c26c858 Update copyright for 2016 in NOTICE.txt] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+HUNK: 2abe6afe : [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 3db06a15 : [82b6d2e [CSV-161] Fix Javadoc to say CSVFormat with() methods return a new CSVFormat.] src/changes/changes.xml
+DROP: 51e74644 : [8861157 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] pom.xml
+DROP: 21a2fe7b : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+TEST: 3f234f27 : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+TEST: da5f386f : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: aee058fd : [f8b80e8 [CSV-168] CsvFormat.nullString should not be escaped. [CSV-170] CSVFormat.MYSQL nullString should be \N.] src/changes/changes.xml
+DROP: e7f5831f : [913e4a8 Better Javadoc.] src/main/java/org/apache/commons/csv/Constants.java
+DROP: 9436e73b : [70185ba Copyright 2002-2016 The Apache Software Foundation.] NOTICE.txt
+TEST: 37fab9ff : [5206b2a [CSV-169] The null string should be case-sensitive when reading records. Also simplify branch test.] src/main/java/org/apache/commons/csv/CSVParser.java
+DROP: aaf8e0da : [5206b2a [CSV-169] The null string should be case-sensitive when reading records. Also simplify branch test.] src/changes/changes.xml
+DROP: c35e230b : [446eaf8 Format.] src/test/java/org/apache/commons/csv/Utils.java
+DROP: ce491e7a : [c52b1f0 FindBugs: Avoid possible NPE.] src/test/java/org/apache/commons/csv/CSVFileParserTest.java
+DROP: 975b2202 : [453cfcb Use final.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: bf73c390 : [453cfcb Use final.] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+HUNK: 79795fbc : [453cfcb Use final.] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 22a4c812 : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/test/resources/csv-167/sample1.csv
+DROP: 0465b3aa : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/test/java/org/apache/commons/csv/JiraCsv167Test.java
+DROP: b09c1ce2 : [54597a8 Unit test for [CSV-167] Comment line hides next record.] src/main/java/org/apache/commons/csv/CSVRecord.java
+DROP: 74969499 : [ce9768f Update javancss-maven-plugin 2.0 -> 2.1.] pom.xml
+DROP: 6165ae83 : [fbc6196 findbugs-maven-plugin 3.0.2 -> 3.0.3.] pom.xml
+TEST: 1ad280ca : [6b069cf Fix PMDs: Unnecessary use of fully qualified name 'Constants.END_OF_STREAM' due to existing static import 'org.apache.commons.csv.Constants.END_OF_STREAM'.] src/main/java/org/apache/commons/csv/Lexer.java
+DROP: 54d20b1e : [290fdff Update maven-pmd-plugin 3.5 -> 3.6.] pom.xml
+DROP: 2613efba : [af94955 maven-checkstyle-plugin 2.16 -> 2.17.] pom.xml
+DROP: 587f21d1 : [65cc3ed Collect the DOAPs] doap_csv.rdf
+DROP: 11e56785 : [e7d9ab0 TODO.] src/main/java/org/apache/commons/csv/Assertions.java
+DROP: 3fda8862 : [e0f022e More tests.] src/test/java/org/apache/commons/csv/CSVParserTest.java
+DROP: ce54d016 : [bae5752 commons-parent 38 -> 39.] pom.xml
+DROP: 340da44a : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/test/java/org/apache/commons/csv/CSVParserTest.java
+TEST: bc6764b5 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVParser.java
+TEST: 4d96f4c8 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/main/java/org/apache/commons/csv/CSVFormat.java
+DROP: 5c223da7 : [d54b339 [CSV-159] Add IgnoreCase option for accessing header names] src/changes/changes.xml
+DROP: b5052ab8 : [2f76dfa Add github badges to README.md instead of CONTRIBUTING.md] README.md
+DROP: a911227f : [2f76dfa Add github badges to README.md instead of CONTRIBUTING.md] CONTRIBUTING.md
+DROP: 4e59b022 : [c20cd95 Add badges for github.] CONTRIBUTING.md
+DROP: a8a1bc4d : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+TEST: 7a73f4a1 : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/main/java/org/apache/commons/csv/CSVPrinter.java
+DROP: a1708f44 : [3b10c8f CSV-153: CSVPrinter doesn't skip creation of header record if skipHeaderRecord is set to true. Thanks to Wren. This also fixes #8 from github.] src/changes/changes.xml
+DROP: a5511a52 : [1d5dfcb Test CSV-154.] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+DROP: edb61aea : [68c74f6 Test CSV-154.] src/test/java/org/apache/commons/csv/CSVFormatTest.java
+DROP: 4dcb0243 : [e7ccb14 Version 1.2.] src/changes/changes.xml
+DROP: 3e00abc1 : [5ed84eb Version 1.2.] README.md
+DROP: a1312fa9 : [d641efa Version 1.2.] doap_csv.rdf
+DROP: 2d84142d : [7dbb8d4 Typos.] RELEASE-NOTES.txt
+DROP: 8ca16b44 : [816abc0 Update POM version from 1.2-SNAPSHOT to 1.3-SNAPSHOT.] pom.xml
+
+[STATS] ************** Stats **************
+[STATS] total.time : 3.233
+[STATS] main.algo : 1.055
+[STATS] insert.edge : 0.0
+[STATS] hunk.deps.time : 0.779
+[STATS] extract.time : 0.0
+[STATS] call.graph.time : 0.357
+[STATS] tests.time : 0.772
+[STATS] comp.count : 0
+[STATS] hunk.count : 5
+[STATS] test.count : 15
+[STATS] hunk.deps.set : 5
+[STATS] drop.count : 95
+[STATS] ast.line.count : 1267
+[STATS] test.deps : 127
+[STATS] comp.deps : 179
+[STATS] reduction.hunk : 82.6086956521739
+[STATS] reduction.rate : 86.95652173913044
+[STATS] ***********************************

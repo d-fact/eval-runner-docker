@@ -1,0 +1,272 @@
+5848e9060 PDFBOX-3502: add character and word spacing
+7c1a2c8f0 PDFBOX-3501: avoid ArrayIndexOutOfBoundsException for bitonal images
+04f164db4 PDFBOX-3500: catch another bad floating point number, as suggested by Simon Gaeremynck
+af24edc6d PDFBOX-2852: fix javadoc, as suggested by Lorenz Pahl
+4b06b4cf5 PDFBOX-2852: remove explicit array creation for calling varargs method, as suggested by Lorenz Pahl
+6aebe93f6 PDFBOX-3498: add test files
+a893680aa PDFBOX-3498: ignore widths <= 0
+8c1ff9d5c PDFBOX-2852: more efficient strings, as suggested by Simon Steiner
+9293a5c68 PDFBOX-2852: fix javadoc
+46676d5c3 PDFBOX-3488: Don't allow CFF fonts in TTFParser
+97b886a6c PDFBOX-3332: avoid NPE if reverse mapping doesn't exist
+1ce0d8ec1 PDFBOX-3332: use different methods to handle ambiguous reverse mappings in an encoding
+275687eda PDFBOX-3065: restore deleted constructor, deprecate instead
+ae8de9cb6 PDFBOX-2852: fix javadoc
+d13b54593 PDFBOX-3065: add tests for external signing, as done by Petras Petkus
+47f3b6d3f PDFBOX-2852: use foreach loop, as suggested by Simon Steiner
+23a48151f PDFBOX-3493: check multiple widgets
+31c0eb960 PDFBOX-2852: fix imports
+0c0c309d4 PDFBOX-2852: fix imports
+7d76c1ece PDFBOX-2852: remove unnecessary type casting and type arguments, as suggested by Lorenz Pahl
+75151c15f PDFBOX-2852: use foreach loop, as suggested by Simon Steiner
+20114fc74 PDFBOX-2852: use foreach loop, as suggested by Simon Steiner
+ab7c5f3c6 PDFBOX-3065: remove comment to close, because SequenceInputStream.close would close its input streams too
+f24af6743 PDFBOX-3065: remove deprecated constructor; remove unused variables; remove super(); integrate initWriter() into constructor; change COSStandardOutputStream constructor parameter
+53f4d16c8 PDFBOX-3491: return 0 for empty string
+8ed03647f PDFBOX-3490: avoid NPE
+01533367b PDFBOX-2852: fix imports
+bfd72ebab PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+fdcdbb3dc PDFBOX-3488: avoid NullPointerException if glyf table is missing
+7e321bb8a PDFBOX-3487: avoid ClassCastException if /ID is not an array
+68af18f2a PDFBOX-3486: IllegalArgumentException for images without dimensions
+c91f657dc PDFBOX-3485: accept object references in /Rect
+4000f5b81 PDFBOX-3479: remove AP entry for widgets with empty /Rect entry
+57f793df4 PDFBOX-2852: use foreach loop, as suggested by Simon Steiner
+31622a3b0 PDFBOX-3375: another attempt to solve concurrency issues with PDDeviceRGB, as suggested by Cornelis Hoeflake
+f809f773d PDFBOX-2852: use foreach loop, as suggested by Simon Steiner
+44a2df033 PDFBOX-2852: fix imports
+e9c66d3f7 PDFBOX-3484: cache PDImageXObject if resources are not needed
+22c458c9e PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+fc2933acf PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+b15ae24e2 PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+9efc9921b PDFBOX-3065: add apache header
+2731c68fe PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+f91267d21 PDFBOX-2852: user foreach loop, as suggested by Simon Steiner
+c0f5f3bc1 PDFBOX-2852: remove unneeded boxing / unboxing
+7b41c08a0 PDFBOX-2852: remove ";" as suggested by Simon Steiner
+14c72a19d PDFBOX-3065: enable external signing, as done by Petras Petkus
+a1fc7047c PDFBOX-2852: clarify javadoc
+4625d506f PDFBOX-2852: clarify javadoc
+c7a899880 PDFBOX-2852: clarify javadoc
+f0481a586 PDFBOX-2852: fix javadoc
+60e0dc630 PDFBOX-2852: clarify javadoc
+bd90c321c PDFBOX-3481: avoid arab digits if Arab numbering is default
+43cb6c4ee PDFBOX-3481: avoid arab digits if Arab numbering is default
+cb05b3940 PDFBOX-3481: add test
+2bcd558b7 PDFBOX-3481: avoid arab digits if Arab numbering is default
+1cd036096 PDFBOX-2852: clarify javadoc
+bf15a0b29 PDFBOX-3000: add no parameter constructor
+c14194601 PDFBOX-3479: don't throw exception if no rectangle in widget
+60a329487 PDFBOX-3479: avoid NPE if no rectangle in widget
+6354ec6b0 PDFBOX-3165: replace Tab character with space. Proper handling to follow in PDFBOX-3469
+89d7f19bd PDFBOX-3477: always clip alpha to 0..1
+52d007e63 PDFBOX-3476: Updated to BouncyCastle 1.55
+487d143a8 PDFBOX-2984: add 90° ad 270° to test files
+aeeaf950b PDFBOX-2984: add test files
+3ce97275e PDFBOX-2984: avoid negative height and space width
+b9598ca2a PDFBOX-3475: sonarQube fix
+b5ec2ca8e PDFBOX-3475: repair /Length2
+bf168921a PDFBOX-3471: set to ignore comments with DocumentBuilderFactory
+f0a0d213f PDFBOX-3471: ensure that all nodes are visited when removing; ignore comments
+55de1afca PDFBOX-3473: avoid exception is resources are missing in a page
+b9eb8d743 PDFBOX-3375: revert solution of Philip Helger, didn't work either
+84fe2aeb8 PDFBOX-3472: avoid NPE as proposed by Petras; improve javadoc
+616b403ab PDFBOX-3468: downgrade dash error log to warning
+59dce45b7 PDFBOX-3470: set background, fix bug in border color, don't set width 1
+dd51ffe48 PDFBOX-3470: improve example with non standard text, border and background color
+03028c45e PDFBOX-3461: add new template with more control character samples; remove unused imports
+1a51103c3 PDFBOX-2852: add generic type argument to uses of PDNameTreeNode, as suggested by Lorenz Pahl
+1164efe66 PDFBOX-2852: use better return type, as suggested by Simon Steiner
+3ae56dfa0 PDFBOX-2852: remove redundant variables, as suggested by Lorenz Pahl
+a82a0ebcc PDFBOX-3467: don't modify during getAnnotations
+fb314a07a PDFBOX-2963: remove BouncyCastle dependency that isn't needed here
+651bed1f8 getAnnotations should not modify the PDF
+0ea424c25 PDFBOX-2852: clarify javadoc
+5eb40e90a PDFBOX-3466: modify calls to methods deprecated in JDK9
+b5bf6cf75 PDFBOX-2852: clarify javadoc
+0f1442be0 PDFBOX-3461: add handling for empty paragraphs; enhance unit tests; compare streams
+5a0e4015b PDFBOX-3461: add additional characters and combinations to force paragraph breaks
+2695d1e95 PDFBOX-3462: improve exception text for NoSuchAlgorithmException; code cleanup
+f33bcaaae PDFBOX-3375: force LittleCMS for tests, as suggested by Philip Helger
+25f40fc6e PDFBOX-3375: disable LittleCMS for tests, as suggested by Philip Helger
+dbcf778c9 PDFBOX-2420: keep timezones -14:00 thru +14:00, adjust tests
+809404ae4 PDFBOX-3460: warn users not to use legacy code
+5cfdb7cae PDFBOX-2941: replace old "filtered" / "unfiltered" terminology
+c4fc49bb2 PDFBOX-2941: show beads and use thin stroke width
+3619f8055 PDFBOX-2941: configurability!
+967cbb277 PDFBOX-3459: don't cache twice
+9cd8a26cc PDFBOX-3459: undo IntelliJ's meddling
+59ce418dc PDFBOX-2941: show text bounds as an overlay
+d0c268522 PDFBOX-2852: fix imports
+f147a0883 PDFBOX-3459: Typo
+6249fef4c PDFBOX-3459: Update JavaDoc
+6c793b13b PDFBOX-3458: add method to set text rendering mode
+5430d6ccd PDFBOX-3459: Move Glyph2D functionality into PDFont subclasses
+0e836870a PDFBOX-2941: clean up the font encoding panel
+785970220 PDFBOX-2941: larger default window size
+0be029c9c PDFBOX-2941: infer file extensions for streams for easy "save as" and "open"
+0068c2cb3 PDFBOX-2852: removed unused field
+c25770c37 PDFBOX-3315: prevent corner case 12:00 to be interpreted as 00:00, fixed + added tests
+fd63b900f PDFBOX-2919: throw IOException instead of IllegalArgumentException
+bf26dae1b PDFBOX-3080: reduce synchronized code by using synchronized blocks instead of synchronized methods
+6c18bc267 PDFBOX-3403: Handle invalid BaseEncoding names + Ignore invalid BaseEncoding names, as done by John Hewson in 2.0
+773ef68ff PDFBOX-3375: revert solution of Philip Helger, didn't work either
+9ed31ec05 PDFBOX-2852: DRY-refactoring to improve readability of synchronized code
+60ba9966f PDFBOX-3442: cache direct fonts
+88e06fde9 PDFBOX-3426: avoid ArrayIndexOutOfBoundsException if cmapTable.getCmaps() is empty
+2aebe3cbe PDFBOX-3435: use CapHeight when glyphHeight is 0
+1d9c26a09 PDFBOX-2852: simplify code
+0b2a0e85f PDFBOX-2852: avoid unchecked exceptions
+8d27b1eb5 PDFBOX-3306: only stretch to fit when enabled
+aa5ba29d4 PDFBOX-3447: avoid XStep / YStep >= 32767
+e7dde6632 PDFBOX-3448: convert null elements of /WIDTHS array to 0
+bcc507506 PDFBOX-3448: avoid NullPointerException for null elements
+dc262a393 PDFBOX-3450: avoid ArrayIndexOutOfBoundsException if <code> token is empty
+099a04f72 PDFBOX-3446: avoid /Prev loop
+1601b3272 PDFBOX-2941: use code, not name for vector fonts
+20c305452 PDFBOX-3428: remove calls that are now done in importPage
+db132457a PDFBOX-3428: avoid inherited rotation, mediabox and cropbox from getting lost
+affe91328 PDFBOX-3441: use long instead of int to handle huge files, as suggested by Michael Doswald
+db6221b8f PDFBOX-3439: avoid another exception if seconds are missing, which is valid ISO8601 but not xsd:datetime; improve error message
+74e10ab70 PDFBOX-3375: sonar fix
+cb8bc0ea4 PDFBOX-2941: Show all CID fonts with glyphs; use vertical bounds for all glyphs; copy old SimpleFont pane for type3 fonts
+5fc230dbb PDFBOX-2941: show the names only for 'real' fields
+d28464f06 PDFBOX-3375: use explicit lock object, as suggested by Philip Helger a
+d94c58df2 PDFBOX-3375: revert my own attempt at this, didn't work
+e6b174261 PDFBOX-2941: show font rendering
+e6ede27a9 PDFBOX-2941: show non-terminal field name in tree
+0383b7794 PDFBOX-2941: show field name in tree
+c32f5de23 PDFBOX-2941: include cropbox and /Rotate value to PDF coordinate calculation
+9de4f6f1f PDFBOX-2941: show PDF coordinates
+80dcacdd4 PDFBOX-2941: add status bar
+81ebf4760 PDFBOX-2852: clarify javadoc
+dffa46313 PDFBOX-3432: optimize by avoiding calling Collections.max() + DRY refactoring, by Michael Doswald
+8f75e7cfb PDFBOX-3432: use bit arithmetic instead of modulo, by Michael Doswald
+3b78b1f9a PDFBOX-3433: add optimizations by Michael Doswald
+33f753bc6 PDFBOX-2852: clarify javadoc
+5bff172be PDFBOX-3017: remove call that has no effect, add a TODO for later
+67260a494 PDFBOX-3017: revert premature name change; rename parameter names; improve javadoc
+2e4633e3e PDFBOX-3017: deprecate / remove poorly named method "getTemplateAppearanceStream"
+6ecee97d4 PDFBOX-3017: improve javadoc, rename parameter names
+9e67af6ed PDFBOX-3017: improve javadoc, rename parameter names
+966dbc8fd PDFBOX-3017: close image stream, clarify variable names
+55d3f2f4d PDFBOX-3017: correct variables names
+80d2427f8 PDFBOX-3017: improve javadoc, correct local variables names
+f183b8937 PDFBOX-3017: buffer and close inputStream, fix javadoc
+8032442fc PDFBOX-3017: improve javadoc
+f367e9706 PDFBOX-3421: Optimize float to string conversion, as done by Michael Doswald
+f6998eebf PDFBOX-3017: remove setting of placeholder items, this is done in PDDocument.addSignature since 2011
+f6bc5c6ad PDFBOX-3417: remove useless code
+aafec81cd PDFBOX-2852: Avoid using a branching statement as the last in a loop;
+f14d068b0 PDFBOX-2852: add break
+e67d4ddbd PDFBOX-2852: add break
+f4a9065bc PDFBOX-2852: remove redundant if
+7c28cb9f1 PDFBOX-3017: move constructor to top
+f4608a7cd PDFBOX-3017: DRY refactoring
+ebd55bb5c PDFBOX-3017: cache visual signature stream as RandomAccessBuffer instead of RandomAccessBufferedFileInputStream to avoid disk access
+397d37249 PDFBOX-3395: forgot to restore exception
+2a988ea35 PDFBOX-3395: revert last change and allow empty glyf table instead
+64583021b PDFBOX-2852: make fields private that aren't used outside
+2ec869fb9 PDFBOX-3395: allow missing glyf table
+b3c68ccd0 PDFBOX-3419: pass type to parseLiElement from above instead of assuming text
+fc5feecc4 PDFBOX-3418: optimize string to hex conversion, as suggested by Michael Doswald
+9e7273b89 PDFBOX-3416: fix imports
+4767d7122 PDFBOX-3416: avoid NullPointerException as suggested by Vittal Aithal; refactor double code
+8c84911f7 PDFBOX-3298: improve Exception message
+2caf840b3 PDFBOX-3375: my own attempt at this - initalize that part before all else
+e2980531e PDFBOX-3324: deprecate or delete /S
+4c3aba95e PDFBOX-3324: correct misleading javadoc
+292b4614e PDFBOX-3324: add entries specific to a sound action; deprecate or delete /S
+b7b1c6038 PDFBOX-3324: add /Sound
+c50b69f3f PDFBOX-3414: Add orientation parameter and improve usage dialog (secret option -printerName wasn't mentioned)
+67c56fd52 PDFBOX-3377: exclude fonts.*
+5ddf3de1a PDFBOX-3298: added encoding for ZapfDingbats
+4cd78f9f2 PDFBOX-3404: drop concurrent HashSet, synchronize initialization instead
+b1fb05cc2 PDFBOX-3403: Sonar fixes
+20683dbc8 PDFBOX-3403: revert 1750561 for lack of consensus
+03a6a3102 PDFBOX-3411: fix embedding of non subsetted font
+5cc7dda11 PDFBOX-3410: added landscape option, as wished by Marc Stuart PDFBOX-3409: don't drop leading spaces, and handle formfeed as wished by Marc Stuart
+87ef0bd6a PDFBOX-3408: Go up the hierarchy to get the type
+3162f6b22 PDFBOX-3396: don't add a transformation if there is a XObject
+30a3d40f1 PDFBOX-3408: Correct validation of Btn widget annotations for PDF/A-1
+66490ac30 PDFBOX-3408: Correct validation of Btn widget annotations for PDF/A-1
+0b668b67d PDFBOX-3408: Correct validation of Btn widget annotations for PDF/A-1
+f0f9ab8f7 PDFBOX-2852: remove option that doesn't exist in 2.*
+e84db7fa8 PDFBOX-3405: clarify javadoc
+2262ffe42 PDFBOX-3405: clarify javadoc
+61bded05d PDFBOX-3405: clarify javadoc
+5f04c93c1 PDFBOX-3397: use UTF-8 when reading XML Metadata instead of ISO-8859-1
+456900d2a PDFBOX-3405: clarify javadoc
+5780bac16 PDFBOX-2852: fix javadoc
+51638bd3d PDFBOX-2852: fix javadoc
+be521c95e PDFBOX-2854: avoid NPE for missing post table
+2f2514a72 PDFBOX-2854: skip os2 and cmap tables if subset is empty
+12ab00082 PDFBOX-3382, PDFBOX-3404: use concurrentHashMap for standard 14 fonts; remove double WinAnsiEncoding assignment and use it as a singleton; remove unused field
+ab9db36f4 PDFBOX-3403: don't throw exception if encoding is missing but use /differences table, as suggested by Michael Klink
+96d5f008b PDFBOX-3404: use concurrent HashSet
+2b8cb956f PDFBOX-3403: add MacExpertEncoding
+55f86a19c PDFBOX-2852: fix javadoc
+6b590a685 PDFBOX-2852: fix javadoc
+e937dd2d0 PDFBOX-2852: fix javadoc
+b13ad3b94 PDFBOX-2852: fix javadoc
+55fe64204 PDFBOX-2852: fix javadoc
+4dc67894c PDFBOX-2852: fix javadoc
+79b256b8a PDFBOX-2852: fix javadoc
+0603a550d PDFBOX-2852: fix javadoc
+dd2fd21cf PDFBOX-2852: fix javadoc
+12ce7e8e0 PDFBOX-2852: fix javadoc
+b1e0a4563 PDFBOX-2852: fix javadoc
+cf3024281 PDFBOX-3401: call PDXObject.createXObject() only if parameter is a COSStream
+79a76281e PDFBOX-2852: fix javadoc
+c56e2bdf1 PDFBOX-2852: fix javadoc
+716b62ce2 PDFBOX-2852: fix javadoc
+289e59041 PDFBOX-2852: fix javadoc
+123e175d9 PDFBOX-3391: improve setting the fields value if an /Opts entry is defined
+4386609a9 PDFBOX-2852: fix javadoc
+5c7843a17 PDFBOX-2852: fix javadoc
+f972e8f15 PDFBOX-2852: fix javadoc
+f10cba075 PDFBOX-2852: fix javadoc
+723c4a73b PDFBOX-2852: fix javadoc
+37396b02c PDFBOX-2852: fix javadoc
+b4c202950 PDFBOX-2852: fix javadoc
+f05156cf5 PDFBOX-2852: fix javadoc
+65daedca9 PDFBOX-3375: revert changes of r1747574 as it doesn't work
+1b1560071 PDFBOX-2852: fix javadoc
+8ee176daf PDFBOX-2852: fix javadoc
+6ce1a8289 PDFBOX-2852: fix javadoc
+dfb55bfc3 PDFBOX-2852: fix javadoc
+8aab2957c PDFBOX-2852: fix javadoc
+848fb073f PDFBOX-3069: add rat exception
+d138f0b68 PDFBOX-3069: add CCITT G4 (T6) encoding from BufferedImage with encoder from twelvemonkeys; add check for orientation
+cd2e88aba PDFBOX-2852: SonarQube fix
+67b826599 PDFBOX-2852: SonarQube fix
+50355fe3a PDFBOX-2852: fix javadoc
+3db5a726e PDFBOX-2852: fix javadoc
+5dccf4071 PDFBOX-3382: move optimized hex encoding code to utility class, optimize remaining methods as well based on Tilmans changes
+e20cc29d3 PDFBOX-3389: add sample to determine if a text fits the width of a field
+66766f5e9 PDFBOX-2852: fix javadoc
+2657491ca PDFBOX-2852: fix javadoc
+19abe1430 PDFBOX-2852: remove tests that are duplicate due to removal of non sequential parser
+1797f7f0e PDFBOX-3382: speed up getWidth()
+1b95ee8bb PDFBOX-3387: make sure the fields widget is printable
+3385ae81f PDFBOX-3386: added a comment on using an outdated plugin version
+398f27ecd PDFBOX-3386: downgrade maven-bundle-plugin due to jdk6 compatibility
+1b6633e36 PDFBOX-3280: remove test due to revert in 1741295
+57ae0a515 PDFBOX-3280: revert 1741295 because it resulted in split creating huge files
+b85007113 PDFBOX-3337: added test code from Philip Helger
+49d200385 PDFBOX-3382: reorder modifier according to JLS suggestions
+a57f902b5 PDFBOX-3337: Don't clear data when closing an in-memory TTF stream
+9b08a58fe PDFBOX-3382: speed up hex writing, don't check for hex if it is already forced
+ad3accf5e PDFBOX-3382: speed up encoding
+4376d54a2 PDFBOX-3017: SonarQube fix
+43723e223 PDFBOX-3017: assign name/location/reason the values set in visibleSignatureProperties; don't use signatureOptions.setVisualSignature(visibleSignatureProperties) as this is misleading
+c3a6229c6 PDFBOX-3383: revert code change that doesn't make sense for invisible signatures
+c6267d357 PDFBOX-3383: adjust test
+de5df72ef PDFBOX-3383: refactor to allow tsa timestamping for visible signatures, some renaming for clarity
+4a397c832 PDFBOX-2854, PDFBOX-3379: add test
+43dcf443c PDFBOX-2854: modify for missing .notdef entry
+32d30ff4e PDFBOX-3379: correct handling of partially monospaced fonts: first glyphid larger than maxgid needs width of maxgid but own lsb
+69ee29623 PDFBOX-3379: correct handling of partially monospaced fonts, increase hmetrics only when last gid wasn't already part of the set
+925b08bc0 PDFBOX-3375: use a static lock object to synchronize the initialization of a singleton
+1e884adcf PDFBOX-3017: simplify code by using getSignedContent()
+343a4e113 PDFBOX-3017: simplify code by using getSignedContent()

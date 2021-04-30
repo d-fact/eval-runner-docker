@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  driver:
+    environment:
+      - PYTHONUNBUFFERED=1
+    build: .
+    container_name: facts-utils
+    #volumes:
+    #  - datavol:/data
+    # command: hislicing.main --cslicer /data/json/name_one.json
+    command: hislicing.main --fact /data/json/group_one.json
+    # command: run_grok -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql
+    # command: rts.main --fact /data/json/group_one.json
+# volumes:
+#   datavol: {}

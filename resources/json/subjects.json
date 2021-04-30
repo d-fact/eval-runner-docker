@@ -1,0 +1,102 @@
+{
+  "COMPRESS":{
+    "fullname": "Apache Commons Compress",
+    "historyStart": "99bc508"  ,
+    "historyEnd": "b29395d",
+    "historyLength": 148,
+    "editedFiles": 144 ,
+    "addedLOC": 4644  ,
+    "deletedLOC": 2006,
+    "no_criteria": 5
+  },
+
+  "CONFIG":{
+    "fullname": "Apache Commons Configuration"  ,
+    "historyStart": "89428f1"  ,
+    "historyEnd": "9fb4ad8"  ,
+    "historyLength": 50  ,
+    "editedFiles": 34  ,
+    "addedLOC": 1201  ,
+    "deletedLOC": 655  ,
+    "no_criteria": 2 
+  }, 
+  "CSV":{
+    "fullname": "Apache Commons CSV",
+    "historyStart": "b230a6f5" ,
+    "historyEnd": "7310e5c6",
+    "historyLength": 79  ,
+    "editedFiles": 28  ,
+    "addedLOC": 1640  ,
+    "deletedLOC": 713  ,
+    "no_criteria": 4
+  }, 
+  "FLUME-1":{
+    "fullname": "Apache Flume",
+    "historyStart": "cda3bd10" ,
+    "historyEnd": "31d45f1b" ,
+    "historyLength": 101 ,
+    "editedFiles": 181,
+    "addedLOC": 14742 ,
+    "deletedLOC": 3097 ,
+    "no_criteria": 3 
+  }, 
+  "FLUME-2"  :{
+    "fullname": "Apache Flume",
+    "historyStart": "f7560038" ,
+    "historyEnd": "5e400ea8" ,
+    "historyLength": 100 ,
+    "editedFiles": 428 ,
+    "addedLOC": 17341 ,
+    "deletedLOC": 8187 ,
+    "no_criteria": 3 
+  }, 
+  "IO"  :{
+    "fullname": "Apache Commons IO",
+    "historyStart": "8de491fc" ,
+    "historyEnd": "b1b9f1af" ,
+    "historyLength": 136 ,
+    "editedFiles": 182 ,
+    "addedLOC": 5647  ,
+    "deletedLOC": 1681 ,
+    "no_criteria": 5 
+  }, 
+  "LANG":{
+    "fullname":"Apache Commons Lang",
+    "historyStart": "24767d6"  ,
+    "historyEnd": "76cc69c"  ,
+    "historyLength": 262 ,
+    "editedFiles": 146 ,
+    "addedLOC": 6741  ,
+    "deletedLOC": 2076 ,
+    "no_criteria": 8 
+  }, 
+  "MAVEN-1":{
+    "fullname": "Apache Maven" ,
+    "historyStart": "b175144"  ,
+    "historyEnd": "308d4d4"  ,
+    "historyLength": 51  ,
+    "editedFiles": 78  ,
+    "addedLOC": 1816  ,
+    "deletedLOC": 713  ,
+    "no_criteria":3 
+  },
+  "MAVEN-2" :{
+    "historyStart": "b7e3ce2"  ,
+    "historyEnd": "ea8b2b0"  ,
+    "historyLength": 97  ,
+    "editedFiles": 160 ,
+    "addedLOC": 4431  ,
+    "deletedLOC": 4144 ,
+    "no_criteria":        2 
+  }, 
+  "NET": { 
+    "fullname": "Apache Commons Net",
+    "historyStart":"d483631"  ,
+    "historyEnd": "abd6711" ,
+    "historyLength": 269 ,
+    "editedFiles": 233 ,
+    "addedLOC": 6845  ,
+    "deletedLOC": 2393 ,
+    "no_criteria":2
+  } 
+}

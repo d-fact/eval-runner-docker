@@ -1,0 +1,114 @@
+\documentclass{article}
+
+
+\input{macros}
+
+\begin{document}
+
+%\input{plots/plot-progress}
+
+Columns:
+
+\TableHeadNumOfCommits: The number of commits in history slice (mapped back to original commits)
+
+\TableHeadNumOfChangedLines: The number of changed lines in history slice
+
+\TableHeadCommitsReduction: (\TableHeadOrigHisLen - \TableHeadNumOfCommits) / \TableHeadOrigHisLen
+
+\TableHeadChangedLinesReduction: (\TableHeadOrigNumOfChangedLines - \TableHeadNumOfChangedLines) / \TableHeadOrigNumOfChangedLines
+
+\TableHeadRunTime: Run time in seconds
+
+\TableHeadOrigHisLen: The number of commits in the original range of history
+
+\TableHeadOrigNumOfChangedLines: The number of changed lines in the original range of history
+\FloatBarrier
+
+
+{\setlength{\tabcolsep}{3pt}
+%\input{tables/allconfigs-table0}
+%\input{tables/allconfigs-table1}
+%\input{tables/allconfigs-table2}
+%\input{tables/allconfigs-table3}
+%\input{tables/allconfigs-table4}
+%% \input{tables/allconfigs-table5}
+
+
+\input{tables/allconfigs-table6}
+\input{tables/allconfigs-table7}
+\input{tables/allconfigs-table8}
+\input{tables/allconfigs-table9}
+\input{tables/allconfigs-table10}
+\input{tables/allconfigs-table11}
+\input{tables/allconfigs-table12}
+}
+
+%\input{tables/suffix-example-table}
+
+\FloatBarrier
+
+\textbf{No Optimization}: \ConfigsWithoutCache
+
+\textbf{Prefix Sharing}: \ConfigsWithCache
+
+\textbf{Suffix Sharing}: \ConfigsWithSuffixCache
+
+\newpage
+\clearpage
+
+\input{tables/end-to-end-time-table}
+
+\newpage
+\clearpage
+
+
+
+%\hspace{-20px}
+%\input{tables/examples-table}
+
+%% \textbf{Id}: Feature id, labeled by developers.
+
+%% \textbf{His.Len}: The original length of history (number of commits) during which the feature is developed.
+
+%% \textbf{Slice}: The size of history slice (the number of commits implementing the feature) produced by CSlicer.
+
+%% \textbf{\#Edits}: The number of changed lines in the history slice.
+
+%% \textbf{Definer.Slice}: The size of history slice produced by Definer.
+
+%% \textbf{Split.His.Len}: The length of history after we split each original commit into multiple file-level commits (longer than original history).
+
+%% \textbf{Split.Slice}: The size of history slice computed by CSlicer from the splitted history.
+
+%% %\textbf{Split.Slice.Map.Back}: If we map each commit in \textbf{Split.Slice.Size} back to the corresponding original commit in the original history, this is the size of original history we get.
+
+%% \textbf{\#Split.Edits}: The number of changed lines in the history slice from the splitted history.
+
+%% \textbf{Reduction}: (\textbf{\#Edits} - \textbf{\#Split.Edits}) / \textbf{\#Edits}
+
+%% \newpage
+%% %\input{tables/time-table}
+
+%% \textbf{Id}: Feature id, labeled by developers.
+
+%% \textbf{CSlicer.Orig.Time}: The run time of CSlicer on the original history.
+
+%% \textbf{CSlicer.Split.Time}: The run time of CSlicer on the splitted history.
+
+%% \textbf{Definer.Time}: The run time of Definer on the original history.
+
+%% \newpage
+%% %\input{tables/ast-lines-table}
+
+%% \textbf{Id}: Feature id, labeled by developers.
+
+%% \textbf{Orig.Atomic.Lines}: The number of lines of the atomic changes kept in the original history slice.
+
+%% \textbf{Split.Atomic.Lines}: The number of lines of the atomic changes kept in the splitted history slice.
+
+\input{plot}
+
+\input{tables/small_history-table}
+\input{tables/end-to-end-time-table}
+
+\end{document}

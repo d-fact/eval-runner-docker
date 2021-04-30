@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{matrix}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\pgfplotsset{compat=1.13}
+
+\begin{document}
+  
+\begin{tikzpicture}
+\begin{groupplot}[
+group style={
+  group name=myplot,
+  group size=4 by 3,
+  %xlabels at=edge bottom,
+  %ylabels at=edge left,
+  %xticklabels at=edge bottom,
+  %yticklabels at=edge left,
+  vertical sep=20pt,
+  horizontal sep=25pt
+},
+%ylabel={$|H^*|$},
+%xlabel={\# test runs},
+%ytick = {30,60,...,150},
+%xtick = {30,60,...,120},
+footnotesize,
+width=7cm,
+height=4cm,
+xmin=0, xmax=150,
+ymin=0, ymax=150,
+tickpos=left
+]
+% IO-173
+\nextgroupplot[xlabel=\textsf{IO-173}, xlabel shift=-4pt, xmax=50, ymax=300, xtick 
+={10,20,...,50}, ytick={0,50,100,...,300}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{IO-173-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{IO-173-csd.dat}; \label{plots:plot2}
+% IO-173
+% IO-275
+\nextgroupplot[xlabel=\textsf{IO-275}, xlabel shift=-4pt, xmax=50, ymax=300, xtick 
+={10,20,...,50}, ytick={0,50,100,...,300}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{IO-275-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{IO-275-csd.dat}; \label{plots:plot2}
+% IO-275
+% IO-288
+\nextgroupplot[xlabel=\textsf{IO-288}, xlabel shift=-4pt, xmax=50, ymax=300, xtick 
+={10,20,...,50}, ytick={0,50,100,...,300}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{IO-288-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{IO-288-csd.dat}; \label{plots:plot2}
+% IO-288
+% IO-290
+\nextgroupplot[xlabel=\textsf{IO-290}, xlabel shift=-4pt, xmax=50, ymax=300, xtick 
+={10,20,...,50}, ytick={0,50,100,...,300}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{IO-290-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{IO-290-csd.dat}; \label{plots:plot2}
+% IO-290
+% IO-305
+\nextgroupplot[xlabel=\textsf{IO-305}, xlabel shift=-4pt, xmax=100, ymax=300, xtick 
+={10,20,...,100}, ytick={0,50,100,...,300}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{IO-305-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{IO-305-csd.dat}; \label{plots:plot2}
+% IO-305
+% CSV-159
+\nextgroupplot[xlabel=\textsf{CSV-159}, xlabel shift=-4pt, xmax=200, ymax=120, xtick 
+={10,50,...,200}, ytick={0,20,...,120}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{CSV-159-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{CSV-159-csd.dat}; \label{plots:plot2}
+% CSV-159
+% CSV-175
+\nextgroupplot[xlabel=\textsf{CSV-175}, xlabel shift=-4pt, xmax=200, ymax=120, xtick 
+={10,50,...,200}, ytick={0,20,...,120}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{CSV-175-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{CSV-175-csd.dat}; \label{plots:plot2}
+% CSV-159
+% CSV-180
+\nextgroupplot[xlabel=\textsf{CSV-180}, xlabel shift=-4pt, xmax=200, ymax=120, xtick 
+={10,50,...,200}, ytick={0,20,...,120}]
+\addplot [const plot] table[x=t,y=h,col sep=comma]{CSV-180-sd.dat}; \label{plots:plot1}
+\addplot [const plot, mark=*, blue] table[x=t,y=h,col sep=comma]{CSV-180-csd.dat}; \label{plots:plot2}
+% CSV-180
+\end{groupplot}
+% legend
+\path (myplot c1r1.north west|-current bounding box.north)--
+coordinate(legendpos)
+(myplot c2r1.north east|-current bounding box.north);
+\matrix[
+matrix of nodes,
+anchor=south,
+draw,
+inner sep=0.2em,
+draw
+]at([yshift=1ex]legendpos)
+{
+  \ref{plots:plot1}& \textbf{split-definer} &[5pt]
+  \ref{plots:plot2}& \textbf{cslicer-split-definer}\\};
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Thu Apr 21 11:05:44 EDT 2016
+soot-2.5.0.jar>=
+soot-2.5.0-sources.jar>=
+soot-2.5.0.pom>=

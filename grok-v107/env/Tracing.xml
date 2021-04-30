@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Tracing State="off">
+	<Event Name="FunctionLib" State="off"></Event>
+</Tracing>

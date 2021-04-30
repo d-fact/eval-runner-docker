@@ -1,0 +1,91 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\author{Annonymous authors}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+  \noindent
+  Original history: $H$\\
+  Running test suite $T$ at the end commit of $H$: $T(H)$\\
+  Running \textsc{CSlicer} on $H$ with slicing criteria $T(H)$ produces
+  \[
+  \begin{array}{rcl}
+    H' & = & slicer(H, T(H)) \\
+       & = & \{\Delta \in H | \exists \sigma \in \Delta\text{ 
+      s.t. } \sigma \in \Lambda \vee ((\sigma\text{ is INS }\vee \sigma\text{ 
+      is DEL}) \wedge \sigma \in \Pi)\},
+  \end{array}
+  \]
+  where $\Lambda$ is the functional set and $\Pi$ is the compilation set of 
+  $T(H)$.
+  
+  \vspace{.2in}
+
+  \begin{lemma}
+    Let $\Lambda$ and $\Lambda'$ be the functional sets of $T(H)$ and $T(H')$, 
+    respectively. We have $\Lambda = \Lambda'$.
+    \label{lemma.1}
+  \end{lemma}
+  \begin{proof}
+    From the definition of $H'$ we will see that all changes on the functional 
+    set entities are preserved in $H'$.
+    Therefore, when running $T$ on $H'$, it traverses the same set of code 
+    entities.
+  \end{proof}
+
+  \begin{lemma}
+    Let $\Pi$ and $\Pi'$ be the compilation sets of $T(H)$ and $T(H')$, 
+    respectively. We have $\Pi = \Pi'$.
+  \end{lemma}
+  \begin{proof}
+    Let $\pi \in \Pi$ be an arbitrary code entity in the compilation set.
+    By the definition of compilation set, there exists a functional entity 
+    $\lambda \in \Lambda$ such that $\lambda \rightarrowtail \pi$.
+    From Lemma~\ref{lemma.1}, $\lambda \in \Lambda'$. 
+    Therefore, $\pi \in \Pi'$.
+  \end{proof}
+
+  \begin{theorem}[``split-slicer'' is equivalent to ``slicer-split-slicer'']
+    Formally, $slicer(split(H), T(H)) = slicer(split(H'), T(H'))$.
+  \end{theorem}
+  \begin{proof}
+    Let $\hat{\Delta}$ denote a file-level commit, we have,
+    \[
+    \begin{array}{rcl}
+      LHS & = & \{\hat{\Delta} \in SH | \exists \sigma \in 
+      \hat{\Delta}\text{ s.t. } \sigma \in \Lambda \vee ((\sigma\text{ is INS 
+      }\vee \sigma\text{ is DEL}) \wedge \sigma \in \Pi)\} \\
+          &   & \text{(For any $\hat{\Delta} \in SH$, there exists a $\delta 
+          \in \hat{\Delta} \wedge \delta \in SH'$.)} \\
+          & = & \{\hat{\Delta} \in SH' | \exists \sigma \in 
+      \hat{\Delta}\text{ s.t. } \sigma \in \Lambda \vee ((\sigma\text{ is INS 
+      }\vee \sigma\text{ is DEL}) \wedge \sigma \in \Pi)\} \\
+          &   & \text{(By Lemma 1 and 2.)} \\
+          & = & \{\hat{\Delta} \in SH' | \exists \sigma \in 
+      \hat{\Delta}\text{ s.t. } \sigma \in \Lambda' \vee ((\sigma\text{ is INS 
+      }\vee \sigma\text{ is DEL}) \wedge \sigma \in \Pi')\} \\
+          & = & RHS.
+    \end{array}
+    \]
+  \end{proof}
+
+  \begin{theorem}[``X-slicer'' is a subset of ``X'']
+  \end{theorem}
+  
+  \begin{theorem}[``X-definer'' is a subset of ``X'']
+  \end{theorem}
+
+  \begin{theorem}[``X-split-slicer'' is a subset of ``X-slicer'']
+  \end{theorem}
+  
+  \begin{theorem}[``X-split-definer'' is a subset of ``X'']
+  \end{theorem}
+
+\end{document}

@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+START_TIME=$(date +%s)
+
+# set your JGROK_HOME
+JGROK_HOME="/tool/grok-v107"
+
+GROK_SCRIPT=$1
+TA_DIR=$2
+
+function usage() {
+    ProgName=$(basename "$0")
+    printf "Usage: %s grok_script ta_dir [...]\n" "$ProgName"
+    printf "    All .ta files in *ta_dir* will be loaded\n"
+    printf "    and *grok_script* will be executed on loaded facts.\n"
+    printf "    Other arguments will be passed to JGrok.\n"
+}
+
+function check_gettas_exist() {
+    if grep -q "getta(" "$GROK_SCRIPT"; then 
+        1>&2 printf "Warning! getta() exists in script."
+    fi
+}
+
+function report_time() {
+    CUR_TIME_SEC=$(date +%s)
+    CUR_TIME_ISO8601=$(date +%Y-%m-%dT%H:%M:%S%z)
+    1>&2 printf "[%s, %s] $* \n" "$CUR_TIME_ISO8601"  $((CUR_TIME_SEC - START_TIME)) 
+}
+
+function insert_gettas() {
+    check_gettas_exist;
+    # insert getta statements to script
+    RAND_FILESUFFIX=$(head /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 12)
+    SCRIPT_RUN=$GROK_SCRIPT.$RAND_FILESUFFIX
+
+    report_time "Temp .ql file will be in %s" "$SCRIPT_RUN"
+
+    stmt=$(find "$TA_DIR" -name \*.ta -printf "getta(\"%p\")\n" | sort)
+
+    if [[ -e $SCRIPT_RUN ]] ; then
+        1>&2 printf "Overwrite %s" "$SCRIPT_RUN";
+    fi
+
+    sed '/^\/\/#+INSERTION.*/r /dev/stdin' "$GROK_SCRIPT" <<< "${stmt}" > "$SCRIPT_RUN"
+
+    report_time "Finished inserting getta()"
+}
+
+# BEGIN
+if [[ $# -lt 2 ]]; then
+    usage
+    exit 2
+fi
+insert_gettas
+shift 2;
+
+# execute the script, all remaining params will be passed to grok
+if [[ $# -ne 0 ]]; then
+    printf "Pass '%s' to grok" "$*\n"
+fi
+# java -classpath $JGROK_HOME/src:$JGROK_HOME/mysql-connector-java-5.1.40-bin.jar ca.uwaterloo.cs.jgrok.Main $SCRIPT_RUN
+java -Xmx6G -classpath $JGROK_HOME/src:$JGROK_HOME/mysql-connector-java-5.1.40-bin.jar ca.uwaterloo.cs.jgrok.Main "$SCRIPT_RUN" "$@"
+
+# remove generated running script
+rm "$SCRIPT_RUN"
+
+report_time "Finished."
+# END

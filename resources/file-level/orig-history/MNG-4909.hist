@@ -1,0 +1,51 @@
+308d4d45e [maven-release-plugin] prepare release maven-3.0.1
+38ced22fd MNG-4910 Use BeanConfigurator for configuration sub-elements
+2c935ddff o Polished comment
+2af6eb051 o Added workaround for MNG-3443 to ensure distro ends up being the same regardless of Maven version being used
+2c74959bb [MNG-4903] Update to Wagon 1.0-beta-7
+c00f454a9 [MNG-4909] Emit warning when dependency with scope import but inproper type is declared
+a702225a3 [MNG-4907]  Wrong error message when relativePath wrong
+7e57e9ea8 [maven-release-plugin] prepare for next development iteration
+93af60e03 [maven-release-plugin] prepare release maven-3.0.1-RC1
+2aab70376 [MNG-4850] [regression] several elements of server configuration in settings.xml are not honoured
+a3f0ad50c [MNG-4884] Guice provision errors
+6af651b2b [MNG-4883] [regression] Dependency resolution does not fail for artifact with over-constrained version ranges
+0bfec136d [MNG-4904] Make MavenExecutionResult.getTopologicallySortedProjects() return empty list instead of null Submitted by: Basil James Whitehouse III
+381f2ac25 [MNG-4903] Update to Wagon 1.0-beta-7 Issue id: MNG-4903
+ab0d04456 o Reduced NPE risk
+3860e6e3a [MNG-4902] Update default plugin versions
+8d53cd4cc [MNG-4900] "Unresolveable build extension" when using shade plugin and repositories in profile
+294561212 o Fixed svn properties
+8d8611c36 o Added readme for github
+24df3d678 o Polished CLI help output
+99b2cd257 [MNG-4896] Help for -pl option does not include use of comma-sep, also more than one -pl does not work or complain Submitted by: Jason Dillon
+0fb027ea4 [MNG-4895] Plugins depending on 3rd party JARs that contain the Maven API can't be configured/run due to type incompatibilities
+a77e4c2eb [MNG-4892] Use of --log-file doesn't capture all output, e.g. from maven-antrun-plugin
+32b45f5ae [MNG-4891] Improve robustness of snapshot dependency resolution in case a remote repo accidently uses the id "local"
+81126757e cleanup bad language to better comply with Eclipse.org requirements
+7756084f6 short desc should be... short
+efab04b7b add missing releases
+dba97347c o Declared used dependencies
+3c3459c44 MPIR-171: support "TimeZones" as a timezone
+3a53a3caf [MNG-4877] Regression: Deploy to SCP with privateKey fails - privateKey and passphrase gets lost
+545fa2b10 o Introduced SettingsSource to enable non-file based content providers
+d838106be [MNG-4874] The <latestVersion> value isn't updated for local installs
+11bae4226 o Set svn:keywords
+e79d41e74 o Splitted .gitattributes
+21611f899 o Excluded Git metafiles from source bundle
+d851f3f45 o Tried to improve interop between SVN and Git when dealing with keyword expansion
+04d718d73 o Removed unused import
+40f9aafbc updated links to Sonatype components to their new home
+5ab998fa4 [MNG-4864] npe when transferring artifacts
+267d53703 [MNG-4867] incorrect namespace in settings.xml
+41fd34401 MNG-4866 use intermediate array to make sure we can purge all inherited MavenSession instances
+d76af58fc o Improved error handling
+f5ad9a458 o Fixed lazy repo creation to cache result repo
+947973e85 [MNG-4860] Allow management of project building request kept inside MavenProject instances
+1036f3859 [MNG-4858] correct NullPointerException if goal name is malformed
+5fee94bc6 o Aligned package of test with package of class under test
+e7bc1a997 o Improved effeciency of cache
+1fd91671e o Included project repositories in debug log
+22f6fe364 remove redundant part of name
+03789c315 [maven-release-plugin] prepare for next development iteration
+eaf528f2c [maven-release-plugin] prepare release maven-3.0

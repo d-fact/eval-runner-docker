@@ -1,0 +1,1572 @@
+===== Git History Slicing Toolkit =====
+   ______ _____  __ _                  
+  / ____// ___/ / /(_)_____ ___   _____
+ / /     \__ \ / // // ___// _ \ / ___/
+/ /___  ___/ // // // /__ /  __// /
+\____/ /____//_//_/ \___/ \___//_/
+
+=======================================
+[DEBUG] Original |H|: 136
+[OUTPUT] Computing FUNC & COMP set ... 
+[OUTPUT] Running coverage analysis ...
+[DEBUG] FULL
+[DEBUG] 108 classes have been analyzed.
+[DEBUG] Analyzing package: org/apache/commons/io/comparator ...
+[DEBUG] 	File: NameFileComparator.java ...
+[DEBUG] 	File: LastModifiedFileComparator.java ...
+[DEBUG] 	File: ExtensionFileComparator.java ...
+[DEBUG] 	File: CompositeFileComparator.java ...
+[DEBUG] 	File: PathFileComparator.java ...
+[DEBUG] 	File: ReverseComparator.java ...
+[DEBUG] 	File: AbstractFileComparator.java ...
+[DEBUG] 	File: DirectoryFileComparator.java ...
+[DEBUG] 	File: SizeFileComparator.java ...
+[DEBUG] 	File: DefaultFileComparator.java ...
+[DEBUG] Analyzing package: org/apache/commons/io/filefilter ...
+[DEBUG] 	File: DirectoryFileFilter.java ...
+[DEBUG] 	File: DelegateFileFilter.java ...
+[DEBUG] 	File: WildcardFilter.java ...
+[DEBUG] 	File: PrefixFileFilter.java ...
+[DEBUG] 	File: OrFileFilter.java ...
+[DEBUG] 	File: CanReadFileFilter.java ...
+[DEBUG] 	File: NotFileFilter.java ...
+[DEBUG] 	File: FalseFileFilter.java ...
+[DEBUG] 	File: WildcardFileFilter.java ...
+[DEBUG] 	File: FileFilterUtils.java ...
+[DEBUG] 	File: EmptyFileFilter.java ...
+[DEBUG] 	File: CanWriteFileFilter.java ...
+[DEBUG] 	File: TrueFileFilter.java ...
+[DEBUG] 	File: AndFileFilter.java ...
+[DEBUG] 	File: FileFileFilter.java ...
+[DEBUG] 	File: HiddenFileFilter.java ...
+[DEBUG] 	File: SuffixFileFilter.java ...
+[DEBUG] 	File: RegexFileFilter.java ...
+[DEBUG] 	File: NameFileFilter.java ...
+[DEBUG] 	File: MagicNumberFileFilter.java ...
+[DEBUG] 	File: AbstractFileFilter.java ...
+[DEBUG] 	File: SizeFileFilter.java ...
+[DEBUG] 	File: AgeFileFilter.java ...
+[DEBUG] Analyzing package: org/apache/commons/io/output ...
+[DEBUG] 	File: ThresholdingOutputStream.java ...
+[DEBUG] 	File: WriterOutputStream.java ...
+[DEBUG] 	File: StringBuilderWriter.java ...
+[DEBUG] 	File: NullWriter.java ...
+[DEBUG] 	File: DemuxOutputStream.java ...
+[DEBUG] 	File: ProxyWriter.java ...
+[DEBUG] 	File: TeeOutputStream.java ...
+[DEBUG] 	File: ByteArrayOutputStream.java ...
+[DEBUG] 	File: LockableFileWriter.java ...
+[DEBUG] 	File: FileWriterWithEncoding.java ...
+[DEBUG] 	File: XmlStreamWriter.java ...
+[DEBUG] 	File: DeferredFileOutputStream.java ...
+[DEBUG] 	File: NullOutputStream.java ...
+[DEBUG] 	File: ClosedOutputStream.java ...
+[DEBUG] 	File: BrokenOutputStream.java ...
+[DEBUG] 	File: CloseShieldOutputStream.java ...
+[DEBUG] 	File: TaggedOutputStream.java ...
+[DEBUG] 	File: ProxyOutputStream.java ...
+[DEBUG] 	File: CountingOutputStream.java ...
+[DEBUG] Analyzing package: org/apache/commons/io/monitor ...
+[DEBUG] 	File: FileAlterationObserver.java ...
+[DEBUG] 	File: FileAlterationListenerAdaptor.java ...
+[DEBUG] 	File: FileEntry.java ...
+[DEBUG] 	File: FileAlterationMonitor.java ...
+[DEBUG] Analyzing package: org/apache/commons/io/input ...
+[DEBUG] 	File: XmlStreamReaderException.java ...
+[DEBUG] 	File: DemuxInputStream.java ...
+[DEBUG] 	File: XmlStreamReader.java ...
+[DEBUG] 	File: BOMInputStream.java ...
+[DEBUG] 	File: NullInputStream.java ...
+[DEBUG] 	File: CharSequenceInputStream.java ...
+[DEBUG] 	File: SwappedDataInputStream.java ...
+[DEBUG] 	File: BoundedInputStream.java ...
+[DEBUG] 	File: NullReader.java ...
+[DEBUG] 	File: ReversedLinesFileReader.java ...
+[DEBUG] 	File: CountingInputStream.java ...
+[DEBUG] 	File: AutoCloseInputStream.java ...
+[DEBUG] 	File: TeeInputStream.java ...
+[DEBUG] 	File: BrokenInputStream.java ...
+[DEBUG] 	File: ReaderInputStream.java ...
+[DEBUG] 	File: Tailer.java ...
+[DEBUG] 	File: ClosedInputStream.java ...
+[DEBUG] 	File: ProxyInputStream.java ...
+[DEBUG] 	File: CharSequenceReader.java ...
+[DEBUG] 	File: TailerListenerAdapter.java ...
+[DEBUG] 	File: ClassLoaderObjectInputStream.java ...
+[DEBUG] 	File: CloseShieldInputStream.java ...
+[DEBUG] 	File: TaggedInputStream.java ...
+[DEBUG] 	File: ProxyReader.java ...
+[DEBUG] Analyzing package: org/apache/commons/io ...
+[DEBUG] 	File: ByteOrderMark.java ...
+[DEBUG] 	File: FileExistsException.java ...
+[DEBUG] 	File: TaggedIOException.java ...
+[DEBUG] 	File: IOUtils.java ...
+[DEBUG] 	File: FileDeleteStrategy.java ...
+[DEBUG] 	File: HexDump.java ...
+[DEBUG] 	File: FileCleaningTracker.java ...
+[DEBUG] 	File: ThreadMonitor.java ...
+[DEBUG] 	File: IOCase.java ...
+[DEBUG] 	File: IOExceptionWithCause.java ...
+[DEBUG] 	File: FileSystemUtils.java ...
+[DEBUG] 	File: FileUtils.java ...
+[DEBUG] 	File: DirectoryWalker.java ...
+[DEBUG] 	File: FileCleaner.java ...
+[DEBUG] 	File: EndianUtils.java ...
+[DEBUG] 	File: LineIterator.java ...
+[DEBUG] 	File: FilenameUtils.java ...
+[DEBUG] 	File: CopyUtils.java ...
+[DEBUG] Drawing static call graph ...
+[OUTPUT] Scanning class files ...
+[DEBUG] 0 Reading class file: HexDump.class
+[DEBUG] 1 Reading class file: ClosedOutputStream.class
+[DEBUG] 2 Reading class file: FileWriterWithEncoding.class
+[DEBUG] 3 Reading class file: ByteArrayOutputStream.class
+[DEBUG] 4 Reading class file: ThresholdingOutputStream.class
+[DEBUG] 5 Reading class file: ProxyWriter.class
+[DEBUG] 6 Reading class file: DeferredFileOutputStream.class
+[DEBUG] 7 Reading class file: WriterOutputStream.class
+[DEBUG] 8 Reading class file: CloseShieldOutputStream.class
+[DEBUG] 9 Reading class file: BrokenOutputStream.class
+[DEBUG] 10 Reading class file: NullWriter.class
+[DEBUG] 11 Reading class file: DemuxOutputStream.class
+[DEBUG] 12 Reading class file: TeeOutputStream.class
+[DEBUG] 13 Reading class file: LockableFileWriter.class
+[DEBUG] 14 Reading class file: XmlStreamWriter.class
+[DEBUG] 15 Reading class file: TaggedOutputStream.class
+[DEBUG] 16 Reading class file: NullOutputStream.class
+[DEBUG] 17 Reading class file: StringBuilderWriter.class
+[DEBUG] 18 Reading class file: CountingOutputStream.class
+[DEBUG] 19 Reading class file: ProxyOutputStream.class
+[DEBUG] 20 Reading class file: IOUtils.class
+[DEBUG] 21 Reading class file: DirectoryWalker.class
+[DEBUG] 22 Reading class file: FileCleaningTracker.class
+[DEBUG] 23 Reading class file: FileEntry.class
+[DEBUG] 24 Reading class file: FileAlterationListenerAdaptor.class
+[DEBUG] 25 Reading class file: FileAlterationListener.class
+[DEBUG] 26 Reading class file: FileAlterationObserver.class
+[DEBUG] 27 Reading class file: FileAlterationMonitor.class
+[DEBUG] 28 Reading class file: PathFileComparator.class
+[DEBUG] 29 Reading class file: DirectoryFileComparator.class
+[DEBUG] 30 Reading class file: NameFileComparator.class
+[DEBUG] 31 Reading class file: DefaultFileComparator.class
+[DEBUG] 32 Reading class file: AbstractFileComparator.class
+[DEBUG] 33 Reading class file: ReverseComparator.class
+[DEBUG] 34 Reading class file: ExtensionFileComparator.class
+[DEBUG] 35 Reading class file: SizeFileComparator.class
+[DEBUG] 36 Reading class file: CompositeFileComparator.class
+[DEBUG] 37 Reading class file: LastModifiedFileComparator.class
+[DEBUG] 38 Reading class file: ByteOrderMark.class
+[DEBUG] 39 Reading class file: IOCase.class
+[DEBUG] 40 Reading class file: TaggedIOException.class
+[DEBUG] 41 Reading class file: LineIterator.class
+[DEBUG] 42 Reading class file: FileDeleteStrategy$ForceFileDeleteStrategy.class
+[DEBUG] 43 Reading class file: CopyUtils.class
+[DEBUG] 44 Reading class file: FileUtils.class
+[DEBUG] 45 Reading class file: FileSystemUtils.class
+[DEBUG] 46 Reading class file: TaggedInputStream.class
+[DEBUG] 47 Reading class file: TeeInputStream.class
+[DEBUG] 48 Reading class file: NullReader.class
+[DEBUG] 49 Reading class file: BoundedInputStream.class
+[DEBUG] 50 Reading class file: ProxyReader.class
+[DEBUG] 51 Reading class file: SwappedDataInputStream.class
+[DEBUG] 52 Reading class file: AutoCloseInputStream.class
+[DEBUG] 53 Reading class file: TailerListenerAdapter.class
+[DEBUG] 54 Reading class file: ReversedLinesFileReader.class
+[DEBUG] 55 Reading class file: Tailer.class
+[DEBUG] 56 Reading class file: XmlStreamReaderException.class
+[DEBUG] 57 Reading class file: XmlStreamReader.class
+[DEBUG] 58 Reading class file: CloseShieldInputStream.class
+[DEBUG] 59 Reading class file: CharSequenceInputStream.class
+[DEBUG] 60 Reading class file: CountingInputStream.class
+[DEBUG] 61 Reading class file: CharSequenceReader.class
+[DEBUG] 62 Reading class file: ClassLoaderObjectInputStream.class
+[DEBUG] 63 Reading class file: ReversedLinesFileReader$1.class
+[DEBUG] 64 Reading class file: TailerListener.class
+[DEBUG] 65 Reading class file: BrokenInputStream.class
+[DEBUG] 66 Reading class file: BOMInputStream.class
+[DEBUG] 67 Reading class file: ProxyInputStream.class
+[DEBUG] 68 Reading class file: ReversedLinesFileReader$FilePart.class
+[DEBUG] 69 Reading class file: NullInputStream.class
+[DEBUG] 70 Reading class file: ClosedInputStream.class
+[DEBUG] 71 Reading class file: ReaderInputStream.class
+[DEBUG] 72 Reading class file: DemuxInputStream.class
+[DEBUG] 73 Reading class file: DirectoryWalker$CancelException.class
+[DEBUG] 74 Reading class file: FileCleaningTracker$Reaper.class
+[DEBUG] 75 Reading class file: IOExceptionWithCause.class
+[DEBUG] 76 Reading class file: DirectoryFileFilter.class
+[DEBUG] 77 Reading class file: NameFileFilter.class
+[DEBUG] 78 Reading class file: FileFileFilter.class
+[DEBUG] 79 Reading class file: IOFileFilter.class
+[DEBUG] 80 Reading class file: AgeFileFilter.class
+[DEBUG] 81 Reading class file: FileFilterUtils.class
+[DEBUG] 82 Reading class file: EmptyFileFilter.class
+[DEBUG] 83 Reading class file: WildcardFileFilter.class
+[DEBUG] 84 Reading class file: CanReadFileFilter.class
+[DEBUG] 85 Reading class file: DelegateFileFilter.class
+[DEBUG] 86 Reading class file: OrFileFilter.class
+[DEBUG] 87 Reading class file: WildcardFilter.class
+[DEBUG] 88 Reading class file: CanWriteFileFilter.class
+[DEBUG] 89 Reading class file: TrueFileFilter.class
+[DEBUG] 90 Reading class file: ConditionalFileFilter.class
+[DEBUG] 91 Reading class file: AndFileFilter.class
+[DEBUG] 92 Reading class file: HiddenFileFilter.class
+[DEBUG] 93 Reading class file: FalseFileFilter.class
+[DEBUG] 94 Reading class file: SizeFileFilter.class
+[DEBUG] 95 Reading class file: MagicNumberFileFilter.class
+[DEBUG] 96 Reading class file: RegexFileFilter.class
+[DEBUG] 97 Reading class file: SuffixFileFilter.class
+[DEBUG] 98 Reading class file: NotFileFilter.class
+[DEBUG] 99 Reading class file: AbstractFileFilter.class
+[DEBUG] 100 Reading class file: PrefixFileFilter.class
+[DEBUG] 101 Reading class file: FileCleaner.class
+[DEBUG] 102 Reading class file: FileCleaningTracker$Tracker.class
+[DEBUG] 103 Reading class file: FileDeleteStrategy.class
+[DEBUG] 104 Reading class file: FilenameUtils.class
+[DEBUG] 105 Reading class file: EndianUtils.class
+[DEBUG] 106 Reading class file: ThreadMonitor.class
+[DEBUG] 107 Reading class file: FileExistsException.class
+[DEBUG] 1: Done: org.apache.commons.io.IOUtils
+[DEBUG] 2: Done: org.apache.commons.io.output.StringBuilderWriter
+[DEBUG] 3: Done: org.apache.commons.io.FileUtils
+[DEBUG] 4: Done: org.apache.commons.io.FilenameUtils
+[DEBUG] 5: Done: org.apache.commons.io.LineIterator
+[DEBUG] 6: Done: org.apache.commons.io.output.ByteArrayOutputStream
+[DEBUG] 7: Done: org.apache.commons.io.FileExistsException
+[DEBUG] 8: Done: org.apache.commons.io.filefilter.FalseFileFilter
+[DEBUG] 9: Done: org.apache.commons.io.filefilter.FileFilterUtils
+[DEBUG] 10: Done: org.apache.commons.io.filefilter.IOFileFilter
+[DEBUG] 11: Done: org.apache.commons.io.output.NullOutputStream
+[DEBUG] 12: Done: org.apache.commons.io.filefilter.SuffixFileFilter
+[DEBUG] 13: Done: org.apache.commons.io.filefilter.DirectoryFileFilter
+[DEBUG] 14: Done: org.apache.commons.io.filefilter.TrueFileFilter
+[DEBUG] 15: Done: org.apache.commons.io.IOCase
+[DEBUG] 16: Done: org.apache.commons.io.input.ClosedInputStream
+[DEBUG] 17: Done: org.apache.commons.io.filefilter.FileFileFilter
+[DEBUG] 18: Done: org.apache.commons.io.filefilter.NameFileFilter
+[DEBUG] 19: Done: org.apache.commons.io.filefilter.PrefixFileFilter
+[DEBUG] 20: Done: org.apache.commons.io.filefilter.AndFileFilter
+[DEBUG] 21: Done: org.apache.commons.io.filefilter.MagicNumberFileFilter
+[DEBUG] 22: Done: org.apache.commons.io.filefilter.AgeFileFilter
+[DEBUG] 23: Done: org.apache.commons.io.filefilter.SizeFileFilter
+[DEBUG] 24: Done: org.apache.commons.io.filefilter.DelegateFileFilter
+[DEBUG] 25: Done: org.apache.commons.io.filefilter.OrFileFilter
+[DEBUG] 26: Done: org.apache.commons.io.filefilter.NotFileFilter
+[DEBUG] 27: Done: org.apache.commons.io.filefilter.AbstractFileFilter
+[DEBUG] 28: Done: org.apache.commons.io.filefilter.ConditionalFileFilter
+[DEBUG] Adding to touch set ...
+[DEBUG] Test: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long)
+Test: org.apache.commons.io.output.StringBuilderWriter.write(String)
+Test: org.apache.commons.io.FilenameUtils.isSystemWindows()
+Test: org.apache.commons.io.IOUtils.closeQuietly(Closeable)
+Test: org.apache.commons.io.IOUtils.closeQuietly(InputStream)
+Test: org.apache.commons.io.FileUtils.ONE_YB : BigInteger
+Test: org.apache.commons.io.FileUtils.cleanDirectory(File)
+Test: org.apache.commons.io.IOUtils.closeQuietly(Reader)
+Test: org.apache.commons.io.FileUtils.ONE_ZB : BigInteger
+Test: org.apache.commons.io.output.StringBuilderWriter.StringBuilderWriter(int)
+Test: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long,byte[])
+Test: org.apache.commons.io.IOUtils.skip(Reader,long)
+Test: org.apache.commons.io.IOUtils.closeQuietly(Writer)
+Test: org.apache.commons.io.IOUtils.skip(InputStream,long)
+Test: org.apache.commons.io.FilenameUtils
+Test: org.apache.commons.io.IOUtils.closeQuietly(OutputStream)
+Test: org.apache.commons.io.IOUtils.skipFully(InputStream,long)
+Test: org.apache.commons.io.FileUtils.isSymlink(File)
+Test: org.apache.commons.io.output.StringBuilderWriter.close()
+Test: org.apache.commons.io.FileUtils.UTF8 : Charset
+Test: org.apache.commons.io.IOUtils.skipFully(Reader,long)
+Test: org.apache.commons.io.output.StringBuilderWriter
+Test: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long,char[])
+Test: org.apache.commons.io.FileUtils
+Test: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long)
+Test: org.apache.commons.io.FileUtils.EMPTY_FILE_ARRAY : File[]
+Test: org.apache.commons.io.IOUtils
+Test: org.apache.commons.io.output.StringBuilderWriter.toString()
+Test: org.apache.commons.io.IOUtils.DIR_SEPARATOR : char
+Test: org.apache.commons.io.FilenameUtils.SYSTEM_SEPARATOR : char
+Test: org.apache.commons.io.FilenameUtils.EXTENSION_SEPARATOR_STR : String
+Test: org.apache.commons.io.FileUtils.deleteDirectory(File)
+Test: org.apache.commons.io.FileUtils.forceDelete(File)
+Comp: org.apache.commons.io.FileExistsException
+Comp: org.apache.commons.io.FileUtils.deleteDirectory(File)
+Comp: org.apache.commons.io.FilenameUtils.isSystemWindows()
+Comp: org.apache.commons.io.filefilter.MagicNumberFileFilter
+Comp: org.apache.commons.io.filefilter.AndFileFilter
+Comp: org.apache.commons.io.FileUtils.ONE_YB : BigInteger
+Comp: org.apache.commons.io.filefilter.NotFileFilter
+Comp: org.apache.commons.io.IOUtils.closeQuietly(InputStream)
+Comp: org.apache.commons.io.IOUtils
+Comp: org.apache.commons.io.IOUtils.SKIP_BYTE_BUFFER : byte[]
+Comp: org.apache.commons.io.output.StringBuilderWriter.builder : StringBuilder
+Comp: org.apache.commons.io.FileUtils
+Comp: org.apache.commons.io.output.StringBuilderWriter.toString()
+Comp: org.apache.commons.io.IOUtils.closeQuietly(Closeable)
+Comp: org.apache.commons.io.filefilter.ConditionalFileFilter
+Comp: org.apache.commons.io.IOUtils.SKIP_CHAR_BUFFER : char[]
+Comp: org.apache.commons.io.FileUtils.EMPTY_FILE_ARRAY : File[]
+Comp: org.apache.commons.io.filefilter.DelegateFileFilter
+Comp: org.apache.commons.io.filefilter.AbstractFileFilter
+Comp: org.apache.commons.io.filefilter.OrFileFilter
+Comp: org.apache.commons.io.filefilter.TrueFileFilter
+Comp: char[]
+Comp: org.apache.commons.io.IOUtils.DIR_SEPARATOR : char
+Comp: org.apache.commons.io.filefilter.FileFilterUtils
+Comp: int[]
+Comp: org.apache.commons.io.FileUtils.forceDelete(File)
+Comp: org.apache.commons.io.input.ClosedInputStream
+Comp: org.apache.commons.io.FileUtils.ONE_ZB : BigInteger
+Comp: org.apache.commons.io.IOUtils.skip(Reader,long)
+Comp: org.apache.commons.io.output.NullOutputStream
+Comp: org.apache.commons.io.output.StringBuilderWriter.StringBuilderWriter(int)
+Comp: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long)
+Comp: org.apache.commons.io.IOUtils.skipFully(InputStream,long)
+Comp: org.apache.commons.io.IOUtils.skip(InputStream,long)
+Comp: org.apache.commons.io.filefilter.SuffixFileFilter
+Comp: org.apache.commons.io.IOCase
+Comp: org.apache.commons.io.filefilter.FileFileFilter
+Comp: org.apache.commons.io.output.StringBuilderWriter
+Comp: org.apache.commons.io.LineIterator
+Comp: org.apache.commons.io.FileUtils.cleanDirectory(File)
+Comp: org.apache.commons.io.filefilter.FalseFileFilter
+Comp: org.apache.commons.io.filefilter.PrefixFileFilter
+Comp: org.apache.commons.io.filefilter.NameFileFilter
+Comp: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long,byte[])
+Comp: org.apache.commons.io.FileUtils.isSymlink(File)
+Comp: org.apache.commons.io.FilenameUtils
+Comp: org.apache.commons.io.filefilter.IOFileFilter
+Comp: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long,char[])
+Comp: org.apache.commons.io.filefilter.AgeFileFilter
+Comp: org.apache.commons.io.filefilter.SizeFileFilter
+Comp: org.apache.commons.io.output.StringBuilderWriter.write(String)
+Comp: org.apache.commons.io.IOUtils.skipFully(Reader,long)
+Comp: org.apache.commons.io.FilenameUtils.SYSTEM_SEPARATOR : char
+Comp: org.apache.commons.io.FileUtils.UTF8 : Charset
+Comp: org.apache.commons.io.output.ByteArrayOutputStream
+Comp: org.apache.commons.io.FilenameUtils.EXTENSION_SEPARATOR_STR : String
+Comp: org.apache.commons.io.filefilter.DirectoryFileFilter
+Comp: byte[]
+
+
+[OUTPUT] Initial |S| = 136
+[OUTPUT] Analysing Commits ... 
+[DEBUG] === Inspecting commit: b1b9f1af : How to regenerate releases notes ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6ae1acaf : Update release notes (using the generated text in target\announcement\announcement.vm. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8463d421 : Cut 2.2-RC4. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 182f03a4 : Cut 2.2-RC4. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 61b60430 : Typo. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 87737ab3 : [IO-313] Add IOUTils.toBufferedReader(Reader) ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1d6feac9 : Add missing tests as discovered with Cobertura. Add a new method IOUTils.toBufferedReader(Reader). ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.contentEquals(Reader,Reader) : org.apache.commons.io.IOUtils.contentEquals(Reader,Reader) : (1844, 1879) --> (1857, 1889)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader) : org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader) : (1881, 1917) --> (1891, 1917)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.readLines(Reader) : org.apache.commons.io.IOUtils.readLines(Reader) : (822, 844) --> (835, 857)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.toBufferedReader(Reader) : org.apache.commons.io.IOUtils : (416, 427)
+[DEBUG] 
+[DEBUG] === Inspecting commit: f4958dfe : Fix method name. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b5444a5e : Add missing tests as discovered with Cobertura. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: c0e29f7e : Fix checkstyle for line length > 120. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/ByteOrderMark.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: bb5259cf : Don't use assertTrue for comparing equals ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a9039dee : Test case bug ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8437c21e : Test case bug ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: aea44bd1 : MOre test coverage ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1833fb07 : @since 2.2 markers ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/ByteOrderMark.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 62dd0968 : IO-308 Allow applications to provide buffer (or size) for copyLarge methods. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : (1462, 1506) --> (1482, 1504)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer) : org.apache.commons.io.IOUtils.copyLarge(Reader,Writer) : (1586, 1610) --> (1630, 1647)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : (1612, 1655) --> (1674, 1696)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream) : (1434, 1460) --> (1434, 1453)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long,byte[]) : org.apache.commons.io.IOUtils : (1506, 1550)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,byte[]) : org.apache.commons.io.IOUtils : (1455, 1480)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,char[]) : org.apache.commons.io.IOUtils : (1649, 1672)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long,char[]) : org.apache.commons.io.IOUtils : (1698, 1740)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9f7b69e8 : Alignment ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 57ca8f6d : Javadoc - rename offset as that is usually used for destination buffer ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : (1462, 1506) --> (1462, 1506)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : (1612, 1655) --> (1612, 1655)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 211174c5 : Calculate buffer lengthe once ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : (1462, 1505) --> (1462, 1506)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6c58d22a : Javadoc ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/LineIterator.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: f584ed90 : IO-311 IOUtils.read(InputStream/Reader) ignores the offset parameter ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int) : org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int) : (2005, 2033) --> (2005, 2033)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.read(Reader,char[],int,int) : org.apache.commons.io.IOUtils.read(Reader,char[],int,int) : (1959, 1987) --> (1959, 1987)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9282a0c8 : Javadoc ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationListenerAdaptor.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 073fa3e5 : Javadoc ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FalseFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.filefilter.NameFileFilter.accept(File,String) : org.apache.commons.io.filefilter.NameFileFilter.accept(File,String) : (153, 168) --> (153, 168)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: cf971eb0 : Rename testClose* methods to testCloseQuietly* to reflect the API tested: closeQuietly. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5c8a6f44 : IO-312 CharSequenceInputStream(CharSequence s, Charset charset, int bufferSize) ignores bufferSize ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceInputStream.mark(int) : org.apache.commons.io.input.CharSequenceInputStream.mark(int) : (184, 187) --> (184, 191)
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceInputStream.reset() : org.apache.commons.io.input.CharSequenceInputStream.reset() : (189, 195) --> (193, 199)
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceInputStream.CharSequenceInputStream(CharSequence,Charset,int) : org.apache.commons.io.input.CharSequenceInputStream.CharSequenceInputStream(CharSequence,Charset,int) : (46, 62) --> (46, 62)
+[DEBUG] 
+[DEBUG] === Inspecting commit: cf5c4628 : Use "@since x.y" instead of "@since Commons IO x.y" ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/ByteOrderMark.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/DirectoryWalker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileCleaningTracker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileDeleteStrategy.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileExistsException.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileSystemUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOCase.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOExceptionWithCause.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/LineIterator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/TaggedIOException.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/AbstractFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/CompositeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DefaultFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DirectoryFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ExtensionFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/LastModifiedFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/NameFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/PathFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ReverseComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/SizeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AbstractFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AgeFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/CanReadFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/CanWriteFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DelegateFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DirectoryFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/EmptyFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FalseFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFilterUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/HiddenFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/IOFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/MagicNumberFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NotFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/OrFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/PrefixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SizeFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SuffixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/AutoCloseInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BOMInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BoundedInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BrokenInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ClassLoaderObjectInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CloseShieldInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ClosedInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CountingInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ProxyInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ProxyReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/TaggedInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/Tailer.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/TailerListener.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/TailerListenerAdapter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/TeeInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReaderException.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationListener.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationListenerAdaptor.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationMonitor.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationObserver.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileEntry.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/BrokenOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ByteArrayOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/CloseShieldOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ClosedOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/CountingOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DeferredFileOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/FileWriterWithEncoding.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/NullWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ProxyOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ProxyWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/StringBuilderWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/TaggedOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/WriterOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/XmlStreamWriter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1daa7cb1 : Replace magic number (-1) with new private constant EOF. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int) : org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int) : (2004, 2032) --> (2005, 2033)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.contentEquals(Reader,Reader) : org.apache.commons.io.IOUtils.contentEquals(Reader,Reader) : (1757, 1792) --> (1758, 1793)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : (1461, 1504) --> (1462, 1505)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer) : org.apache.commons.io.IOUtils.copyLarge(Reader,Writer) : (1584, 1608) --> (1585, 1609)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.read(Reader,char[],int,int) : org.apache.commons.io.IOUtils.read(Reader,char[],int,int) : (1958, 1986) --> (1959, 1987)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.toByteArray(InputStream,int) : org.apache.commons.io.IOUtils.toByteArray(InputStream,int) : (459, 493) --> (460, 494)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.contentEquals(InputStream,InputStream) : org.apache.commons.io.IOUtils.contentEquals(InputStream,InputStream) : (1721, 1755) --> (1722, 1756)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : (1610, 1653) --> (1611, 1654)
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream) : org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream) : (1433, 1459) --> (1434, 1460)
+[DEBUG] Insert: FIELD: org.apache.commons.io.IOUtils.EOF : int : org.apache.commons.io.IOUtils : (84, 84)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 03ad89f6 : Javadoc ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/ByteOrderMark.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2413cf3c : Missing @since 2.2 markers; standardise format ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 18a39356 : Javadoc - fix copy-paste error ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: b04b4f53 : Fix some odd formatting. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: e3646441 : Use "@since 1.1" instead of "@since Commons IO 1.1" ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileSystemUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFilterUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/OrFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ClassLoaderObjectInputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: bf5571fe : Don't leave non-SNAPSHOT versions where CI bots can see them ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 32eeb20e : [IO-310] Add ByteOrderMark constants for UTF-32. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/ByteOrderMark.java ---
+[DEBUG] Insert: FIELD: org.apache.commons.io.ByteOrderMark.UTF_32BE : ByteOrderMark : org.apache.commons.io.ByteOrderMark : (44, 45)
+[DEBUG] Insert: FIELD: org.apache.commons.io.ByteOrderMark.UTF_32LE : ByteOrderMark : org.apache.commons.io.ByteOrderMark : (47, 48)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1170279d : Remove noisy and unnecessary parens. Especially painful in return statements: "return (foo + bar);" vs. "return foo + bar;" ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/DirectoryWalker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileCleaningTracker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileSystemUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/HexDump.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DirectoryFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DelegateFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/EmptyFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/PrefixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SuffixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BOMInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/SwappedDataInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.SwappedDataInputStream.readFully(byte[],int,int) : org.apache.commons.io.input.SwappedDataInputStream.readFully(byte[],int,int) : (123, 149) --> (123, 149)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileAlterationObserver.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/monitor/FileEntry.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/StringBuilderWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ThresholdingOutputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8965e5ef : Tests that {@link ByteOrderMark#getCharsetName()} can be loaded as a {@link java.nio.charset.Charset} as advertised. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 22d7a157 : Drop stale releases ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 740fe050 : eol native ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: da3a87a4 : Synchronise RELEASE-NOTES and the template that generates it ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9d8d86f7 : Set release date. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2fb77924 : Release 2.2. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a241539e : Clean up text. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b1c02e48 : Add compatibility section. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: ac05a9a0 : Remove older Javadoc 2.x releases. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 88f98ed0 : Use $Id$ instead of the mix of $Date$ and others. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/DirectoryWalker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/AbstractFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/CompositeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DefaultFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DirectoryFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ExtensionFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/LastModifiedFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/NameFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/PathFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ReverseComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/SizeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AbstractFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/CanReadFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/CanWriteFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DelegateFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DirectoryFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/EmptyFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FalseFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/HiddenFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/IOFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NotFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/OrFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/PrefixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SuffixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BOMInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/DemuxInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/NullReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/SwappedDataInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DemuxOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/StringBuilderWriter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: c10347e5 : Drop $Date$ SVN variables ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/AbstractFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/CompositeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DefaultFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/DirectoryFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ExtensionFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/LastModifiedFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/NameFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/PathFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/ReverseComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/comparator/SizeFileComparator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AbstractFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DelegateFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DirectoryFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FalseFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/IOFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NotFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/OrFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/PrefixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SuffixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BOMInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/DemuxInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/SwappedDataInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DemuxOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/StringBuilderWriter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 25cfc24a : Next RC comming up. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3ae9f7d2 : Simplify and avoid boxing ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0031a91b : IO-305:  New copyLarge() method in IOUtils that takes additional offset, length arguments ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long) : org.apache.commons.io.IOUtils : (1460, 1503)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long) : org.apache.commons.io.IOUtils : (1609, 1652)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6dbc1b3e : Move changes.xml to location expected by CP24 Add previous release notes to end of .vm file so we keep history when regenerating ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8314cfed : Set end copyright date to 2012. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 94e64536 : Javadoc ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4ccf5c72 : Release notes for 2.2. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3fdb1c36 : Remove accidental import ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: dbdab57a : Document current Windows behaviour. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: d58ac896 : IO-300 FileUtils.moveDirectoryToDirectory removes source directory if destination is a subdirectory ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.moveDirectory(File,File) : org.apache.commons.io.FileUtils.moveDirectory(File,File) : (2463, 2501) --> (2464, 2505)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 55c1430f : IO-307 ReaderInputStream#read(byte[] b, int off, int len) should check for valid parameters ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : (211, 242) --> (211, 249)
+[DEBUG] 
+[DEBUG] === Inspecting commit: caa0578b : Convert test to JUnit4 ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6ccf35ec : Add check for negative offset ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceReader.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceReader.read(char[],int,int) : org.apache.commons.io.input.CharSequenceReader.read(char[],int,int) : (90, 121) --> (90, 121)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 87dfbd99 : Allow clirr reports to be run from command line ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 033a3174 : Another fix for this version ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 8076962b : Easier to scan XML in Eclipse outline if issue number appears first ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 33368e1a : @since 2.2 markers ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6b5f6085 : Fix up clirr and checkstyle versions Add RAT excludes ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6cb913db : Preparing 2.2 release. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 315fe2d7 : Preparing 2.2 release. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 45276617 : Preparing 2.2 release. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: f3fe62e5 : Add code coverage for markSupported(). ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: ea6fc334 : Better page title ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: c4251ace : IO-306 ReaderInputStream#read(byte[] b, int off, int len) should always return 0 for length == 0 ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : (211, 239) --> (211, 242)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0c7f3107 : Fix occasional test failure - should always return 0 for read length == 0 ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceInputStream.read(byte[],int,int) : org.apache.commons.io.input.CharSequenceInputStream.read(byte[],int,int) : (112, 140) --> (112, 143)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3200c5f8 : A bit more debug to help pin down occasional Gump failures ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: cefb5141 : Upgarde to commons-parent 24 from 23. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5236eb0d : Javadoc. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 9f48d4ad : Checkstyle wants Javadoc for private methods ... ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0ab79cc7 : Document why safe to create skip buffers without synch ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 5db7f804 : Use fixed Locale for upcasing ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReader.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.XmlStreamReader.getContentTypeEncoding(String) : org.apache.commons.io.input.XmlStreamReader.getContentTypeEncoding(String) : (626, 645) --> (627, 646)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 027d9419 : Javadoc, Checkstyle. More precise throw clause in private method. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.setUpEffectiveDirFilter(IOFileFilter) : org.apache.commons.io.FileUtils.setUpEffectiveDirFilter(IOFileFilter) : (487, 496) --> (493, 502)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.CharSequenceInputStream.fillBuffer() : org.apache.commons.io.input.CharSequenceInputStream.fillBuffer() : (96, 103) --> (97, 110)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3278b1ba : Javadoc. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 508f4664 : Rename private method setupEffectiveDirFilter to setUpEffectiveDirFilter ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter) : (488, 520) --> (488, 520)
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : (425, 462) --> (425, 462)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.setUpEffectiveDirFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (477, 486)
+[DEBUG] Delete: METHOD: org.apache.commons.io.FileUtils.setupEffectiveDirFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (477, 486)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2fc63ef3 : Rename private method setupEfectiveFileFilter to setUpEffectiveFileFilter ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter) : (488, 520) --> (488, 520)
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : (425, 462) --> (425, 462)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.setUpEffectiveFileFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (473, 475)
+[DEBUG] Delete: METHOD: org.apache.commons.io.FileUtils.setupEfectiveFileFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (473, 475)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 41f2753b : Remove dead comment. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 84f52250 : Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 109f81a8 : Remove unnecessary parens. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/XmlStreamWriter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 24be3c76 : Mark as 2.2-SNAPSHOT like Maven POM. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b2e74b3a : Add missing 2.1 version. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: f12b0136 : Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 72aba063 : Remove my middle initial from my name. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: e3daec3b : Fix tab in source and reformat 2 methods for longer lines. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: d8a496f4 : Fix Javadocs. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DeferredFileOutputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 79920525 : Format fix. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DeferredFileOutputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 022490d4 : Format fix. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2f5db12d : Remove extra parens. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DeferredFileOutputStream.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: b37ba99e : Remove @author tags per Apache guidelines. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/CopyUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/EndianUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileCleaner.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileCleaningTracker.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileDeleteStrategy.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileSystemUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/HexDump.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOCase.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOExceptionWithCause.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/LineIterator.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AbstractFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AgeFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DelegateFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/DirectoryFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FalseFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/FileFilterUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/IOFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NameFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/NotFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/OrFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/PrefixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SizeFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/SuffixFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFileFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/WildcardFilter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ClassLoaderObjectInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/CountingInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/DemuxInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ProxyInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ProxyReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/SwappedDataInputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReader.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/XmlStreamReaderException.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ByteArrayOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DeferredFileOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/DemuxOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/LockableFileWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/NullOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ProxyOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ProxyWriter.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/ThresholdingOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/WriterOutputStream.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/XmlStreamWriter.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: ce7f497c : Set commons.rc.version to RC1 ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 642d6594 : IO-173 FileUtils.listFiles() doesn't return directories ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter) : (433, 486) --> (438, 475)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.innerListFiles(Collection<File>,File,IOFileFilter,boolean) : org.apache.commons.io.FileUtils : (411, 436)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils : (504, 536)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.setupEffectiveDirFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (493, 502)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.setupEfectiveFileFilter(IOFileFilter) : org.apache.commons.io.FileUtils : (488, 491)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.validateListFilesParameters(File,IOFileFilter) : org.apache.commons.io.FileUtils : (477, 486)
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.iterateFilesAndDirs(File,IOFileFilter,IOFileFilter) : org.apache.commons.io.FileUtils : (561, 583)
+[DEBUG] Delete: METHOD: org.apache.commons.io.FileUtils.innerListFiles(Collection<File>,File,IOFileFilter) : org.apache.commons.io.FileUtils : (411, 431)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4cef5296 : IO-276 "FileUtils#deleteDirectoryOnExit(File)" does not work ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.deleteDirectoryOnExit(File) : org.apache.commons.io.FileUtils.deleteDirectoryOnExit(File) : (2052, 2068) --> (2052, 2068)
+[DEBUG] 
+[DEBUG] === Inspecting commit: b1dede03 : IO-273 BoundedInputStream.read() treats max differently from BoundedInputStream.read(byte[]...) ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BoundedInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.BoundedInputStream.read() : org.apache.commons.io.input.BoundedInputStream.read() : (77, 92) --> (77, 92)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 50a7fdca : IO-297 CharSequenceInputStream to efficiently stream content of a CharSequence ===
+[DEBUG] --- New File: src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java ---
+[DEBUG] Insert: CLASS: org.apache.commons.io.input.CharSequenceInputStream : org.apache.commons.io.input.CharSequenceInputStream : (29, 192)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 1e870590 : Missing @Overrides ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 6ab58439 : IO-296 ReaderInputStream optimization: more efficient reading of small chunks of data ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReaderInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int) : (184, 228) --> (206, 234)
+[DEBUG] Update: METHOD: org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(Reader,CharsetEncoder,int) : org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(Reader,CharsetEncoder,int) : (111, 124) --> (111, 126)
+[DEBUG] Update: METHOD: org.apache.commons.io.input.ReaderInputStream.read() : org.apache.commons.io.input.ReaderInputStream.read() : (243, 254) --> (249, 268)
+[DEBUG] Update: FIELD: org.apache.commons.io.input.ReaderInputStream.encoderOut : ByteBuffer : org.apache.commons.io.input.ReaderInputStream.encoderOut : ByteBuffer : (90, 95) --> (90, 95)
+[DEBUG] Insert: METHOD: org.apache.commons.io.input.ReaderInputStream.fillBuffer() : org.apache.commons.io.input.ReaderInputStream : (186, 204)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 05f4b42c : IO-298 Various methods of class 'org.apache.commons.io.FileUtils' incorrectly suppress 'java.io.IOException' ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.writeStringToFile(File,String,String,boolean) : org.apache.commons.io.FileUtils.writeStringToFile(File,String,String,boolean) : (1714, 1734) --> (1715, 1736)
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.writeLines(File,String,Collection<?>,String,boolean) : org.apache.commons.io.FileUtils.writeLines(File,String,Collection<?>,String,boolean) : (1941, 1965) --> (1944, 1969)
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.copyInputStreamToFile(InputStream,File) : org.apache.commons.io.FileUtils.copyInputStreamToFile(InputStream,File) : (1348, 1374) --> (1348, 1375)
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.writeByteArrayToFile(File,byte[],boolean) : org.apache.commons.io.FileUtils.writeByteArrayToFile(File,byte[],boolean) : (1833, 1851) --> (1835, 1854)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 025f2766 : [IO-304] The second constructor of Tailer class does not pass 'delay' to the third one ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/Tailer.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.Tailer.Tailer(File,TailerListener,long) : org.apache.commons.io.input.Tailer.Tailer(File,TailerListener,long) : (143, 151) --> (143, 151)
+[DEBUG] 
+[DEBUG] === Inspecting commit: a3c8c6f4 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 47e16e5b : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times. Refactor tests to use both BOM and no-BOM test files. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 3f8cc6d5 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/BOMInputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.input.BOMInputStream.getBOM() : org.apache.commons.io.input.BOMInputStream.getBOM() : (160, 190) --> (160, 191)
+[DEBUG] 
+[DEBUG] === Inspecting commit: eea40304 : Adding missing license header. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 28d32e9c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 56c87a17 : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/TeeOutputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.output.TeeOutputStream.close() : org.apache.commons.io.output.TeeOutputStream.close() : (89, 109) --> (89, 107)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 7af4ac7c : Update findbugs-maven-plugin to 2.4.0 from 2.3.2. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: aad6359c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/output/TeeOutputStream.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.output.TeeOutputStream.close() : org.apache.commons.io.output.TeeOutputStream.close() : (89, 97) --> (89, 109)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 96c5e875 : Checkstyle: Line length <= 120. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 91b2c630 : Update maven-checkstyle-plugin to 2.9 from 2.7. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 0535d141 : Link to related methods ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 90c7e6b4 : Refactor new directortContains method for https://issues.apache.org/jira/browse/IO-291. Change behavior: an unrealized child File is NOT contained in a directory in FileUtils. If you want to test with file names, use FilenameUtils#directoryContains(String, String). ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.directoryContains(File,File) : org.apache.commons.io.FileUtils.directoryContains(File,File) : (1432, 1479) --> (1432, 1479)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.FilenameUtils.directoryContains(String,String) : org.apache.commons.io.FilenameUtils : (514, 552)
+[DEBUG] 
+[DEBUG] === Inspecting commit: f0fdfa63 : Add missing @since 2.2 tag. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 492e9b29 : Migrate to commons-parent 23. ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: fde4aaaf : [IO-301] Add IOUtils.closeQuietly(Selector) necessary. Patch applied, thank you. Also added another test to get the test code coverage to 100%. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.closeQuietly(Selector) : org.apache.commons.io.IOUtils : (323, 354)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 71a7618b : IO-291 Add test case which shows FileUtils.directoryContains() returns true for a file which doesn't exist ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: e36e518c : Checkstyle fixes ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 4b62012c : Checkstyle - replace tab characters with spaces ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 94afbe46 : IO-288 Move ReversedLinesFileReader to org.apache.commons.io.input package with the reset of the InputStreams & Readers ===
+[DEBUG] --- Delete File: src/main/java/org/apache/commons/io/ReversedLinesFileReader.java ---
+[DEBUG] Delete: CLASS: org.apache.commons.io.ReversedLinesFileReader : org.apache.commons.io.ReversedLinesFileReader : (27, 286)
+[DEBUG] --- New File: src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java ---
+[DEBUG] Insert: CLASS: org.apache.commons.io.input.ReversedLinesFileReader : org.apache.commons.io.input.ReversedLinesFileReader : (27, 286)
+[DEBUG] 
+[DEBUG] === Inspecting commit: bf48fd5f : Additional classes and methods merit 2.2 ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: d80edebc : IO-292 IOUtils.closeQuietly() should take a ServerSocket as a parameter ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.closeQuietly(ServerSocket) : org.apache.commons.io.IOUtils : (322, 353)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 25aaa9cb : IO-290 Add read/readFully methods to IOUtils ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.IOUtils.skipFully(Reader,long) : org.apache.commons.io.IOUtils.skipFully(Reader,long) : (1776, 1796) --> (1776, 1796)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.read(InputStream,byte[]) : org.apache.commons.io.IOUtils : (1872, 1885)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int) : org.apache.commons.io.IOUtils : (1843, 1870)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.read(Reader,char[]) : org.apache.commons.io.IOUtils : (1828, 1841)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.readFully(Reader,char[],int,int) : org.apache.commons.io.IOUtils : (1887, 1907)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.readFully(InputStream,byte[]) : org.apache.commons.io.IOUtils : (1948, 1963)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.readFully(InputStream,byte[],int,int) : org.apache.commons.io.IOUtils : (1926, 1946)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.read(Reader,char[],int,int) : org.apache.commons.io.IOUtils : (1799, 1826)
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.readFully(Reader,char[]) : org.apache.commons.io.IOUtils : (1909, 1924)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 33b0f21c : IO-288 Supply a ReversedLinesFileReader N.B. Renamed test .txt files to .bin and made them application/octet-stream as it's important not to change the EOL setting ===
+[DEBUG] --- New File: src/main/java/org/apache/commons/io/ReversedLinesFileReader.java ---
+[DEBUG] Insert: CLASS: org.apache.commons.io.ReversedLinesFileReader : org.apache.commons.io.ReversedLinesFileReader : (27, 286)
+[DEBUG] 
+[DEBUG] === Inspecting commit: ec29cec2 : IO-288 Supply a ReversedLinesFileReader ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: b20daf59 : Not my change ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 531aaa5b : [IO-291] Add new function FileUtils.directoryContains. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.directoryContains(File,File) : org.apache.commons.io.FileUtils : (1432, 1479)
+[DEBUG] 
+[DEBUG] === Inspecting commit: ec04894a : Adding EB/PB/TB per IO-287 and Ron Kuris' patch ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileUtils.byteCountToDisplaySize(long) : org.apache.commons.io.FileUtils.byteCountToDisplaySize(long) : (339, 372) --> (339, 371)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 2316361c : Surefire blindly treats all matching files as potential test classes Ensure only .class files are selected ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: 288d6f0a : Check files fail to compare byte-wise ===
+[DEBUG] 
+[DEBUG] === Inspecting commit: a2cf5463 : IO-275 FileUtils.contentEquals/IOUtils.contentEquals - Add option to ignore "line endings" ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL(File,File,String) : org.apache.commons.io.FileUtils : (626, 680)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/IOUtils.java ---
+[DEBUG] Insert: METHOD: org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader) : org.apache.commons.io.IOUtils : (1631, 1667)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 33e9a899 : Use Collection.isEmpty() instead of size() == 0 ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FileSystemUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FileSystemUtils.performCommand(String[],int,long) : org.apache.commons.io.FileSystemUtils.performCommand(String[],int,long) : (459, 531) --> (459, 531)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.FilenameUtils.splitOnTokens(String) : org.apache.commons.io.FilenameUtils.splitOnTokens(String) : (1326, 1366) --> (1326, 1366)
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/filefilter/AndFileFilter.java ---
+[DEBUG] Update: METHOD: org.apache.commons.io.filefilter.AndFileFilter.accept(File) : org.apache.commons.io.filefilter.AndFileFilter.accept(File) : (114, 128) --> (114, 128)
+[DEBUG] Update: METHOD: org.apache.commons.io.filefilter.AndFileFilter.accept(File,String) : org.apache.commons.io.filefilter.AndFileFilter.accept(File,String) : (130, 144) --> (130, 144)
+[DEBUG] 
+[DEBUG] === Inspecting commit: 63a1efef : Remove superfluous parens. ===
+[DEBUG] --- Modify File: src/main/java/org/apache/commons/io/FilenameUtils.java ---
+[DEBUG] 
+[DEBUG] === Inspecting commit: 7fa02d13 : Simplify my developer entry. ===
+[DEBUG] 
+
+[OUTPUT] Analysing Hunk Dependency ... 
+[DEBUG] Done: Javadoc - rename offset as that is usually used for destination buffer
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Done: IO-305:  New copyLarge() method in IOUtils that takes additional offset, length arguments
+[DEBUG] Done: Fix some odd formatting.
+[DEBUG] Done: Missing @since 2.2 markers; standardise format
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Done: IO-290 Add read/readFully methods to IOUtils
+[DEBUG] Done: Release notes for 2.2.
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Done: IO-300 FileUtils.moveDirectoryToDirectory removes source directory if destination is a subdirectory
+[DEBUG] Done: Move changes.xml to location expected by CP24 Add previous release notes to end of .vm file so we keep history when regenerating
+[DEBUG] Excluding src/test/java/org/apache/commons/io/DirectoryWalkerTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/DirectoryWalkerTestCaseJava4.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileSystemUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsCleanDirectoryTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FilenameUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FilenameUtilsWildcardTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOCaseTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/LineIteratorTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/filefilter/FileFilterTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/NullInputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/NullReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/XmlStreamReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/compatibility/XmlStreamReader.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/XmlStreamWriterTest.java ...
+[DEBUG] Done: Remove noisy and unnecessary parens. Especially painful in return statements: "return (foo + bar);" vs. "return foo + bar;"
+[DEBUG] Done: @since 2.2 markers
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Done: IO-173 FileUtils.listFiles() doesn't return directories
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Done: IO-275 FileUtils.contentEquals/IOUtils.contentEquals - Add option to ignore "line endings"
+[DEBUG] Done: IO-297 CharSequenceInputStream to efficiently stream content of a CharSequence
+[DEBUG] Done: IO-288 Supply a ReversedLinesFileReader
+[DEBUG] Done: IO-307 ReaderInputStream#read(byte[] b, int off, int len) should check for valid parameters
+[DEBUG] Done: Additional classes and methods merit 2.2
+[DEBUG] Excluding src/test/java/org/apache/commons/io/ReversedLinesFileReaderTestParamBlockSize.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/ReversedLinesFileReaderTestParamFile.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/ReversedLinesFileReaderTestSimple.java ...
+[DEBUG] Done: IO-288 Move ReversedLinesFileReader to org.apache.commons.io.input package with the reset of the InputStreams & Readers
+[DEBUG] Done: Add check for negative offset
+[DEBUG] Done: Use Collection.isEmpty() instead of size() == 0
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/ReversedLinesFileReaderTestParamBlockSize.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/ReversedLinesFileReaderTestParamFile.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/ReversedLinesFileReaderTestSimple.java ...
+[DEBUG] Done: Checkstyle - replace tab characters with spaces
+[DEBUG] Done: Use fixed Locale for upcasing
+[DEBUG] Done: Javadoc, Checkstyle. More precise throw clause in private method.
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Done: IO-276 "FileUtils#deleteDirectoryOnExit(File)" does not work
+[DEBUG] Done: IO-296 ReaderInputStream optimization: more efficient reading of small chunks of data
+[DEBUG] Done: [IO-291] Add new function FileUtils.directoryContains.
+[DEBUG] Done: Not my change
+[DEBUG] Done: Another fix for this version
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/ReaderInputStreamTest.java ...
+[DEBUG] Done: IO-306 ReaderInputStream#read(byte[] b, int off, int len) should always return 0 for length == 0
+[DEBUG] Done: IO-288 Supply a ReversedLinesFileReader N.B. Renamed test .txt files to .bin and made them application/octet-stream as it's important not to change the EOL setting
+[DEBUG] Done: Fix tab in source and reformat 2 methods for longer lines.
+[DEBUG] Done: Rename private method setupEfectiveFileFilter to setUpEffectiveFileFilter
+[DEBUG] Done: Rename private method setupEffectiveDirFilter to setUpEffectiveDirFilter
+[DEBUG] Done: IO-273 BoundedInputStream.read() treats max differently from BoundedInputStream.read(byte[]...)
+[DEBUG] Done: IO-298 Various methods of class 'org.apache.commons.io.FileUtils' incorrectly suppress 'java.io.IOException'
+[DEBUG] Done: Easier to scan XML in Eclipse outline if issue number appears first
+[DEBUG] Done: [IO-304] The second constructor of Tailer class does not pass 'delay' to the third one
+[DEBUG] Done: [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/BOMInputStreamTest.java ...
+[DEBUG] Done: [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Done: [IO-301] Add IOUtils.closeQuietly(Selector) necessary. Patch applied, thank you. Also added another test to get the test code coverage to 100%.
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/TeeOutputStreamTest.java ...
+[DEBUG] Done: [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception.
+[DEBUG] Done: [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs.
+[DEBUG] Done: IO-292 IOUtils.closeQuietly() should take a ServerSocket as a parameter
+[DEBUG] Done: Calculate buffer lengthe once
+[DEBUG] Done: Replace magic number (-1) with new private constant EOF.
+[DEBUG] Done: IO-308 Allow applications to provide buffer (or size) for copyLarge methods.
+[DEBUG] Done: IO-312 CharSequenceInputStream(CharSequence s, Charset charset, int bufferSize) ignores bufferSize
+[DEBUG] Done: Alignment
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Done: IO-311 IOUtils.read(InputStream/Reader) ignores the offset parameter
+[DEBUG] Done: Use "@since x.y" instead of "@since Commons IO x.y"
+[DEBUG] Done: Synchronise RELEASE-NOTES and the template that generates it
+[DEBUG] Done: Javadoc
+[DEBUG] Excluding src/test/java/org/apache/commons/io/EndianUtilsTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/HexDumpTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/CharSequenceReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/ProxyReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/SwappedDataInputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/CountingOutputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/FileWriterWithEncodingTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/LockableFileWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/NullOutputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/NullWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/ProxyWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/StringBuilderWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/TeeOutputStreamTest.java ...
+[DEBUG] Done: Use $Id$ instead of the mix of $Date$ and others.
+[DEBUG] Done: Remove superfluous parens.
+[DEBUG] Excluding src/test/java/org/apache/commons/io/CopyUtilsTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/DemuxTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileCleanerTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileCleaningTrackerTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsCleanDirectoryTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsFileNewerTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FileUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/FilenameUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/HexDumpTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOCaseTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOExceptionWithCauseTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsCopyTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/IOUtilsWriteTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/LineIteratorTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/CountingInputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/XmlStreamReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/compatibility/XmlStreamReader.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/compatibility/XmlStreamReaderException.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/ByteArrayOutputStreamTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/DeferredFileOutputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/XmlStreamWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/testtools/FileBasedTestCase.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/testtools/YellOnCloseInputStream.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/testtools/YellOnFlushAndCloseOutputStream.java ...
+[DEBUG] Done: Remove @author tags per Apache guidelines.
+[DEBUG] Done: [IO-310] Add ByteOrderMark constants for UTF-32.
+[DEBUG] Done: Clean up text.
+[DEBUG] Done: Set release date.
+[DEBUG] Excluding src/test/java/org/apache/commons/io/EndianUtilsTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/HexDumpTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/CharSequenceReaderTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/input/SwappedDataInputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/CountingOutputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/FileWriterWithEncodingTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/LockableFileWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/NullOutputStreamTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/StringBuilderWriterTest.java ...
+[DEBUG] Excluding src/test/java/org/apache/commons/io/output/TeeOutputStreamTest.java ...
+[DEBUG] Done: Drop $Date$ SVN variables
+[DEBUG] Done: Next RC comming up.
+[DEBUG] Hunk depends on: 9f7b69e8 : Alignment : added back.
+[DEBUG] Hunk depends on: f584ed90 : IO-311 IOUtils.read(InputStream/Reader) ignores the offset parameter : added back.
+[DEBUG] Hunk depends on: 5c8a6f44 : IO-312 CharSequenceInputStream(CharSequence s, Charset charset, int bufferSize) ignores bufferSize : added back.
+[DEBUG] Hunk depends on: cf5c4628 : Use "@since x.y" instead of "@since Commons IO x.y" : added back.
+[DEBUG] Hunk depends on: 03ad89f6 : Javadoc : added back.
+[DEBUG] Hunk depends on: 2413cf3c : Missing @since 2.2 markers; standardise format : added back.
+[DEBUG] Hunk depends on: b04b4f53 : Fix some odd formatting. : added back.
+[DEBUG] Hunk depends on: 32eeb20e : [IO-310] Add ByteOrderMark constants for UTF-32. : added back.
+[DEBUG] Hunk depends on: 1170279d : Remove noisy and unnecessary parens. Especially painful in return statements: "return (foo + bar);" vs. "return foo + bar;" : added back.
+[DEBUG] Hunk depends on: da3a87a4 : Synchronise RELEASE-NOTES and the template that generates it : added back.
+[DEBUG] Hunk depends on: 9d8d86f7 : Set release date. : added back.
+[DEBUG] Hunk depends on: a241539e : Clean up text. : added back.
+[DEBUG] Hunk depends on: 88f98ed0 : Use $Id$ instead of the mix of $Date$ and others. : added back.
+[DEBUG] Hunk depends on: c10347e5 : Drop $Date$ SVN variables : added back.
+[DEBUG] Hunk depends on: 25cfc24a : Next RC comming up. : added back.
+[DEBUG] Hunk depends on: 6dbc1b3e : Move changes.xml to location expected by CP24 Add previous release notes to end of .vm file so we keep history when regenerating : added back.
+[DEBUG] Hunk depends on: 4ccf5c72 : Release notes for 2.2. : added back.
+[DEBUG] Hunk depends on: d58ac896 : IO-300 FileUtils.moveDirectoryToDirectory removes source directory if destination is a subdirectory : added back.
+[DEBUG] Hunk depends on: 55c1430f : IO-307 ReaderInputStream#read(byte[] b, int off, int len) should check for valid parameters : added back.
+[DEBUG] Hunk depends on: 6ccf35ec : Add check for negative offset : added back.
+[DEBUG] Hunk depends on: 033a3174 : Another fix for this version : added back.
+[DEBUG] Hunk depends on: 8076962b : Easier to scan XML in Eclipse outline if issue number appears first : added back.
+[DEBUG] Hunk depends on: 33368e1a : @since 2.2 markers : added back.
+[DEBUG] Hunk depends on: c4251ace : IO-306 ReaderInputStream#read(byte[] b, int off, int len) should always return 0 for length == 0 : added back.
+[DEBUG] Hunk depends on: 5db7f804 : Use fixed Locale for upcasing : added back.
+[DEBUG] Hunk depends on: 027d9419 : Javadoc, Checkstyle. More precise throw clause in private method. : added back.
+[DEBUG] Hunk depends on: 508f4664 : Rename private method setupEffectiveDirFilter to setUpEffectiveDirFilter : added back.
+[DEBUG] Hunk depends on: 2fc63ef3 : Rename private method setupEfectiveFileFilter to setUpEffectiveFileFilter : added back.
+[DEBUG] Hunk depends on: e3daec3b : Fix tab in source and reformat 2 methods for longer lines. : added back.
+[DEBUG] Hunk depends on: b37ba99e : Remove @author tags per Apache guidelines. : added back.
+[DEBUG] Hunk depends on: 642d6594 : IO-173 FileUtils.listFiles() doesn't return directories : added back.
+[DEBUG] Hunk depends on: 4cef5296 : IO-276 "FileUtils#deleteDirectoryOnExit(File)" does not work : added back.
+[DEBUG] Hunk depends on: b1dede03 : IO-273 BoundedInputStream.read() treats max differently from BoundedInputStream.read(byte[]...) : added back.
+[DEBUG] Hunk depends on: 50a7fdca : IO-297 CharSequenceInputStream to efficiently stream content of a CharSequence : added back.
+[DEBUG] Hunk depends on: 6ab58439 : IO-296 ReaderInputStream optimization: more efficient reading of small chunks of data : added back.
+[DEBUG] Hunk depends on: 05f4b42c : IO-298 Various methods of class 'org.apache.commons.io.FileUtils' incorrectly suppress 'java.io.IOException' : added back.
+[DEBUG] Hunk depends on: 025f2766 : [IO-304] The second constructor of Tailer class does not pass 'delay' to the third one : added back.
+[DEBUG] Hunk depends on: a3c8c6f4 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times : added back.
+[DEBUG] Hunk depends on: 3f8cc6d5 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times : added back.
+[DEBUG] Hunk depends on: 28d32e9c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs. : added back.
+[DEBUG] Hunk depends on: aad6359c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. : added back.
+[DEBUG] Hunk depends on: 4b62012c : Checkstyle - replace tab characters with spaces : added back.
+[DEBUG] Hunk depends on: 94afbe46 : IO-288 Move ReversedLinesFileReader to org.apache.commons.io.input package with the reset of the InputStreams & Readers : added back.
+[DEBUG] Hunk depends on: bf48fd5f : Additional classes and methods merit 2.2 : added back.
+[DEBUG] Hunk depends on: 33b0f21c : IO-288 Supply a ReversedLinesFileReader N.B. Renamed test .txt files to .bin and made them application/octet-stream as it's important not to change the EOL setting : added back.
+[DEBUG] Hunk depends on: ec29cec2 : IO-288 Supply a ReversedLinesFileReader : added back.
+[DEBUG] Hunk depends on: b20daf59 : Not my change : added back.
+[DEBUG] Hunk depends on: 531aaa5b : [IO-291] Add new function FileUtils.directoryContains. : added back.
+[DEBUG] Hunk depends on: a2cf5463 : IO-275 FileUtils.contentEquals/IOUtils.contentEquals - Add option to ignore "line endings" : added back.
+[DEBUG] Hunk depends on: 33e9a899 : Use Collection.isEmpty() instead of size() == 0 : added back.
+[DEBUG] Hunk depends on: 63a1efef : Remove superfluous parens. : added back.
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.IOUtils.readLines(Reader)
+org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader)
+org.apache.commons.io.IOUtils.contentEquals(Reader,Reader)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter)
+org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter)
+org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.iterateFilesAndDirs(File,IOFileFilter,IOFileFilter)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter)
+org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter)
+org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.directoryContains(File,File)}
+[DEBUG] Side-effects: 
+[DEBUG] {org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL(File,File,String)}
+[DEBUG] src/main/java/org/apache/commons/io/FilenameUtils.java : 90c7e6b4b1dffeba0012b3d5de5c277347b76761
+[DEBUG] src/main/java/org/apache/commons/io/ReversedLinesFileReader.java : 33b0f21c557b26de02b928140ffbbff0c3b6e11a
+[DEBUG] src/main/java/org/apache/commons/io/ByteOrderMark.java : 32eeb20ee9096257520cded0d1af33d4664f8619
+[DEBUG] src/main/java/org/apache/commons/io/input/ReaderInputStream.java : 6ab5843928a7c3dfd7093e2d2d33cdc44b43ea67
+[DEBUG] src/main/java/org/apache/commons/io/IOUtils.java : inconsistent!
+[DEBUG] src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java : 94afbe4621736c8183f0145f779f86e48cf2d4d6
+[DEBUG] src/main/java/org/apache/commons/io/FileUtils.java : inconsistent!
+[DEBUG] src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java : 50a7fdcaf8fb9a684a96568ceeb8643b4941c475
+
+[DEBUG] Original |H| 136
+[DEBUG] Tracker:
+[
+7fa02d13bfadcfe8fe98c208355bad3b9489230c : []
+63a1efef1d71667220a506b3f7a79e8642c5c712 : []
+33e9a899dcc38a2fdcf42432fb82024d323b0c6d : [[org.apache.commons.io.filefilter.AndFileFilter.accept(File):UPD,DROP], [org.apache.commons.io.FilenameUtils.splitOnTokens(String):UPD,DROP], [org.apache.commons.io.FileSystemUtils.performCommand(String[],int,long):UPD,DROP], [org.apache.commons.io.filefilter.AndFileFilter.accept(File,String):UPD,DROP]]
+a2cf54639b1655d9059d416e6a6cb80931940a7d : [[org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader):INS,DROP], [org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL(File,File,String):INS,DROP]]
+288d6f0a6b2a0beed8378d459cd674186ebc3540 : []
+2316361c8f5f419358753856656308444036c5bf : []
+ec04894a074afd40e7074c83c9e3c27f4b20b3eb : [[org.apache.commons.io.FileUtils.byteCountToDisplaySize(long):UPD,DROP]]
+531aaa5b972e3676ac1b255481291ac3392a9068 : [[org.apache.commons.io.FileUtils.directoryContains(File,File):INS,DROP]]
+b20daf593e7ee4ab56985be269dbc03a69c03a4e : []
+ec29cec2923b4654d5e30b4ff83c1d9a39e1682a : []
+33b0f21c557b26de02b928140ffbbff0c3b6e11a : [[org.apache.commons.io.ReversedLinesFileReader:INS,DROP]]
+25aaa9cba84ffd92ddcd670ffb1906f1743fa833 : [[org.apache.commons.io.IOUtils.readFully(Reader,char[]):INS,DROP], [org.apache.commons.io.IOUtils.readFully(InputStream,byte[],int,int):INS,DROP], [org.apache.commons.io.IOUtils.read(Reader,char[],int,int):INS,DROP], [org.apache.commons.io.IOUtils.skipFully(Reader,long):UPD,TEST], [org.apache.commons.io.IOUtils.read(Reader,char[]):INS,DROP], [org.apache.commons.io.IOUtils.readFully(Reader,char[],int,int):INS,DROP], [org.apache.commons.io.IOUtils.readFully(InputStream,byte[]):INS,DROP], [org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int):INS,DROP], [org.apache.commons.io.IOUtils.read(InputStream,byte[]):INS,DROP]]
+d80edebc9481eb3b04da62af8d39d53bff19b8c8 : [[org.apache.commons.io.IOUtils.closeQuietly(ServerSocket):INS,TEST]]
+bf48fd5f8985c8d24d5bcebf7064767c7ea5ec91 : []
+94afbe4621736c8183f0145f779f86e48cf2d4d6 : [[org.apache.commons.io.ReversedLinesFileReader:DEL,DROP], [org.apache.commons.io.input.ReversedLinesFileReader:INS,DROP]]
+4b62012c3c1b0cf0182bcc8d9cdcb86c360327c9 : []
+e36e518ce959a8fa68be4f35d26d0780a73e13b8 : []
+71a7618b3740eb9fe759e75ab23dcfd6663374df : []
+fde4aaaf5d92f18938bf9d3c5477dc4d6a0daff0 : [[org.apache.commons.io.IOUtils.closeQuietly(Selector):INS,TEST]]
+492e9b29c6a9e8cb826bf7c0709950a704e754e7 : []
+f0fdfa63b9e1e479a990f2d50b8878512ae6a980 : []
+90c7e6b4b1dffeba0012b3d5de5c277347b76761 : [[org.apache.commons.io.FileUtils.directoryContains(File,File):UPD,DROP], [org.apache.commons.io.FilenameUtils.directoryContains(String,String):INS,DROP]]
+0535d141cb38f6d14803e04841a4467bc85a45ac : []
+91b2c630d0c9b3091cf4da756481f68bc1940bac : []
+96c5e875c2227622d445b095e7123e89caf8e2c2 : []
+aad6359c39d59176c51e0d4e5ee31def1bc10077 : [[org.apache.commons.io.output.TeeOutputStream.close():UPD,DROP]]
+7af4ac7cc462cc6d0a5b371b63fb8d557a9e6a2b : []
+56c87a17189ea320ff5799f7d10789ca8d9ce958 : [[org.apache.commons.io.output.TeeOutputStream.close():UPD,DROP]]
+28d32e9cb656d8df391cb36824e2e0afcbe3e375 : []
+eea40304671560cc0ad8d516ce6e334c54920da8 : []
+3f8cc6d5f6565608b0146f87137ed34316bc4eb3 : [[org.apache.commons.io.input.BOMInputStream.getBOM():UPD,DROP]]
+47e16e5bcff38e7cde014b3c78f3f0b4be69739f : []
+a3c8c6f443cd89bb132da992a791cbb84419e00e : []
+025f2766f7c3db20e508f07bd0f17c4cb0702bdf : [[org.apache.commons.io.input.Tailer.Tailer(File,TailerListener,long):UPD,DROP]]
+05f4b42cc0b32a5273fd518c8efe7fb041e9baf6 : [[org.apache.commons.io.FileUtils.copyInputStreamToFile(InputStream,File):UPD,DROP], [org.apache.commons.io.FileUtils.writeLines(File,String,Collection<?>,String,boolean):UPD,DROP], [org.apache.commons.io.FileUtils.writeByteArrayToFile(File,byte[],boolean):UPD,DROP], [org.apache.commons.io.FileUtils.writeStringToFile(File,String,String,boolean):UPD,DROP]]
+6ab5843928a7c3dfd7093e2d2d33cdc44b43ea67 : [[org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int):UPD,DROP], [org.apache.commons.io.input.ReaderInputStream.fillBuffer():INS,DROP], [org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(Reader,CharsetEncoder,int):UPD,DROP], [org.apache.commons.io.input.ReaderInputStream.encoderOut : ByteBuffer:UPD,DROP], [org.apache.commons.io.input.ReaderInputStream.read():UPD,DROP]]
+1e8705903be81c83a13c622a82e3843753537790 : []
+50a7fdcaf8fb9a684a96568ceeb8643b4941c475 : [[org.apache.commons.io.input.CharSequenceInputStream:INS,DROP]]
+b1dede03147ca84376b4c3a26010229b2b20c105 : [[org.apache.commons.io.input.BoundedInputStream.read():UPD,DROP]]
+4cef5296135cf1a056f44158b00977239e4fc3ae : [[org.apache.commons.io.FileUtils.deleteDirectoryOnExit(File):UPD,DROP]]
+642d6594b461bff2adb58fc4ca88a86a7ddbf8d4 : [[org.apache.commons.io.FileUtils.setupEffectiveDirFilter(IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.innerListFiles(Collection<File>,File,IOFileFilter):DEL,DROP], [org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.innerListFiles(Collection<File>,File,IOFileFilter,boolean):INS,DROP], [org.apache.commons.io.FileUtils.iterateFilesAndDirs(File,IOFileFilter,IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.setupEfectiveFileFilter(IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter):UPD,DROP], [org.apache.commons.io.FileUtils.validateListFilesParameters(File,IOFileFilter):INS,DROP]]
+ce7f497cca137a9efc97ab75e4f4ea0e30f4df90 : []
+b37ba99e8f838e0fb7df77bea2fc774d5c8e893f : []
+2f5db12da6e4c301ac6a315a8991bdc0e4fbe50a : []
+022490d4748844f26e2621f3aea603d87187454c : []
+799205251cd03637ab03d35a87f64005e1838875 : []
+d8a496f47192236d35e156193c55d52beefe4030 : []
+e3daec3bb2ff25c8eb5be128f102d7acccea2cfc : []
+72aba063d1703b0b37801bd04e4df07d49bb3c92 : []
+f12b0136f79ac7cdf74270b9d6f04e97eb943b52 : []
+b2e74b3a838adc261797eb0b4743ad94afa4c65d : []
+24be3c7653d8d8baa28ca1505f5fcc071da14839 : []
+109f81a88121c443d7129bb62e84e96b5fe92a38 : []
+84f52250cf6a5827ac04a0f6d8908c39a43eba55 : []
+41f2753b44c20aeb7c64fb79a95bfb3bc7dcfbe3 : []
+2fc63ef30b8846c693469dbe7dab9855a3fee102 : [[org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter):UPD,DROP], [org.apache.commons.io.FileUtils.setupEfectiveFileFilter(IOFileFilter):DEL,DROP], [org.apache.commons.io.FileUtils.setUpEffectiveFileFilter(IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter):UPD,DROP]]
+508f46640417b3be3e4e58e751f51020979d1ffe : [[org.apache.commons.io.FileUtils.listFiles(File,IOFileFilter,IOFileFilter):UPD,DROP], [org.apache.commons.io.FileUtils.setupEffectiveDirFilter(IOFileFilter):DEL,DROP], [org.apache.commons.io.FileUtils.setUpEffectiveDirFilter(IOFileFilter):INS,DROP], [org.apache.commons.io.FileUtils.listFilesAndDirs(File,IOFileFilter,IOFileFilter):UPD,DROP]]
+3278b1ba9bf131a247824aac255ae68e017a7e62 : []
+027d941954b6e81af5ba8acb7d8e5399dc6232d4 : [[org.apache.commons.io.input.CharSequenceInputStream.fillBuffer():UPD,DROP], [org.apache.commons.io.FileUtils.setUpEffectiveDirFilter(IOFileFilter):UPD,DROP]]
+5db7f804522957c408a9db89b69715d71a0fd8f4 : [[org.apache.commons.io.input.XmlStreamReader.getContentTypeEncoding(String):UPD,DROP]]
+0ab79cc7801f7f91bcc13166d5e0bde5a0c3e52a : []
+9f48d4add42a7cdce1dc7bebd1b32daaa27fdc90 : []
+5236eb0d95ac51d03ee8d5b412497ae2b22861c8 : []
+cefb51414869208b4292a9a5cc29261ae7cd35b8 : []
+3200c5f8f6ecdf03dbe7d1bc97416986a234ecb7 : []
+0c7f310735275b001264f62e54accb8c78ef2144 : [[org.apache.commons.io.input.CharSequenceInputStream.read(byte[],int,int):UPD,DROP]]
+c4251acef1beb1f164413b94ba526f399b8838d6 : [[org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int):UPD,DROP]]
+ea6fc33434ba8b111e8dad9baa29d4ec0414ee93 : []
+f3fe62e5100b38e7596ad4e2385082d7c0f47a22 : []
+452766179b5d56491d40246e2c7f412f033c79fa : []
+315fe2d7c561f8a7f275256e0b83a3987c5a9162 : []
+6cb913dba00047423d13176cd92ceb4c86d4ce3e : []
+6b5f608599ef6d0647e877245ae50b544c082ea6 : []
+33368e1a9d1fa6f960490ceace5c90d9dda80924 : []
+8076962b9187bff55faf77e5cc2d29d1691a6a97 : []
+033a3174df6ab1c4a49984b4bcacf683ae9a4e8d : []
+87dfbd996f7091029ba018ff13fda735c15036d9 : []
+6ccf35ec8e3518d2bc073440773a9d501baf555f : [[org.apache.commons.io.input.CharSequenceReader.read(char[],int,int):UPD,DROP]]
+caa0578b7235fbe330022d4746562c0f94cd109a : []
+55c1430fc712e4b64fd4ba08660c0c8b4931486b : [[org.apache.commons.io.input.ReaderInputStream.read(byte[],int,int):UPD,DROP]]
+d58ac89621aae78f7afcf3720f6b2ec1396beef1 : [[org.apache.commons.io.FileUtils.moveDirectory(File,File):UPD,DROP]]
+dbdab57a6f7aa4d46ab542cfe15bcfe0c7901b4d : []
+3fdb1c369b9d805af90c3bdb1c7943c3ec691a19 : []
+4ccf5c7290377b471715eaa78f340fb5c596cd29 : []
+94e64536b14fb6d0726b21af9358a1e0a890864a : []
+8314cfed9ce43e0487b2d1eead5996a972ed818d : []
+6dbc1b3ead1c3d3510411b7bbd5b5dd3ba0541b6 : []
+0031a91ba7b5b580b28fab5cb60d683c93e9fae8 : [[org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long):INS,TEST], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long):INS,TEST]]
+3ae9f7d2b49a61f7196f5a8131e63459c38d2662 : []
+25cfc24a8b52ec890f9ab3e0036a9c7c9447159a : []
+c10347e5bef291ff2514016abc263d1b213d6571 : []
+88f98ed034d37346ce43c02ed581b0bbf37b6988 : []
+ac05a9a0ef09228ab5d2d5dca4b498b25f0ffa80 : []
+b1c02e4864056300a9c6a1767435778103cc848d : []
+a241539edd2a63a30062789a3c425c9a10f9f68a : []
+2fb7792425fc70681544b7c399ad4e84996cc3d8 : []
+9d8d86f7068ff29703ffb4349a1dbae430caf202 : []
+da3a87a40b0afd46ce1a556411143bb5fa1d6375 : []
+740fe050f2599122e8a4175e7c4e384ad642a119 : []
+22d7a1573aab096fc9b1567b0763546922423da0 : []
+8965e5ef5854c86d1b7fb88dc4667ff117ae476f : []
+1170279dc85c2bbdea594b053c56b379a72a2104 : [[org.apache.commons.io.input.SwappedDataInputStream.readFully(byte[],int,int):UPD,DROP]]
+32eeb20ee9096257520cded0d1af33d4664f8619 : [[org.apache.commons.io.ByteOrderMark.UTF_32LE : ByteOrderMark:INS,DROP], [org.apache.commons.io.ByteOrderMark.UTF_32BE : ByteOrderMark:INS,DROP]]
+bf5571fe564f7bdf2dcedadbea60f97f48a17ff1 : []
+e3646441205b9271fe2bad0e93088304a8db5a44 : []
+b04b4f533d82da73e2cd7947a7e6312fe330e1a3 : []
+18a393565b1525118da8a1bcbd394b053ecb04d3 : []
+2413cf3c607371a7b7aa9d37a9e5d916814a4799 : []
+03ad89f678077b04b9b28d0c4a5f6d5892a3f9b5 : []
+1daa7cb1c8d2abe9caaa4c6f568e00217ce18da5 : [[org.apache.commons.io.IOUtils.toByteArray(InputStream,int):UPD,DROP], [org.apache.commons.io.IOUtils.EOF : int:INS,DROP], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream):UPD,DROP], [org.apache.commons.io.IOUtils.read(Reader,char[],int,int):UPD,DROP], [org.apache.commons.io.IOUtils.contentEquals(Reader,Reader):UPD,DROP], [org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int):UPD,DROP], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer):UPD,DROP], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long):UPD,TEST], [org.apache.commons.io.IOUtils.contentEquals(InputStream,InputStream):UPD,DROP], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long):UPD,TEST]]
+cf5c462807a137b823a3155dfe9800b3cbf2303d : []
+5c8a6f44016a12aee9e485d94fc295fcd27375a6 : [[org.apache.commons.io.input.CharSequenceInputStream.reset():UPD,DROP], [org.apache.commons.io.input.CharSequenceInputStream.mark(int):UPD,DROP], [org.apache.commons.io.input.CharSequenceInputStream.CharSequenceInputStream(CharSequence,Charset,int):UPD,DROP]]
+cf971eb03a5e1bee24a0842ac7eb7d5b1ae4e5c7 : []
+073fa3e583457e97245c0cc5caccabf04ac691c0 : [[org.apache.commons.io.filefilter.NameFileFilter.accept(File,String):UPD,DROP]]
+9282a0c816daa49b1d2d9ebc02a540021cb491ab : []
+f584ed909815d3020e718c8dd9c1f335c7a1543d : [[org.apache.commons.io.IOUtils.read(InputStream,byte[],int,int):UPD,DROP], [org.apache.commons.io.IOUtils.read(Reader,char[],int,int):UPD,DROP]]
+6c58d22a2a29e7eeaff51026dda9a6c1cfb720a5 : []
+211174c5242ef7eff06b2edf7ae74bc55851d2c2 : [[org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long):UPD,TEST]]
+57ca8f6d878e3ff0955904cc9e261f254c0320b2 : [[org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long):UPD,TEST], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long):UPD,TEST]]
+9f7b69e843d9f039b375c1d2aacc05d4e49040e0 : []
+62dd09687a08f660efbab7adc9f82ae501fd840f : [[org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long,char[]):INS,TEST], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long,byte[]):INS,TEST], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,long,long):UPD,TEST], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer):UPD,DROP], [org.apache.commons.io.IOUtils.copyLarge(Reader,Writer,char[]):INS,DROP], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream):UPD,DROP], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,long,long):UPD,TEST], [org.apache.commons.io.IOUtils.copyLarge(InputStream,OutputStream,byte[]):INS,DROP]]
+1833fb0792fa0dd3e4a3a0d1b5eec39db5da7848 : []
+aea44bd13647590b549658f613f65f06cf8df0fc : []
+8437c21e2a608eb68221feb2d70c4cf6eb4d9bfa : []
+a9039dee0f112ea403216b239cd3bb205d0c9ef6 : []
+bb5259cfd5fa5f943d2c2d972047d4c124008fc5 : []
+c0e29f7e393163f042b9bfed8da71536041f517b : []
+b5444a5e21e32ced46a346edd696853bd6345c81 : []
+f4958dfe7f3caf7ec00c1bff134be507aa6e1aee : []
+1d6feac910975c5d22b66b7f2a46ec87dd844d66 : [[org.apache.commons.io.IOUtils.readLines(Reader):UPD,DROP], [org.apache.commons.io.IOUtils.contentEquals(Reader,Reader):UPD,DROP], [org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(Reader,Reader):UPD,DROP], [org.apache.commons.io.IOUtils.toBufferedReader(Reader):INS,DROP]]
+87737ab36f55adbacd541a9202cb662d20db932b : []
+61b60430e8fb7a512b32865bd65aaf9b409612e8 : []
+182f03a4dfba5624f426bd01ff270cdf572deafe : []
+8463d421e686c6bd0be7411e7518d956700dfa9a : []
+6ae1acaf3e6a2f57a1f1af107293f9849250152e : []
+b1b9f1af948b0a7ccef16c9a5b8293fba5d56ce5 : []
+]
+[OUTPUT] Results:
+DROP: b1b9f1af : How to regenerate releases notes
+DROP: 6ae1acaf : Update release notes (using the generated text in target\announcement\announcement.vm.
+DROP: 8463d421 : Cut 2.2-RC4.
+DROP: 182f03a4 : Cut 2.2-RC4.
+DROP: 61b60430 : Typo.
+DROP: 87737ab3 : [IO-313] Add IOUTils.toBufferedReader(Reader)
+DROP: 1d6feac9 : Add missing tests as discovered with Cobertura. Add a new method IOUTils.toBufferedReader(Reader).
+DROP: f4958dfe : Fix method name.
+DROP: b5444a5e : Add missing tests as discovered with Cobertura.
+DROP: c0e29f7e : Fix checkstyle for line length > 120.
+DROP: bb5259cf : Don't use assertTrue for comparing equals
+DROP: a9039dee : Test case bug
+DROP: 8437c21e : Test case bug
+DROP: aea44bd1 : MOre test coverage
+DROP: 1833fb07 : @since 2.2 markers
+TEST: 62dd0968 : IO-308 Allow applications to provide buffer (or size) for copyLarge methods.
+HUNK: 9f7b69e8 : Alignment
+TEST: 57ca8f6d : Javadoc - rename offset as that is usually used for destination buffer
+TEST: 211174c5 : Calculate buffer lengthe once
+DROP: 6c58d22a : Javadoc
+HUNK: f584ed90 : IO-311 IOUtils.read(InputStream/Reader) ignores the offset parameter
+DROP: 9282a0c8 : Javadoc
+DROP: 073fa3e5 : Javadoc
+DROP: cf971eb0 : Rename testClose* methods to testCloseQuietly* to reflect the API tested: closeQuietly.
+HUNK: 5c8a6f44 : IO-312 CharSequenceInputStream(CharSequence s, Charset charset, int bufferSize) ignores bufferSize
+HUNK: cf5c4628 : Use "@since x.y" instead of "@since Commons IO x.y"
+TEST: 1daa7cb1 : Replace magic number (-1) with new private constant EOF.
+HUNK: 03ad89f6 : Javadoc
+HUNK: 2413cf3c : Missing @since 2.2 markers; standardise format
+DROP: 18a39356 : Javadoc - fix copy-paste error
+HUNK: b04b4f53 : Fix some odd formatting.
+DROP: e3646441 : Use "@since 1.1" instead of "@since Commons IO 1.1"
+DROP: bf5571fe : Don't leave non-SNAPSHOT versions where CI bots can see them
+HUNK: 32eeb20e : [IO-310] Add ByteOrderMark constants for UTF-32.
+HUNK: 1170279d : Remove noisy and unnecessary parens. Especially painful in return statements: "return (foo + bar);" vs. "return foo + bar;"
+DROP: 8965e5ef : Tests that {@link ByteOrderMark#getCharsetName()} can be loaded as a {@link java.nio.charset.Charset} as advertised.
+DROP: 22d7a157 : Drop stale releases
+DROP: 740fe050 : eol native
+HUNK: da3a87a4 : Synchronise RELEASE-NOTES and the template that generates it
+HUNK: 9d8d86f7 : Set release date.
+DROP: 2fb77924 : Release 2.2.
+HUNK: a241539e : Clean up text.
+DROP: b1c02e48 : Add compatibility section.
+DROP: ac05a9a0 : Remove older Javadoc 2.x releases.
+HUNK: 88f98ed0 : Use $Id$ instead of the mix of $Date$ and others.
+HUNK: c10347e5 : Drop $Date$ SVN variables
+HUNK: 25cfc24a : Next RC comming up.
+DROP: 3ae9f7d2 : Simplify and avoid boxing
+TEST: 0031a91b : IO-305:  New copyLarge() method in IOUtils that takes additional offset, length arguments
+HUNK: 6dbc1b3e : Move changes.xml to location expected by CP24 Add previous release notes to end of .vm file so we keep history when regenerating
+DROP: 8314cfed : Set end copyright date to 2012.
+DROP: 94e64536 : Javadoc
+HUNK: 4ccf5c72 : Release notes for 2.2.
+DROP: 3fdb1c36 : Remove accidental import
+DROP: dbdab57a : Document current Windows behaviour.
+HUNK: d58ac896 : IO-300 FileUtils.moveDirectoryToDirectory removes source directory if destination is a subdirectory
+HUNK: 55c1430f : IO-307 ReaderInputStream#read(byte[] b, int off, int len) should check for valid parameters
+DROP: caa0578b : Convert test to JUnit4
+HUNK: 6ccf35ec : Add check for negative offset
+DROP: 87dfbd99 : Allow clirr reports to be run from command line
+HUNK: 033a3174 : Another fix for this version
+HUNK: 8076962b : Easier to scan XML in Eclipse outline if issue number appears first
+HUNK: 33368e1a : @since 2.2 markers
+DROP: 6b5f6085 : Fix up clirr and checkstyle versions Add RAT excludes
+DROP: 6cb913db : Preparing 2.2 release.
+DROP: 315fe2d7 : Preparing 2.2 release.
+DROP: 45276617 : Preparing 2.2 release.
+DROP: f3fe62e5 : Add code coverage for markSupported().
+DROP: ea6fc334 : Better page title
+HUNK: c4251ace : IO-306 ReaderInputStream#read(byte[] b, int off, int len) should always return 0 for length == 0
+DROP: 0c7f3107 : Fix occasional test failure - should always return 0 for read length == 0
+DROP: 3200c5f8 : A bit more debug to help pin down occasional Gump failures
+DROP: cefb5141 : Upgarde to commons-parent 24 from 23.
+DROP: 5236eb0d : Javadoc.
+DROP: 9f48d4ad : Checkstyle wants Javadoc for private methods ...
+DROP: 0ab79cc7 : Document why safe to create skip buffers without synch
+HUNK: 5db7f804 : Use fixed Locale for upcasing
+HUNK: 027d9419 : Javadoc, Checkstyle. More precise throw clause in private method.
+DROP: 3278b1ba : Javadoc.
+HUNK: 508f4664 : Rename private method setupEffectiveDirFilter to setUpEffectiveDirFilter
+HUNK: 2fc63ef3 : Rename private method setupEfectiveFileFilter to setUpEffectiveFileFilter
+DROP: 41f2753b : Remove dead comment.
+DROP: 84f52250 : Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from.
+DROP: 109f81a8 : Remove unnecessary parens.
+DROP: 24be3c76 : Mark as 2.2-SNAPSHOT like Maven POM.
+DROP: b2e74b3a : Add missing 2.1 version.
+DROP: f12b0136 : Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from.
+DROP: 72aba063 : Remove my middle initial from my name.
+HUNK: e3daec3b : Fix tab in source and reformat 2 methods for longer lines.
+DROP: d8a496f4 : Fix Javadocs.
+DROP: 79920525 : Format fix.
+DROP: 022490d4 : Format fix.
+DROP: 2f5db12d : Remove extra parens.
+HUNK: b37ba99e : Remove @author tags per Apache guidelines.
+DROP: ce7f497c : Set commons.rc.version to RC1
+HUNK: 642d6594 : IO-173 FileUtils.listFiles() doesn't return directories
+HUNK: 4cef5296 : IO-276 "FileUtils#deleteDirectoryOnExit(File)" does not work
+HUNK: b1dede03 : IO-273 BoundedInputStream.read() treats max differently from BoundedInputStream.read(byte[]...)
+HUNK: 50a7fdca : IO-297 CharSequenceInputStream to efficiently stream content of a CharSequence
+DROP: 1e870590 : Missing @Overrides
+HUNK: 6ab58439 : IO-296 ReaderInputStream optimization: more efficient reading of small chunks of data
+HUNK: 05f4b42c : IO-298 Various methods of class 'org.apache.commons.io.FileUtils' incorrectly suppress 'java.io.IOException'
+HUNK: 025f2766 : [IO-304] The second constructor of Tailer class does not pass 'delay' to the third one
+HUNK: a3c8c6f4 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+DROP: 47e16e5b : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times. Refactor tests to use both BOM and no-BOM test files.
+HUNK: 3f8cc6d5 : [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+DROP: eea40304 : Adding missing license header.
+HUNK: 28d32e9c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs.
+DROP: 56c87a17 : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs.
+DROP: 7af4ac7c : Update findbugs-maven-plugin to 2.4.0 from 2.3.2.
+HUNK: aad6359c : [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception.
+DROP: 96c5e875 : Checkstyle: Line length <= 120.
+DROP: 91b2c630 : Update maven-checkstyle-plugin to 2.9 from 2.7.
+DROP: 0535d141 : Link to related methods
+DROP: 90c7e6b4 : Refactor new directortContains method for https://issues.apache.org/jira/browse/IO-291. Change behavior: an unrealized child File is NOT contained in a directory in FileUtils. If you want to test with file names, use FilenameUtils#directoryContains(String, String).
+DROP: f0fdfa63 : Add missing @since 2.2 tag.
+DROP: 492e9b29 : Migrate to commons-parent 23.
+TEST: fde4aaaf : [IO-301] Add IOUtils.closeQuietly(Selector) necessary. Patch applied, thank you. Also added another test to get the test code coverage to 100%.
+DROP: 71a7618b : IO-291 Add test case which shows FileUtils.directoryContains() returns true for a file which doesn't exist
+DROP: e36e518c : Checkstyle fixes
+HUNK: 4b62012c : Checkstyle - replace tab characters with spaces
+HUNK: 94afbe46 : IO-288 Move ReversedLinesFileReader to org.apache.commons.io.input package with the reset of the InputStreams & Readers
+HUNK: bf48fd5f : Additional classes and methods merit 2.2
+TEST: d80edebc : IO-292 IOUtils.closeQuietly() should take a ServerSocket as a parameter
+TEST: 25aaa9cb : IO-290 Add read/readFully methods to IOUtils
+HUNK: 33b0f21c : IO-288 Supply a ReversedLinesFileReader N.B. Renamed test .txt files to .bin and made them application/octet-stream as it's important not to change the EOL setting
+HUNK: ec29cec2 : IO-288 Supply a ReversedLinesFileReader
+HUNK: b20daf59 : Not my change
+HUNK: 531aaa5b : [IO-291] Add new function FileUtils.directoryContains.
+DROP: ec04894a : Adding EB/PB/TB per IO-287 and Ron Kuris' patch
+DROP: 2316361c : Surefire blindly treats all matching files as potential test classes Ensure only .class files are selected
+DROP: 288d6f0a : Check files fail to compare byte-wise
+HUNK: a2cf5463 : IO-275 FileUtils.contentEquals/IOUtils.contentEquals - Add option to ignore "line endings"
+HUNK: 33e9a899 : Use Collection.isEmpty() instead of size() == 0
+HUNK: 63a1efef : Remove superfluous parens.
+DROP: 7fa02d13 : Simplify my developer entry.
+
+[STATS] ************** Stats **************
+[STATS] total.time : 8.616
+[STATS] main.algo : 3.831
+[STATS] insert.edge : 0.0
+[STATS] hunk.deps.time : 2.511
+[STATS] extract.time : 0.001
+[STATS] call.graph.time : 0.462
+[STATS] tests.time : 1.611
+[STATS] comp.count : 0
+[STATS] hunk.count : 51
+[STATS] test.count : 8
+[STATS] hunk.deps.set : 51
+[STATS] drop.count : 77
+[STATS] ast.line.count : 571
+[STATS] test.deps : 33
+[STATS] comp.deps : 58
+[STATS] reduction.hunk : 56.61764705882353
+[STATS] reduction.rate : 94.11764705882354
+[STATS] ***********************************

@@ -1,0 +1,8 @@
+cached-repos
+suffix-cache
+output-backup/
+output-noop/
+output-share-prefix/
+output-share-suffix-backup/
+output-share-suffix/
+output/

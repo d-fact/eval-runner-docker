@@ -1,0 +1,387 @@
+Test: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean)
+Test: org.apache.commons.csv.CSVFormat.validate()
+Test: org.apache.commons.csv.Token.content : StringBuilder
+Test: org.apache.commons.csv.CSVFormat
+Test: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat)
+Test: org.apache.commons.csv.QuoteMode.QuoteMode()
+Test: org.apache.commons.csv.CSVFormat.withEscape(Character)
+Test: org.apache.commons.csv.ExtendedBufferedReader.getLastChar()
+Test: org.apache.commons.csv.Lexer.isCommentStart(int)
+Test: org.apache.commons.csv.Token.Type
+Test: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames()
+Test: org.apache.commons.csv.CSVParser.nextRecord()
+Test: org.apache.commons.csv.CSVParser.reusableToken : Token
+Test: org.apache.commons.csv.Lexer.isStartOfLine(int)
+Test: org.apache.commons.csv.Lexer
+Test: org.apache.commons.csv.Token.Token()
+Test: org.apache.commons.csv.CSVFormat.withRecordSeparator(String)
+Test: org.apache.commons.csv.CSVFormat.isLineBreak(Character)
+Test: org.apache.commons.csv.ExtendedBufferedReader.isClosed()
+Test: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase()
+Test: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean)
+Test: org.apache.commons.csv.Assertions
+Test: org.apache.commons.csv.CSVFormat.getQuoteCharacter()
+Test: org.apache.commons.csv.ExtendedBufferedReader
+Test: org.apache.commons.csv.Constants
+Test: org.apache.commons.csv.CSVFormat.EXCEL : CSVFormat
+Test: org.apache.commons.csv.Lexer.isQuoteChar(int)
+Test: org.apache.commons.csv.Constants.DOUBLE_QUOTE_CHAR : Character
+Test: org.apache.commons.csv.ExtendedBufferedReader.lastChar : int
+Test: org.apache.commons.csv.Lexer.isEscape(int)
+Test: org.apache.commons.csv.Token
+Test: org.apache.commons.csv.CSVFormat.getEscapeCharacter()
+Test: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat
+Test: org.apache.commons.csv.CSVParser.initializeHeader()
+Test: org.apache.commons.csv.CSVFormat.getIgnoreEmptyLines()
+Test: org.apache.commons.csv.CSVFormat.toStringArray(Object[])
+Test: org.apache.commons.csv.Token.type : Token.Type
+Test: org.apache.commons.csv.Token.Type.INVALID : Type
+Test: org.apache.commons.csv.CSVFormat.getNullString()
+Test: org.apache.commons.csv.CSVParser
+Test: org.apache.commons.csv.CSVParser.iterator()
+Test: org.apache.commons.csv.CSVFormat.getDelimiter()
+Test: org.apache.commons.csv.CSVFormat.isLineBreak(char)
+Test: org.apache.commons.csv.Lexer.mapNullToDisabled(Character)
+Test: org.apache.commons.csv.CSVFormat.TDF : CSVFormat
+Test: org.apache.commons.csv.QuoteMode.ALL : QuoteMode
+Test: org.apache.commons.csv.Token.Type.EOF : Type
+Test: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.getSkipHeaderRecord()
+Test: org.apache.commons.csv.Lexer.Lexer(CSVFormat,ExtendedBufferedReader)
+Test: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean)
+Test: org.apache.commons.csv.ExtendedBufferedReader.read()
+Test: org.apache.commons.csv.CSVFormat.withQuote(Character)
+Test: org.apache.commons.csv.Token.reset()
+Test: org.apache.commons.csv.CSVFormat.getIgnoreSurroundingSpaces()
+Test: org.apache.commons.csv.CSVRecord.EMPTY_STRING_ARRAY : String[]
+Test: org.apache.commons.csv.QuoteMode
+Test: org.apache.commons.csv.Lexer.getCharacterPosition()
+Test: org.apache.commons.csv.Token.Type.COMMENT : Type
+Test: org.apache.commons.csv.QuoteMode.MINIMAL : QuoteMode
+Test: org.apache.commons.csv.CSVParser.addRecordValue(boolean)
+Test: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat,long,long)
+Test: org.apache.commons.csv.ExtendedBufferedReader.getPosition()
+Test: org.apache.commons.csv.Lexer.readEndOfLine(int)
+Test: org.apache.commons.csv.Lexer.isClosed()
+Test: org.apache.commons.csv.CSVFormat.withRecordSeparator(char)
+Test: org.apache.commons.csv.CSVFormat.withHeader(String...)
+Test: org.apache.commons.csv.CSVRecord
+Test: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces()
+Test: org.apache.commons.csv.CSVParser.isClosed()
+Test: org.apache.commons.csv.CSVRecord.get(String)
+Test: org.apache.commons.csv.CSVParser.record : List
+Test: org.apache.commons.csv.Lexer.isEndOfFile(int)
+Test: org.apache.commons.csv.Assertions.notNull(Object,String)
+Test: org.apache.commons.csv.Token.Type.Type()
+Test: org.apache.commons.csv.ExtendedBufferedReader.ExtendedBufferedReader(Reader)
+Test: org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.withEscape(char)
+Test: org.apache.commons.csv.Lexer.isDelimiter(int)
+Test: org.apache.commons.csv.CSVFormat.getHeader()
+Test: org.apache.commons.csv.CSVFormat.withDelimiter(char)
+Test: org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase()
+Test: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean)
+Test: org.apache.commons.csv.CSVFormat.withNullString(String)
+Test: org.apache.commons.csv.QuoteMode.NON_NUMERIC : QuoteMode
+Test: org.apache.commons.csv.CSVRecord.CSVRecord(String[],Map<String, Integer>,String,long,long)
+Test: org.apache.commons.csv.CSVFormat.RFC4180 : CSVFormat
+Test: org.apache.commons.csv.CSVFormat.parse(Reader)
+Test: org.apache.commons.csv.Lexer.nextToken(Token)
+Test: org.apache.commons.csv.CSVFormat.getCommentMarker()
+Test: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean)
+Test: org.apache.commons.csv.Token.Type.TOKEN : Type
+Test: org.apache.commons.csv.CSVFormat.getTrim()
+Test: org.apache.commons.csv.QuoteMode.NONE : QuoteMode
+Test: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat
+Test: org.apache.commons.csv.Lexer.parseSimpleToken(Token,int)
+Test: org.apache.commons.csv.Token.Type.EORECORD : Type
+Comp: org.apache.commons.csv.QuoteMode.$VALUES : QuoteMode[]
+Comp: org.apache.commons.csv.CSVRecord.toList()
+Comp: org.apache.commons.csv.CSVFormat.TDF : CSVFormat
+Comp: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat,long,long)
+Comp: org.apache.commons.csv.CSVRecord.getRecordNumber()
+Comp: org.apache.commons.csv.Lexer.isMetaChar(int)
+Comp: org.apache.commons.csv.CSVPrinter.print(Object)
+Comp: org.apache.commons.csv.Token.Type.$VALUES : Type[]
+Comp: org.apache.commons.csv.Lexer.isStartOfLine(int)
+Comp: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames()
+Comp: org.apache.commons.csv.CSVFormat.escapeCharacter : Character
+Comp: org.apache.commons.csv.Token.Type[]
+Comp: org.apache.commons.csv.CSVFormat.Predefined.Predefined(String,int)
+Comp: org.apache.commons.csv.Lexer.getCharacterPosition()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.static {...}
+Comp: org.apache.commons.csv.CSVFormat
+Comp: org.apache.commons.csv.Lexer.readEscape()
+Comp: org.apache.commons.csv.CSVPrinter.flush()
+Comp: org.apache.commons.csv.Lexer.isClosed()
+Comp: org.apache.commons.csv.QuoteMode.values()
+Comp: org.apache.commons.csv.CSVParser
+Comp: org.apache.commons.csv.CSVRecord.putIn(Map)
+Comp: org.apache.commons.csv.CSVFormat.getHeader()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.closed : boolean
+Comp: org.apache.commons.csv.CSVParser.getRecords()
+Comp: org.apache.commons.csv.CSVPrinter.getOut()
+Comp: org.apache.commons.csv.CSVRecord.static {...}
+Comp: org.apache.commons.csv.CSVRecord.serialVersionUID : long
+Comp: org.apache.commons.csv.CSVRecord.values : String[]
+Comp: org.apache.commons.csv.Constants.BACKSLASH : char
+Comp: org.apache.commons.csv.CSVFormat.withEscape(Character)
+Comp: org.apache.commons.csv.CSVFormat.getEscapeCharacter()
+Comp: org.apache.commons.csv.Token.Type.name()
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreEmptyLines()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.TDF : Predefined
+Comp: org.apache.commons.csv.Token.Type[].clone()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.values()
+Comp: org.apache.commons.csv.Lexer.isEscape(int)
+Comp: org.apache.commons.csv.CSVParser.iterator()
+Comp: org.apache.commons.csv.CSVParser.initializeHeader()
+Comp: org.apache.commons.csv.Token.Type.valueOf(String)
+Comp: org.apache.commons.csv.QuoteMode.static {...}
+Comp: org.apache.commons.csv.CSVFormat.validate()
+Comp: org.apache.commons.csv.QuoteMode.MINIMAL : QuoteMode
+Comp: org.apache.commons.csv.CSVPrinter.1.$SwitchMap$org$apache$commons$csv$QuoteMode : int[]
+Comp: org.apache.commons.csv.ExtendedBufferedReader.position : long
+Comp: org.apache.commons.csv.CSVFormat.nullString : String
+Comp: org.apache.commons.csv.CSVRecord.getCharacterPosition()
+Comp: org.apache.commons.csv.Lexer.parseEncapsulatedToken(Token)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.close()
+Comp: org.apache.commons.csv.Token.Type.TOKEN : Type
+Comp: org.apache.commons.csv.QuoteMode[].clone()
+Comp: org.apache.commons.csv.CSVPrinter.CSVPrinter(Appendable,CSVFormat)
+Comp: org.apache.commons.csv.ExtendedBufferedReader
+Comp: org.apache.commons.csv.CSVFormat.EXCEL : CSVFormat
+Comp: org.apache.commons.csv.Lexer.reader : ExtendedBufferedReader
+Comp: org.apache.commons.csv.Assertions.Assertions()
+Comp: org.apache.commons.csv.CSVFormat.delimiter : char
+Comp: org.apache.commons.csv.CSVFormat.getDelimiter()
+Comp: org.apache.commons.csv.Token.INITIAL_TOKEN_LENGTH : int
+Comp: org.apache.commons.csv.CSVFormat.Predefined[]
+Comp: int[]
+Comp: org.apache.commons.csv.CSVFormat.withHeaderComments(Object[])
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces(boolean)
+Comp: org.apache.commons.csv.CSVFormat.trailingDelimiter : boolean
+Comp: org.apache.commons.csv.CSVFormat.withHeader(String[])
+Comp: org.apache.commons.csv.CSVRecord.get(Enum)
+Comp: org.apache.commons.csv.CSVParser.record : List
+Comp: org.apache.commons.csv.ExtendedBufferedReader.read()
+Comp: org.apache.commons.csv.CSVFormat.recordSeparator : String
+Comp: org.apache.commons.csv.CSVParser.nextRecord()
+Comp: org.apache.commons.csv.CSVFormat.ignoreHeaderCase : boolean
+Comp: org.apache.commons.csv.CSVParser.isClosed()
+Comp: org.apache.commons.csv.CSVFormat.withQuote(char)
+Comp: org.apache.commons.csv.Assertions.notNull(Object,String)
+Comp: org.apache.commons.csv.CSVFormat.getQuoteCharacter()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.Excel : Predefined
+Comp: org.apache.commons.csv.ExtendedBufferedReader.lastChar : int
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreSurroundingSpaces()
+Comp: org.apache.commons.csv.CSVPrinter.printRecords(ResultSet)
+Comp: org.apache.commons.csv.CSVRecord
+Comp: org.apache.commons.csv.Constants
+Comp: org.apache.commons.csv.CSVFormat.isQuoteCharacterSet()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.valueOf(String)
+Comp: org.apache.commons.csv.Constants.PIPE : char
+Comp: org.apache.commons.csv.Token.isReady : boolean
+Comp: org.apache.commons.csv.CSVFormat.withTrim()
+Comp: org.apache.commons.csv.QuoteMode.valueOf(String)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber()
+Comp: org.apache.commons.csv.CSVParser.lexer : Lexer
+Comp: org.apache.commons.csv.CSVFormat.isNullStringSet()
+Comp: org.apache.commons.csv.Constants.PARAGRAPH_SEPARATOR : String
+Comp: org.apache.commons.csv.Token.type : Type
+Comp: org.apache.commons.csv.CSVParser.recordNumber : long
+Comp: org.apache.commons.csv.CSVRecord.hasComment()
+Comp: org.apache.commons.csv.CSVPrinter.printRecord(Iterable)
+Comp: org.apache.commons.csv.CSVFormat.parse(Reader)
+Comp: org.apache.commons.csv.CSVPrinter.println()
+Comp: org.apache.commons.csv.CSVFormat.withTrailingDelimiter()
+Comp: org.apache.commons.csv.Lexer.isCommentStart(int)
+Comp: org.apache.commons.csv.CSVParser.parse(URL,Charset,CSVFormat)
+Comp: org.apache.commons.csv.Constants.UNDEFINED : int
+Comp: org.apache.commons.csv.CSVFormat.trim : boolean
+Comp: org.apache.commons.csv.CSVFormat.ignoreSurroundingSpaces : boolean
+Comp: org.apache.commons.csv.CSVFormat.serialVersionUID : long
+Comp: org.apache.commons.csv.QuoteMode.ordinal()
+Comp: org.apache.commons.csv.Constants.Constants()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.RFC4180 : Predefined
+Comp: org.apache.commons.csv.CSVFormat.isLineBreak(char)
+Comp: org.apache.commons.csv.QuoteMode.QuoteMode(String,int)
+Comp: org.apache.commons.csv.CSVFormat.toString()
+Comp: org.apache.commons.csv.CSVParser.characterOffset : long
+Comp: org.apache.commons.csv.Lexer.DISABLED : char
+Comp: org.apache.commons.csv.QuoteMode.hashCode()
+Comp: org.apache.commons.csv.Token.Type
+Comp: org.apache.commons.csv.CSVFormat.Predefined.getFormat()
+Comp: org.apache.commons.csv.CSVFormat.getAllowMissingColumnNames()
+Comp: org.apache.commons.csv.CSVFormat.toStringArray(Object[])
+Comp: org.apache.commons.csv.CSVFormat.quoteMode : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.Predefined.InformixUnloadCsv : Predefined
+Comp: org.apache.commons.csv.CSVFormat.equals(Object)
+Comp: org.apache.commons.csv.Constants.DOUBLE_QUOTE_CHAR : Character
+Comp: org.apache.commons.csv.CSVFormat.print(Appendable)
+Comp: org.apache.commons.csv.Constants.CRLF : String
+Comp: org.apache.commons.csv.CSVFormat.withHeader(ResultSetMetaData)
+Comp: org.apache.commons.csv.CSVFormat.getQuoteMode()
+Comp: org.apache.commons.csv.CSVFormat.hashCode()
+Comp: org.apache.commons.csv.Lexer.readEndOfLine(int)
+Comp: org.apache.commons.csv.CSVFormat.getCommentMarker()
+Comp: org.apache.commons.csv.CSVFormat.withTrim(boolean)
+Comp: org.apache.commons.csv.QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines(boolean)
+Comp: org.apache.commons.csv.CSVFormat.Predefined.InformixUnload : Predefined
+Comp: org.apache.commons.csv.Lexer.getCurrentLineNumber()
+Comp: org.apache.commons.csv.CSVParser.format : CSVFormat
+Comp: org.apache.commons.csv.Constants.RS : char
+Comp: org.apache.commons.csv.CSVFormat.withDelimiter(char)
+Comp: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.withQuote(Character)
+Comp: org.apache.commons.csv.CSVParser.headerMap : Map
+Comp: org.apache.commons.csv.Token.Type.EOF : Type
+Comp: org.apache.commons.csv.CSVFormat.isLineBreak(Character)
+Comp: org.apache.commons.csv.CSVFormat.withTrailingDelimiter(boolean)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.lookAhead()
+Comp: org.apache.commons.csv.QuoteMode.NON_NUMERIC : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.withAllowMissingColumnNames(boolean)
+Comp: org.apache.commons.csv.CSVRecord.get(int)
+Comp: org.apache.commons.csv.CSVPrinter.out : Appendable
+Comp: org.apache.commons.csv.CSVRecord.getComment()
+Comp: org.apache.commons.csv.CSVPrinter.close()
+Comp: org.apache.commons.csv.CSVFormat.quoteCharacter : Character
+Comp: org.apache.commons.csv.CSVRecord.characterPosition : long
+Comp: org.apache.commons.csv.CSVFormat.skipHeaderRecord : boolean
+Comp: org.apache.commons.csv.CSVFormat.CSVFormat(char,Character,QuoteMode,Character,Character,boolean,boolean,String,String,Object[],String[],boolean,boolean,boolean,boolean,boolean)
+Comp: org.apache.commons.csv.Constants.NEXT_LINE : String
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getPosition()
+Comp: org.apache.commons.csv.Constants.LINE_SEPARATOR : String
+Comp: org.apache.commons.csv.CSVParser.close()
+Comp: org.apache.commons.csv.CSVParser.getCurrentLineNumber()
+Comp: org.apache.commons.csv.Lexer.trimTrailingSpaces(StringBuilder)
+Comp: org.apache.commons.csv.CSVFormat.INFORMIX_UNLOAD_CSV : CSVFormat
+Comp: org.apache.commons.csv.Token.Type.EORECORD : Type
+Comp: org.apache.commons.csv.Constants.US : char
+Comp: org.apache.commons.csv.CSVFormat.static {...}
+Comp: org.apache.commons.csv.Token.Type.INVALID : Type
+Comp: org.apache.commons.csv.ExtendedBufferedReader.getLastChar()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.read(char[],int,int)
+Comp: org.apache.commons.csv.Constants.CR : char
+Comp: org.apache.commons.csv.CSVFormat.getTrim()
+Comp: org.apache.commons.csv.CSVFormat.header : String[]
+Comp: org.apache.commons.csv.CSVRecord.iterator()
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreEmptyLines()
+Comp: org.apache.commons.csv.Constants.BACKSPACE : char
+Comp: org.apache.commons.csv.Lexer
+Comp: org.apache.commons.csv.CSVRecord.size()
+Comp: org.apache.commons.csv.CSVPrinter.format : CSVFormat
+Comp: org.apache.commons.csv.CSVPrinter.trim(CharSequence)
+Comp: org.apache.commons.csv.CSVParser.parse(String,CSVFormat)
+Comp: org.apache.commons.csv.Constants.TAB : char
+Comp: org.apache.commons.csv.Lexer.commentStart : char
+Comp: org.apache.commons.csv.CSVRecord.get(String)
+Comp: org.apache.commons.csv.CSVPrinter
+Comp: org.apache.commons.csv.CSVPrinter.print(Object,CharSequence,int,int)
+Comp: org.apache.commons.csv.CSVRecord.isConsistent()
+Comp: org.apache.commons.csv.CSVPrinter.printAndQuote(Object,CharSequence,int,int)
+Comp: org.apache.commons.csv.CSVPrinter.newRecord : boolean
+Comp: org.apache.commons.csv.CSVRecord.values()
+Comp: org.apache.commons.csv.Lexer.isDelimiter(int)
+Comp: org.apache.commons.csv.CSVFormat.valueOf(String)
+Comp: org.apache.commons.csv.CSVRecord.recordNumber : long
+Comp: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord(boolean)
+Comp: org.apache.commons.csv.CSVFormat.getHeaderComments()
+Comp: org.apache.commons.csv.Token.Type.Type(String,int)
+Comp: org.apache.commons.csv.CSVParser.getRecordNumber()
+Comp: org.apache.commons.csv.CSVFormat.getRecordSeparator()
+Comp: org.apache.commons.csv.CSVRecord.EMPTY_STRING_ARRAY : String[]
+Comp: org.apache.commons.csv.CSVFormat.allowMissingColumnNames : boolean
+Comp: org.apache.commons.csv.CSVFormat.ignoreEmptyLines : boolean
+Comp: org.apache.commons.csv.Lexer.parseSimpleToken(Token,int)
+Comp: org.apache.commons.csv.CSVFormat.withSkipHeaderRecord()
+Comp: org.apache.commons.csv.Lexer.quoteChar : char
+Comp: org.apache.commons.csv.CSVRecord.isSet(String)
+Comp: org.apache.commons.csv.Token.Type.ordinal()
+Comp: org.apache.commons.csv.CSVRecord.CSVRecord(String[],Map,String,long,long)
+Comp: org.apache.commons.csv.Lexer.ignoreSurroundingSpaces : boolean
+Comp: org.apache.commons.csv.CSVPrinter.printRecord(Object[])
+Comp: org.apache.commons.csv.CSVFormat.withCommentMarker(char)
+Comp: org.apache.commons.csv.Lexer.ignoreEmptyLines : boolean
+Comp: org.apache.commons.csv.Lexer.close()
+Comp: org.apache.commons.csv.CSVFormat.getIgnoreHeaderCase()
+Comp: org.apache.commons.csv.CSVParser.1.this$0 : CSVParser
+Comp: org.apache.commons.csv.Token.Type.static {...}
+Comp: org.apache.commons.csv.CSVFormat.format(Object[])
+Comp: org.apache.commons.csv.Lexer.delimiter : char
+Comp: org.apache.commons.csv.ExtendedBufferedReader.ExtendedBufferedReader(Reader)
+Comp: org.apache.commons.csv.CSVFormat.Predefined.$VALUES : Predefined[]
+Comp: org.apache.commons.csv.CSVFormat.withQuoteMode(QuoteMode)
+Comp: org.apache.commons.csv.CSVParser.1.{...}
+Comp: org.apache.commons.csv.CSVParser.addRecordValue(boolean)
+Comp: org.apache.commons.csv.ExtendedBufferedReader.eolCounter : long
+Comp: org.apache.commons.csv.Token.content : StringBuilder
+Comp: org.apache.commons.csv.Lexer.nextToken(Token)
+Comp: org.apache.commons.csv.Constants.COMMA : char
+Comp: org.apache.commons.csv.Token
+Comp: org.apache.commons.csv.CSVFormat.Predefined.format : CSVFormat
+Comp: org.apache.commons.csv.Token.Type.COMMENT : Type
+Comp: org.apache.commons.csv.CSVFormat.withRecordSeparator(char)
+Comp: org.apache.commons.csv.CSVFormat.commentMarker : Character
+Comp: org.apache.commons.csv.Assertions
+Comp: org.apache.commons.csv.CSVFormat.RFC4180 : CSVFormat
+Comp: org.apache.commons.csv.CSVFormat.getTrailingDelimiter()
+Comp: org.apache.commons.csv.Lexer.isQuoteChar(int)
+Comp: org.apache.commons.csv.CSVFormat.withNullString(String)
+Comp: org.apache.commons.csv.CSVParser.getHeaderMap()
+Comp: org.apache.commons.csv.Constants.LF : char
+Comp: org.apache.commons.csv.CSVFormat.withCommentMarker(Character)
+Comp: org.apache.commons.csv.QuoteMode[]
+Comp: org.apache.commons.csv.CSVFormat.getNullString()
+Comp: org.apache.commons.csv.CSVPrinter.printRecords(Iterable)
+Comp: org.apache.commons.csv.CSVParser.2.$SwitchMap$org$apache$commons$csv$Token$Type : int[]
+Comp: org.apache.commons.csv.CSVFormat.withRecordSeparator(String)
+Comp: org.apache.commons.csv.QuoteMode.NONE : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.Predefined.Default : Predefined
+Comp: org.apache.commons.csv.Lexer.isWhitespace(int)
+Comp: org.apache.commons.csv.CSVPrinter.printAndEscape(CharSequence,int,int)
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase(boolean)
+Comp: org.apache.commons.csv.QuoteMode.ALL : QuoteMode
+Comp: org.apache.commons.csv.CSVFormat.isCommentMarkerSet()
+Comp: org.apache.commons.csv.CSVFormat.withHeader(ResultSet)
+Comp: org.apache.commons.csv.Constants.COMMENT : char
+Comp: org.apache.commons.csv.CSVFormat.newFormat(char)
+Comp: org.apache.commons.csv.Token.reset()
+Comp: org.apache.commons.csv.CSVFormat.MYSQL : CSVFormat
+Comp: org.apache.commons.csv.Lexer.escape : char
+Comp: org.apache.commons.csv.CSVPrinter.printComment(String)
+Comp: org.apache.commons.csv.CSVRecord.comment : String
+Comp: org.apache.commons.csv.Constants.static {...}
+Comp: org.apache.commons.csv.CSVFormat.DEFAULT : CSVFormat
+Comp: org.apache.commons.csv.CSVRecord.mapping : Map
+Comp: org.apache.commons.csv.CSVRecord.isMapped(String)
+Comp: org.apache.commons.csv.Token.toString()
+Comp: org.apache.commons.csv.Lexer.isEndOfFile(int)
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreSurroundingSpaces()
+Comp: org.apache.commons.csv.Token.Token()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.isClosed()
+Comp: org.apache.commons.csv.CSVFormat.Predefined.MySQL : Predefined
+Comp: org.apache.commons.csv.Lexer.Lexer(CSVFormat,ExtendedBufferedReader)
+Comp: org.apache.commons.csv.CSVParser.reusableToken : Token
+Comp: org.apache.commons.csv.CSVFormat.getSkipHeaderRecord()
+Comp: org.apache.commons.csv.Constants.EMPTY : String
+Comp: org.apache.commons.csv.CSVRecord.toString()
+Comp: org.apache.commons.csv.CSVFormat.withHeader(Class)
+Comp: org.apache.commons.csv.CSVFormat.Predefined
+Comp: org.apache.commons.csv.CSVParser.CSVParser(Reader,CSVFormat)
+Comp: org.apache.commons.csv.CSVFormat.isEscapeCharacterSet()
+Comp: org.apache.commons.csv.CSVParser.parse(File,Charset,CSVFormat)
+Comp: org.apache.commons.csv.CSVFormat.headerComments : String[]
+Comp: org.apache.commons.csv.CSVFormat.Predefined[].clone()
+Comp: org.apache.commons.csv.Token.Type.values()
+Comp: org.apache.commons.csv.ExtendedBufferedReader.readLine()
+Comp: char[]
+Comp: org.apache.commons.csv.Lexer.mapNullToDisabled(Character)
+Comp: org.apache.commons.csv.Constants.SP : char
+Comp: org.apache.commons.csv.CSVFormat.withFirstRecordAsHeader()
+Comp: org.apache.commons.csv.CSVFormat.withIgnoreHeaderCase()
+Comp: org.apache.commons.csv.CSVPrinter.printRecords(Object[])
+Comp: org.apache.commons.csv.Constants.END_OF_STREAM : int
+Comp: org.apache.commons.csv.CSVFormat.withEscape(char)
+Comp: org.apache.commons.csv.CSVRecord.toMap()
+Comp: org.apache.commons.csv.Constants.FF : char

@@ -1,0 +1,269 @@
+abd67115 Fix dates and versions
+d0d31602 Drop unnecessary README
+6f978339 RATs - forgot AL header
+7b8b5e5a Fix up site URL
+99281093 Recent changes
+15d7caf2 Latest versions
+8447d34d Doc
+9bb6841f Checkstyle: Line length
+ab2fd4f9 Checkstyle: Line length
+e8d76ef9 NET-581 SimpleSMTPHeader fails to supply the required Date: header
+77a30c21 SImplify
+a19fae72 NET-582 SimpleSMTPHeader does not allow for missing To: field
+83b95072 NET-582 SimpleSMTPHeader does not allow for missing To: field
+642158f7 Javadoc
+0177f900 NET-580 SMTPClient.sendSimpleMessage() silently ignores failed recipients Update Javadoc
+05111dae RedundantThrows no longer supported
+5e3fd2b3 Empty Catch Blocks
+cf4d2069 Latest checkstyle tool
+ecf65484 Moved @author entries to pom
+16b656fc Missing @return
+bb74e81c These are now fixed, so make them errors
+41401894 Redundant spaces
+d4267c5a Redundant spaces
+65302de2 NET-579 SSL/TLS SocketClients do not verify the hostname against the certificate
+4ca6aa3f Checkstyle fixes
+06adc0bd Always use blocks
+f1bb5ed0 Qualifier order
+95249151 Qualifier order
+6512d665 Qualifier order
+452081a3 Qualifier order
+c9a1c7d0 Move assembly to standard location
+31044ba5 NET-558 - getModificationTime(<filename>) returns complete received line including response code and EOL
+f5304f2e CP37 => CP38
+4450add7 NET-576 Allow FTPClient to use SYST response if system type is not specified in configuration
+55758ab0 NET-575 FTPClientExample should support setting the date format
+53468c68 Order
+12f145e4 Add test for NET-573
+ff519f3d Add hint
+fa0e3dd5 No need for fields to be mutable or package-visible
+f6d1a4d9 NET-538 - FTPHTTPClient should use socket factory to create sockets
+5df3f18b NET-570 - empty description tag causes RDF parser fail
+aa36b3b5 Each Version must be in its own release section
+e17d89b3 CGI must be svn:executable *
+3c52e534 Javadoc
+d12b5c37 No longer needed, as excluded in parent pom
+0b32962c Update to CP37
+43235dbb Synch release notes
+768dd780 Happy New Year
+45113dcf Tab police
+a31fe81a Checkstyle
+483a6a52 Use simpler way of parsing the compiler target
+6eda86da Use constant for port number Use different ports for tests that might run consecutively
+7de68184 Looks like there was a corrupt rat in my local repo; deleted it and it all works again now
+16c748d8 Fix NPE in RAT Only display current version in jira report
+ad6853f5 Remove unnecessary overrides
+8112b379 Next version is 3.4
+e36f8917 Should not have been committed
+0d157e15 AL header
+4df00cef Document why Clirr errors are OK
+92e5980b revert r1652867
+c0277c63 NET-525 Added missing set methods on NTP class and interface Restore compatibility
+06341a39 Javadoc
+7a4e64b0 Drop examples from CLI invocation of clirr:clirr
+e27c3821 Javadoc @since
+e49f1851 Should be OK with Javadoc 8 now (phew!)
+cd2d049f Javadoc 8 fixes
+724d534b Javadoc 8 fixes
+00104e73 Javadoc
+5469e099 Empty/unnecessary <p> tags
+966226bd Javadoc
+8fadf001 Javadoc
+50a124bf NET-566 UnixFTPEntryParser Drops Leading Spaces from File Names
+1762d632 Test forced trimming
+3426c6e0 expected value comes before actual value
+f9a8a384 NET-566 UnixFTPEntryParser Drops Leading Spaces from File Names Add option to parser to not skip leading spaces TODO make this the default but still allow reversion
+ff154772 Merge filename processing into single group Always process link type (no functional change)
+85b6e116 docs
+b43ac62d No code change; split RE so separators are more clearly identified
+28232bf9 Clarify what setControlEncoding does
+d6dda0c1 Allow for broken Animal Sniffer 1.13
+33df0280 Allow for missing properties file
+759f29fd Move properties to correct place
+d822758c Replace Java 6+ method call
+0a3c3449 Simplify examples/Main - use predefined properties file to define aliases
+03f251f0 Fix up Maven warning - cannot have two copies of build helper in main build
+4632dbae Automatically generate the correct Animal Sniffer signature name
+bfc2d81a Trial implementation of animal-sniffer
+b158a367 Update to latest versions of plugins and dependencies
+dd596752 Revert unintentional commit
+51352231 Document
+9fb2ca62 NET-552 SocketTimeoutException connecting a FTP server via an HTTP Proxy
+021922ee Document what looks like code duplication
+5e34e05f Fails on Continuum
+896ccef9 Allow use of exec:java to launch examples from classpath
+1bde5cd5 Improved error reporting
+7caaa91a Enable alias mechanism to work from the classpath Better output when class not found
+e0aba3e6 Implement retry for temporary failures
+0e2f4d6f Docs
+5337e4e7 Print the missing ids at the end
+20a4cc78 Check sequence of responses to detect missed messages
+d225362c Better handling of multiple item names
+e8605ab7 Javadoc
+90124986 Better handling of protocol commands
+231850ff Allow overwrite of mbox file
+b01fe9bf Add a bit more debug when requests fail
+330a6717 Better handling of invalid entries; Javadoc
+375a63b1 Javadoc
+c0f6da1e Mistakenly committed
+c2be3466 NET-528 FTPListParseEngine does not provide access to raw responses N.B. TelnetClientScript did not belong in this commit; removed in r1644803
+32f3b815 Layout
+bc21e8bd Test precision unit tests
+306f43c2 Unnecessary linewrap
+50fe5b9d Simplify by using common test method
+0c0d1df4 Need to check all significant units are set ...
+4b325fe9 Oops - also need to check previous entry
+cb5b5c3d Shared method for checking precision
+59f559ad NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date Only clear one field as doing re-enables the 'set' status for all others
+b262d06a NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date More efficient implementation - only parse format string when it is set up Ensure formats always set via private setter method Clear all insignificant fields below the least significant parsed field
+19783e58 NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date +set Calendar to indicate which parts are significant remaining parsers TODO: improve tests - ensure all more significant fields are set
+be045051 Check for parse error
+a9a79104 Check for parse error
+fb85a39f NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date +set Calendar to indicate which parts are significant in Enterprise Parser
+76fa83ce More tests
+c422412d More parsing tests and fixes
+a4a8f826 NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date +set Calendar to indicate which parts are significant in MLSxEntryParser
+bfac1aec Javadoc
+e2c97990 Update to use mdtmFile
+809652a3 NET-565 Add FTPClient method to return an FTPFile from an MDTM command
+61d2ab41 Add display timezone option for listing methods Allow multiple listing methods in a single connect session
+d219afb0 NET-564 FTPFile.toFormattedString - allow specification of TimeZone for display
+fd10c3d7 Typo
+3ac7c4c9 NET-562 FTPFile.toFormattedString should print only signficant parts of the parsed date Part 1: detect which parts are present TODO: set Calendar to indicate which parts are significant
+17ecff74 NET-563 MLSxEntryParser needs test cases; parsing is too lax
+fdf3d2c2 Show boundary
+efa533b3 Add mdtm output
+d7eb24cb Add server Timezone for parsing LIST responses
+9a06c433 Spaces
+182a19bc Javadoc
+48786125 Docn
+caa3ae14 Document LIST timestamp restrictions
+1eeecab0 Standardise on Calendar.DAY_OF_MONTH rather than the synonym Calendar.DATE - which is less obvious
+4c63aa0a Javadoc
+b8f3226d Fix indentation and unnecessary line wraps
+1a30a36b Document what happens when invalid parameters supplied
+752a551c NET-561 FTPFile.toFormattedString prints user and group in wrong order
+e68628bb NET-544 FTPClient.initiateListParsing does not correctly check if parserKey was cached
+d4e49ab1 Add example config item
+2e6efa8f NET-554 Simplify TelnetOptionHandler class hierarchy
+316dfd40 NET-558 - getModificationTime(<filename>) returns complete received line including response code
+a272cd97 Trailing spaces
+dfadc09f General tidyup and enhancements
+41bdc4e2 Don't show reflection wrapper in stack trace if exception was thrown by called code
+22cd80de Javadoc
+f9193d5f findbugs-maven-plugin 2.5.3 -> 2.5.5.
+a9d7cc5a NET-556 Make SubnetInfo.isInRange(int) public
+c3d19247 Simplify conditional by using switch Add missing value
+766da3f0 Javadoc
+ebf09d32 Trailing spaces
+0f6bc4c0 Unused import
+5555226c NET-550 Default FTPClient bufferSize results in very slow retrieve transfers Fix code in Util#copyStream (also copyReader) that failed to use the proper default for buffer size 0
+506d0271 NET-551 Util copyReader calls CopyStreamListener.bytesTransferred with the incorrect value for bytesTransferred Rename confusing fields
+aee94d0b NET-551 Util copyReader calls CopyStreamListener.bytesTransferred with the incorrect value for bytesTransferred
+c5192345 Only create String once
+d75f0c42 Added control character processing to TelnetClientExample
+e58cf27d NET-547 There is a lack of documentation regarding setControlKeepAliveTimeout
+b62a8b12 Add tag for 3.3
+72ea0f2b NET-549 - Telnet does not convert LF to CRLF in ASCII mode
+9eeb9c15 TYPO
+6e790e42 Trailing spaces
+b77ce822 Tab police
+e7e48da6 Camel case test method name.
+953b0d30 Format: Add blank line.
+66d6cbb8 Update commons-parent to 34 from 33.
+131a120d NET-543 telnet: spy read EOL is reversed
+1d8d34db Javadoc
+8fe92b71 Don't "borrow" external hosts for testing
+4115f808 Javadoc Count messages found
+2fec3721 Use separate BufferedReader variables to avoid resource not closed warning
+1a25a4cc Unnecessary
+6077beaa Unused import
+de559667 Close the resource
+e9d6422b Add examples
+56db2c59 NET-540 Article#printThread should have option to use any PrintStream
+422b0fe3 Test if Javadoc 8 fix works
+b26a3b41 NET-539 NPE if Threader.thread invoked with empty list or with null array
+061d70dd Java 8 Javadoc fixes
+727f55cc Remove unthrown exceptions. These are not part of the method signature so don't affect binary compatibility
+38141bae Java 8 Javadoc fixes
+cb10f50d Remove unthrown exceptions. These are not part of the method signature so don't affect binary compatibility
+0fb67b40 Remove unecessary test Javadoc - may cause IDE Javadoc warnings - more to maintain
+616cad1f Java 8 Javadoc fixes
+cb0d3f61 Java 8 Javadoc fixes
+4db79407 Remove unecessary test Javadoc - may cause IDE Javadoc warnings - more to maintain
+001d716d Java 8 Javadoc fixes
+2e7f9121 Remove useless Javadoc (causes IDE Javadoc warnings)
+55ebc7bc Remove useless Javadoc (causes IDE Javadoc warnings)
+ad8f8f03 Remove useless Javadoc (causes IDE Javadoc warnings)
+f6ffd04c Remove useless Javadoc (causes IDE Javadoc warnings)
+c83e0eed Java 8 Javadoc fixes
+f1ebf757 Java 8 Javadoc fixes
+7b71e2ae Java 8 Javadoc fixes
+29c80bf4 Javadoc fixes (Java 8)
+e96cf344 NET-536 IMAP FETCH example : IMAPExportMbox
+1e7d8d6f Simplify by standardising on URI for server and login details; use common utility method
+5d8fa90d Rewrite to avoid some resource closure warnings caused by reusing the stream variables
+428bac52 NET-535 IMAP FETCH can overflow reply buffer; provide for partial responses Add TRUE_CHUNK_LISTENER
+c21fcb1e Add details of what example does
+f8d82c9b Unescape >+From_ lines, not just >From_
+df9480cf NET-535 IMAP FETCH can overflow reply buffer; provide for partial responses
+560e40ca NET-534 Unnecesssary call to getReplyString() if no listeners configured
+e3b71afb Javadoc examples
+955d69ed Add example
+a0973e36 Don't use class fields when local variables are sufficient
+b8ecb3f9 NET-530 input parameter of org.apache.commons.net.ftp.FTP.__getReply(boolean) is not used
+949be1b5 Update versions; ensure compiler version is specified (we override parent)
+f8f24b82 Regen release notes
+c499348a Fix up incorrect XML
+bfcbea41 Default the current release Java minimum to the current compiler target
+adfaf3ba NET-529 SubnetUtils throws exception on valid input
+d5bceac7 NET-527 Add SimpleNTPServer as example and for testing
+41dd3db3 NET-516 parser problem occurs if the filename contains one or more characters of which the second byte of Shift-JIS code is 0x85 Fix NT parser
+75129393 Add regex flags to constructors
+30acc18a Constructors should not call overrideable methods. Add setRegex(regex, flags) method
+934ce8f6 Fix Javadoc to agree with code
+7ac3c663 TODO was fixed a while ago
+bba8edb1 Typo
+edfbddb9 Ensure case statement has a default case
+5c38cf8f Typo
+d645c73e Add control encoding option
+1d830a80 Add control encoding option
+4379a681 Cut-n-paste bug
+b4fabe83 NET-525 Added missing set methods on NTP class and interface
+d6a95a75 TRailing spaces
+52b9bc03 TRailing spaces
+0b144842 TRailing spaces
+fbee82eb NET-526 Avoid greedy matches within a regex
+aa4da9ef Fix bug in matching numbers without commas Start message numbering at 1 Log message number with length
+8290fefe Don't rely on getLocalHost() being directly accessible
+b4380110 Remove debug
+0a354864 Let's try explicit local host address
+cb17db7c A bit more debug
+a8ee23ca Add some temporary debug for investigating Continuum test failures
+156724c0 Replace call to deprecated API
+a690f593 Add dates and desc
+64475d4a Missing spaces
+430884f6 HNY
+71706889 NET-520 SubnetUtils("0.0.0.0/0") does not behave as expected Fixed range checking so network and broadcast addresses are treated as unsigned ints
+1ab1a17f NET-521 SubnetUtils.SubnetInfo.getAddressCount() can overflow as it returns an int
+e333ff8e Spurious closing tag
+9c352db4 NET-515 FTPClient sample in class javadoc "bug"
+ad3da80f NET-519 Apache Commons Net 3.3 has a performance issue
+f2e08e84 NET-517 FTPClient#reinitialize is package protected
+7879fd65 NET-512 Downloading files or members from the AS400 QSYS file system is not supported
+476395d7 NET-518 FTPClient#initFeatureMap should not initialize empty map if reply code is 530
+a02169b3 Use for each loop.
+588fb691 Formatting.
+9d090d40 [NET-511] Exception for new SubnetUtils("0.0.0.0/0").
+ceb54335 Sort members in AB order.
+b23d7bf4 ASF Branding
+86450a6f Use IMAP URL to simplify command line Add selector support
+0a25cf01 Typos
+5e305c6a NET-514 IMAP APPEND multiple issues in IMapClient. Deprecated unusable append methods. Added new append method, as well as example IMapImportMbox class to make use of it.
+efc34a93 Javadoc
+22c63caf Update to CP32 Fix incremental compiler bug (Net does not use annotations in package-info.java files)
+bcba9364 It's tricky following the range check as one end is exclusive and the other is inclusive Make both ends inclusive and adjust the calling code accordingly
+efc49076 Typo
+e95984b4 Oops, forgot to close tag
+8ea9034a 3.3 released
+529ae45a Bump version

@@ -1,0 +1,392 @@
+// Landscape TA file written by LSEdit 7.3.5
+// Landscape TA file written by LSEdit 7.3.5
+// Landscape TA file written by LSEdit 7.3.4
+// Landscape TA file written by LSEdit 7.3.4
+// Landscape TA file written by LSEdit 7.3.4
+// Landscape TA file written by LSEdit 7.2.4
+
+SCHEME TUPLE :
+
+$INHERIT switch $ENTITY
+$INHERIT firewall $ENTITY
+$INHERIT server $ENTITY
+$INHERIT db $ENTITY
+$INHERIT apache $ENTITY
+$INHERIT serve $ENTITY
+$INHERIT balancer $ENTITY
+$INHERIT (contain) ($RELATION)
+$INHERIT (depends_on) ($RELATION)
+$INHERIT (communicate) ($RELATION)
+$INHERIT (shares_loa) ($RELATION)
+$INHERIT (runs) ($RELATION)
+$INHERIT (authorizes) ($RELATION)
+
+depends_on switch firewall
+depends_on firewall switch
+communicate switch firewall
+communicate firewall switch
+communicate switch server
+communicate apache db
+communicate db apache
+shares_loa server server
+shares_loa apache apache
+runs server db
+runs server apache
+runs serve balancer
+
+
+SCHEME ATTRIBUTE :
+
+apache {
+ ugly
+ class_style = 1
+ class_icon = "fac_upsx_32.jpg"
+}
+
+$ENTITY {
+ color = (0 0 255)
+ labelcolor = (0 255 255)
+ class_style = 0
+}
+
+firewall {
+ color = (102 102 102)
+ nasty
+ class_style = 1
+ class_icon = "secx_32.jpg"
+}
+
+db {
+ color = (0 102 102)
+ class_style = 1
+ class_icon = "dat_basx_32.jpg"
+}
+
+serve {
+ class_style = 1
+ class_icon = "har_serx_32.jpg"
+}
+
+server {
+ color = (153 51 0)
+ class_style = 1
+ class_icon = "har_serx_32.jpg"
+}
+
+switch {
+ color = (0 0 0)
+ class_style = 1
+ class_icon = "net_hubx.jpg"
+}
+
+balancer {
+ color = (255 102 247)
+ class_style = 1
+ class_icon = "net_nicx_32.jpg"
+}
+
+($RELATION) {
+class_iofactor = 0
+ color = (0 0 0)
+ class_style = 0
+}
+
+(depends_on) {
+ color = (0 204 51)
+ class_style = 0
+}
+
+(contain) {
+class_hierarchy = 0
+class_iscontains = 0
+ class_style = 0
+class_active = 0}
+
+(communicate) {
+ color = (153 0 102)
+ class_style = 0
+}
+
+(authorizes) {
+ color = (255 153 153)
+ class_style = 0
+}
+
+(runs) {
+ color = (0 0 204)
+ class_style = 0
+}
+
+(shares_loa) {
+ color = (0 153 0)
+ class_style = 0
+}
+
+
+
+FACT TUPLE :
+
+$INSTANCE internet_firewall firewall
+$INSTANCE bank_load_balancer_1 balancer
+$INSTANCE bank_load_balancer_2 balancer
+$INSTANCE bank_load_balancer_3 balancer
+$INSTANCE apache_1 apache
+$INSTANCE apache_2 apache
+$INSTANCE apache_3 apache
+$INSTANCE mysql_db_1 db
+$INSTANCE mysql_db_2 db
+$INSTANCE dmz_switch switch
+$INSTANCE siteminder_server firewall
+$INSTANCE db_load_balancer balancer
+$INSTANCE dmz_firewall firewall
+$INSTANCE db_server_1 server
+$INSTANCE db_server_2 server
+$INSTANCE bank_server_1 server
+$INSTANCE bank_server_2 server
+$INSTANCE bank_server_3 server
+$INSTANCE intranet_switch switch
+depends_on internet_firewall dmz_switch
+depends_on apache_1 bank_load_balancer_1
+shares_loa apache_1 apache_2
+shares_loa apache_1 apache_3
+depends_on apache_2 bank_load_balancer_2
+shares_loa apache_2 apache_1
+shares_loa apache_2 apache_3
+depends_on apache_3 bank_load_balancer_3
+shares_loa apache_3 apache_1
+shares_loa apache_3 apache_2
+communicate mysql_db_1 apache_1
+communicate mysql_db_1 apache_2
+communicate mysql_db_1 apache_3
+communicate mysql_db_2 apache_1
+communicate mysql_db_2 apache_2
+communicate mysql_db_2 apache_3
+communicate dmz_switch dmz_firewall
+depends_on dmz_switch internet_firewall
+authorizes siteminder_server apache_2
+communicate db_load_balancer intranet_switch
+depends_on db_load_balancer mysql_db_1
+depends_on db_load_balancer mysql_db_2
+depends_on dmz_firewall dmz_switch
+communicate dmz_firewall dmz_switch
+depends_on dmz_firewall intranet_switch
+shares_loa db_server_1 db_server_2
+communicate db_server_1 intranet_switch
+runs db_server_1 mysql_db_1
+communicate db_server_2 intranet_switch
+shares_loa db_server_2 db_server_1
+runs db_server_2 mysql_db_2
+runs bank_server_1 apache_1
+runs bank_server_1 bank_load_balancer_1
+runs bank_server_2 apache_2
+runs bank_server_2 bank_load_balancer_2
+runs bank_server_3 apache_3
+runs bank_server_3 bank_load_balancer_3
+communicate intranet_switch db_server_2
+communicate intranet_switch db_server_1
+communicate intranet_switch db_load_balancer
+
+
+FACT ATTRIBUTE :
+
+$ROOT {
+version=7003005
+diagram:drawroot=$ROOT
+font[1]="Helvetica,0,12"
+font[2]="Helvetica,0,10"
+font[3]="Helvetica,0,12"
+font[4]="Helvetica,0,10"
+font[5]="Helvetica,0,9"
+font[6]="Helvetica,1,14"
+font[7]="Helvetica,0,11"
+font[8]="Helvetica,1,12"
+font[9]="Helvetica,0,11"
+font[10]="Helvetica,1,12"
+font[11]="Helvetica,0,11"
+font[12]="Helvetica,0,11"
+font[13]="Helvetica,0,11"
+font[14]="Helvetica,0,11"
+font[15]="Helvetica,0,10"
+font[16]="Helvetica,1,14"
+font[17]="Helvetica,0,11"
+font[18]="Helvetica,0,11"
+font[19]="Dialog,1,12"
+font[20]="Dialog,0,12"
+font[21]="Helvetica,0,11"
+font[22]="Helvetica,0,11"
+font[23]="Helvetica,0,11"
+font[24]="Helvetica,0,11"
+option:gridsize=1
+option:gridcolor=(255 255 255)
+option:showdesc=true
+option:showfeedback=true
+option:lefttabbox=false
+option:tabsscroll=false
+option:fixedscrollbars=false
+option:sorttoc=false
+option:topclients=true
+option:showclients=true
+option:showsuppliers=true
+option:usecompaction=true
+option:visibleedges=false
+option:visibleentities=false
+option:liftedges=true
+option:dstcardinals=false
+option:srccardinals=false
+option:groupquery=false
+option:querypersists=false
+option:focusancestor=false
+option:hideempty=false
+option:membercounts=false
+option:inheritance=false
+option:legendblack=true
+option:showgrid=false
+option:snaptogrid=true
+arrow:linewidth=1
+arrow:linelength=10.0
+arrow:arc=0.4
+arrow:3dpixels=3
+arrow:shadow=5
+arrow:labelarc=0.0
+arrow:hover=1.0
+arrow:zoomx=1.0
+arrow:zoomy=1.0
+arrow:iconpath="c:/swag/lsedit/icons"
+arrow:edgemode=3
+arrow:iconrule=0
+arrow:iconfixed=false
+arrow:fill=true
+arrow:center=false
+arrow:weighted=true
+arrow:blackwhite=true
+arrow:edgelabel=true
+arrow:rotate=true
+arrow:edgetip=false
+arrow:color=false
+arrow:invert=false
+arrow:labelfg=false
+arrow:labelbg=false
+arrow:labelbw=false
+label = $ROOT
+}
+internet_firewall {
+ xrel      = -30389
+ yrel      = -14935
+ widthrel  = -21598
+ heightrel = -28168
+ openPort = 80
+}
+bank_load_balancer_1 {
+ xrel      = -26732
+ yrel      = 20460
+ widthrel  = -21598
+ heightrel = -28168
+}
+bank_load_balancer_2 {
+ xrel      = -2964
+ yrel      = 19684
+ widthrel  = -21598
+ heightrel = -28168
+}
+bank_load_balancer_3 {
+ xrel      = 15316
+ yrel      = 19092
+ widthrel  = -21598
+ heightrel = -28168
+}
+apache_1 {
+ xrel      = -26395
+ yrel      = 6932
+ widthrel  = -21598
+ heightrel = -28168
+}
+apache_2 {
+ xrel      = -2751
+ yrel      = 11906
+ widthrel  = -21598
+ heightrel = -28168
+ ugly = x47
+}
+apache_3 {
+ xrel      = 15316
+ yrel      = 6660
+ widthrel  = -21598
+ heightrel = -28168
+}
+mysql_db_1 {
+ xrel      = -9042
+ yrel      = -9805
+ widthrel  = -21598
+ heightrel = -28168
+}
+mysql_db_2 {
+ xrel      = 6971
+ yrel      = -9448
+ widthrel  = -21598
+ heightrel = -28168
+}
+dmz_switch {
+ xrel      = -30389
+ yrel      = -22637
+ widthrel  = -21598
+ heightrel = -28168
+}
+siteminder_server {
+ xrel      = -11620
+ yrel      = 4362
+ widthrel  = -21598
+ heightrel = -28168
+}
+db_load_balancer {
+ xrel      = -539
+ yrel      = -16509
+ widthrel  = -21598
+ heightrel = -28168
+}
+dmz_firewall {
+ xrel      = -30389
+ yrel      = -30339
+ widthrel  = -21598
+ heightrel = -28168
+ nasty = x47
+}
+db_server_1 {
+ xrel      = -11326
+ yrel      = -22697
+ widthrel  = -21598
+ heightrel = -28168
+}
+db_server_2 {
+ xrel      = 12316
+ yrel      = -22651
+ widthrel  = -21598
+ heightrel = -28168
+}
+(runs db_server_2 mysql_db_2) {
+ slowly = 51
+}
+bank_server_1 {
+ xrel      = -20668
+ yrel      = 26368
+ widthrel  = -21598
+ heightrel = -28168
+}
+bank_server_2 {
+ xrel      = 1097
+ yrel      = 26219
+ widthrel  = -21598
+ heightrel = -28168
+ port = 80
+}
+bank_server_3 {
+ xrel      = 20417
+ yrel      = 26253
+ widthrel  = -21598
+ heightrel = -28168
+}
+intranet_switch {
+ xrel      = -551
+ yrel      = -28981
+ widthrel  = -21598
+ heightrel = -28168
+}

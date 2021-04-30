@@ -1,0 +1,12 @@
+#config,loc.red,time
+cslicer,10.79,32.51
+definer,85.27,2163.87
+split-cslicer,43.00,94.52
+split-definer,98.51,5894.50
+cslicer-split-cslicer,43.00,74.61
+cslicer-split-definer,0,9999
+definer-split-cslicer,88.73,1628.25
+definer-split-definer,98.51,2593.14
+cslicer-definer-split-cslicer,43.00,562.48
+cslicer-definer-split-definer,0,9999
+cslicer-definer,19.53,528.07

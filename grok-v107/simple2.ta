@@ -1,0 +1,287 @@
+// Landscape TA file written by LSEdit 7.2.3
+// Landscape TA file written by LSEdit 7.2.2
+// Landscape TA file written by LSEdit 7.1.49
+// Landscape TA file written by LSEdit 7.1.49
+// Landscape TA file written by LSEdit 7.1.49
+// Landscape TA file written by LSEdit 7.1.38
+// Landscape TA file written by LSEdit 7.1.37
+// Landscape TA file written by LSEdit 7.1.25
+// The ERD
+// EntityClass attributes
+
+SCHEME TUPLE :
+
+$INHERIT module library
+$INHERIT library subsystem
+$INHERIT subsystem $ENTITY
+$INHERIT junk $ENTITY
+$INHERIT statement1 $ENTITY
+$INHERIT statement2 $ENTITY
+$INHERIT (contain) ($RELATION)
+$INHERIT (redline) (usevar)
+$INHERIT (usevar) ($RELATION)
+$INHERIT (smile) ($RELATION)
+
+contain subsystem subsystem
+contain subsystem library
+contain subsystem module
+contain library module
+contain junk module
+redline statement1 statement2
+usevar library subsystem
+usevar subsystem subsystem
+usevar module module
+usevar module subsystem
+usevar subsystem module
+usevar module library
+usevar library module
+smile statement1 statement2
+smile statement2 statement1
+
+
+SCHEME ATTRIBUTE :
+
+library {
+ color = (102 255 255)
+ labelcolor = (0 0 0)
+ test = abc
+ width
+ elision
+ outelision
+ y
+ title
+ label
+ x
+ description
+ height
+ class_style = 3
+ class_description = n94x
+}
+
+module {
+ color = (128 255 255)
+ labelcolor = (0 128 255)
+ class_style = 2
+ class_description = n535x
+ class_icon = "c:/swag/lsedit/images/button_company1.jpg"
+}
+
+subsystem {
+ color = (153 153 153)
+ labelcolor = (255 255 0)
+ width
+ elision
+ outelision
+ y
+ title
+ label
+ x
+ description
+ height
+ class_style = 4
+ class_description = n470x
+}
+
+statement2 {
+ color = (0 0 255)
+ labelcolor = (0 255 255)
+ class_style = 0
+}
+
+$ENTITY {
+ color = (0 0 255)
+ labelcolor = (0 255 255)
+ size = 10
+ class_style = 0
+}
+
+statement1 {
+ color = (0 0 255)
+ labelcolor = (0 255 255)
+ class_style = 0
+}
+
+junk {
+ color = (0 0 255)
+ labelcolor = (0 255 255)
+ class_style = 5
+}
+
+(usevar) {
+arrowcolor = (51 255 51)
+ color = (0 0 0)
+ class_style = 0
+}
+
+(smile) {
+ dog = Rover
+ cat
+}
+
+(redline) {
+ color = (255 0 0)
+ class_style = 0
+}
+
+
+
+FACT TUPLE :
+
+$INSTANCE main subsystem
+$INSTANCE slibrary library
+$INSTANCE service module
+$INSTANCE clibrary library
+$INSTANCE client module
+$INSTANCE Entity#1 module
+$INSTANCE software subsystem
+$INSTANCE code module
+$INSTANCE statement3 module
+$INSTANCE statement4 module
+$INSTANCE statement2 module
+$INSTANCE statement1 module
+$INSTANCE Entity#0 module
+contain main slibrary
+contain main clibrary
+contain main software
+contain slibrary service
+contain clibrary client
+contain clibrary Entity#1
+usevar client code
+usevar client service
+usevar client statement2
+redline client Entity#0
+redline Entity#1 Entity#0
+contain software code
+contain software Entity#0
+usevar code service
+contain code statement3
+contain code statement2
+contain code statement1
+contain statement3 statement4
+usevar statement4 statement2
+redline statement4 Entity#1
+usevar statement2 statement4
+redline statement1 statement2
+
+
+FACT ATTRIBUTE :
+
+$ROOT {
+ version = 7002003
+ label = $ROOT
+ color = (191 191 191)
+ version = 7001049
+ topclients = true
+ wantsuppliers = true
+ wantclients = true
+ fred = large
+ wantcardinals = true
+ edgemode = 2
+}
+main {
+ xrel      = 0.0626927029804728
+ yrel      = 0.06349206349206349
+ widthrel  = 0.9373072970195272
+ heightrel = 0.9365079365079365
+ open = (contain)
+ color = (76 143 0)
+ nesting = ((1 A D) 2 3)
+ lineno = 100
+ file = c:/source/lsedit/7.1.27/test.java
+ navlink = ("../data/asx.ta" TARGET_APP)
+}
+slibrary {
+ xrel      = 0.06682270050618569
+ yrel      = 0.03333333333333334
+ widthrel  = 0.030982041101467492
+ heightrel = 0.24954600146545997
+ label = abt
+ open = (contain)
+ file = c:/source/lsedit/7.1.27/LandscapeEditorCore.java
+ tag = abc
+}
+service {
+ xrel      = 0.3124992853403587
+ yrel      = 0.30567631468331347
+ widthrel  = 0.20141177575788993
+ heightrel = 0.0991415780410307
+}
+clibrary {
+ xrel      = 0.2158273381294964
+ yrel      = 0.31746031746031744
+ widthrel  = 0.2209660842754368
+ heightrel = 0.24735449735449735
+ open = (contain)
+}
+client {
+ xrel      = 0.3124992853403587
+ yrel      = 0.30567631468331347
+ widthrel  = 0.20141177575788993
+ heightrel = 0.09914157804103069
+}
+(usevar client code) {
+ labelcolor = (255 0 0)
+ labelcolor = (255 0 0)
+ label = Ian
+ description = Anne
+}
+Entity#1 {
+ xrel      = 0.5627906976744186
+ yrel      = 0.6096256684491979
+ widthrel  = 0.3395348837209302
+ heightrel = 0.29411764705882354
+}
+software {
+ xrel      = 0.09649122807017543
+ yrel      = 0.6059322033898306
+ widthrel  = 0.8245614035087719
+ heightrel = 0.2782485875706215
+ label = Fred
+ open = (contain)
+ opencolor = (51 255 0)
+}
+code {
+ xrel      = 0.07180851063829788
+ yrel      = 0.36548223350253806
+ widthrel  = 0.5013297872340425
+ heightrel = 0.5177664974619289
+ open = (contain)
+ bug = yes
+}
+(usevar code service) {
+ style = 3
+ dog = black
+ frog = green
+}
+statement3 {
+ xrel      = 0.7984084880636605
+ yrel      = 0.43137254901960786
+ widthrel  = 0.11405835543766578
+ heightrel = 0.47058823529411764
+ open = (contain)
+}
+statement4 {
+ xrel      = 0.25
+ yrel      = 0.25
+ widthrel  = 0.5
+ heightrel = 0.5
+}
+statement2 {
+ xrel      = 0.5464190981432361
+ yrel      = 0.4019607843137255
+ widthrel  = 0.11405835543766578
+ heightrel = 0.10784313725490197
+}
+statement1 {
+ xrel      = 0.1
+ yrel      = 0.1
+ widthrel  = 0.11538460384153662
+ heightrel = 0.11533850000000001
+}
+Entity#0 {
+ xrel      = 0.6474820143884892
+ yrel      = 0.24915254237288137
+ widthrel  = 0.2867420349434738
+ heightrel = 0.2559322033898305
+ label = Entity#0
+}

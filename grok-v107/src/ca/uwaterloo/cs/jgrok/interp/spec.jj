@@ -1,0 +1,1383 @@
+/**
+ * Interp.
+ * @author Jingwei Wu
+ */
+options {
+    BUILD_PARSER = true;
+}
+
+PARSER_BEGIN(Interp)
+
+package ca.uwaterloo.cs.jgrok.interp;
+
+import java.io.*;
+import java.util.*;
+import ca.uwaterloo.cs.jgrok.interp.select.*;
+
+public class Interp {
+    static File file = null;
+    static Interp interp = null;
+    static ScriptUnitNode scriptUnit = null;
+    
+    private static InputStream in = System.in;
+    private static PrintStream out = System.out;
+    private static PrintStream err = System.err;
+        
+    /**
+     * Constructs a command-line Interp.
+     */
+    public Interp() {
+        this(System.in);
+        interp = this;
+    }
+    
+    /**
+     * Constructs a script-file Interp, which
+     * evaluates the specified <code>file</code>.
+     */
+    public Interp(File f) throws FileNotFoundException {
+        this(new FileInputStream(f));
+        file = f;
+        interp = this;
+    }
+    
+    public static Interp instance() {
+        if(interp == null) {
+            interp = new Interp();
+        }
+        return interp;
+    }
+    
+    public static Interp reinit(File f) throws FileNotFoundException {
+        if(interp != null) {
+            file = f;
+            interp.ReInit(new FileInputStream(f));
+        } else {
+            interp = new Interp(f); 
+        }
+        
+        return interp;
+    }
+    
+    public ScriptUnitNode parse() {
+        try {
+            return ScriptUnit();
+        }  catch(ParseException e) {
+            err.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Bootstrap an Env with a given script.
+     * After evaluation, the main ScriptUnit is not removed.
+     */
+    public void bootstrapEvaluate(Env env, String[] args) {
+        try {
+            in = env.in;
+            out = env.out;
+            err = env.err;
+
+            Variable var;
+            ScriptUnitNode unit = ScriptUnit();
+            env.setMainUnit(unit);
+            
+            // Add $# (number of script args).
+            var = new Variable(unit, "$#", new Value(args.length-1));
+            unit.addVariable(var);
+            
+            // Add script args: $0 $1 $2 ...
+            // The $0 is the script file.
+            for(int i = 0; i < args.length; i++) {
+                var = new Variable(unit, "$"+i, new Value(args[i]));
+                unit.addVariable(var);
+            }
+            
+            env.pushScope(unit);
+            unit.evaluate(env);
+        } catch(TokenMgrError e) {
+            err.println(e.getMessage());
+        } catch(ParseException e) {
+            err.println(e.getMessage());
+        } catch(EvaluationException e) {
+            err.println(e.getMessage());
+        }
+    }
+
+    public void fileEvaluate(Env env, String[] args) {
+        try {
+            Variable var;
+            ScriptUnitNode unit = ScriptUnit();
+            env.setMainUnit(unit);
+            
+            // Add $# (number of script args).
+            var = new Variable(unit, "$#", new Value(args.length-1));
+            unit.addVariable(var);
+            
+            // Add script args: $0 $1 $2 ...
+            // The $0 is the script file.
+            for(int i = 0; i < args.length; i++) {
+                var = new Variable(unit, "$"+i, new Value(args[i]));
+                unit.addVariable(var);
+            }
+            
+            env.pushScope(unit);
+            unit.evaluate(env);
+            env.popScope();
+        } catch(TokenMgrError e) {
+            err.println(e.getMessage());
+        } catch(ParseException e) {
+            err.println(e.getMessage());
+        } catch(EvaluationException e) {
+            env.popScope();
+            err.println(e.getMessage());
+        }
+    }
+    
+    static final Location getLocation(Token tok) {
+        return new Location(file, tok.getLine(), tok.getColumn());
+    }
+    
+    static final void setLocation(SyntaxTreeNode nd, Token tok) {
+        nd.setLocation(getLocation(tok));
+    }
+    
+    static final String processStringLiteral(String str) {
+        char c;
+        String s;
+        StringBuffer b;
+        
+        b = new StringBuffer();
+        s = str.substring(1, str.length()-1);
+        for(int i = 0; i < s.length(); i++) {
+            c = s.charAt(i);
+            if(c == '\\') {
+                i++;
+                c = s.charAt(i);
+                switch(c) {
+                case '\\':
+                    b.append('\\');
+                    break;
+                case '\"':
+                    b.append('\"');
+                    break;
+                case '\'':
+                    b.append('\'');
+                    break;
+                case 'b':
+                    b.append('\b');
+                    break;
+                case 'f':
+                    b.append('\f');
+                    break;
+                case 'n':
+                    b.append('\n');
+                    break;
+                case 'r':
+                    b.append('\r');
+                    break;
+                case 't':
+                    b.append('\t');
+                    break;
+                default:
+                    b.append('\\');
+                    b.append(c);
+                }
+            } else {
+                b.append(c);
+            }
+        }
+        
+        return b.toString();
+    }
+}
+
+PARSER_END(Interp)
+
+/*****************************************************************************
+ * Token follows.
+ *****************************************************************************/
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| "\f"
+| <"%%" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| < LINE_CONTINUE: "\\" >
+}
+
+TOKEN :
+{
+  < COLUMN:
+    "&" ("#" | "0" | ["1"-"9"] (["0"-"9"])* | "-" ("0" | ["1"-"9"] (["0"-"9"])*)) >
+}
+
+TOKEN :
+{
+  < INT_LITERAL:
+    ("0" | ["1"-"9"] (["0"-"9"])*) >
+|
+  < FLOAT_LITERAL:
+    ("0" | ["1"-"9"] (["0"-"9"])*) "." ["0"-"9"] (["0"-"9"])* >
+|
+  < STRING_LITERAL:
+      "\""
+      (   (~["\"","\\","\n","\r"])
+        | ("\\"
+            ( ["n","t","b","r","f","\\","'","\""]
+            | ["0"-"7"] ( ["0"-"7"] )?
+            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
+            )
+          )
+      )*
+      "\""
+  >
+}
+
+TOKEN :
+{
+  < ARGN : "$#" >
+| < IOTOFILE : ">>" >
+| < IOAPPEND : ">>>" >
+}
+
+TOKEN :
+{
+  < IF    : "if"    >
+| < ELSE  : "else"  >
+| < FOR   : "for"   >
+| < WHILE : "while" >
+| < RETURN: "return">
+}
+
+TOKEN :
+{
+  < TRUE  : "true"  >
+| < FALSE : "false" >
+}
+
+TOKEN :
+{
+  < COMMA :    "," >
+| < COLON :    ":" >
+| < SEMICOLON: ";" >
+| < LPAREN:    "(" >
+| < RPAREN:    ")" >
+| < LBRACE:    "{" >
+| < RBRACE:    "}" >
+| < LBRACKET:  "[" >
+| < RBRACKET:  "]" >
+}
+
+TOKEN :
+{
+  < ASSIGN_PLUS     : "+=" >
+| < ASSIGN_MINUS    : "-=" >
+| < ASSIGN_MULTIPLY : "*=" >
+| < ASSIGN_DIVIDE   : "/=" >
+}
+
+TOKEN :
+{
+  < GT : ">"  >
+| < LT : "<"  >
+| < EQ : "==" >
+| < LE : "<=" >
+| < GE : ">=" >
+| < NE : "!=" >
+| < ME : "=~" >
+| < UE : "!~" >
+| < IN : "in" >
+}
+
+TOKEN :
+{
+  < OR  : "||">
+| < AND : "&&">
+| < NOT : "!" >
+}
+
+TOKEN :
+{
+  < RCOMPOSE : "**">
+}
+
+TOKEN :
+{
+  < PLUS     : "+" >
+| < MINUS    : "-" >
+| < INTERSECT: "^" >
+| < COMPOSE  : "o" >
+| < MULTIPLY : "*" >
+| < DIVIDE   : "/" >
+| < MOD      : "%" >
+| < PROJECT  : "." >
+| < CROSS    : "X" >
+| < POUND    : "#" >
+| < ATTR     : "@" >
+| < ASSIGN   : "=" >
+| < TILDE    : "~" >
+| < DOLLAR   : "$" >
+| < ADDRESS  : "&" >
+}
+
+TOKEN :
+{
+  < op_id    : "id"  >
+| < op_inv   : "inv" >
+| < op_dom   : "dom" >
+| < op_rng   : "rng" >
+| < op_ent   : "ent" >
+}
+
+TOKEN :
+{
+  < cmd_quit  : "quit"  >
+| < cmd_exit  : "exit"  >
+| < cmd_print : "print" >
+| < cmd_delete: "delete">
+| < cmd_help  : "help" | "?" >
+}
+
+TOKEN :
+{
+   <IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)*>
+|  <#LETTER: ["A"-"Z","_","a"-"z"]>
+|  <#DIGIT: ["0"-"9"]>
+}
+
+/*****************************************************************************
+ * Script syntax.
+ *****************************************************************************/
+
+ScriptUnitNode ScriptUnit() :
+{
+    StatementNode stmt;    
+    ScriptUnitNode nd = new ScriptUnitNode();
+    if(file != null) nd.setFile(file);
+    setLocation(nd, getToken(1));
+    scriptUnit = nd;
+}
+{
+( stmt = Statement() { nd.addStatement(stmt); } )* <EOF>
+    {
+        scriptUnit = null;
+        return nd;
+    }
+}
+
+/*****************************************************************************
+ * Statement syntax follows.
+ *****************************************************************************/
+
+StatementNode Statement() :
+{
+    StatementNode nd;
+    ExpressionNode exp;
+    Token tok;
+}
+{
+( nd = ControlStatement()
+|
+  nd = CommandStatement()
+|
+  LOOKAHEAD( PrologClauseLookahead() )
+  nd = PrologClause()
+|
+  LOOKAHEAD( AssignmentLookahead() )
+  nd = Assignment()
+|
+  LOOKAHEAD( ExpressionLookahead() )
+  exp = Expression()
+    {
+        nd = new ExpStatementNode(exp);
+        nd.setLocation(exp.getLocation());
+    }
+|
+  nd = BlockStatement()
+) [ LOOKAHEAD(1)
+   (  ";"
+    |
+      <IOTOFILE>
+      [ LOOKAHEAD( ExpressionLookahead() )
+        exp = Expression() [ LOOKAHEAD(1) ";" ]
+        {
+            Location l = nd.getLocation();
+            nd = new RedirectStatementNode(nd, exp, false);
+            nd.setLocation(l);
+        }
+      ]
+    |
+      <IOAPPEND>
+      [ LOOKAHEAD( ExpressionLookahead() )
+        exp = Expression() [ LOOKAHEAD(1) ";" ]
+        {
+            Location l = nd.getLocation();
+            nd = new RedirectStatementNode(nd, exp, true);
+            nd.setLocation(l);
+        }
+      ]
+   )
+  ]
+    { return nd; }
+}
+
+/*****************************************************************************
+ * Part of Statements: ControlStatement syntax follows
+ *****************************************************************************/
+
+void ControlStatementLookahead() : {}
+{
+  <IF> | <ELSE> | <FOR> | <WHILE> | <RETURN>
+}
+
+StatementNode ControlStatement() :
+{
+    StatementNode nd;
+}
+{
+( nd = IfStatement()
+|
+  nd = ForStatement()
+|
+  nd = WhileStatement()
+|
+  nd = ReturnStatement()
+)
+    { return nd; }
+}
+
+StatementNode IfStatement() :
+{
+    IfStatementNode ifNode;
+    ExpressionNode expNode;
+    StatementNode thenNode;
+    StatementNode elseNode = null;
+    Token tok = getToken(1);
+}
+{
+    "if" expNode = Expression() thenNode = Statement()
+    [ LOOKAHEAD(1) "else" elseNode = Statement() ]
+    {
+        if(elseNode == null) ifNode = new IfStatementNode(expNode, thenNode);
+        else ifNode = new IfStatementNode(expNode, thenNode, elseNode);
+        setLocation(ifNode, tok);
+        return ifNode;
+    }
+}
+
+StatementNode ForStatement() :
+{
+    VariableNode varNode;
+    ExpressionNode expNode;
+    StatementNode bodyNode;
+    StatementNode forNode;
+    Token tok = getToken(1);
+}
+{
+    "for" varNode = Variable()
+    "in"  expNode = Expression()
+     bodyNode = Statement()
+    {
+        forNode = new ForStatementNode(varNode, expNode, bodyNode);
+        setLocation(forNode, tok);
+        return forNode;
+    }
+}
+
+StatementNode WhileStatement() :
+{
+    ExpressionNode expNode;
+    StatementNode bodyNode;
+    StatementNode whileNode;
+    Token tok = getToken(1);
+}
+{
+    "while"
+    expNode = Expression()
+    bodyNode = Statement()
+    {
+        whileNode = new WhileStatementNode(expNode, bodyNode);
+        setLocation(whileNode, tok);
+        return whileNode;
+    }
+}
+
+StatementNode ReturnStatement() :
+{
+    StatementNode nd;
+    ExpressionNode expNode;
+    Token tok = getToken(1);
+    
+    expNode = null;
+}
+{
+    "return"
+    [ LOOKAHEAD(ExpressionLookahead()) expNode = Expression() ]
+    {
+        if(expNode == null)
+            nd = new ReturnStatementNode();
+        else
+            nd = new ReturnStatementNode(expNode);
+        setLocation(nd, tok);
+        return nd;
+    }
+}
+
+StatementNode BlockStatement() :
+{
+    StatementNode stmtNode;
+    BlockStatementNode blockNode;
+    blockNode = new BlockStatementNode();
+    setLocation(blockNode, getToken(1));
+}
+{
+    "{"
+    ( stmtNode = Statement() { blockNode.add(stmtNode); } )*
+    "}"
+    { return blockNode; }
+}
+
+/*****************************************************************************
+ * Part of Statements: CommandStatement syntax follows
+ *****************************************************************************/
+
+void CommandStatementLookahead() : {}
+{
+  <cmd_quit> | <cmd_exit> | <cmd_print> | <cmd_help> | <cmd_delete>
+}
+
+StatementNode CommandStatement() :
+{
+    StatementNode nd;
+}
+{
+( nd = CommandQuit()
+|
+  nd = CommandHelp()
+|
+  nd = CommandPrint()
+|
+  nd = CommandDelete() )
+    { return nd; }
+}
+
+CommandNode CommandQuit() :
+{
+    CommandNode cmdNode;
+    Token tok = getToken(1);
+}
+{
+    ( "quit" { cmdNode = new CommandQuitNode("quit"); }
+     |
+      "exit" { cmdNode = new CommandQuitNode("exit"); } )
+    {
+        setLocation(cmdNode, tok);
+        return cmdNode;
+    }
+}
+
+CommandNode CommandHelp() :
+{
+    CommandNode cmdNode;
+    VariableNode varNode;
+    Token tok = getToken(1);
+    boolean attr_b = false;
+    boolean doll_b = false;
+    Token tok2 = null;
+}
+{
+    <cmd_help>
+    [ tok2 = "$" { doll_b = true; } | tok2 = "@" { attr_b = true; } ]
+    varNode = Variable()
+    {
+        if(attr_b) {
+            varNode = new AttrSignNode(varNode.getName());
+            setLocation(varNode, tok2);
+        }
+        if(doll_b) {
+            varNode = new DollarSignNode(varNode.getName());
+            setLocation(varNode, tok2);
+        }
+        
+        cmdNode = new CommandHelpNode(varNode);
+        setLocation(cmdNode, tok);
+        return cmdNode;
+    }
+}
+
+CommandNode CommandPrint() :
+{
+    CommandNode cmdNode;
+    ExpressionNode expNode;
+    Token tok = getToken(1);
+}
+{
+    <cmd_print> expNode = Expression()
+    {
+        cmdNode = new CommandPrintNode(expNode);
+        setLocation(cmdNode, tok);
+        return cmdNode;
+    }
+}
+
+CommandNode CommandDelete() :
+{
+    CommandNode cmdNode;
+    ExpressionNode expNode;
+    Token tok = getToken(1);
+}
+{
+    <cmd_delete> expNode = Expression()
+    {
+        cmdNode = new CommandDeleteNode(expNode);
+        setLocation(cmdNode, tok);
+        return cmdNode;
+    }
+}
+
+/*****************************************************************************
+ * Part of Statements: Prolog syntax follows
+ *****************************************************************************/
+
+void PrologClauseLookahead() : {}
+{
+  <IDENTIFIER> "[" <IDENTIFIER> ( "," <IDENTIFIER> ) * "]" <ASSIGN>
+}
+
+StatementNode PrologClause() :
+{
+    VariableNode varNode;
+    StatementNode stmtNode;
+    PrologClauseNode clauseNode;
+    PrologExpressionNode pexpNode;
+    
+    Token tok1, tok2;
+    ArrayList args = new ArrayList();
+    BlockStatementNode blockNode = new BlockStatementNode();
+    tok1 = getToken(1);
+}
+{
+    varNode = Variable()
+    {
+        pexpNode = new PrologExpressionNode(varNode, args);
+        setLocation(pexpNode, tok1);
+    }
+   "["
+       varNode = Variable() { args.add(varNode); }
+     ( ","
+       varNode = Variable() { args.add(varNode); } ) *
+   "]"
+   
+   <ASSIGN>
+   
+   tok2 = "{"
+      (
+       (LOOKAHEAD(PrologExpressionLookahead())
+        stmtNode = PrologExpression() [ LOOKAHEAD(1) ";" ]
+       |
+        stmtNode = Statement()
+       )
+       
+      { if(stmtNode != null) blockNode.add(stmtNode); }
+       
+      )*
+   "}"
+   {
+       clauseNode = new PrologClauseNode(pexpNode, blockNode);
+       setLocation(clauseNode, tok1);
+       setLocation(blockNode, tok2);
+       return clauseNode;
+   }
+}
+
+void PrologExpressionLookahead() : {}
+{
+  [ "@" | "$" ] <IDENTIFIER> "[" <IDENTIFIER> ( "," <IDENTIFIER> ) * "]"
+}
+
+StatementNode PrologExpression() :
+{
+    VariableNode varNode;
+    PrologExpressionNode nd;
+    ArrayList args = new ArrayList();
+ 
+    Token tok = getToken(1);   
+    boolean attr_b = false;
+    boolean doll_b = false;
+}
+{
+    [ "@" { attr_b = true; } | "$" { doll_b = true; } ]
+    varNode = Variable()
+      {
+          if(attr_b) {
+              varNode = new AttrSignNode(varNode.getName());
+              setLocation(varNode, tok);
+          }
+          if(doll_b) {
+              varNode = new DollarSignNode(varNode.getName());
+              setLocation(varNode, tok);
+          }
+          nd = new PrologExpressionNode(varNode, args);
+          setLocation(nd, tok);
+      }
+    "["
+      varNode = Variable() { args.add(varNode); }
+    ( "," 
+      varNode = Variable() { args.add(varNode); } ) *
+    "]"
+  {
+      return nd;
+  }
+}
+
+/*****************************************************************************
+ * Part of Statements: Assignment syntax follows
+ *****************************************************************************/
+
+void AssignmentLookahead() : {}
+{
+  (  ( [ "@" | "$" ] <IDENTIFIER> )
+  |
+    ( "("      [ "@" | "$" ] <IDENTIFIER>
+         (","  [ "@" | "$" ] <IDENTIFIER> ) *
+      ")" )
+  )
+  ( <ASSIGN> | <ASSIGN_PLUS> | <ASSIGN_MINUS> | <ASSIGN_MULTIPLY> | <ASSIGN_DIVIDE> )
+}
+
+StatementNode Assignment() :
+{
+    int op = -1;
+    VariableNode leftNode;
+    ExpressionNode expNode;
+    boolean attr_b = false;
+    boolean doll_b = false;
+    Token tok = getToken(1);
+    Token tok2 = getToken(1);
+    ArrayList leftList = null;
+}
+{
+  (
+    (
+     [ "@" { attr_b = true; } | "$" { doll_b = true; } ]
+       leftNode = Variable()
+    )
+    {
+        if(attr_b) {
+            leftNode = new AttrSignNode(leftNode.getName());
+            setLocation(leftNode, tok);
+        }
+        if(doll_b) {
+            leftNode = new DollarSignNode(leftNode.getName());
+            setLocation(leftNode, tok);
+        }
+        setLocation(leftNode, tok);
+    }
+  |
+    (
+    "(" {
+            leftList = new ArrayList(5);
+            tok2 = getToken(1);
+        }
+       [ "@" { attr_b = true; } | "$"  { doll_b = true; } ]
+       leftNode = Variable()
+    {
+        if(attr_b) {
+            leftNode = new AttrSignNode(leftNode.getName());
+            setLocation(leftNode, tok2);
+        }
+        if(doll_b) {
+            leftNode = new DollarSignNode(leftNode.getName());
+            setLocation(leftNode, tok2);
+        }
+        setLocation(leftNode, tok2);
+        leftList.add(leftNode);
+    }
+      (","
+    {
+        tok2 = getToken(1);
+        attr_b = false;
+        doll_b = false;
+    }
+        [ "@" { attr_b = true; } | "$" { doll_b = true; } ]
+        leftNode = Variable()
+        {
+            if(attr_b) {
+                leftNode = new AttrSignNode(leftNode.getName());
+                setLocation(leftNode, tok2);
+            }
+            if(doll_b) {
+                leftNode = new DollarSignNode(leftNode.getName());
+                setLocation(leftNode, tok2);
+            }
+            setLocation(leftNode, tok2);
+            leftList.add(leftNode);
+        }
+      ) *
+    ")"
+    )
+  )
+
+  (  <ASSIGN>          { op = Operator.ASSIGN;          }
+   | <ASSIGN_PLUS>     { op = Operator.ASSIGN_PLUS;     }
+   | <ASSIGN_MINUS>    { op = Operator.ASSIGN_MINUS;    }
+   | <ASSIGN_MULTIPLY> { op = Operator.ASSIGN_MULTIPLY; }
+   | <ASSIGN_DIVIDE>   { op = Operator.ASSIGN_DIVIDE;   }
+  )
+  
+    expNode = Expression()
+    {
+        if(op == Operator.ASSIGN) {
+            AssignmentNode assign;
+            if(leftList == null) {
+                assign = new AssignmentNode(leftNode, expNode);
+            } else {
+                VariableNode[] lefts;
+                lefts = new VariableNode[leftList.size()];
+                leftList.toArray(lefts);
+                assign = new AssignmentNode(lefts, expNode);
+            }
+            setLocation(assign, tok);
+            return assign;
+        } else {
+            AssignmentExtensionNode assign;
+            if(leftList == null) {
+                assign = new AssignmentExtensionNode(op, leftNode, expNode);
+            } else {
+                throw new ParseException("left side cannot be a list when " + Operator.key(op) + " is used");
+            }
+            setLocation(assign, tok);
+            return assign;
+        }
+    }
+}
+
+/*****************************************************************************
+ * Expression syntax follows
+ *****************************************************************************/
+
+VariableNode Variable() :
+{
+    Token tok;
+    VariableNode nd;
+}
+{
+    tok = <IDENTIFIER>
+    {
+        nd = new VariableNode(tok.getText());
+        setLocation(nd, tok);
+        return nd;
+    }
+
+}
+
+VariableNode SpecialVariable() :
+{
+    VariableNode nd;
+    Token lit = null;
+    Token tok = getToken(1);
+}
+{
+    ( "$" lit = <INT_LITERAL> | "$#" )
+    {
+        if(lit != null) {
+            try {
+                int val = Integer.parseInt(lit.getText());
+                nd = new VariableNode("$" + val);
+            } catch (NumberFormatException e) {
+                throw new ParseException("illegal int " + e.getMessage());
+            }
+        } else {
+            nd = new VariableNode("$#");
+        }
+        setLocation(nd, tok);
+        return nd;
+    }
+}
+
+void ExpressionLookahead() : {}
+{
+    Expression()
+}
+
+ExpressionNode Expression() :
+{
+    ExpressionNode nd;
+}
+{
+    nd = ConditionalExpression()
+    { return nd; }
+}
+
+ExpressionNode ConditionalExpression() :
+{
+    ExpressionNode nd;
+}
+{
+    nd = ConditionalOrExpression()
+    { return nd; }
+}
+
+ExpressionNode ConditionalOrExpression() :
+{
+    Token tok;
+    ExpressionNode nd, left, right;
+}
+{
+    left = ConditionalAndExpression() { nd = left; } 
+    ( tok = <OR> right = ConditionalAndExpression()
+    {
+        left = nd = new ConditionalOrExpressionNode(left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; }
+}
+
+ExpressionNode ConditionalAndExpression() :
+{
+    Token tok;
+    ExpressionNode nd, left, right;
+}
+{
+    left = RelationalExpression() { nd = left; }
+    ( tok = <AND> right = RelationalExpression()
+    {
+        left = nd = new ConditionalAndExpressionNode(left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; }
+}
+
+ExpressionNode RelationalExpression() :
+{
+    int op=-1;
+    Token tok;
+    ExpressionNode nd, left, right;
+}
+{
+    left = AdditiveExpression() { nd = left; }
+    ( (  tok = <EQ> { op = Operator.EQ; }
+       | tok = <NE> { op = Operator.NE; }
+       | tok = <LT> { op = Operator.LT; }
+       | tok = <GT> { op = Operator.GT; }
+       | tok = <LE> { op = Operator.LE; }
+       | tok = <GE> { op = Operator.GE; }
+       | tok = <ME> { op = Operator.ME; }
+       | tok = <UE> { op = Operator.UE; }
+       | tok = <IN> { op = Operator.IN; } ) right = AdditiveExpression()
+    {
+        left = nd = new RelationalExpressionNode(op, left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; }
+}
+
+ExpressionNode AdditiveExpression() :
+{
+    int op = -1;
+    Token tok;
+    ExpressionNode nd, left, right;
+}
+{
+    left = MultiplicativeExpression() { nd = left; }
+    ( ( tok = "+"   { op = Operator.PLUS;   }
+      | tok = "-"   { op = Operator.MINUS;  } )
+      right = MultiplicativeExpression()
+    {
+        left = nd = new AdditiveExpressionNode(op, left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; }
+}
+
+ExpressionNode MultiplicativeExpression() :
+{
+    int op = -1;
+    Token tok;
+    ExpressionNode nd, left, right;
+}
+{
+    left = UnaryExpression() { nd = left; }
+    ( ( tok = "^"   { op = Operator.INTERSECT; }
+      | tok = "o"   { op = Operator.COMPOSE;   }
+      | tok = "*"   { op = Operator.MULTIPLY;  }
+      | tok = "/"   { op = Operator.DIVIDE;    }
+      | tok = "X"   { op = Operator.CROSS;     }
+      | tok = "."   { op = Operator.PROJECT;   }
+      | tok = "%"   { op = Operator.MOD;       }
+      | tok = "**"  { op = Operator.RCOMPOSE;  } )  right = UnaryExpression()
+    {
+        left = nd = new MultiplicativeExpressionNode(op, left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; } 
+}
+
+ExpressionNode UnaryExpression() :
+{
+    ExpressionNode nd;
+}
+{
+ (  nd = PrefixExpression()
+  |
+    LOOKAHEAD( SuffixExpressionLookahead() )
+    nd = SuffixExpression()
+  |
+    nd = PrimaryExpression()
+  |
+    nd = Arguments() )
+    { return nd; }
+}
+
+ExpressionNode PrefixExpression() :
+{
+    int op = -1;
+    ExpressionNode nd;
+    Token tok = getToken(1);
+}
+{
+    ( "id" | "inv" | "dom" | "rng" | "ent" | "#" | "~" | "-" | <NOT> )
+    {
+        op = Operator.op(tok.getText());
+    }
+    nd = UnaryExpression()
+    {
+        nd = new PrefixExpressionNode(op, nd);
+        setLocation(nd, tok);
+        return nd;
+    }
+}
+
+void SuffixExpressionLookahead() : {}
+{
+  ( PrimaryExpression() | Arguments() )
+  ( "("  |  "["  | ClosureLookahead() )
+}
+
+void ClosureLookahead() : {}
+{
+  ( "+" | "*")
+  ( ";" | ")" | "}" | "," | "*" | "X" | "^" | "o" | "." | "+" | "-" | "**"
+  | ControlStatementLookahead()
+  | CommandStatementLookahead()
+  | AssignmentLookahead()
+  | <EOF> )
+}
+
+ExpressionNode SuffixExpression() :
+{
+    int op = -1;
+    ExpressionNode nd;
+    ArgumentsNode argsNode;
+    SelectConditionNode condNode;
+    Token tok = getToken(1);
+}
+{
+    ( nd = PrimaryExpression() | nd = Arguments() )
+    (
+      ("*" { op = Operator.MULTIPLY; } | "+" { op = Operator.PLUS; } )
+      { nd = new SuffixExpressionNode(nd, op); }
+    |
+      argsNode = Arguments()
+      {
+          if(nd instanceof VariableNode) {
+              nd = new FunctionExpressionNode(new FunctionNameNode((VariableNode)nd), argsNode);
+          } else {
+              throw new InterpException(getLocation(tok),
+                                        "illegal function name encountered");
+          }
+      }
+    | 
+      condNode = SelectCondition()
+      { nd = new SelectExpressionNode(nd, condNode); }
+    )
+    {
+        setLocation(nd, tok);
+        return nd;
+    }
+}
+
+ExpressionNode PrimaryExpression() :
+{
+    ExpressionNode nd;
+    boolean attr_b = false;
+    boolean doll_b = false;
+    Token tok = getToken(1);
+}
+{
+(  nd = Literal()
+ |
+   nd = SetConstructor()
+ |
+   LOOKAHEAD(["$" | "@"] Variable())
+   [ "@" { attr_b = true; } | "$" { doll_b = true; } ]
+   nd = Variable()
+     {
+         if(attr_b) {
+             nd = new AttrSignNode(((VariableNode)nd).getName());
+             setLocation(nd, tok);
+         }
+         if(doll_b) {
+             nd = new DollarSignNode(((VariableNode)nd).getName());
+             setLocation(nd, tok);
+         }
+     }
+ |
+   LOOKAHEAD(SpecialVariable())
+   nd = SpecialVariable()
+)
+    { return nd; }
+}
+
+ExpressionNode Literal() :
+{
+    boolean bool;
+    String literal;
+    ExpressionNode nd;
+    Token tok = getToken(1);
+}
+{
+  tok = <INT_LITERAL>
+  {
+      literal = tok.getText();
+      try {
+          long val = Long.valueOf(literal).longValue();
+          nd = new LiteralNode(val);
+          setLocation(nd, tok);
+          return nd;
+      } catch (NumberFormatException e) {
+          throw new ParseException("illegal long " + e.getMessage());
+      }
+  }
+|
+  tok = <FLOAT_LITERAL>
+  {
+      literal = tok.getText();
+      try {
+          double val = Double.valueOf(literal).doubleValue();
+          nd = new LiteralNode(val);
+          setLocation(nd, tok);
+          return nd;
+      } catch (NumberFormatException e) {
+          throw new ParseException("illegal double " + e.getMessage());
+      }
+  }
+|
+  tok = <STRING_LITERAL>
+  {   literal = processStringLiteral(tok.getText());
+      nd = new LiteralNode(literal);
+      setLocation(nd, tok);
+      return nd;
+  }
+|
+  bool = BooleanLiteral()
+  {
+      nd = new LiteralNode(bool);
+      setLocation(nd, tok);
+      return nd;
+  }
+|
+  nd = Column()
+  {
+      return nd;
+  }
+}
+
+boolean BooleanLiteral() :
+{}
+{
+    "true"  { return true; }
+|
+    "false" { return false; }
+}
+
+ExpressionNode SetConstructor() :
+{
+    ExpressionNode item;
+    SetConstructorNode nd;
+    nd = new SetConstructorNode();
+    setLocation(nd, getToken(1));
+}
+{
+    "{"
+     [     item = SetElement() { nd.addItem(item); }
+     ( "," item = SetElement() { nd.addItem(item); } )* ]
+    "}"
+    { return nd; }
+}
+
+ExpressionNode SetElement() :
+{
+    ExpressionNode nd;
+}
+{
+    ( nd = Literal() | nd = Variable() )
+    { return nd; }
+}
+
+ArgumentsNode Arguments() :
+{
+    ArgumentsNode nd;
+    ExpressionNode expNode;
+    ArrayList expList = new ArrayList(5);
+    Token tok = getToken(1);
+}
+{
+    "("
+     [       expNode = Expression() { expList.add(expNode); }
+       ( "," expNode = Expression() { expList.add(expNode); } )* ]
+    ")"
+    {
+        ExpressionNode[] expNodes = new ExpressionNode[expList.size()];
+        expList.toArray(expNodes);
+        nd = new ArgumentsNode(expNodes);
+        setLocation(nd, tok);
+        return nd;
+    }
+}
+
+/*****************************************************************************
+ * Select expression syntax follows.
+ *****************************************************************************/
+
+SelectConditionNode SelectCondition() :
+{
+    Token tok;
+    ColumnNode colNd;
+    ArrayList colList;
+    SelectConditionNode nd;
+}
+{
+    "[" ( LOOKAHEAD(<INT_LITERAL> "]")
+      tok = <INT_LITERAL>
+      {
+          try {
+              String literal = tok.getText();
+              int val = Integer.valueOf(literal).intValue();
+              nd = new SelectTupleNode(val);
+              setLocation(nd, tok);
+          } catch (NumberFormatException e) {
+              throw new ParseException("illegal int " + e.getMessage());
+          }
+      }
+    |
+      LOOKAHEAD(Column() ("," | "]"))
+      colNd = Column() { colList = new ArrayList(2); colList.add(colNd); }
+      ("," colNd = Column() { colList.add(colNd); } )* 
+      {
+          nd = new SelectProjectionNode(colList);
+      }
+    |
+      nd = SelectOrExpression()
+    )
+    "]"
+    { return nd; }
+}
+
+SelectConditionNode SelectOrExpression() :
+{
+    Token tok;
+    SelectConditionNode nd, left, right;
+}
+{
+    left = SelectAndExpression() { nd = left; }
+    ( tok = <OR> right = SelectAndExpression()
+    {
+        left = nd = new SelectOrExpressionNode(left, right);
+        setLocation(nd, tok);
+    }
+    )*
+    { return nd; }
+}
+
+SelectConditionNode SelectAndExpression() :
+{
+    Token tok;
+    SelectConditionNode nd;
+    SelectConditionNode left, right;
+}
+{
+    left = SelectRelationalExpression() { nd = left; }
+    ( tok = <AND> right = SelectRelationalExpression()
+    {
+        left = nd = new SelectAndExpressionNode(left, right);
+        setLocation(nd, tok);
+    }
+    )*
+
+    { return nd; }
+}
+
+ColumnNode Column() :
+{
+    String lit;
+    ColumnNode nd;
+    VariableNode var = null;
+    Token tok = getToken(1);
+}
+{
+  tok = <COLUMN> [ LOOKAHEAD(1) "." var = Variable() ]
+  {
+      lit = tok.getText();
+      try {
+          lit = lit.substring(1);
+          
+          boolean positive = true;
+          if(lit.charAt(0) == '-') {
+              positive = false;
+              lit = lit.substring(1);
+          }
+          
+          int val = Integer.valueOf(lit).intValue();
+          if(var == null) nd = new ColumnNode(val);
+          else nd = new ColumnAttributeNode(val, var.getName());
+          nd.setPositive(positive);
+          setLocation(nd, tok);
+          return nd;
+      } catch (NumberFormatException e) {
+          nd = new ColumnNode();
+          setLocation(nd, tok);
+          return nd;
+      }
+  }
+}
+
+SelectConditionNode SelectRelationalExpression() :
+{
+    int op;
+    Token tok;
+    ExpressionNode left;
+    ExpressionNode right;
+    SelectConditionNode nd;
+    op = -1;
+    tok = getToken(1);
+}
+{   
+    left = AdditiveExpression()
+    (  <EQ>   { op = Operator.EQ; }
+     | <NE>   { op = Operator.NE; }
+     | <LT>   { op = Operator.LT; }
+     | <GT>   { op = Operator.GT; }
+     | <LE>   { op = Operator.LE; }
+     | <GE>   { op = Operator.GE; }
+     | <ME>   { op = Operator.ME; }
+     | <UE>   { op = Operator.UE; }
+     | <IN>   { op = Operator.IN; }
+    )
+    right = AdditiveExpression()
+    {
+        nd = new SelectRelationalExpressionNode(op, left, right);
+        setLocation(nd, tok);
+        return nd;
+    }
+}

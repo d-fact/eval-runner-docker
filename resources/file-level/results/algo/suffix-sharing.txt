@@ -1,0 +1,42 @@
+* config: the current configuration to run, each Oi is a step/phase/operation (C|S|D)
+* len: the number of steps/phases of the current configuration. E.g., the len of CDSD is 4
+* test: test suite
+* cache_map: Map<suffix, Map<config, history_state>>, a map that maps a given suffix to the
+             history state (the slice) *before* the suffix run. The inner map maps a config
+             to the state saved by that config. E.g., cache_map[SD][CDSD]=H' means if we run
+             CDSD, then before SD starts, the history state is H'; while cache_map[SD][DSD]=H"
+             means if we run DSD, then before SD starts, the history state is H"
+* result_map: Map<suffix, Map<config, history_slice>, a map that maps a suffix to the
+              resulted history slice *after* the suffix run
+* orig_hist: the original history
+
+def SuffixSharing(config=O1,O2,O3,...ON, len=N, test, cache_map, result_map, orig_hist):
+    if cache_map[config] != null:
+        // find out which config saved the suffix and matched the state
+        matched_config <- historyStateMatch(orig_hist, cache_map[config]):
+            if matched_config != null:
+                return result_map[config][matched_config]
+    hist_slice <- orig_hist
+    cacheSuffix(hist_slice, config, config)
+    for m in [1, N]:
+        hist_slice <- run(Om, test, hist_slice)
+        if cache_map[config[m+1:N]] != null:
+            matched_config <- historyStateMatch(hist_slice, cache_map[config[m+1:n]]):
+            if matched_config != null:
+                return result_map[config[m+1:n]][matched_config]
+        cacheSuffix(hist_slice, config[m+1:n], config)
+
+def isSuffixCached(suffix, config, cache_map):
+    return cache_map[suffix][config] != null
+
+def historyStateMatch(hist_slice, suffix, cache_map):
+    for config in cache_map[suffix]:
+        if hist_slice == map[suffix][config]:
+            return config
+    return null
+
+def cacheSuffix(hist_slice, suffix, config, cache_map):
+    if isSuffixCached(suffix, config, cache_map):
+        return
+    cache_map[suffix][config] = hist_slice
+

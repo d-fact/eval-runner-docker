@@ -1,0 +1,107 @@
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{cite}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{url}
+%\usepackage[table]{xcolor}
+\usepackage{colortbl}
+%\usepackage{supertabular}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+\usepackage{subcaption}
+\usepackage{placeins}
+
+\newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
+\newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
+
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+%\input{tables/examples-numbers}
+\input{tables/allconfigs-numbers}
+\input{tables/treeconfigs-numbers}
+\input{tables/end-to-end-time-numbers}
+
+\newcommand{\TableCaptionExamples}{Result of Examples}
+\newcommand{\TableHeadExampleId}{\textbf{Id}}
+%\newcommand{\TableHeadOrigHisLen}{\textbf{His.Len}}
+\newcommand{\TableHeadOrigSliceSize}{\textbf{Slice}}
+\newcommand{\TableHeadOrigNumOfEdits}{\textbf{\#Edits}}
+\newcommand{\TableHeadSplitHisLen}{\textbf{Split.His.Len}}
+\newcommand{\TableHeadSplitSliceSize}{\textbf{Split.Slice}}
+\newcommand{\TableHeadSplitNumOfEdits}{\textbf{\#Split.Edits}}
+\newcommand{\TableHeadSplitSliceSizeMapBack}{\textbf{Split.Slice.Map.Back}}
+\newcommand{\TableHeadReduction}{\textbf{Reduction}}
+\newcommand{\TableHeadDefinerHistSliceSize}{\textbf{Definer.Slice}}
+
+\newcommand{\TableHeadNumOfFilesChanged}{\textbf{Split.\#Cmts}}
+\newcommand{\TableHeadAvgNumOfChangedFilesPerCommit}{\textbf{\# Changed Files/Commit}}
+\newcommand{\TableHeadAvgNumOfFeaturesPerCommit}{\textbf{\# Features/Commit}}
+\newcommand{\TableCaptionSmallHistoryInfo}{History information}
+
+\newcommand{\TableCaptionTime}{Run Time (Time out = 2 hrs)}
+\newcommand{\TableHeadOrigTime}{\textbf{CSlicer.Orig.Time (s)}}
+\newcommand{\TableHeadSplitTime}{\textbf{CSlicer.Split.Time (s)}}
+\newcommand{\TableHeadDefinerTime}{\textbf{Definer.Time (s)}}
+
+\newcommand{\TableCaptionASTLines}{Atomic Change Lines}
+\newcommand{\TableHeadOrigASTLinesCount}{\textbf{Orig.Atomic.Lines}}
+\newcommand{\TableHeadSplitASTLinesCount}{\textbf{Split.Atomic.Lines}}
+
+% ----------
+\newcommand{\TableCaptionAllConfigs}{All configurations of experiments}
+\newcommand{\TableHeadCSlicerStandalone}{\textbf{CSlicer}}
+\newcommand{\TableHeadDefinerStandalone}{\textbf{Definer}}
+\newcommand{\TableHeadSplitCSlicer}{\textbf{Split-CSlicer}}
+\newcommand{\TableHeadSplitDefiner}{\textbf{Split-Definer}}
+\newcommand{\TableHeadCSlicerSplitCSlicer}{\textbf{CSlicer-Split-CSlicer}}
+\newcommand{\TableHeadCSlicerSplitDefiner}{\textbf{CSlicer-Split-Definer}}
+\newcommand{\TableHeadDefinerSplitCSlicer}{\textbf{Definer-Split-CSlicer}}
+\newcommand{\TableHeadDefinerSplitDefiner}{\textbf{Definer-Split-Definer}}
+\newcommand{\TableHeadCSlicerDefinerSplitCSlicer}{\textbf{CSlicer-Definer-Split-CSlicer}}
+\newcommand{\TableHeadCSlicerDefinerSplitDefiner}{\textbf{CSlicer-Definer-Split-Definer}}
+\newcommand{\TableHeadCSlicerDefiner}{\textbf{CSlicer-Definer}}
+\newcommand{\TableHeadSplitCSlicerDefiner}{\textbf{Split-CSlicer-Definer}}
+
+\newcommand{\TableHeadDefinerDefiner}{\textbf{Definer-Definer}}
+\newcommand{\TableHeadSplitDefinerDefiner}{\textbf{Split-Definer-Definer}}
+\newcommand{\TableHeadCSlicerDefinerDefiner}{\textbf{CSlicer-Definer-Definer}}
+\newcommand{\TableHeadDefinerCSlicerDefiner}{\textbf{Definer-CSlicer-Definer}}
+\newcommand{\TableHeadSplitCSlicerDefinerDefiner}{\textbf{Split-CSlicer-Definer-Definer}}
+\newcommand{\TableHeadSplitDefinerCSlicerDefiner}{\textbf{Split-Definer-CSlicer-Definer}}
+\newcommand{\TableHeadCSlicerSplitDefinerDefiner}{\textbf{CSlicer-Split-Definer-Definer}}
+\newcommand{\TableHeadDefinerSplitCSlicerDefiner}{\textbf{Definer-Split-CSlicer-Definer}}
+\newcommand{\TableHeadDefinerCSlicerSplitDefiner}{\textbf{Definer-CSlicer-Split-Definer}}
+\newcommand{\TableHeadCSlicerDefinerSplitCSlicerDefiner}{\textbf{CSlicer-Definer-Split-CSlicer-Definer}}
+\newcommand{\TableHeadCSlicerSplitDefinerCSlicerDefiner}{\textbf{CSlicer-Split-Definer-CSlicer-Definer}}
+
+\newcommand{\TableHeadNumOfCommits}{\textbf{\#Cmts}}
+\newcommand{\TableHeadNumOfChangedLines}{\textbf{\#LOC}}
+\newcommand{\TableHeadCommitsReduction}{\textbf{Cmts.Red}}
+\newcommand{\TableHeadChangedLinesReduction}{\textbf{LOC.Red}}
+\newcommand{\TableHeadRunTime}{\textbf{Time(s)}}
+\newcommand{\TableHeadOrigHisLen}{\textbf{Orig.\#Cmts}}
+\newcommand{\TableHeadOrigNumOfChangedLines}{\textbf{Orig.\#LOC}}
+\newcommand{\TableRowAvg}{Average}
+
+\newcommand{\TableCaptionEndToEndTime}{Total Time (CDSC-CDSD-SCDD-DSCD-CSDD-DCSD-SDCD-DSD-CDD-DCD-SDD-DD-CDSCD-CSDCD)}
+\newcommand{\TableHeadSevenConfigsTime}{C$+$D$+$CD$+$CSD$+$SCD$+$SC$+$SD}
+\newcommand{\TableHeadFiveConfigsTime}{D$+$CD$+$CSD$+$SCD$+$SD}
+\newcommand{\TableHeadSharedConfigsTime}{D$+$C$+$(CD$-$C)$+$(CSD$-$C)$+$S$+$(SCD$-$S)$+$(SD$-$S)}
+\newcommand{\TableHeadTimeWithPrefixCache}{\textbf{Prefix Sharing (s)}}
+\newcommand{\TableHeadTimeWithoutCache}{\textbf{No Optimization (s)}}
+\newcommand{\TableHeadTimeWithSuffixCache}{\textbf{Suffix Sharing (s)}}
+\newcommand{\TableHeadPrefixCacheSavingPercentage}{\textbf{Saving (Pre)}}
+\newcommand{\TableHeadSuffixCacheSavingPercentage}{\textbf{Saving (Suf)}}
+
+\newcommand{\ConfigsWithCache}{CDSC-(CDS)D-SCDD-DSCD-(C)SDD-(D)CSD-(S)DCD-(DS)D-(CD)D-(DC)D-(SD)D-(D)D}
+\newcommand{\ConfigsWithSuffixCache}{CDSC-CDSD-SCDD-DSCD-CSD(D)-DC(SD)-SDC(D)-D(SD)-CDD-DC(D)-SD(D)-D(D)}
+\newcommand{\ConfigsWithoutCache}{CDSC-CDSD-SCDD-DSCD-CSDD-DCSD-SDCD-DSD-CDD-DCD-SDD-DD}

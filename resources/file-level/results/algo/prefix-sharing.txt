@@ -1,0 +1,31 @@
+* config: the current configuration to run, each Oi is a step/phase/operation (C|S|D)
+* len: the number of steps/phases of the current configuration. E.g., the len of CDSD is 4
+* test: test suite
+* cache_map: Map<prefix, cached_repo>, a map that maps a given prefix to its cached repo.
+             (To reuse a prefix, we copy its cached repo and run the remaining steps)
+* result_map: Map<prefix, history_slice>, a map that maps a prefix to the resulted
+              history slice after the prefix run
+* orig_hist: the original history
+
+def PrefixSharing(config=O1,O2,O3,...ON, len=N, test, cache_map, result_map, orig_hist):
+    if isPrefixCached(config, cache_map):
+        return result_map[config]
+    hist_slice <- orig_hist
+    for m in [N-1, 1]:  // from N-1 to 1
+        if isPrefixCached(config[:m], cache_map):
+            copy the repo located at cache_map[config[:m]]
+            for Oi in config[m+1: N]:
+                hist_slice <- run(Oi, test, hist_slice) // Oi is a step, one of S,C,D
+                cachePrefix(current_repo, config[:m] + Oi)
+    return hist_slice
+
+def isPrefixCached(prefix, cache_map):
+    return cache_map[prefix] != null
+
+def cachePrefix(current_repo, prefix, cache_map):
+    if isPrefixCached(prefix, cache_map):
+        return
+    cache_map[prefix] <- current_repo
+
+def run(operation, test, hist_slice):
+    return the result of the operation (C, S or D)

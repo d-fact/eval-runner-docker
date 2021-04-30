@@ -1,0 +1,199 @@
+{
+  "CALCITE##ba6e43c6##c4d346b0": {
+    "767": 35,
+    "diff_tuple": 2557,
+    "diff_attr": 2557,
+    "hunkdep": 95,
+    "deps": 32989,
+    "static": 38198
+  },
+  "NET##d8812a3##4c3860e": {
+    "diff_tuple": 271,
+    "diff_attr": 271,
+    "hunkdep": 109,
+    "deps": 7443,
+    "static": 8094,
+    "436": 105
+  },
+  "PDFBOX##7c1a2c8##69a8e03": {
+    "diff_tuple": 323,
+    "diff_attr": 323,
+    "hunkdep": 65,
+    "deps": 36173,
+    "static": 36884,
+    "3262": 0
+  },
+  "IO##8de491fc##b1b9f1af": {
+    "288": 11,
+    "290": 28,
+    "diff_tuple": 100,
+    "diff_attr": 100,
+    "hunkdep": 222,
+    "deps": 3515,
+    "static": 3937,
+    "305": 33,
+    "173": 72,
+    "275": 38
+  },
+  "CONFIGURATION##89428f1##9fb4ad8": {
+    "diff_tuple": 40,
+    "diff_attr": 40,
+    "hunkdep": 45,
+    "deps": 13686,
+    "static": 13811,
+    "624": 522,
+    "626": 181
+  },
+  "COMPRESS##99bc508##b29395d": {
+    "327": 2106,
+    "373": 2106,
+    "369": 2106,
+    "diff_tuple": 414,
+    "diff_attr": 414,
+    "hunkdep": 201,
+    "deps": 10759,
+    "static": 11788,
+    "374": 2106,
+    "375": 2106
+  },
+  "FLUME##cda3bd10##31d45f1b": {
+    "2206": 33,
+    "diff_tuple": 869,
+    "diff_attr": 869,
+    "hunkdep": 74,
+    "deps": 7458,
+    "static": 9270,
+    "2130": 160,
+    "2056": 238,
+    "2052": 0
+  },
+  "PDFBOX##3b5ae83##5848e90": {
+    "3418": 5,
+    "3461": 1441,
+    "diff_tuple": 640,
+    "diff_attr": 640,
+    "hunkdep": 133,
+    "deps": 35985,
+    "static": 37398,
+    "3069": 1264
+  },
+  "NET##d483631##abd6711": {
+    "525": 77,
+    "diff_tuple": 356,
+    "diff_attr": 356,
+    "hunkdep": 526,
+    "deps": 8367,
+    "static": 9605,
+    "527": 74
+  },
+  "FLUME##f7560038##5e400ea8": {
+    "2498": 93,
+    "2982": 0,
+    "2955": 81,
+    "2628": 131,
+    "diff_tuple": 540,
+    "diff_attr": 540,
+    "hunkdep": 126,
+    "deps": 660,
+    "static": 1866
+  },
+  "MNG##b175144##308d4d4": {
+    "4909": 40,
+    "4910": 21,
+    "diff_tuple": 132,
+    "diff_attr": 132,
+    "hunkdep": 13,
+    "deps": 11867,
+    "static": 12144,
+    "4904": 86
+  },
+  "LANG##24767d6##76cc69c": {
+    "1088": 53,
+    "1033": 6,
+    "993": 30,
+    "999": 2,
+    "diff_tuple": 507,
+    "diff_attr": 507,
+    "hunkdep": 422,
+    "deps": 9562,
+    "static": 10998,
+    "1093": 12,
+    "1080": 242,
+    "883": 28,
+    "1006": 4
+  },
+  "CALCITE##aeb6bf14##08c56b15": {
+    "1309": 3329,
+    "diff_tuple": 806,
+    "diff_attr": 806,
+    "hunkdep": 34,
+    "deps": 103963,
+    "static": 105609,
+    "991": 1573,
+    "1288": 3341
+  },
+  "CALCITE##f10ea367##d60f2aa3": {
+    "diff_tuple": 672,
+    "diff_attr": 672,
+    "hunkdep": 74,
+    "deps": 89010,
+    "static": 90428,
+    "627": 1947,
+    "655": 61
+  },
+  "PDFBOX##a281f71##9e102f2": {
+    "3307": 2132,
+    "diff_tuple": 126,
+    "diff_attr": 126,
+    "hunkdep": 4,
+    "deps": 35302,
+    "static": 35558
+  },
+  "MNG##b7e3ce2##ea8b2b0": {
+    "5549": 713,
+    "5530": 13,
+    "diff_tuple": 324,
+    "diff_attr": 324,
+    "hunkdep": 81,
+    "deps": 12560,
+    "static": 13289
+  },
+  "CALCITE##495f1859##0c0c203d": {
+    "811": 2618,
+    "diff_tuple": 743,
+    "diff_attr": 743,
+    "hunkdep": 66,
+    "deps": 535,
+    "static": 2087,
+    "718": 47,
+    "803": 185,
+    "758": 5056
+  },
+  "CSV##b230a6f5##7310e5c6": {
+    "159": 97,
+    "175": 124,
+    "179": 39,
+    "diff_tuple": 78,
+    "diff_attr": 78,
+    "hunkdep": 93,
+    "deps": 1074,
+    "static": 1323,
+    "180": 36
+  },
+  "FLUME##31d45f1b##f7560038": {
+    "diff_tuple": 593,
+    "diff_attr": 593,
+    "hunkdep": 129,
+    "deps": 2515,
+    "static": 3830,
+    "1710": 8
+  },
+  "CONFIGURATION##5270237##f81ff1a": {
+    "diff_tuple": 949,
+    "diff_attr": 949,
+    "hunkdep": 229,
+    "deps": 8980,
+    "static": 11107,
+    "466": 70
+  }
+}

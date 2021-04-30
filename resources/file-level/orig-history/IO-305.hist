@@ -1,0 +1,136 @@
+b1b9f1af How to regenerate releases notes
+6ae1acaf Update release notes (using the generated text in target\announcement\announcement.vm.
+8463d421 Cut 2.2-RC4.
+182f03a4 Cut 2.2-RC4.
+61b60430 Typo.
+87737ab3 [IO-313] Add IOUTils.toBufferedReader(Reader)
+1d6feac9 Add missing tests as discovered with Cobertura. Add a new method IOUTils.toBufferedReader(Reader).
+f4958dfe Fix method name.
+b5444a5e Add missing tests as discovered with Cobertura.
+c0e29f7e Fix checkstyle for line length > 120.
+bb5259cf Don't use assertTrue for comparing equals
+a9039dee Test case bug
+8437c21e Test case bug
+aea44bd1 MOre test coverage
+1833fb07 @since 2.2 markers
+62dd0968 IO-308 Allow applications to provide buffer (or size) for copyLarge methods.
+9f7b69e8 Alignment
+57ca8f6d Javadoc - rename offset as that is usually used for destination buffer
+211174c5 Calculate buffer lengthe once
+6c58d22a Javadoc
+f584ed90 IO-311 IOUtils.read(InputStream/Reader) ignores the offset parameter
+9282a0c8 Javadoc
+073fa3e5 Javadoc
+cf971eb0 Rename testClose* methods to testCloseQuietly* to reflect the API tested: closeQuietly.
+5c8a6f44 IO-312 CharSequenceInputStream(CharSequence s, Charset charset, int bufferSize) ignores bufferSize
+cf5c4628 Use "@since x.y" instead of "@since Commons IO x.y"
+1daa7cb1 Replace magic number (-1) with new private constant EOF.
+03ad89f6 Javadoc
+2413cf3c Missing @since 2.2 markers; standardise format
+18a39356 Javadoc - fix copy-paste error
+b04b4f53 Fix some odd formatting.
+e3646441 Use "@since 1.1" instead of "@since Commons IO 1.1"
+bf5571fe Don't leave non-SNAPSHOT versions where CI bots can see them
+32eeb20e [IO-310] Add ByteOrderMark constants for UTF-32.
+1170279d Remove noisy and unnecessary parens. Especially painful in return statements: "return (foo + bar);" vs. "return foo + bar;"
+8965e5ef Tests that {@link ByteOrderMark#getCharsetName()} can be loaded as a {@link java.nio.charset.Charset} as advertised.
+22d7a157 Drop stale releases
+740fe050 eol native
+da3a87a4 Synchronise RELEASE-NOTES and the template that generates it
+9d8d86f7 Set release date.
+2fb77924 Release 2.2.
+a241539e Clean up text.
+b1c02e48 Add compatibility section.
+ac05a9a0 Remove older Javadoc 2.x releases.
+88f98ed0 Use $Id$ instead of the mix of $Date$ and others.
+c10347e5 Drop $Date$ SVN variables
+25cfc24a Next RC comming up.
+3ae9f7d2 Simplify and avoid boxing
+0031a91b IO-305:  New copyLarge() method in IOUtils that takes additional offset, length arguments
+6dbc1b3e Move changes.xml to location expected by CP24 Add previous release notes to end of .vm file so we keep history when regenerating
+8314cfed Set end copyright date to 2012.
+94e64536 Javadoc
+4ccf5c72 Release notes for 2.2.
+3fdb1c36 Remove accidental import
+dbdab57a Document current Windows behaviour.
+d58ac896 IO-300 FileUtils.moveDirectoryToDirectory removes source directory if destination is a subdirectory
+55c1430f IO-307 ReaderInputStream#read(byte[] b, int off, int len) should check for valid parameters
+caa0578b Convert test to JUnit4
+6ccf35ec Add check for negative offset
+87dfbd99 Allow clirr reports to be run from command line
+033a3174 Another fix for this version
+8076962b Easier to scan XML in Eclipse outline if issue number appears first
+33368e1a @since 2.2 markers
+6b5f6085 Fix up clirr and checkstyle versions Add RAT excludes
+6cb913db Preparing 2.2 release.
+315fe2d7 Preparing 2.2 release.
+45276617 Preparing 2.2 release.
+f3fe62e5 Add code coverage for markSupported().
+ea6fc334 Better page title
+c4251ace IO-306 ReaderInputStream#read(byte[] b, int off, int len) should always return 0 for length == 0
+0c7f3107 Fix occasional test failure - should always return 0 for read length == 0
+3200c5f8 A bit more debug to help pin down occasional Gump failures
+cefb5141 Upgarde to commons-parent 24 from 23.
+5236eb0d Javadoc.
+9f48d4ad Checkstyle wants Javadoc for private methods ...
+0ab79cc7 Document why safe to create skip buffers without synch
+5db7f804 Use fixed Locale for upcasing
+027d9419 Javadoc, Checkstyle. More precise throw clause in private method.
+3278b1ba Javadoc.
+508f4664 Rename private method setupEffectiveDirFilter to setUpEffectiveDirFilter
+2fc63ef3 Rename private method setupEfectiveFileFilter to setUpEffectiveFileFilter
+41f2753b Remove dead comment.
+84f52250 Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from.
+109f81a8 Remove unnecessary parens.
+24be3c76 Mark as 2.2-SNAPSHOT like Maven POM.
+b2e74b3a Add missing 2.1 version.
+f12b0136 Add JIRA report for all versions so you can see what has been fixed no matter what version you are updating from.
+72aba063 Remove my middle initial from my name.
+e3daec3b Fix tab in source and reformat 2 methods for longer lines.
+d8a496f4 Fix Javadocs.
+79920525 Format fix.
+022490d4 Format fix.
+2f5db12d Remove extra parens.
+b37ba99e Remove @author tags per Apache guidelines.
+ce7f497c Set commons.rc.version to RC1
+642d6594 IO-173 FileUtils.listFiles() doesn't return directories
+4cef5296 IO-276 "FileUtils#deleteDirectoryOnExit(File)" does not work
+b1dede03 IO-273 BoundedInputStream.read() treats max differently from BoundedInputStream.read(byte[]...)
+50a7fdca IO-297 CharSequenceInputStream to efficiently stream content of a CharSequence
+1e870590 Missing @Overrides
+6ab58439 IO-296 ReaderInputStream optimization: more efficient reading of small chunks of data
+05f4b42c IO-298 Various methods of class 'org.apache.commons.io.FileUtils' incorrectly suppress 'java.io.IOException'
+025f2766 [IO-304] The second constructor of Tailer class does not pass 'delay' to the third one
+a3c8c6f4 [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+47e16e5b [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times. Refactor tests to use both BOM and no-BOM test files.
+3f8cc6d5 [IO-302] ArrayIndexOutOfBoundsException in BOMInputStream when reading a file without BOM multiple times
+eea40304 Adding missing license header.
+28d32e9c [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs.
+56c87a17 [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception. Use a different impl with < LOCs.
+7af4ac7c Update findbugs-maven-plugin to 2.4.0 from 2.3.2.
+aad6359c [IO-303] TeeOutputStream fails executing branch.close() when main.close() raised an exception.
+96c5e875 Checkstyle: Line length <= 120.
+91b2c630 Update maven-checkstyle-plugin to 2.9 from 2.7.
+0535d141 Link to related methods
+90c7e6b4 Refactor new directortContains method for https://issues.apache.org/jira/browse/IO-291. Change behavior: an unrealized child File is NOT contained in a directory in FileUtils. If you want to test with file names, use FilenameUtils#directoryContains(String, String).
+f0fdfa63 Add missing @since 2.2 tag.
+492e9b29 Migrate to commons-parent 23.
+fde4aaaf [IO-301] Add IOUtils.closeQuietly(Selector) necessary. Patch applied, thank you. Also added another test to get the test code coverage to 100%.
+71a7618b IO-291 Add test case which shows FileUtils.directoryContains() returns true for a file which doesn't exist
+e36e518c Checkstyle fixes
+4b62012c Checkstyle - replace tab characters with spaces
+94afbe46 IO-288 Move ReversedLinesFileReader to org.apache.commons.io.input package with the reset of the InputStreams & Readers
+bf48fd5f Additional classes and methods merit 2.2
+d80edebc IO-292 IOUtils.closeQuietly() should take a ServerSocket as a parameter
+25aaa9cb IO-290 Add read/readFully methods to IOUtils
+33b0f21c IO-288 Supply a ReversedLinesFileReader N.B. Renamed test .txt files to .bin and made them application/octet-stream as it's important not to change the EOL setting
+ec29cec2 IO-288 Supply a ReversedLinesFileReader
+b20daf59 Not my change
+531aaa5b [IO-291] Add new function FileUtils.directoryContains.
+ec04894a Adding EB/PB/TB per IO-287 and Ron Kuris' patch
+2316361c Surefire blindly treats all matching files as potential test classes Ensure only .class files are selected
+288d6f0a Check files fail to compare byte-wise
+a2cf5463 IO-275 FileUtils.contentEquals/IOUtils.contentEquals - Add option to ignore "line endings"
+33e9a899 Use Collection.isEmpty() instead of size() == 0
+63a1efef Remove superfluous parens.
+7fa02d13 Simplify my developer entry.

@@ -1,0 +1,6 @@
+.idea
+out/
+tags
+**/*.class
+ijgrok.sh
+

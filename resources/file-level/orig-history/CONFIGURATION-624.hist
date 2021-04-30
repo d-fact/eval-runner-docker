@@ -1,0 +1,50 @@
+9fb4ad80 Updated building documentation.
+d14b4840 Updated changes.xml.
+53f9e5a9 Updated version to next development iteration.
+6b70cd16 updated to commons-parent release 41
+982ebe93 set failOnViolation for checkstyle to false as discussed on the mailinglist
+561ed068 fixed excludes for generated plist sources
+afbaa957 Downgrade checkstyle-plugin to be compatible with Java 6 (see https://maven.apache.org/plugins/maven-checkstyle-plugin/history.html)
+6485eb72 Set missing svn properties.
+dbe87b57 Updated version in site menu.
+bd09c878 Updated dependencies page.
+849306df Updated release notes for upcoming 2.1 release.
+b3c7c41b Updated download page for upcoming 2.1 release.
+0e1332c0 Made defensive copies of arrays.
+57753e16 Reformatted test classes to match coding conventions.
+db9e5bea Added missing ASL headers.
+e7294a6d [CONFIGURATION-636] Updated changes.xml.
+05077ebc [CONFIGURATION-636] Changed access to keys when saving a properties configuration.
+19abbba0 Fixed a Javadoc error.
+f65eeb63 [CONFIGURATION-628] Updated changes.xml.
+4b01de88 [CONFIGURATION-628] Adapted building documentation.
+7064987a [CONFIGURATION-628] Dropped files related to ant build.
+404f5ed2 Added Raviteja Lokineni to contributors section.
+2ccca975 [CONFIGURATION-634] Updated changes.xml.
+5544b5af [CONFIGURATION-634] Reworked createFullyInitializedLocatorFromURL().
+628813c0 [CONFIGURATION-635] Update optional dependency Apache Commons Codec from 1.9 to 1.10.
+0cb26ac6 [CONFIGURATION-635] Update optional dependency Apache Commons Code from 1.9 to 1.10.
+3cc0a5da [CONFIGURATION-635] Update optional dependency Apache Commons Code from 1.9 to 1.10.
+7344ddb4 [CONFIGURATION-632] Updated changes.xml.
+bea5ca11 [CONFIGURATION-632] Better support for interpolation with arrays.
+67407f28 Merge branch 'arrayInterpolation_CONF-633' into trunk
+edbe77e5 added ciManagement
+436ea067 [CONFIGURATION-626] Updated user guide.
+b1d7b38a [CONFIGURATION-626] Updated changes.xml.
+d042d359 [CONFIGURATION-626] Deprecated getArray() method.
+1761c73c [CONFIGURATION-626] Do not use getArray() any more.
+f3a8208d [CONFIGURATION-626] get() now supports array conversions.
+b29dcd58 [CONFIGURATION-631] Update Apache Commons VFS from 2.0 to 2.1.
+85eaaf74 [CONFIGURATION-624] documentation
+40741a9d [CONFIGURATION-624] added comment
+447baf81 Switched to most recent version of commons-parent.
+8d34352d [CONFIGURATION-624] better names
+3410aed6 [CONFIGURATION-624] renamed tests to match convention
+00d9578b [CONFIGURATION-624] added config factory bean
+cf9cbbda [CONFIGURATION-624] fixed checkstyle violations, updated to latest version of checkstyle-maven-plugin, ensure correct checkstyle configuration is applied in all cases
+1f207424 [CONFIGURATION-624] Support Commons Configuration as PropertySource in Spring
+e4071db6 align versions to fix build
+8fc74a9b [CONFIGURATION-622] Updated changes.xml.
+75b2d209 [CONFIGURATION-622] Fixed handling of escaped keys in INIConfiguration.write.
+fc534100 Updated changes.xml for next development iteration.
+d377fbbd Updated versions to next development iteration.

@@ -1,0 +1,51 @@
+d60f2aa3 [maven-release-plugin] prepare release calcite-1.2.0-incubating
+a8190265 Update history
+a00e4521 [CALCITE-672] SQL ANY type should be nullable (Jinfeng Ni)
+66b62c5d Disable tests, pending [CALCITE-673] Timeout executing joins against MySQL
+65774b05 Fix traits in MongoDB adapter, and NPE in JdbcTest
+e48c7627 [CALCITE-366] Support Aggregate push down in bushy joins (Jesus Camacho Rodriguez)
+5f57f789 [CALCITE-670] AvaticaPreparedStatement should support execute() and executeUpdate() (Nick Dimiduk)
+d4d7ab99 [CALCITE-641] Implement logging throughout Avatica server (Nick Dimiduk)
+7d522dc9 [CALCITE-662] Query validation fails when an ORDER BY clause is used with WITH CLAUSE
+38a4dd41 [CALCITE-307] Implement CAST between date-time types
+241f77e2 [CALCITE-657] NullPointerException when executing JdbcAggregate implement method (Yuri Au Yong)
+30ae0513 [CALCITE-659] Missing types in averageTypeValueSize method in RelMdSize (Jesus Camacho Rodriguez)
+0d80fd25 [CALCITE-646] AvaticaStatement execute method broken over remote JDBC (Yeong Wei and Julian Hyde)
+272e6040 [CALCITE-613] Implicitly convert character values in comparisons
+5648083f [CALCITE-660] Improve Avatica date support
+304eb70c [CALCITE-655] Implement "connectionSync" RPC (Nick Dimiduk)
+0ea085b7 [CALCITE-654] Tighten up AvaticaStatement#execute semantics (Nick Dimiduk)
+ba07b09a [CALCITE-658] Cleanup dependency usage (Nick Dimiduk)
+fa9bdc4a [CALCITE-652] Move server pieces of avatica into avatica-server (Nick Dimiduk)
+17d7a8e3 [CALCITE-651] In JdbcMeta, convert property definitions to an enum (Nick Dimiduk)
+3b55c35a Fix TestTraitPropagation.withoutHack (withoutHack now succeeds, withHack now fails).
+b312031f [CALCITE-606] Fix trait propagation and add test case
+d3fc7cf2 Remove checkstyle Eclipse properties from git tracking
+a13137dc [CALCITE-631] Push theta joins down to JDBC adapter (Ng Jiunn Jye)
+e2833a29 [CALCITE-650] Add metadata for average size of a tuple in SemiJoin (Jesus Camacho Rodriguez)
+0f824f81 [CALCITE-640] Avatica server should expire stale connections/statements (Nick Dimiduk)
+c446e02a [CALCITE-639] Open up permissions on avatica server components (Nick Dimiduk)
+18fea1f0 [CALCITE-637] Implement Avatica CloseConnection RPC (Nick Dimiduk)
+0ad6019b [CALCITE-636] Connection isolation for Avatica clients (Nick Dimiduk)
+208eda66 [CALCITE-626] Implement CloseStatement RPC (Nick Dimiduk)
+aa7cb035 [CALCITE-644] Increase check style line limit to 100 chars (Nick Dimiduk)
+321dc430 [CALCITE-617] Check at initialization time in CachingInvocationHandler that MD provider is not null (Jesus Camacho Rodriguez)
+61eea9ce [CALCITE-649] Extend splitCondition method in RelOptUtil to handle multiple joins on the same key (Jesus Camacho Rodriguez)
+a24b3c1f [CALCITE-648] Update ProjectMergeRule description for new naming convention (Jinfeng Ni)
+9e0be8bc [CALCITE-625] README.md linking to the wrong page of optiq-csv (hongbin ma)
+3923ec76 [CALCITE-632] Sort order returned by SUPERCLASS_COMPARATOR in ReflectiveRelMetadataProvider is inconsistent (Jesus Camacho Rodriguez)
+32179077 Another test query
+5e285a16 [CALCITE-634] Allow ORDER BY aggregate function in SELECT DISTINCT, provided that it occurs in SELECT clause (Sean Hsuan-Yi Chu)
+574dc7cc [CALCITE-335] Remove uses of linq4j Functions.adapt
+0fe2637d [CALCITE-592] Upgrade to Guava 14.0.1
+76a0665c [CALCITE-638] SQL standard REAL is 4 bytes, FLOAT is 8 bytes
+8b9a5776 [CALCITE-630] Flesh out AvaticaParameter#setObject (Nick Dimiduk)
+fe13dd3b [CALCITE-627] Add Avatica support for getTableTypes, getColumns (Xavier FH Leong)
+4d2f647a [CALCITE-618] Add Avatica support for getTables (Julian Hyde and Nick Dimiduk)
+2b07a9e9 [CALCITE-596] JDBC adapter incorrectly reads null values as 0 (Ng Jiunn Jye)
+3b10a6a5 Update release HOWTO
+60789a57 In linq4j, implement firstOrDefault, single, and singleOrDefault methods (Daniel Cooper)
+3807827b [CALCITE-633] WITH ... ORDER BY cannot find table
+321217dd [CALCITE-614] IN clause in CASE in GROUP BY gives AssertionError
+119a3993 [CALCITE-619] Slim down dependencies in parent POM
+22f42e46 [maven-release-plugin] prepare for next development iteration
