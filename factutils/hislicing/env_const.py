@@ -5,12 +5,12 @@ from pathlib import Path
 BASE_DIR = "/data"  # change this to the path to CSlicer
 BASE_DIR_IN_CFG = "/home/cgzhu/projects/gitslice"  # do not change this, this path is hardcoded in orig-config.
 DOWNLOADS_DIR = BASE_DIR + '/_downloads'
-POMS_DIR = BASE_DIR + '/file-level/example-poms'
-CONFIGS_DIR = BASE_DIR + '/file-level/orig-configs'
+POMS_DIR = BASE_DIR + '/resources/file-level/example-poms'
+CONFIGS_DIR = BASE_DIR + '/resources/file-level/orig-configs'
 NEW_CONFIGS_DIR = os.path.join(DOWNLOADS_DIR, "configs")
-JACOCOS_DIR = BASE_DIR + '/file-level/jacoco-files'
+JACOCOS_DIR = BASE_DIR + '/resources/file-level/jacoco-files'
 
-OUTPUT_DIR = os.path.join(BASE_DIR, "file-level/output")
+OUTPUT_DIR = os.path.join(BASE_DIR, "resources/file-level/output")
 CSLICER_STANDALONE_OUTPUT_DIR = os.path.join(OUTPUT_DIR, 'cslicer')
 CSLICER_FACTS_OUTPUT_DIR = os.path.join(OUTPUT_DIR, 'cslicer_facts')
 FACTS_RESULTS_DIR = os.path.join(OUTPUT_DIR, "facts")

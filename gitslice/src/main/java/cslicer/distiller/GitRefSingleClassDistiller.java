@@ -36,9 +36,6 @@ import ch.uzh.ifi.seal.changedistiller.structuredifferencing.StructureDiffNode;
 import ch.uzh.ifi.seal.changedistiller.structuredifferencing.StructureNode;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.Node;
 
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
-
 /**
  * Extracts changes from a class {@link StructureDiffNode}.
  * 
@@ -139,7 +136,7 @@ public class GitRefSingleClassDistiller {
 			StructureEntityVersion rootEntity) {
 		Node root = fASTHelper.createDeclarationTree(fRootNode);
 
-		for (Enumeration<Node> nodes = (root.postorderEnumeration()); nodes
+		for (Enumeration<Node> nodes = root.postorderEnumeration(); nodes
 				.hasMoreElements();) {
 			Node n = nodes.nextElement();
 			SourceCodeEntity parent = null;

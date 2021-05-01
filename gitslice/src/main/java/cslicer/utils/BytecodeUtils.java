@@ -28,6 +28,8 @@ package cslicer.utils;
 import org.apache.commons.lang3.StringUtils;
 import org.objectweb.asm.Type;
 
+import cslicer.daikon.ChangedInvVar;
+import cslicer.daikon.DaikonFieldVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +138,69 @@ public class BytecodeUtils {
 		return false;
 	}
 
+	public static String getQualifiedMethodNameFromDaikon(ChangedInvVar var) {
+
+		String daikonMethodSignature = var.getVarInfo().ppt.toString();
+		daikonMethodSignature = daikonMethodSignature.replace(" ", "");
+		String methodName = daikonMethodSignature.split(":::")[0];
+		methodName = methodName.substring(0, methodName.indexOf("("));
+		String argString = daikonMethodSignature.substring(
+				daikonMethodSignature.indexOf("(") + 1,
+				daikonMethodSignature.indexOf(")"));
+		String[] args = argString.split(",");
+		String newSignature = methodName + "(";
+		for (int i = 0; i < args.length; i++) {
+			String arg = getShortClassName(args[i]);
+			newSignature += arg;
+			if (i == args.length - 1) {
+				newSignature += ")";
+			} else {
+				newSignature += ",";
+			}
+		}
+		// System.out.println(var.getVarInfo().repr());
+		// System.out.println("[MEYHOD]: " + newSignature);
+		return newSignature;
+	}
+
+	public static String getQualifiedFieldNameFromDaikon(ChangedInvVar var) {
+		String pptName = var.getVarInfo().ppt.toString().split(":::")[0];
+		String pptClassName = "";
+		if (var.getVarInfo().ppt.toString().split(":::")[1].equals("CLASS")
+				|| var.getVarInfo().ppt.toString().split(":::")[1]
+						.equals("OBJECT")) {
+			pptClassName = pptName;
+		} else {
+			pptClassName = pptName.substring(0, pptName.lastIndexOf('('));
+			pptClassName = pptClassName.substring(0,
+					pptClassName.lastIndexOf('.'));
+		}
+
+		// String daikonFieldRepr =
+		// var.getVarInfo().get_VarInfoName().toString();
+		// PrintUtils.print(var.getVarInfo().get_VarInfoName().identifier_name());
+		// PrintUtils.print(var.getVarInfo().get_VarInfoName().name());
+
+		DaikonFieldVisitor visitor = new DaikonFieldVisitor();
+		var.getVarInfo().get_VarInfoName().accept(visitor);
+		String fieldName = pptClassName + "." + visitor.getFieldName();
+
+		// String fieldName = "";
+		// if (daikonFieldRepr.equals("this")) {
+		// fieldName = pptClassName + "." + daikonFieldRepr;
+		// } else {
+		//
+		// fieldName = pptClassName + "."
+		// + daikonFieldRepr.substring(
+		// daikonFieldRepr.indexOf('{') + 1,
+		// daikonFieldRepr.indexOf('}'));
+		// }
+		String fullTypeName = var.getVarInfo().type.toString();
+		String shortTypeName = getShortClassName(fullTypeName);
+		// System.out.println(var.getVarInfo().repr());
+		// System.out.println("[FIELD]: " + fieldName + " : " + shortTypeName);
+		return fieldName + " : " + shortTypeName;
+	}
 
 	private static String getMethodName(final String vmclassname,
 			final String vmmethodname, final String vmdesc,

@@ -5,15 +5,16 @@ COPY . .
 # install python util
 RUN pip3 install .
 # build modified cslicer
+ENV M2_HOME=/usr/share/maven
 RUN mvn -f /tool/gitslice/pom.xml package -DskipTests
 # copy data
-COPY resources /data
+COPY data /data
 # build jgrok
 WORKDIR /tool/grok-v107
 RUN /bin/bash c.sh
 
 WORKDIR /tool/factutils
-RUN python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
+# RUN python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
 # CMD [ "python3", "-m" , "hislicing.main", "--cslicer", "/data/json/name_one.json" ]
 # CMD [ "python3", "-m" , "hislicing.main", "--fact", "/data/json/group_one.json" ]
 ENTRYPOINT [ "python3", "-m" ]

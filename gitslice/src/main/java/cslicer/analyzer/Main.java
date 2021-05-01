@@ -42,6 +42,7 @@ import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import cslicer.CSlicer;
+import cslicer.analyzer.Refiner.SCHEME;
 import cslicer.analyzer.HistoryAnalyzer.FactFormat;
 import cslicer.builder.BuildScriptInvalidException;
 import cslicer.callgraph.ClassPathInvalidException;
@@ -73,11 +74,11 @@ public class Main {
 		System.out.println("=======================================");
 
 		// check environment
-		// if (!checkEnvVars()) {
-		// 	PrintUtils.print("Environment not setup properly. Abort.",
-		// 			TAG.WARNING);
-		// 	System.exit(1);
-		// }
+		if (!checkEnvVars()) {
+			PrintUtils.print("Environment not setup properly. Abort.",
+					TAG.WARNING);
+			System.exit(1);
+		}
 
 		// help and info options
 		Options options1 = new Options();
@@ -199,7 +200,15 @@ public class Main {
 				config.setEnableIntersection(line.hasOption("intersection"));
 				config.setEnableJson(line.hasOption("savetojson"));
 
-				if (line.getOptionValue("engine").equals("hunker")) {
+				if (line.getOptionValue("engine").equals("slicer")) {
+					invokeSlicer(line, config);
+				} else if (line.getOptionValue("engine").equals("refiner")) {
+					invokeRefiner(line, config);
+				} else if (line.getOptionValue("engine").equals("delta")) {
+					invokePlainDD(line, config);
+				} else if (line.getOptionValue("engine").equals("srr")) {
+					invokeSRR(line, config);
+				} else if (line.getOptionValue("engine").equals("hunker")) {
 					invokeHunker(line, config);
 				} else if (line.getOptionValue("engine").equals("fact")) {
 					invokeFacts(line, config, FactFormat.TA);
@@ -234,6 +243,29 @@ public class Main {
 		}
 	}
 
+	private static void invokeSRR(CommandLine line,
+			ProjectConfiguration config) {
+		try {
+			SCHEME partitionScheme = SCHEME.COMBINED;
+			config.setEnableLearning(true);
+
+			RRefiner srr = new RRefiner(config);
+			List<RevCommit> res = srr.refineSlice(partitionScheme);
+
+			if (line.hasOption("test"))
+				srr.verifyOneMinimal(res);
+
+			srr.cleanUp();
+		} catch (RepositoryInvalidException | CommitNotFoundException
+				| BuildScriptInvalidException | CoverageControlIOException
+				| AmbiguousEndPointException | ProjectConfigInvalidException
+				| BranchNotFoundException | CoverageDataMissingException
+				| CheckoutBranchFailedException | ClassPathInvalidException
+				| CheckoutFileFailedException | IOException
+				| CompilationFailureException | TestFailureException e) {
+			e.printStackTrace();
+		}
+	}
 
     private static void invokeFacts(CommandLine line, ProjectConfiguration config, FactFormat factsFormat) {
 		try {
@@ -317,6 +349,114 @@ public class Main {
 	}
 
 
+	private static void invokePlainDD(CommandLine line,
+			ProjectConfiguration config) {
+		try {
+			DeltaDebugger debugger = new DeltaDebugger(config);
+			List<RevCommit> res = debugger.doSlicing(SCHEME.COMBINED);
+		} catch (IOException | RepositoryInvalidException
+				| CommitNotFoundException | BuildScriptInvalidException
+				| CoverageControlIOException | AmbiguousEndPointException
+				| ProjectConfigInvalidException | BranchNotFoundException
+				| CoverageDataMissingException
+				| CheckoutBranchFailedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void invokeSlicer(CommandLine line,
+			ProjectConfiguration config) {
+		try {
+			Slicer refactor = new Slicer(config);
+
+			if (line.hasOption("diff")) {
+				// show AST diff of a commit
+				refactor.showASTDiff(line.getOptionValue("diff"));
+			} else if (line.hasOption("test")) {
+				// verify slicing results loaded from file can be
+				// cherry-picked
+				refactor.verifyResultPicking(
+						refactor.loadSlicingResult().getPicks());
+			} else {
+				SlicingResult result = refactor.doSlicing();
+				// cache slicing result to file
+				refactor.saveSlicingResult();
+				// try shorten the slice
+				if (line.hasOption("short"))
+					refactor.shortenSlice(result);
+			}
+
+			refactor.cleanUp();
+
+		} catch (IOException e) {
+			PrintUtils.print("Project configuration file is missing!",
+					TAG.WARNING);
+			e.printStackTrace();
+			System.exit(3);
+		} catch (ProjectConfigInvalidException e) {
+			PrintUtils.print("Project configuration file is not valid!",
+					TAG.WARNING);
+			e.printStackTrace();
+			System.exit(4);
+		} catch (ClassNotFoundException | CommitNotFoundException
+				| BuildScriptInvalidException | CoverageDataMissingException
+				| CoverageControlIOException | RepositoryInvalidException
+				| AmbiguousEndPointException | BranchNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void invokeRefiner(CommandLine line,
+			ProjectConfiguration config) {
+		try {
+			SCHEME partitionScheme = SCHEME.COMBINED;
+
+			if (line.hasOption("learn")) {
+				String args = line.getOptionValue("learn");
+				List<String> argSet = Arrays.asList(args.split(","));
+
+				config.setEnableInvariant(true);
+				config.setEnableLearning(true);
+				config.setEnableInitRank(true);
+
+				if (argSet.contains("noinv"))
+					config.setEnableInvariant(false);
+				if (argSet.contains("nolearn"))
+					config.setEnableLearning(false);
+				if (argSet.contains("noinit"))
+					config.setEnableInitRank(false);
+				if (argSet.contains("nocomp"))
+					config.setEnableCompCheck(false);
+				if (argSet.contains("noprob"))
+					config.setEnableProbablistic(false);
+
+				if (argSet.contains("low3"))
+					partitionScheme = SCHEME.LOWER_3;
+				else if (argSet.contains("neg"))
+					partitionScheme = SCHEME.NEGATIVE;
+				else if (argSet.contains("nonpos"))
+					partitionScheme = SCHEME.NON_POSITIVE;
+
+			}
+
+			Refiner refiner = new Refiner(config);
+			List<RevCommit> res = refiner.refineSlice(partitionScheme);
+
+			if (line.hasOption("test"))
+				refiner.verifyOneMinimal(res);
+
+			refiner.cleanUp();
+
+		} catch (RepositoryInvalidException | CommitNotFoundException
+				| BuildScriptInvalidException | CoverageControlIOException
+				| AmbiguousEndPointException | ProjectConfigInvalidException
+				| BranchNotFoundException | CoverageDataMissingException
+				| CheckoutBranchFailedException | ClassPathInvalidException
+				| CheckoutFileFailedException | IOException
+				| CompilationFailureException | TestFailureException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static void displayVersionInfo() throws IOException {
 

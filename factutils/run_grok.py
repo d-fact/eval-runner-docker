@@ -13,7 +13,7 @@ from subprocess import run
 
 logger = logging.getLogger(__name__)
 
-EXEC_GROK_BASEDIR = "/tool/grok-v107/run_grok"
+EXEC_GROK_BASEDIR = "/data/grok-run"
 tmp_facts_dir = os.path.join(EXEC_GROK_BASEDIR, "tmp_facts_dir")
 grok_log_dir = os.path.join(EXEC_GROK_BASEDIR, "grok_logs")
 grok_result_dir = os.path.join(EXEC_GROK_BASEDIR, "grok_results")
@@ -46,7 +46,7 @@ def prepare_misc_dir(dir_list):
 def main():
     args = handle_args()
     prepare_tmp_dir()
-    prepare_misc_dir([grok_log_dir, grok_result_dir])
+    prepare_misc_dir([EXEC_GROK_BASEDIR, grok_log_dir, grok_result_dir])
     facts_dir = os.path.abspath(args.p)
     group_file = args.g
     output_file = args.o
