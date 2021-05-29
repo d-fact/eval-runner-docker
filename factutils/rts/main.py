@@ -1,50 +1,75 @@
 #!/usr/bin/env python3
-from typing import Dict, List, Set, Tuple
-from pathlib import Path
 import argparse
-import os
-import shutil
-import shlex
-import logging
-import re
+import configparser
 import csv
 import json
+import logging
+import os
+import re
+import shlex
+import shutil
 import subprocess
 from collections import namedtuple
-from hislicing.run_cslicer import collect_deps_diff_facts
-from run_grok import run_grok, prepare_misc_dir
-from rts import testinfo, extract_data
-from util import init_logging, ErrorCode, deprecation, restore_clean_repo
+from dataclasses import dataclass
+from pathlib import Path
 from pprint import pprint
+from typing import Dict, List, Set, Tuple, Union, Optional
+
+from hislicing.env_const import FactFmt
+from hislicing.run_cslicer import collect_deps_diff_facts
+from rts import testinfo, extract_data
+from run_grok import run_grok, prepare_misc_dir
+from util import init_logging, deprecation, restore_clean_repo
 
 logger = logging.getLogger(__name__)
 
 # BugInfo=namedtuple("BugInfo", bugid, rev_bug, rev_fix)
 RevPair = namedtuple("RevPair", ["rev_bug", "rev_fix"])
 
-BASE_PATH = Path("~/Projects/defects4j").expanduser()
-PROJECTS_DATA_PATH = BASE_PATH / "framework/projects"
-CONFIGS_PATH = Path("~/Projects/rts-exp/configs").expanduser()
-
-EXEC_GROK_BASEDIR = Path("~/.local/tmp/run_grok").expanduser()
-FACTS_PATH = EXEC_GROK_BASEDIR / "facts"
-GROK_LOG_DIR = Path(EXEC_GROK_BASEDIR) / "grok_logs"
-GROK_RESULT_DIR = Path(EXEC_GROK_BASEDIR) / "grok_results"
-
 mvn_test_output = re.compile(r"Tests run: (\d+), Failures: (\d+), Errors: (\d+), Skipped: (\d+)")
+
+
+@dataclass()
+class PathsCfg:
+    base_path: Path = Path("~/Projects").expanduser()
+    dfcts4j_path: Path = None
+    projects_data_path: Path = None
+    cslicer_properties: Path = None
+
+    exec_grok_base: Path = Path("~/.local/tmp/run_grok").expanduser()
+    facts_path: Path = None
+    grok_log_path: Path = None
+    grok_results_path: Path = None
+
+    def populate_others(self):
+        self.dfcts4j_path = self.base_path / "defects4j"
+        self.projects_data_path = self.dfcts4j_path / "framework/projects"
+        self.cslicer_properties = self.base_path / "rts-exp/configs"
+        self.facts_path = self.exec_grok_base / "dl-facts"
+        self.grok_log_path = self.exec_grok_base / "grok_logs"
+        self.grok_results_path = self.exec_grok_base / "grok_results"
+
+
+PATHS_CFG = PathsCfg()
 
 
 # FACTS_PATH = Path("~/Projects/rts-exp/facts").expanduser()
 
 
-def get_projects(debug: bool = True):
+def get_projects(debug: bool = True) -> Dict[str, Dict[str, Union[str, list]]]:
     if debug:
         return {
-            "Lang": {
-                "local_repo": "commons-lang",
-                "bug_id": [28]
+            "Math": {
+                "local_repo": "commons-math",
+                "bug_id": [6]
             }
         }
+        # return {
+        #     "Lang": {
+        #         "local_repo": "commons-lang",
+        #         "bug_id": [28]
+        #     }
+        # }
     else:
         return {
             "Lang": {
@@ -104,7 +129,7 @@ def get_trigger_tests_path(project_id: str, bid: int) -> Path:
     :param bid: e.g. 28 in bug Lang-28
     :return: the path to the file containing trigger test names and stack traces
     """
-    return PROJECTS_DATA_PATH / project_id / "trigger_tests" / str(bid)
+    return PATHS_CFG.projects_data_path / project_id / "trigger_tests" / str(bid)
 
 
 def get_relevant_tests(data_file: Path) -> List[str]:
@@ -120,7 +145,7 @@ def get_relevant_tests_path(project_id: str, bid: int) -> Path:
     :param bid: e.g. 28 in bug Lang-28
     :return: the path to the file containing relevant tests, one test on each line
     """
-    return PROJECTS_DATA_PATH / project_id / "relevant_tests" / str(bid)
+    return PATHS_CFG.projects_data_path / project_id / "relevant_tests" / str(bid)
 
 
 def verify_relevant_tests(projects: dict):
@@ -129,7 +154,7 @@ def verify_relevant_tests(projects: dict):
         for bid in v["bug_id"]:
             data_file = get_relevant_tests_path(p, bid)
             expected: set = set(get_relevant_tests(data_file))
-            actual: set = read_test_classes_from_grok_result(GROK_RESULT_DIR / f"{p}-{bid}.affected")
+            actual: set = read_test_classes_from_grok_result(PATHS_CFG.grok_results_path / f"{p}-{bid}.affected")
             logger.info(f"[{p}-{bid}] <- Verify relevant tests.")
             # print(f"Expected:\n{expected}")
             # print(f"Actual:\n{actual}")
@@ -155,7 +180,7 @@ def verify_trigger_testclass(projects: dict) -> Dict[str, Dict[str, Set]]:
             logger.info(f"=> START: verify trigger tests on bug [{pbid}]")
             data_file = get_trigger_tests_path(p, bid)
             expected: Set[str] = set([get_class_from_testname(x) for x in get_trigger_tests(data_file)])
-            actual: Set[str] = read_test_classes_from_grok_result(GROK_RESULT_DIR / f"{p}-{bid}.affected")
+            actual: Set[str] = read_test_classes_from_grok_result(PATHS_CFG.grok_results_path / f"{p}-{bid}.affected")
             unsafe: set = expected - actual
             results[pbid] = {"expected": expected, "actual": actual, "unsafe": unsafe}
             logger.info(f"[{pbid}] <- Check safety property of grok results.")
@@ -165,7 +190,7 @@ def verify_trigger_testclass(projects: dict) -> Dict[str, Dict[str, Set]]:
 
 
 def get_bugs_info(pid: str, bids: List[int]) -> Dict[int, RevPair]:
-    csv_data_file: Path = PROJECTS_DATA_PATH / pid / "active-bugs.csv"
+    csv_data_file: Path = PATHS_CFG.projects_data_path / pid / "active-bugs.csv"
     bugs: Dict[int, RevPair] = get_rev_id(csv_data_file, bids)
     return bugs
 
@@ -297,6 +322,8 @@ def simplify_class_name(fullname: str) -> str:
     for k, v in replace_dict.items():
         if fullname.startswith(k):
             return fullname.replace(k, v, 1)
+    logger.warning("Cannot simplify class name: {fullname}")
+    return fullname
 
 
 def simplify_class_name_more(fullname: str) -> str:
@@ -349,7 +376,7 @@ def write_num_test_method(bid_methodcount: Dict[str, int], out_file: Path):
     str_write_to_file += "\\textbf{Project ID}  & \\textbf{RetestAll} & \\textbf{Ekstazi} & \\textbf{Clover} " \
                          "& \\textbf{STARTS} & \\textbf{HyRTS} & \\textbf{Facts}  & \\textbf{worse than?} \\\\ \\midrule\n"
     for bid, count in bid_methodcount.items():
-        tool_nums: [int] = []
+        tool_nums: List[int] = []
         for t in extract_data.RTStool:
             bid_in_data = "".join(bid.split("-")).lower()
             num = extract_data.get_nums(existing_data, bid_in_data, t, extract_data.ToolResult.NumOfRunTests)
@@ -371,7 +398,8 @@ def calc_percent(bid_methodcount: Dict[str, int]):
         bid_in_data = "".join(bid.split("-")).lower()
         nums: Dict[str, int] = dict()
         for t in tool_set:
-            num = extract_data.get_nums(existing_data, bid_in_data, extract_data.RTStool[t], extract_data.ToolResult.NumOfRunTests)
+            num = extract_data.get_nums(existing_data, bid_in_data, extract_data.RTStool[t],
+                                        extract_data.ToolResult.NumOfRunTests)
             nums[t] = num
         for t in tool_set - {"notool"}:
             percentage[t][bid] = nums[t] / nums["notool"]
@@ -381,18 +409,18 @@ def calc_percent(bid_methodcount: Dict[str, int]):
     for t, d in percentage.items():
         # avg_per_project[t] = {
         proj = "Lang", "Math", "Time"
-        count: Dict[str, int] = {x: 0 for x in proj}
+        count_dict: Dict[str, int] = {x: 0 for x in proj}
         for p in proj:
             for bid, percent in d.items():
                 if bid.startswith(p):
-                    count[p] += 1
+                    count_dict[p] += 1
                     if p in avg_per_project[t]:
                         avg_per_project[t][p] += d[bid]
                     else:
                         avg_per_project[t][p] = d[bid]
-        pprint(count)
+        pprint(count_dict)
         for p in "Lang", "Math", "Time":
-            avg_per_project[t][p] /= count[p]
+            avg_per_project[t][p] /= count_dict[p]
     pprint(avg_per_project)
 
 
@@ -437,7 +465,7 @@ def generate_config_file(repo_path: Path, build_path: Path, rev_pair: RevPair, o
 
 
 def get_facts_subdir(name: str) -> Path:
-    return FACTS_PATH / name
+    return PATHS_CFG.facts_path / name
 
 
 def handle_special_dirstruct(repo_path: Path, pid: str, bid: int) -> Path:
@@ -448,7 +476,7 @@ def handle_special_dirstruct(repo_path: Path, pid: str, bid: int) -> Path:
 
 
 def get_repo_path(subdir: str) -> Path:
-    return BASE_PATH / "project_repos" / subdir
+    return PATHS_CFG.dfcts4j_path / "project_repos" / subdir
 
 
 def collect_facts(projects: dict, skip_exist: bool = False) -> None:
@@ -469,19 +497,19 @@ def collect_facts(projects: dict, skip_exist: bool = False) -> None:
                 logger.info(f"Skip collecting facts for {pbid}. (existing)")
                 continue
             logger.info(f"Start on pair {pbid}")
-            out_file = CONFIGS_PATH / f"{pbid}.properties"
+            out_file = PATHS_CFG.cslicer_properties / f"{pbid}.properties"
             restore_clean_repo(str(repo_path))
             # build buggy version
             build_repo(rev_pair.rev_fix, repo_path, build_path)
             # generate config file
             generate_config_file(repo_path, build_path, rev_pair, out_file)
             # run cslicer
-            collect_deps_diff_facts("/tmp/rts.log", out_file, None)
+            collect_deps_diff_facts("/tmp/rts.log", out_file, None, FactFmt.dl)
             move_facts(repo_path / ".facts", name=pbid)
 
 
 def batch_post_process_diff_facts():
-    for subdir in FACTS_PATH.iterdir():
+    for subdir in PATHS_CFG.facts_path.iterdir():
         if subdir.is_dir() and os.path.splitext(subdir)[1] != ".old":
             diff_file = subdir / "30-diff_tuple.ta"
             if not diff_file.exists():
@@ -494,6 +522,18 @@ def post_process_diff_facts(facts_path: Path):
     with facts_path.open("a") as ff:
         for x in {"Update", "Insert", "Delete"}:
             ff.write(f"{x} NONE NONE\n")
+
+
+def batch_run_souffle(projects: dict, dl_prog: Path, skip_exist: bool = False):
+    """
+    TO BE IMPLEMENTED.
+    Run souffle on facts in batch mode
+    :param projects: {project_name : path, bug_id_list}, see get_projects()
+    :param dl_prog: path to the grok query script
+    :param skip_exist: will check if subdir exist and skip existing facts
+    :return: None
+    """
+    pass
 
 
 def batch_run_grok(projects: dict, grok_script: Path, skip_exist: bool = False):
@@ -509,14 +549,14 @@ def batch_run_grok(projects: dict, grok_script: Path, skip_exist: bool = False):
             pbid: str = f"{p}-{bid}"
             subdir = get_facts_subdir(pbid)
             if subdir.is_dir():
-                grok_results_per_run = GROK_RESULT_DIR / pbid
-                grok_log_per_run = GROK_LOG_DIR / pbid
-                affected_file: Path = GROK_RESULT_DIR / f"{pbid}.affected"
+                grok_results_per_run = PATHS_CFG.grok_results_path / pbid
+                grok_log_per_run = PATHS_CFG.grok_results_path / pbid
+                affected_file: Path = PATHS_CFG.grok_results_path / f"{pbid}.affected"
                 if skip_exist and affected_file.exists():
                     logger.info(f"Skip running grok for {pbid}. (existing)")
                     continue
                 logger.info(f"Grok on {pbid}")
-                run_grok(grok_script, grok_results_per_run, subdir, grok_log_per_run)
+                run_grok(grok_script, grok_results_per_run, subdir, str(grok_log_per_run))
 
 
 def run_tests(rev, repo_path, build_path, classes: Set[str]) -> str:
@@ -572,7 +612,7 @@ def build_repo(rev, repo_path, build_path):
 def move_facts(facts_dir: Path, name: str):
     dst_dir: Path = get_facts_subdir(name)
     if os.path.isdir(dst_dir):
-        dst_dir_old = FACTS_PATH / f"{name}.old"
+        dst_dir_old = PATHS_CFG.facts_path / f"{name}.old"
         logger.warning(f"Renaming existing {dst_dir} before moving in "
                        f"newly-generated facts, existing .old directories "
                        f"will be overwritten")
@@ -599,7 +639,9 @@ def handle_args():
     """
     parser = argparse.ArgumentParser(description="Test selection on Defects4j")
     parser.add_argument("-l", metavar="LOG_LEVEL", type=str)
-    parser.add_argument("-f", action="store_true", help="Collect facts")
+    parser.add_argument("--alt-config", metavar="CFG_FILE",
+                        help="Override default paths using configuration in CFG_FILE")
+    parser.add_argument("-f", action="store_true", help="Collect facts for projects")
     parser.add_argument("--resume", action="store_true",
                         help="Resume process, according to the existence of files/dirs. Works with -f, -s")
     parser.add_argument("--ensure-all-change-types", action="store_true",
@@ -620,8 +662,25 @@ def handle_args():
     return args
 
 
+def handle_env(cfg_file: Optional[str]):
+    global PATHS_CFG
+    if not cfg_file:
+        logger.info("--alt-config not set, use default paths")
+    elif not os.path.isfile(cfg_file):
+        logger.error(f"path provided to --alt-config ({cfg_file}) is not a file")
+    else:
+        config = configparser.ConfigParser()
+        config.read(cfg_file)
+        if 'PATHS' in config:
+            for x in ["base_path", "exec_grok_base"]:
+                if x in config['PATHS']:
+                    setattr(PATHS_CFG, x, Path(config['PATHS'][x]))
+    PATHS_CFG.populate_others()
+
+
 def main():
     args = handle_args()
+    handle_env(args.alt_config)
     projects = get_projects(args.debug)
     if args.f:
         if args.resume:
@@ -631,7 +690,7 @@ def main():
     if args.ensure_all_change_types:
         batch_post_process_diff_facts()
     if args.s:
-        prepare_misc_dir([GROK_LOG_DIR, GROK_RESULT_DIR])
+        prepare_misc_dir([PATHS_CFG.grok_log_path, PATHS_CFG.grok_results_path])
         if args.resume:
             batch_run_grok(projects, Path(args.s), True)
         else:
