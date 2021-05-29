@@ -9,6 +9,7 @@ from hislicing.benchmark import Benchmark
 from typing import List
 import json
 from hislicing import env_const
+from hislicing.env_const import FactFmt
 
 logger = logging.getLogger(__name__)
 
@@ -242,11 +243,11 @@ def report_rev():
     logger.info(f"Currently @ {git_cmd.stdout.read().decode('utf-8')}")
 
 
-def collect_deps_diff_facts(collect_log: str, config_file, branch) -> float:
+def collect_deps_diff_facts(collect_log: str, config_file, branch, engine: FactFmt = FactFmt.fact) -> float:
     cslicer_start_time = time.time()
     # subprocess.run('git checkout ' + branch, shell=True)
     report_rev()
-    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", "fact", "-fuzzy", "-ext", "hunk", "dep", "diff"]
+    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", engine.name, "-fuzzy", "-ext", "hunk", "dep", "diff"]
     subprocess.run(args=cslicer_cmd, shell=False, stdout=open(collect_log, 'w'), stderr=subprocess.STDOUT, check=True)
     cslicer_time = time.time() - cslicer_start_time
     putTimeinLog(collect_log, cslicer_time, label="CSlicer_Only: ")

@@ -1,4 +1,5 @@
 import os
+from enum import Enum
 from pathlib import Path
 
 # SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))  # Dir of this script
@@ -46,3 +47,8 @@ Subjects = {
     "MNG##b7e3ce2##ea8b2b0": "MAVEN-2",
     "NET##d483631##abd6711": "NET",
 }
+
+
+class FactFmt(Enum):
+    fact = 1
+    dl = 2
