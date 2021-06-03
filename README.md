@@ -17,7 +17,7 @@ efficiency.
 #### Pre-requisites
 + Clone this repo `git clone https://github.com/d-fact/eval-runner-docker diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
-+ Docker-compose (tested with version 1.25.0)
++ docker-compose (tested with version 1.25.0)
 
 
 #### Directory Structure
@@ -76,12 +76,14 @@ slicing-driver`.
 
 Mountpoint of the volume can be checked using `docker volume inspect diffbase_datavol`. (If there is
 no such data volume, you can check the correct name of the data volume using `docker volume ls`.) 
-The path is `/var/lib/docker/volumes/facts-utils_datavol/_data` on my system.
+The path is `/var/lib/docker/volumes/diffbase_datavol/_data` on my system.
 
+Following directories (under data volume) contain output.
++ `resources/file-level/output/facts`: facts generated 
++ `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. 
 
 
 ### Evaluate Regression Test Selection
-
 
 ## Reusing Components
 Besides the replication of evaluation in the paper, all the components in the artifacts can be
@@ -93,7 +95,8 @@ There is a `Dockerfile` inside `gitslice` sub-directory.
 cd gitslice && docker build . -t java-ext-standalone
 docker run -it --rm -v /path/on/the/host:/data java-ext-standalone -c /data/project.properties -e fact -exp dep diff hunk
 ```
-Replace `/path/on/the/host` with the directory where a `project.properties` and a built binary exists.
+
+Replace `/path/on/the/host` with the directory where a `project.properties` and a repo exists.
 
 
 ### History Facts Extractor
