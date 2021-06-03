@@ -6,12 +6,19 @@ COPY . .
 RUN pip3 install .
 # build modified cslicer
 ENV M2_HOME=/usr/share/maven
+WORKDIR /tool/gitslice
 RUN mvn -f /tool/gitslice/pom.xml package -DskipTests
 # copy data
 COPY data /data
 # build jgrok
 WORKDIR /tool/grok-v107
 RUN /bin/bash c.sh
+
+# get RTS repos
+WORKDIR /data
+RUN git clone https://github.com/rjust/defects4j.git
+WORKDIR /data/defects4j/project_repos
+RUN ./get_repos.sh
 
 WORKDIR /tool/factutils
 # RUN python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
