@@ -8,8 +8,8 @@ from pprint import pprint
 from hislicing import prepare
 from hislicing import run_cslicer
 from hislicing.benchmark import load_project_names, load_groups
-from hislicing.find_diff import read_commits_from_cslicer_log
 from hislicing.env_const import CSLICER_STANDALONE_OUTPUT_DIR
+from hislicing.find_diff import read_commits_from_cslicer_log
 from util import init_logging
 
 logger = logging.getLogger(__name__)
@@ -40,7 +40,7 @@ def main():
         root, _, f = next(os.walk(CSLICER_STANDALONE_OUTPUT_DIR))
         results = list(map(lambda x: read_commits_from_cslicer_log(os.path.join(root, x)),
                            filter(lambda y: y.endswith(".log"), f)))
-        #for i in results:
+        # for i in results:
         #    pprint(i.slicing_result())
         #    pprint(i.DROP)
 

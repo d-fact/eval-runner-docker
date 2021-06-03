@@ -1,15 +1,16 @@
-import os
+import json
 import logging
-import time
+import os
 import shutil
 import subprocess
-from util import ErrorCode, check_dir, restore_clean_repo
-from hislicing.slicing_util import search_file, extractInfoFromCSlicerConfigs
-from hislicing.benchmark import Benchmark
+import time
 from typing import List
-import json
+
 from hislicing import env_const
+from hislicing.benchmark import Benchmark
 from hislicing.env_const import FactFmt
+from hislicing.slicing_util import search_file, extractInfoFromCSlicerConfigs
+from util import ErrorCode, check_dir, restore_clean_repo
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +33,8 @@ def move_facts(facts_dir: str, name: str):
     dst_dir = os.path.join(env_const.FACTS_RESULTS_DIR, name)
     if os.path.isdir(dst_dir):
         dst_dir_old = os.path.join(env_const.FACTS_RESULTS_DIR, name + ".old")
-        logger.warning(f"Renaming existing {dst_dir} before moving in newly-generated facts, existing .old directories will be overwritten")
+        logger.warning(
+            f"Renaming existing {dst_dir} before moving in newly-generated facts, existing .old directories will be overwritten")
         if os.path.isdir(dst_dir_old):
             shutil.rmtree(dst_dir_old)
         shutil.move(dst_dir, dst_dir_old)
@@ -247,7 +249,10 @@ def collect_deps_diff_facts(collect_log: str, config_file, branch, engine: FactF
     cslicer_start_time = time.time()
     # subprocess.run('git checkout ' + branch, shell=True)
     report_rev()
-    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", engine.name, "-fuzzy", "-ext", "hunk", "dep", "diff"]
+    # cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", "fact", "-fuzzy",
+    #                "-ext", "hunk", "dep", "diff"]
+    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", engine.name, "-ver",
+                   "-ext", "hunk", "dep", "diff"]
     subprocess.run(args=cslicer_cmd, shell=False, stdout=open(collect_log, 'w'), stderr=subprocess.STDOUT, check=True)
     cslicer_time = time.time() - cslicer_start_time
     putTimeinLog(collect_log, cslicer_time, label="CSlicer_Only: ")
@@ -258,7 +263,8 @@ def collect_cov_facts(collect_log: str, config_file, branch) -> float:
     cslicer_start_time = time.time()
     # subprocess.run('git checkout ' + branch, shell=True)
     report_rev()
-    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", "fact", "-fuzzy", "-ext=cov"]
+    cslicer_cmd = ["java", "-jar", env_const.CSLICER_JAR_PATH, "-c", config_file, "-p", "-e", "fact", "-fuzzy",
+                   "-ext=cov"]
     subprocess.run(cslicer_cmd, shell=False, stdout=open(collect_log, 'w'), stderr=subprocess.STDOUT)
     cslicer_time = time.time() - cslicer_start_time
     putTimeinLog(collect_log, cslicer_time, label="CSlicer_Only: ")

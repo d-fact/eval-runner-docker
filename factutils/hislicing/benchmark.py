@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 import argparse
+import json
+import logging
 import os
 from collections import namedtuple
 from pathlib import Path
-
-from util import ErrorCode, init_logging
-from hislicing.slicing_util import Cfg
 from pprint import pprint
-import logging
-import json
+
+from hislicing.slicing_util import Cfg
+from util import ErrorCode, init_logging
 
 logger = logging.getLogger(__name__)
 

@@ -18,22 +18,22 @@ efficiency.
 #### Directory Structure
 ```
 .
-├── 📦 Dockerfile
-├── 📦 docker-compose.yml
-├── 📂 data
-├── 📂 factutils
-│  ├── 📂 hislicing
-│  ├── 📂 rts
-│  ├── 📜 run_grok.py
-│  └── 📜 util.py
-├── 📂 gitslice/
-│  ├── 📦 Dockerfile
-│  ├── 📜 pom.xml
-│  ├── 📂 src
-│  └── 📜 util.py
-├── 📂 grok-v107
-├── 📂 grok_scripts
-├── 📜 grokRun
+├──📦 Dockerfile
+├──📦 docker-compose.yml
+├──📂 data
+├──📂 factutils
+│  ├──📂 hislicing
+│  ├──📂 rts
+│  ├──📜 run_grok.py
+│  └──📜 util.py
+├──📂 gitslice/
+│  ├──📦 Dockerfile
+│  ├──📜 pom.xml
+│  ├──📂 src
+│  └──📜 util.py
+├──📂 grok-v107
+├──📂 grok_scripts
+└──📜 grokRun
 ```
 
 There are multiple Dockerfiles inside this repo, for replicating the evaluations in the paper and
@@ -54,7 +54,7 @@ evaluation.
 docker-compose build -f docker-compose.yml
 ```
 
-If successfully built, there would be two images built -- *slicing-driver* and *rts-dirver*. (They
+If successfully built, there would be two images built --- *slicing-driver* and *rts-dirver*. (They
 should be shown in the image list if issuing `docker image ls` on cmdline, and their names are
 usually prefixed by the folder name.)
 
