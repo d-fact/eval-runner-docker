@@ -26,4 +26,3 @@ WORKDIR /tool/factutils
 # CMD [ "python3", "-m" , "hislicing.main", "--cslicer", "/data/json/name_one.json" ]
 # CMD [ "python3", "-m" , "hislicing.main", "--fact", "/data/json/group_one.json" ]
 # ENTRYPOINT [ "python3", "-m" ]
-ENTRYPOINT "/bin/bash"

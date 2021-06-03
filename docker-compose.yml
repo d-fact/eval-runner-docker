@@ -5,12 +5,20 @@ services:
       - PYTHONUNBUFFERED=1
     build: .
     container_name: facts-slicing
+    # entrypoint: /bin/bash
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -t
     volumes:
       - datavol:/data
     # command: hislicing.main --prepare /data/json/name_eval.json -l info
     # command: hislicing.main --cslicer /data/json/name_one.json -l info
     # command: hislicing.main --fact /data/json/group_one.json -l info
     # command: run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+    command: bash -c "
+      python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
+      && python3 -m hislicing.main --fact /data/json/group_one.json -l info
+      && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+      "
   rts-driver:
     environment:
       - PYTHONUNBUFFERED=1
