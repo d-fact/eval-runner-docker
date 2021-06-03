@@ -1,4 +1,9 @@
+🚧 **Work In Progress**
+
+--- 
+
 # DiffBase
+
 
 **DiffBase** is a framework for extracting, storing and supporting efficient querying and
 manipulation of differential facts, a uniform exchangeable representation of information extracted
@@ -10,7 +15,7 @@ efficiency.
 
 
 #### Pre-requisites
-+ Clone this repo.
++ Clone this repo `git clone https://github.com/d-fact/eval-runner-docker diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
 + Docker-compose (tested with version 1.25.0)
 
@@ -54,15 +59,28 @@ evaluation.
 docker-compose build -f docker-compose.yml
 ```
 
-If successfully built, there would be two images built --- *slicing-driver* and *rts-dirver*. (They
-should be shown in the image list if issuing `docker image ls` on cmdline, and their names are
-usually prefixed by the folder name.)
+If successfully built, there would be two images built --- *diffbase_slicing-driver* and
+*diffbase_rts-dirver*. (They should be shown in the image list if issuing `docker image ls` on
+cmdline, and their names are usually prefixed by the folder name. So you did not clone the repo as
+`diffbase`, the image names can be different.)
 
 ### Evaluate Semantic Hisotry Slicing
+```sh
+docker-compose up slicing-driver
+```
 
+#### Inspect results
+Outputs and intermediate data are in the data volume created during `docker-compose up
+slicing-driver`.
 
-### Inspect results
-Outputs and intermediate data are in the data volume created during `docker-compose up`.
+Mountpoint of the volume can be checked using `docker volume inspect diffbase_datavol`. (If there is
+no such data volume, you can check the correct name of the data volume using `docker volume ls`.) 
+The path is `/var/lib/docker/volumes/facts-utils_datavol/_data` on my system.
+
+You can also 
+
+### Evaluate 
+
 
 ## Reusing Components
 Besides the replication of evaluation in the paper, all the components in the artifacts can be
