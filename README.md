@@ -61,7 +61,7 @@ docker-compose build -f docker-compose.yml
 ```
 
 If successfully built, there would be two images built --- *diffbase_slicing-driver* and
-*diffbase_rts-dirver*. (They should be shown in the image list if issuing `docker image ls` on
+*diffbase_rts-driver*. (They should be shown in the image list if issuing `docker image ls` on
 cmdline, and their names are usually prefixed by the folder name. So you did not clone the repo as
 `diffbase`, the image names can be different.)
 
@@ -81,7 +81,6 @@ The path is `/var/lib/docker/volumes/diffbase_datavol/_data` on my system.
 Following directories (under data volume) contain output.
 + `resources/file-level/output/facts`: facts generated 
 + `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. 
-
 
 ### Evaluate Regression Test Selection
 
