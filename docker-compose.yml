@@ -17,7 +17,7 @@ services:
     command: bash -c "
       python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
       && python3 -m hislicing.main --fact /data/json/group_one.json -l info
-      && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+      && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
       "
   rts-driver:
     environment:
@@ -26,10 +26,6 @@ services:
     container_name: facts-rts
     volumes:
       - datavol:/data
-    # command: hislicing.main --prepare /data/json/name_eval.json -l info
-    # command: hislicing.main --cslicer /data/json/name_one.json -l info
-    # command: hislicing.main --fact /data/json/group_one.json -l info
-    # command: run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
-    command: rts.main --fact /data/json/group_one.json -l info --alt-config rts/config/docker.cfg
+    command: python3 -m rts.main --fact /data/json/group_one.json -l info --alt-config rts/config/docker.cfg
 volumes:
   datavol: {}
