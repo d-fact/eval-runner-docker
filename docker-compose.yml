@@ -17,7 +17,7 @@ services:
     command: bash -c "
       python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
       && python3 -m hislicing.main --fact /data/json/group_one.json -l info
-      && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+      && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
       "
   rts-driver:
     environment:

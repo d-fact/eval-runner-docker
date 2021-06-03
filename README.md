@@ -77,9 +77,9 @@ Mountpoint of the volume can be checked using `docker volume inspect diffbase_da
 no such data volume, you can check the correct name of the data volume using `docker volume ls`.) 
 The path is `/var/lib/docker/volumes/facts-utils_datavol/_data` on my system.
 
-You can also 
 
-### Evaluate 
+
+### Evaluate Regression Test Selection
 
 
 ## Reusing Components

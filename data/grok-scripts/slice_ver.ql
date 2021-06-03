@@ -59,12 +59,12 @@ print included_del_need_insert
 
 print func_and_comp >>> all
 print included_del_need_insert >>> all
-print (func_and_comp + included_del_need_insert) >> test_and_comp_file;
+// print (func_and_comp + included_del_need_insert) >> test_and_comp_file;
 
 hunk_cmt = (func_and_comp + included_del_need_insert) . (HunkDep+);
 print "Size of hunk set: " #hunk_cmt
 // print "// Hunk Set" >>> all 
 print hunk_cmt >>> all
-print hunk_cmt >>> hunk_file
+// print hunk_cmt >>> hunk_file
 
 print "Finished"

@@ -1,0 +1,69 @@
+#+title: GitFacts
+#+author: wuxh
+
+GitFacts is a fact extractor, walking the git history graph and output textual representations in Tuple-Attribute or Datalog format.
+
+** Usage
+#+begin_src
+% cargo build --release
+% target/release/gitfacts -h
+Git History Facts Generator 0.1.0
+
+USAGE:
+    gitfacts [OPTIONS] <INPUT>
+
+ARGS:
+    <INPUT>    Path to the repo
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -f <OutFormat>          Specify format of output facts, ta/dl, default to dl
+    -o <Output>             Specify output filename, default to history.facts
+    -r <RevRange>...        Specify commit ranges
+
+% target/release/gitfacts ~/path/to/some-git-repo -f ta
+#+end_src
+
+You can also specify multiple revision ranges on the command line.
+** Tuple-Attribute format
+   + Space-separated entry: Ancestral child parent.
+
+   A segement of history and generated facts are shown below as an example.
+#+begin_src
++  c0a13d8 (merge f3db117 into 4f7a988)
+|\
+| +  f3db117 (merge 4f7a988 into c219cf1)
+| |\
+| |/
+|/|
++ |  4f7a988
+| +  c219cf1
+|/
++  831fcb0
+#+end_src
+
+#+begin_src
+Ancestral c0a13d8cc528a449967e83b7d0f4043787597e81 4f7a988d5132e9f446bd9c46a58998761be751b9
+Ancestral c0a13d8cc528a449967e83b7d0f4043787597e81 f3db11791569ea3e4fd741a2ee243e02561d1008
+Ancestral f3db11791569ea3e4fd741a2ee243e02561d1008 c219cf1c7146d6290df203c325e8349e8c866d45
+Ancestral f3db11791569ea3e4fd741a2ee243e02561d1008 4f7a988d5132e9f446bd9c46a58998761be751b9
+Ancestral 4f7a988d5132e9f446bd9c46a58998761be751b9 831fcb06722f0fe3022b9fe357e668ad248c46c7
+Ancestral c219cf1c7146d6290df203c325e8349e8c866d45 831fcb06722f0fe3022b9fe357e668ad248c46c7
+#+end_src
+
+** Datalog facts format
+   + TAB-separated entry: child parent parent-index.
+   + Parent index starts from 0.
+
+   Generated Datalog facts of the same segment of history are shown below as an example.
+#+begin_src
+c0a13d8cc528a449967e83b7d0f4043787597e81    4f7a988d5132e9f446bd9c46a58998761be751b9    0
+c0a13d8cc528a449967e83b7d0f4043787597e81    f3db11791569ea3e4fd741a2ee243e02561d1008    1
+f3db11791569ea3e4fd741a2ee243e02561d1008    c219cf1c7146d6290df203c325e8349e8c866d45    0
+f3db11791569ea3e4fd741a2ee243e02561d1008    4f7a988d5132e9f446bd9c46a58998761be751b9    1
+4f7a988d5132e9f446bd9c46a58998761be751b9    831fcb06722f0fe3022b9fe357e668ad248c46c7    0
+c219cf1c7146d6290df203c325e8349e8c866d45    831fcb06722f0fe3022b9fe357e668ad248c46c7    0
+#+end_src
