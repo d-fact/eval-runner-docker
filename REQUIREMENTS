@@ -1,0 +1,4 @@
+Software Environments:
++ GNU/Linux
++ Docker (tested with version 20.10.5, recent version should also work)
++ docker-compose (tested with version 1.25.0)
