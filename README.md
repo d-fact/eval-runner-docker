@@ -82,8 +82,10 @@ Following directories (under data volume) contain output.
 + `resources/file-level/output/facts`: facts generated 
 + `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. 
 
-To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate the evaluation on all subjects, please replace `group_one.json` in `docker-compose.yml`
-with `group_eval.json`.
+To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
+the evaluation on all subjects, please replace `group_one.json` with `group_eval.json` on line 20 of
+`docker-compose.yml`.
+
 ### Evaluate Regression Test Selection
 
 
