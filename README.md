@@ -31,11 +31,12 @@ efficiency.
 │  ├──📂 rts
 │  ├──📜 run_grok.py
 │  └──📜 util.py
-├──📂 gitslice/
+├──📂 gitslice
 │  ├──📦 Dockerfile
 │  ├──📜 pom.xml
 │  ├──📂 src
 │  └──📜 util.py
+├──📂 ext-gitfacts
 ├──📂 grok-v107
 ├──📂 grok_scripts
 └──📜 grokRun
@@ -94,3 +95,6 @@ docker run -it --rm -v /path/on/the/host:/data java-ext-standalone -c /data/proj
 ```
 Replace `/path/on/the/host` with the directory where a `project.properties` and a built binary exists.
 
+
+### History Facts Extractor
+Check [ext-gitfacts](ext-gitfacts) for details.
