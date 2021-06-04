@@ -62,6 +62,14 @@ def get_projects(debug: bool = True) -> Dict[str, Dict[str, Union[str, list]]]:
             "Math": {
                 "local_repo": "commons-math",
                 "bug_id": [6]
+            },
+            "Lang": {
+                "local_repo": "commons-lang",
+                "bug_id": [28]
+            },
+            "Time": {
+                "local_repo": "joda-time",
+                "bug_id": [1]
             }
         }
         # return {

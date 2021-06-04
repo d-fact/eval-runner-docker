@@ -34,16 +34,18 @@ efficiency.
 ├──📂 grok-v107
 ├──📂 grok_scripts
 └──📜 grokRun
+└──📜 diffbase.pdf
 ```
 
 There are multiple Dockerfiles inside this repo, for replicating the evaluations in the paper and
 showing the reusability of components.
 
-| Directories  | Descriptions                                      |
+| Files/Dirs   | Descriptions                                      |
 |--------------|---------------------------------------------------|
 | gitslice     | Core fact extractors implemented based on CSlicer |
 | ext-gitfacts | Git history facts extractor                       |
 | factutils    | Scripts for running software evolution tasks      |
+| diffbase.pdf | Copy of the accepted paper                        |
 
 
 #### Pre-requisites
@@ -106,7 +108,7 @@ contain output.
 
 #### Generated Facts
 `resources/file-level/output/facts` is the directory for facts generated.
-   E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are following files.
+E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are following files.
 ```sh
 ├── 20-deps.ta
 ├── 25-inherit.ta
@@ -164,6 +166,10 @@ facts-rts exited with code 0
 #### Inspect results
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
+
+
+Similarly, the provided docker-s
+
 
 ---
 

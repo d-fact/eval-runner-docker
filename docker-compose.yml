@@ -28,9 +28,10 @@ services:
       - datavol:/data
     command: bash -c "
       tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
-      && python3 -m rts.main --debug -l info -f --ensure-all-change-types --alt-config rts/config/docker.cfg
-      && python3 -m rts.main --debug -l INFO -s /data/grok-scripts/rts5-imprecise.ql --alt-config rts/config/docker.cfg
-      && python3 -m rts.main --debug -l INFO -v --alt-config rts/config/docker.cfg
+      && python3 -m rts.main --debug -l info --alt-config rts/config/docker.cfg -f --ensure-all-change-types
+      && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg -s /data/grok-scripts/rts5-imprecise.ql
+      && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg -v --count-method-json /data/rts-exp/results.json
+      && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg --percent /data/rts-exp/results.json
       "
 volumes:
   datavol: {}
