@@ -88,7 +88,7 @@ diffbase_slicing-driver    latest   <some hash>
 docker-compose up slicing-driver
 ```
 
-This takes about three minutes (on my machine).
+This takes about three minutes (on my machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
 
 #### Inspect results in data volume
 Outputs and intermediate data are in the data volume created during `docker-compose up
