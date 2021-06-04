@@ -1,4 +1,5 @@
 Contents under `gitslice/cslicer-deps` are third party libraries, released in open source licenses.
-Contents under `grok-v107` are from `https://www.swag.uwaterloo.ca/jgrok/`.
+Contents under `grok-v107` are from https://www.swag.uwaterloo.ca/jgrok/ .
+Contents under `data/defects4j` are inputs for evaluation, which comes from defects4j dataset (https://github.com/rjust/defects4j).
 
 All other code are released under Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).

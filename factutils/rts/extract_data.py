@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from typing import TypedDict, Tuple, Dict
+from typing import Dict
 from enum import Enum
 from pathlib import Path
 import re

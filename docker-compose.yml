@@ -26,6 +26,6 @@ services:
     container_name: facts-rts
     volumes:
       - datavol:/data
-    command: python3 -m rts.main --fact /data/json/group_one.json -l info --alt-config rts/config/docker.cfg
+    command: python3 -m rts.main --debug -l info -f --alt-config rts/config/docker.cfg
 volumes:
   datavol: {}

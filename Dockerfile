@@ -14,11 +14,12 @@ COPY data /data
 WORKDIR /tool/grok-v107
 RUN /bin/bash c.sh
 
-# get RTS repos
-WORKDIR /data
-RUN git clone https://github.com/rjust/defects4j.git
-WORKDIR /data/defects4j/project_repos
+# WORKDIR /data
+# RUN git clone https://github.com/rjust/defects4j.git
 # RUN ./get_repos.sh
+
+# extract RTS repos
+WORKDIR /data/defects4j/project_repos
 RUN tar xf /data/rts-repos/defects4j-repos.tar.xz
 
 WORKDIR /tool/factutils
