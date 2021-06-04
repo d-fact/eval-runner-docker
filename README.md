@@ -15,7 +15,7 @@ efficiency.
 
 
 #### Pre-requisites
-+ Clone this repo `git clone https://github.com/d-fact/eval-runner-docker diffbase`
++ Clone this repo `git clone --depth https://github.com/d-fact/eval-runner-docker diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
 + docker-compose (tested with version 1.25.0)
 
@@ -51,6 +51,8 @@ showing the reusability of components.
 | ext-gitfacts | Git history facts extractor                       |
 | factutils    | Scripts for running software evolution tasks      |
 
+
+## 
 ## Evaluation Replication
 Assuming `docker` and `docker-compose` is installed properly and current working directory is at the
 root path of the cloned repo, we can run the following command to build the image for evaluation.
@@ -100,7 +102,7 @@ The data volume contains following subdirs.
 After `docker-compose up` finished and exited, following directories (under data volume) should
 contain output.
 + `resources/file-level/output/facts`: facts generated 
-+ `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. 
++ `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. E.g., `_data/grok_run/grok_results/`
 
 
 To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate

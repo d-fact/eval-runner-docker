@@ -20,7 +20,7 @@ RUN /bin/bash c.sh
 
 # extract RTS repos
 WORKDIR /data/defects4j/project_repos
-RUN tar xf /data/rts-repos/defects4j-repos.tar.xz
+RUN tar xf /data/rts-repos/rts-repos.tar.xz
 
 WORKDIR /tool/factutils
 # RUN python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
