@@ -40,12 +40,14 @@ efficiency.
 There are multiple Dockerfiles inside this repo, for replicating the evaluations in the paper and
 showing the reusability of components.
 
-| Files/Dirs   | Descriptions                                      |
-|--------------|---------------------------------------------------|
-| gitslice     | Core fact extractors implemented based on CSlicer |
-| ext-gitfacts | Git history facts extractor                       |
-| factutils    | Scripts for running software evolution tasks      |
-| diffbase.pdf | Copy of the accepted paper                        |
+| Files/Dirs       | Descriptions                                           |
+|------------------|--------------------------------------------------------|
+| gitslice         | Core fact extractors implemented based on CSlicer      |
+| ext-gitfacts     | Git history facts extractor                            |
+| factutils        | Scripts for running software evolution tasks           |
+| diffbase.pdf     | Copy of the accepted paper                             |
+| quick-slicing.sh | Script for building dockers and run slicing evaluation |
+| quick-rts.sh     | Script for building dockers and run RTS evaluation     |
 
 
 #### Pre-requisites
@@ -57,7 +59,9 @@ showing the reusability of components.
 
 
 ## Scripts for Quick Start
-We provide bash scripts for executing all steps below.
+We provide quick scripts for building and running dockers, you can use `quick-slicing.sh` and `quick-rts.sh`.
+
+You can also check the following section for detailed step-by-step explanations.
 
 ## Evaluation Replication
 Assuming `docker` and `docker-compose` is installed properly and current working directory is at the
