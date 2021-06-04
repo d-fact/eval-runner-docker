@@ -51,7 +51,9 @@ showing the reusability of components.
 #### Pre-requisites
 + Clone this repo `git clone --depth 1 https://github.com/d-fact/eval-runner-docker diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
+  - Official Docker Installation Guide at https://docs.docker.com/get-docker/ 
 + docker-compose (tested with version 1.25.0)
+  - Installation Guide at https://docs.docker.com/compose/install/
 
 
 ## Scripts for Quick Start
@@ -132,9 +134,22 @@ They should be same with results in `data/slicing-results` in this repo.
 E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
 
 To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
-the evaluation on all subjects, please replace `group_one.json` with `group_eval.json` on line 20 of
-`docker-compose.yml`.
+the evaluation on all subjects, please uncomment the command in `docker-compose.yml` and comment out the current one as shown below.
 
+```yml
+ command: bash -c "
+   python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
+   && python3 -m hislicing.main --fact /data/json/group_eval.json -l info
+   && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+   "
+# command: bash -c "
+# 	python3 -m hislicing.main --prepare /data/json/name_one.json -l info
+# 	&& python3 -m hislicing.main --fact /data/json/group_one.json -l info
+# 	&& python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+# 	"
+```
+	
+	
 ### Evaluate Regression Test Selection
 ```sh
 docker-compose up rts-driver
@@ -144,31 +159,40 @@ The following are expected output:
 ```
 Recreating facts-rts ... done
 Attaching to facts-rts
-facts-rts  | [11:07:09] [    INFO] Start work on project Math
-facts-rts  | [11:07:09] [    INFO] Start on pair Math-6
-facts-rts  | [11:07:09] [    INFO] remove old repo "/data/defects4j/project_repos/commons-math"
-facts-rts  | [11:07:09] [    INFO] mvn test-compile
-facts-rts  | [11:08:16] [    INFO] Currently @ 74bceaaee35ab5570296bd0de28605766d8e0233
-facts-rts  |
-facts-rts  | [11:08:36] [ WARNING] Renaming existing /data/run_grok/dl-facts/Math-6 before moving in newly-generated facts, existing .old directories will be overwritten
-facts-rts  | [11:08:36] [    INFO] Grok on Math-6
-facts-rts  | [6-04T11:08:36+0000, 0] Temp .ql file will be in  /data/grok-scripts/rts5-imprecise.ql.Q6Rfxy548H70
-facts-rts  | [6-04T11:08:36+0000, 0] Finished inserting getta()
-facts-rts  | [6-04T11:09:57+0000, 81] Finished.
-facts-rts  | [11:09:57] [    INFO] START: verify trigger tests on project [Math]
-facts-rts  | [11:09:57] [    INFO] => START: verify trigger tests on bug [Math-6]
-facts-rts  | [11:09:57] [    INFO] Read trigger tests from /data/defects4j/framework/projects/Math/trigger_tests/6
-facts-rts  | [11:09:57] [    INFO] Read grok output from /data/run_grok/grok_results/Math-6.affected
-facts-rts  | [11:09:57] [    INFO] [Math-6] <- Check safety property of grok results.
+facts-rts | [    INFO] Start work on project Lang
+facts-rts | [    INFO] Start on pair Lang-28
+facts-rts | [    INFO] mvn test-compile
+facts-rts | [    INFO] Currently @ 562c1b83fca4e23c3c855596420bc2ae8490e0e7
+facts-rts | [    INFO] Grok on Lang-28
+facts-rts | Temp .ql file will be in  /data/grok-scripts/rts5-imprecise.ql.mKmFQj0puYf8
+facts-rts | Finished inserting getta()
+facts-rts | Finished.
+facts-rts | [    INFO] START: verify trigger tests on project [Lang]
+facts-rts | [    INFO] => START: verify trigger tests on bug [Lang-28]
+facts-rts | [    INFO] Read trigger tests from /data/defects4j/framework/projects/Lang/trigger_tests/28
+facts-rts | [    INFO] Read grok output from /data/run_grok/grok_results/Lang-28.affected
+facts-rts | [    INFO] [Lang-28] <- Check safety property of grok results.
+facts-rts | [    INFO] [Lang-28] <- Count test methods of affected test classes.
+facts-rts | [    INFO] [Lang-28] <- 2 affected classes
+facts-rts | [    INFO] {'Lang-28': 20}
+facts-rts | [    INFO] Read existing data in /tool/factutils/rts/rts_data/defects4j-numbers.tex
+facts-rts | {'clover': {'Lang': 0.011841326228537596},
+facts-rts |  'ekstazi': {'Lang': 0.011841326228537596},
+facts-rts |  'fact': {'Lang': 0.011841326228537596},
+facts-rts |  'starts': {'Lang': 0.011841326228537596}}
 facts-rts exited with code 0
 ```
+
+The last JSON is the percentage of testing methods selected by each tool.
+They are the same in the example output since we only run one subject here.
+
+To run all examples, 
+
 
 #### Inspect results
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
 
-
-Similarly, the provided docker-s
 
 
 ---

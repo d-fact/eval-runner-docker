@@ -59,17 +59,9 @@ PATHS_CFG = PathsCfg()
 def get_projects(debug: bool = True) -> Dict[str, Dict[str, Union[str, list]]]:
     if debug:
         return {
-            "Math": {
-                "local_repo": "commons-math",
-                "bug_id": [6]
-            },
             "Lang": {
                 "local_repo": "commons-lang",
                 "bug_id": [28]
-            },
-            "Time": {
-                "local_repo": "joda-time",
-                "bug_id": [1]
             }
         }
         # return {
@@ -428,6 +420,9 @@ def calc_percent(bid_methodcount: Dict[str, int]):
                         avg_per_project[t][p] = d[bid]
         pprint(count_dict)
         for p in "Lang", "Math", "Time":
+            if p not in avg_per_project[t]:
+                logger.info(f"{p}: data not available in current run, skip")
+                continue
             avg_per_project[t][p] /= count_dict[p]
     pprint(avg_per_project)
 
