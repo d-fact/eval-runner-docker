@@ -504,7 +504,7 @@ def collect_facts(projects: dict, skip_exist: bool = False) -> None:
             # generate config file
             generate_config_file(repo_path, build_path, rev_pair, out_file)
             # run cslicer
-            collect_deps_diff_facts("/tmp/rts.log", out_file, None, FactFmt.dl)
+            collect_deps_diff_facts("/tmp/rts.log", out_file, None, FactFmt.fact)
             move_facts(repo_path / ".facts", name=pbid)
 
 

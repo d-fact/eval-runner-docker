@@ -14,7 +14,6 @@ We implement multiple software evolution management tasks with our tools to prov
 efficiency.
 
 
-
 #### Directory Structure
 ```
 .
@@ -139,6 +138,29 @@ the evaluation on all subjects, please replace `group_one.json` with `group_eval
 docker-compose up rts-driver
 ```
 
+The following are expected output:
+```
+Recreating facts-rts ... done
+Attaching to facts-rts
+facts-rts  | [11:07:09] [    INFO] Start work on project Math
+facts-rts  | [11:07:09] [    INFO] Start on pair Math-6
+facts-rts  | [11:07:09] [    INFO] remove old repo "/data/defects4j/project_repos/commons-math"
+facts-rts  | [11:07:09] [    INFO] mvn test-compile
+facts-rts  | [11:08:16] [    INFO] Currently @ 74bceaaee35ab5570296bd0de28605766d8e0233
+facts-rts  |
+facts-rts  | [11:08:36] [ WARNING] Renaming existing /data/run_grok/dl-facts/Math-6 before moving in newly-generated facts, existing .old directories will be overwritten
+facts-rts  | [11:08:36] [    INFO] Grok on Math-6
+facts-rts  | [6-04T11:08:36+0000, 0] Temp .ql file will be in  /data/grok-scripts/rts5-imprecise.ql.Q6Rfxy548H70
+facts-rts  | [6-04T11:08:36+0000, 0] Finished inserting getta()
+facts-rts  | [6-04T11:09:57+0000, 81] Finished.
+facts-rts  | [11:09:57] [    INFO] START: verify trigger tests on project [Math]
+facts-rts  | [11:09:57] [    INFO] => START: verify trigger tests on bug [Math-6]
+facts-rts  | [11:09:57] [    INFO] Read trigger tests from /data/defects4j/framework/projects/Math/trigger_tests/6
+facts-rts  | [11:09:57] [    INFO] Read grok output from /data/run_grok/grok_results/Math-6.affected
+facts-rts  | [11:09:57] [    INFO] [Math-6] <- Check safety property of grok results.
+facts-rts exited with code 0
+```
+
 #### Inspect results
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
@@ -192,7 +214,6 @@ usage:
 -e,--engine <arg>         Select slicing engine: [dl|fact].
 -ext,--extractors <arg>   Choose extractors: [dep|diff|hunk|cov]
 ```
-To use `cov` extractor, you need to generate coverage files using Jacoco.
 
 ### History Facts Extractor
 Check [ext-gitfacts](ext-gitfacts) for details. Note that we have not provided a docker for this
