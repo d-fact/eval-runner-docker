@@ -125,7 +125,13 @@ E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are f
 ├── 50-hunkdep.ta
 └── 90-test_classes.ta
 ```
-E.g.`20-deps.ta` contains static dependencies, such as the following snippet:
+
+E.g.`20-deps.ta` contains static dependencies, such as the following snippet. It contains following information:
++ the method `next()` calls `getNextRecord()` in the first anonymous inner class of `CSVParser`;
++ `next()` is a method;
++ `Token` is a class;
++ `Constants.TAB` is a field.
+
 ```
 call "org.apache.commons.csv.CSVParser.1.next()" "org.apache.commons.csv.CSVParser.1.getNextRecord()"
 CGNodeType Method "org.apache.commons.csv.CSVParser.1.next()"
@@ -139,6 +145,8 @@ They should be same with results in `data/slicing-results` in this repo.
 
 E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
 
+
+#### Run Full Evaluation
 To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
 the evaluation on all subjects, please uncomment the command in `docker-compose.yml` and comment out the current one as shown below.
 
