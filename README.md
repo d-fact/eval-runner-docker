@@ -14,11 +14,6 @@ We implement multiple software evolution management tasks with our tools to prov
 efficiency.
 
 
-#### Pre-requisites
-+ Clone this repo `git clone --depth https://github.com/d-fact/eval-runner-docker diffbase`
-+ Docker (tested with version 20.10.5, recent version should also work)
-+ docker-compose (tested with version 1.25.0)
-
 
 #### Directory Structure
 ```
@@ -50,6 +45,12 @@ showing the reusability of components.
 | gitslice     | Core fact extractors implemented based on CSlicer |
 | ext-gitfacts | Git history facts extractor                       |
 | factutils    | Scripts for running software evolution tasks      |
+
+
+#### Pre-requisites
++ Clone this repo `git clone --depth 1 https://github.com/d-fact/eval-runner-docker diffbase`
++ Docker (tested with version 20.10.5, recent version should also work)
++ docker-compose (tested with version 1.25.0)
 
 
 ## Scripts for Quick Start

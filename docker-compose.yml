@@ -29,8 +29,8 @@ services:
     command: bash -c "
       tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
       && python3 -m rts.main --debug -l info -f --resume --alt-config rts/config/docker.cfg
-      && python3 -m rts.main --debug -l INFO -s /data/grok-scripts/rts5-imprecise.ql
-      && python3 -m rts.main --debug -l INFO -v --resume
+      && python3 -m rts.main --debug -l INFO -s /data/grok-scripts/rts5-imprecise.ql --alt-config rts/config/docker.cfg
+      && python3 -m rts.main --debug -l INFO -v --resume --alt-config rts/config/docker.cfg
       "
 volumes:
   datavol: {}
