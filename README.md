@@ -88,6 +88,8 @@ diffbase_slicing-driver    latest   <some hash>
 docker-compose up slicing-driver
 ```
 
+This takes about three minutes (on my machine).
+
 #### Inspect results in data volume
 Outputs and intermediate data are in the data volume created during `docker-compose up
 slicing-driver`.
@@ -213,7 +215,6 @@ E.g., if run with `--debug` option, there would be file `Lang-28.affected` with 
 org.apache.commons.lang3.StringEscapeUtilsTest
 org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest
 ```
-
 
 ---
 
