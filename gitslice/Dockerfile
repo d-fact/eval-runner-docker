@@ -6,5 +6,6 @@ RUN mvn -f /home/app/pom.xml package -DskipTests
 FROM openjdk:8-jre-slim
 RUN mkdir /data
 COPY --from=build /home/app/target/cslicer-1.0.0-jar-with-dependencies.jar /usr/local/lib/cslicer.jar
+ENV M2_HOME=/usr/share/maven
 ENTRYPOINT ["java","-jar","/usr/local/lib/cslicer.jar"]
 # ENTRYPOINT "/bin/sh"

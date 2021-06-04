@@ -26,6 +26,9 @@ services:
     container_name: facts-rts
     volumes:
       - datavol:/data
-    command: python3 -m rts.main --debug -l info -f --alt-config rts/config/docker.cfg
+    command: bash -c "
+      tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
+      && python3 -m rts.main --debug -l info -f --alt-config rts/config/docker.cfg
+      "
 volumes:
   datavol: {}

@@ -52,7 +52,9 @@ showing the reusability of components.
 | factutils    | Scripts for running software evolution tasks      |
 
 
-## 
+## Scripts for Quick Start
+We provide bash scripts for executing all steps below.
+
 ## Evaluation Replication
 Assuming `docker` and `docker-compose` is installed properly and current working directory is at the
 root path of the cloned repo, we can run the following command to build the image for evaluation.

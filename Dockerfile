@@ -19,10 +19,10 @@ RUN /bin/bash c.sh
 # RUN ./get_repos.sh
 
 # extract RTS repos
-WORKDIR /data/defects4j/project_repos
-RUN tar xf /data/rts-repos/rts-repos.tar.xz
+# WORKDIR /data/defects4j/project_repos
+# RUN tar xf /data/rts-repos/rts-repos.tar.xz
 
-WORKDIR /tool/factutils
+# WORKDIR /tool/factutils
 # RUN python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
 # CMD [ "python3", "-m" , "hislicing.main", "--cslicer", "/data/json/name_one.json" ]
 # CMD [ "python3", "-m" , "hislicing.main", "--fact", "/data/json/group_one.json" ]
