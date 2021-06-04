@@ -121,12 +121,13 @@ call "org.apache.commons.csv.CSVParser.1.next()" "org.apache.commons.csv.CSVPars
 CGNodeType Method "org.apache.commons.csv.CSVParser.1.next()"
 CGNodeType Class "org.apache.commons.csv.Token"
 CGNodeType Field "org.apache.commons.csv.Constants.TAB"
-
 ```
 
 #### Slicing Results
-`grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
+`grok_run/grok_results` is the directory for slicing results. 
+They should be same with results in `data/slicing-results` in this repo. 
 
+E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
 
 To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
 the evaluation on all subjects, please replace `group_one.json` with `group_eval.json` on line 20 of
