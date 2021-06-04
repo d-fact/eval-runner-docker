@@ -553,7 +553,7 @@ def batch_run_grok(projects: dict, grok_script: Path, skip_exist: bool = False):
             subdir = get_facts_subdir(pbid)
             if subdir.is_dir():
                 grok_results_per_run = PATHS_CFG.grok_results_path / pbid
-                grok_log_per_run = PATHS_CFG.grok_results_path / pbid
+                grok_log_per_run = PATHS_CFG.grok_results_path / f"{pbid}.log"
                 affected_file: Path = PATHS_CFG.grok_results_path / f"{pbid}.affected"
                 if skip_exist and affected_file.exists():
                     logger.info(f"Skip running grok for {pbid}. (existing)")

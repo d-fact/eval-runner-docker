@@ -79,7 +79,7 @@ diffbase_rts-driver        latest   <some hash>
 diffbase_slicing-driver    latest   <some hash>
 ```
 
-### Evaluate Semantic Hisotry Slicing
+### Evaluate Semantic Hisotry Slicing (Sec. 4.2)
 ```sh
 docker-compose up slicing-driver
 ```
@@ -137,11 +137,11 @@ To save time, we only run one group of subjects in the slicing evaluation. If yo
 the evaluation on all subjects, please uncomment the command in `docker-compose.yml` and comment out the current one as shown below.
 
 ```yml
- command: bash -c "
-   python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
-   && python3 -m hislicing.main --fact /data/json/group_eval.json -l info
-   && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
-   "
+command: bash -c "
+  python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
+  && python3 -m hislicing.main --fact /data/json/group_eval.json -l info
+  && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
+  "
 # command: bash -c "
 # 	python3 -m hislicing.main --prepare /data/json/name_one.json -l info
 # 	&& python3 -m hislicing.main --fact /data/json/group_one.json -l info
@@ -150,7 +150,7 @@ the evaluation on all subjects, please uncomment the command in `docker-compose.
 ```
 	
 	
-### Evaluate Regression Test Selection
+### Evaluate Regression Test Selection (Sec. 4.3)
 ```sh
 docker-compose up rts-driver
 ```
@@ -186,13 +186,29 @@ facts-rts exited with code 0
 The last JSON is the percentage of testing methods selected by each tool.
 They are the same in the example output since we only run one subject here.
 
-To run all examples, 
+To run all examples, remove all `--debug` in the following command in the `docker-compose.yml` file.
 
+```
+command: bash -c "
+  tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
+  && python3 -m rts.main --debug -l info --alt-config rts/config/docker.cfg -f --ensure-all-change-types
+  && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg -s /data/grok-scripts/rts5-imprecise.ql
+  && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg -v --count-method-json /data/rts-exp/results.json
+  && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg --percent /data/rts-exp/results.json
+  "
+```
 
-#### Inspect results
+#### Inspect selection results
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
 
+The selected test classes are shown under `_data/run_grok/grok_results/`. 
+E.g., if run with `--debug` option, there would be file `Lang-28.affected` with following contents.
+
+```
+org.apache.commons.lang3.StringEscapeUtilsTest
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest
+```
 
 
 ---
