@@ -45,7 +45,7 @@ class PathsCfg:
         self.dfcts4j_path = self.base_path / "defects4j"
         self.projects_data_path = self.dfcts4j_path / "framework/projects"
         self.cslicer_properties = self.base_path / "rts-exp/configs"
-        self.facts_path = self.exec_grok_base / "dl-facts"
+        self.facts_path = self.exec_grok_base / "facts"
         self.grok_log_path = self.exec_grok_base / "grok_logs"
         self.grok_results_path = self.exec_grok_base / "grok_results"
 

@@ -216,6 +216,8 @@ command: bash -c "
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
 
+Generated facts reside in `_data/run_grok/facts` and look similar to facts generated in the slicing evaluation above.
+
 The selected test classes are shown under `_data/run_grok/grok_results/`. 
 E.g., if run with `--debug` option, there would be file `Lang-28.affected` with following contents.
 
