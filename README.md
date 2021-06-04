@@ -80,7 +80,7 @@ diffbase_slicing-driver    latest   <some hash>
 docker-compose up slicing-driver
 ```
 
-#### Inspect results
+#### Inspect results in data volume
 Outputs and intermediate data are in the data volume created during `docker-compose up
 slicing-driver`.
 
@@ -103,8 +103,29 @@ The data volume contains following subdirs.
 
 After `docker-compose up` finished and exited, following directories (under data volume) should
 contain output.
-+ `resources/file-level/output/facts`: facts generated 
-+ `grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. E.g., `_data/grok_run/grok_results/`
+
+#### Generated Facts
+`resources/file-level/output/facts` is the directory for facts generated.
+   E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are following files.
+```sh
+├── 20-deps.ta
+├── 25-inherit.ta
+├── 30-diff_tuple.ta
+├── 40-diff_attr.ta
+├── 50-hunkdep.ta
+└── 90-test_classes.ta
+```
+E.g.`20-deps.ta` contains static dependencies, such as the following snippet:
+```
+call "org.apache.commons.csv.CSVParser.1.next()" "org.apache.commons.csv.CSVParser.1.getNextRecord()"
+CGNodeType Method "org.apache.commons.csv.CSVParser.1.next()"
+CGNodeType Class "org.apache.commons.csv.Token"
+CGNodeType Field "org.apache.commons.csv.Constants.TAB"
+
+```
+
+#### Slicing Results
+`grok_run/grok_results`: slicing results, they should be same with results in `data/slicing-results` in this repo. E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
 
 
 To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
@@ -133,6 +154,20 @@ docker run -it --rm -v /path/on/the/host:/data java-ext-standalone -c /data/proj
 
 Replace `/path/on/the/host` with the directory where a `project.properties` and a repo exists.
 
+For example, you could clone `commons-csv` by `git clone https://github.com/apache/commons-csv` and put it at `/tmp/diffbase`. 
+And put following configuration files at `/tmp/diffbase/csv.properties`.
+
+```ini
+repoPath = /data/commons-csv/.git
+classRoot = /data/commons-csv/target/classes
+startCommit = b230a6f5
+endCommit = 7310e5c6
+```
+Then the run command is:
+```sh
+docker run -it --rm -v /tmp/diffbase:/data java-ext-standalone -c /data/csv.properties -e fact -exp dep diff hunk
+```
 
 ### History Facts Extractor
-Check [ext-gitfacts](ext-gitfacts) for details.
+Check [ext-gitfacts](ext-gitfacts) for details. Note that we have not provided a docker for this
+extractor and user need rust/cargo toolchains to use it.
