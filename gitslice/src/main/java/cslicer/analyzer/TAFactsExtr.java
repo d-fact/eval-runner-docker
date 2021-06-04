@@ -3,7 +3,7 @@ package cslicer.analyzer;
 /*
  * #%L
  * CSlicer
- *    ______ _____  __ _                  
+ *    ______ _____  __ _
  *   / ____// ___/ / /(_)_____ ___   _____
  *  / /     \__ \ / // // ___// _ \ / ___/
  * / /___  ___/ // // // /__ /  __// /
@@ -27,10 +27,7 @@ package cslicer.analyzer;
 
 import ch.uzh.ifi.seal.changedistiller.model.entities.*;
 import cslicer.builder.BuildScriptInvalidException;
-import cslicer.callgraph.BcelStaticCallGraphBuilder;
-import cslicer.callgraph.CGEdgeType;
-import cslicer.callgraph.ClassPathInvalidException;
-import cslicer.callgraph.StaticCallGraph;
+import cslicer.callgraph.*;
 import cslicer.coverage.*;
 import cslicer.distiller.ChangeDistillerException;
 import cslicer.distiller.ChangeExtractor;
@@ -43,11 +40,10 @@ import cslicer.utils.DependencyCache;
 import cslicer.utils.PrintUtils;
 import cslicer.utils.StatsUtils;
 import cslicer.utils.graph.Edge;
-import cslicer.utils.graph.Vertex;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.revwalk.RevCommit;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -56,133 +52,225 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-public class Hunker extends FactsExtr {
+public class TAFactsExtr extends FactsExtr {
 
-    private String depFactsFile;
-    private String covFactsFile;
-    private String diffTupleFile;
-    private String diffAttrFile;
+    private final String depFactsFile;
+    private final String inheritFactsFile;
+    private final String covFactsFile;
+    private final String diffTupleFile;
+    private final String diffAttrFile;
+	private final String testClassFactsFile;
     private String plainStringDiffTupleFile;
     private String plainStringDiffAttrFile;
     private String covPlainStringFile;
     private String depsMD5ToPlainStringMapFile;
     private String depsPlainStringFile;
-    private static HashMap<String,String> md5HashMap = new HashMap<>();
-    private static boolean genPlainFiles = true;
+    private static HashMap<String, String> md5HashMap = new HashMap<>();
+    // private static boolean genPlainFiles = true;
+    private static String endCommit;
+    private static boolean genAuxFiles;
+    private static boolean fuzzyNames;
 
-    private final static String GENERIC_FILTER = "<[\\p{L}][\\p{L}\\p{N}]*>";
-    private final static String CLASS_PATTERN = "([a-zA-Z_$][a-zA-Z\\d_$]*\\.)*[a-zA-Z_$][a-zA-Z\\d_$]*";
 
-    public Hunker(ProjectConfiguration config) throws RepositoryInvalidException, CommitNotFoundException,
+    public TAFactsExtr(ProjectConfiguration config) throws RepositoryInvalidException, CommitNotFoundException,
             BuildScriptInvalidException, CoverageControlIOException,
             AmbiguousEndPointException, ProjectConfigInvalidException,
             BranchNotFoundException, CoverageDataMissingException, IOException {
-        this(config, true);
+        this(config, true, true);
     }
 
-    public Hunker(ProjectConfiguration config, boolean auxFiles) throws RepositoryInvalidException, CommitNotFoundException,
+    public TAFactsExtr(ProjectConfiguration config, boolean auxFiles, boolean fuzzy) throws RepositoryInvalidException, CommitNotFoundException,
             BuildScriptInvalidException, CoverageControlIOException,
             AmbiguousEndPointException, ProjectConfigInvalidException,
             BranchNotFoundException, CoverageDataMissingException, IOException {
-        super(config, false);
+        super(config, fuzzy);
         fClassRootPath = config.getClassRootPath();
         depFactsFile = Paths.get(fOutputPath, "20-deps.ta").toString();
+        inheritFactsFile = Paths.get(fOutputPath, "25-inherit.ta").toString();
         diffTupleFile = Paths.get(fOutputPath, "30-diff_tuple.ta").toString();
         diffAttrFile = Paths.get(fOutputPath, "40-diff_attr.ta").toString();
         covFactsFile = Paths.get(fOutputPath, "60-cov.ta").toString();
+        testClassFactsFile = Paths.get(fOutputPath, "90-test_classes.ta").toString();
+        genAuxFiles = auxFiles;
+        /*
         plainStringDiffTupleFile = Paths.get(fOutputPath, "plain-diff_tuple.ta").toString();
         plainStringDiffAttrFile = Paths.get(fOutputPath, "plain-diff_attr.ta").toString();
         depsMD5ToPlainStringMapFile = Paths.get(fOutputPath, "plain-md5-map.txt").toString();
         depsPlainStringFile = Paths.get(fOutputPath, "deps-plain.txt").toString();
         covPlainStringFile = Paths.get(fOutputPath, "plain-cov.txt").toString();
         genPlainFiles = auxFiles;
+        */
     }
 
     public String generateHunkDependencyFacts() {
         PrintUtils.print("COMPUTING HUNK FACTS...");
         DependencyCache hunkGraph = new DependencyCache();
-        computeHunkDepSet(fHistory, hunkGraph);
+        computeHunkDepSet(fHistory, fHistory, hunkGraph, FactFormat.TA);
         return hunkGraph.toString();
     }
 
-
     public void generateDependencyFacts() throws ClassPathInvalidException {
         PrintUtils.print("COMPUTING DEPS FACTS..."); // dependency facts
-        String classPath = fClassRootPath;
-        String depsFactsFile = this.depFactsFile;
-        String depsMD5ToPlainStringMapFile = this.depsMD5ToPlainStringMapFile;
-        String depsPlainStringFile = this.depsPlainStringFile;
-        computeDependencyFacts(classPath, depsFactsFile, depsMD5ToPlainStringMapFile, depsPlainStringFile, true, genPlainFiles);
+        BcelStaticCallGraphBuilder srcCG = new BcelStaticCallGraphBuilder(fClassRootPath);
+
+        BcelStaticCallGraphBuilder testCG = buildCallGraphForTestClasses(fClassRootPath);
+		generateTestClassesFacts(testCG, testClassFactsFile);
+		// TODO: may generate inherit facts for all classes in the future
+        generateInheritFacts(testCG, inheritFactsFile);
+        computeDependencyFacts(srcCG, testCG, depFactsFile, fuzzyNames);
     }
 
-    public static String computeDependencyFacts(String classPath, String depFactsFile, String depsMD5ToPlainStringMapFile, String depsPlainStringFile)
+    public static void computeDependencyFacts(BcelStaticCallGraphBuilder cgBuilder, String depFactsFile)
             throws ClassPathInvalidException {
-        return computeDependencyFacts(classPath, depFactsFile, depsMD5ToPlainStringMapFile, depsPlainStringFile, false, true);
+        computeDependencyFacts(cgBuilder, null, depFactsFile, false);
     }
 
-    private static String computeDependencyFacts(String classPath, String depFactsFile, String depsMD5ToPlainStringMapFile, String depsPlainStringFile, boolean fuzzy, boolean aux_files)
-            throws ClassPathInvalidException {
-        StringBuilder factsFileContent = new StringBuilder();
-        Map<String, String> MD5ToPlainMap = new TreeMap<>();
-        // file header
-        factsFileContent.append("FACT TUPLE :\n");
-        BcelStaticCallGraphBuilder depsCGBuilder = new BcelStaticCallGraphBuilder(
-                classPath);
-        depsCGBuilder.buildCallGraph();
-        StaticCallGraph depsCG = depsCGBuilder.getCallGraph();
-        //depsCG.outputDOTFile("/tmp/deps-graph.txt");
-        for (Edge e : depsCG.getEdges()) {
-            String frVertexName = e.getFrom().getName();
-            String toVertexName = e.getTo().getName();
-            String operator = findFactOperatorOfDepsEdge(e).toString().toLowerCase();
-            String frNameMD5, toNameMD5;
-            if (fuzzy) {
-                frNameMD5 = calcMD5(matchWithGenericType(frVertexName));
-                toNameMD5 = calcMD5(matchWithGenericType(toVertexName));
-            } else {
-                frNameMD5 = calcMD5(frVertexName);
-                toNameMD5 = calcMD5(toVertexName);
-            }
-            String fact = String.format("%s %s %s", operator, frNameMD5, toNameMD5);
-            MD5ToPlainMap.put(frNameMD5, frVertexName);
-            MD5ToPlainMap.put(toNameMD5, toVertexName);
-            factsFileContent.append(fact).append("\n");
-        }
+    /*
+	private static void writeStringToFile(String contents, String filename){
         try {
-            PrintUtils.print(String.format("Start writing to file @ %s", depFactsFile), PrintUtils.TAG.DEBUG);
-            FileWriter fWriter = new FileWriter(depFactsFile, false);
-            fWriter.write(factsFileContent.toString());
+            PrintUtils.print(String.format("Start writing to file @ %s", filename), PrintUtils.TAG.DEBUG);
+            FileWriter fWriter = new FileWriter(filename, false);
+            fWriter.write(contents);
             fWriter.flush();
             fWriter.close();
-            if (aux_files) {
-                PrintUtils.print(String.format("Start writing to file @ %s", depsMD5ToPlainStringMapFile), PrintUtils.TAG.DEBUG);
-                fWriter = new FileWriter(depsMD5ToPlainStringMapFile, false);
-                for (Map.Entry entry : MD5ToPlainMap.entrySet()) {
-                    fWriter.write(entry.getKey() + " " + entry.getValue() + "\n");
-                }
-                fWriter.flush();
-                fWriter.close();
-
-                PrintUtils.print(String.format("Start writing to file @ %s", depsPlainStringFile), PrintUtils.TAG.DEBUG);
-                fWriter = new FileWriter(depsPlainStringFile, false);
-                StringBuilder plainDepsContent = new StringBuilder();
-                for (String tuple : factsFileContent.toString().split("\\n")) {
-                    if (tuple.contains("FACT TUPLE :"))
-                        continue;
-                    String md5_1 = tuple.split(" ")[1];
-                    String md5_2 = tuple.split(" ")[2];
-                    String plainTuple = tuple.replace(md5_1, MD5ToPlainMap.get(md5_1)).replace(md5_2, MD5ToPlainMap.get(md5_2)) + "\n";
-                    plainDepsContent.append(plainTuple);
-
-                }
-                fWriter.write(plainDepsContent.toString());
-                fWriter.flush();
-                fWriter.close();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return factsFileContent.toString();
+	}*/
+
+	private static void generateTestClassesFacts(BcelStaticCallGraphBuilder cgBuilder,
+                                                 String outputFile) {
+		generateClassesFacts(cgBuilder, "TestClass", outputFile);
+	}
+
+	private static void generateInheritFacts(BcelStaticCallGraphBuilder cgBuilder, String outputFile) {
+        // cgBuilder.getMoreClassInfo(classParents, abstractClazz);
+        HashMap<String, String> classParents = cgBuilder.getInheritPairs();
+        ArrayList<String> abstractClazz = cgBuilder.getAbstractClasses();
+        try {
+            BufferedWriter factsFileWriter = new BufferedWriter(new FileWriter(outputFile, false));
+            factsFileWriter.write("FACT TUPLE :\n");
+            for (Map.Entry<String, String> e : classParents.entrySet()) {
+                String fact = String.format("Inherit \"%s\" \"%s\"\n", e.getKey(), e.getValue());
+                factsFileWriter.write(fact);
+            }
+            for (String c : abstractClazz) {
+                String fact = String.format("AbstractClass \"%s\" NULL\n", c);
+                factsFileWriter.write(fact);
+            }
+            factsFileWriter.flush();
+            factsFileWriter.close();
+        } catch (IOException e) {
+            PrintUtils.print(String.format("Exception when writing facts file [%s]", outputFile), PrintUtils.TAG.WARNING);
+            e.printStackTrace();
+        }
+    }
+
+	private static void generateClassesFacts(BcelStaticCallGraphBuilder cgBuilder, String operator,
+                                             String outputFile) {
+		ArrayList<String> classNames = cgBuilder.getClassNames();
+		try {
+            BufferedWriter factsFileWriter = new BufferedWriter(new FileWriter(outputFile, false));
+            factsFileWriter.write("FACT TUPLE :\n");
+            for (String e : classNames) {
+                String fact = String.format("%s \"%s\" NULL\n", operator, e);
+                factsFileWriter.write(fact);
+            }
+            factsFileWriter.flush();
+            factsFileWriter.close();
+        } catch (IOException e) {
+            PrintUtils.print(String.format("Exception when writing facts file [%s]", outputFile), PrintUtils.TAG.WARNING);
+            e.printStackTrace();
+        }
+	}
+
+	private static void writeFactsFromCGEdges(StaticCallGraph cg, boolean fuzzy, BufferedWriter w,
+                                              HashMap<CGNodeType, HashSet<String>> nodes) {
+        for (Edge<CGNode> e : cg.getEdges()) {
+            String frVertexName = e.getFrom().getName();
+            String toVertexName = e.getTo().getName();
+            String operator = findFactOperatorOfDepsEdge(e).toString().toLowerCase();
+            String frName, toName;
+            if (fuzzy) {
+                frName = matchWithGenericType(frVertexName);
+                toName = matchWithGenericType(toVertexName);
+            } else {
+                frName = frVertexName;
+                toName = toVertexName;
+            }
+            String fact = String.format("%s \"%s\" \"%s\"\n", operator, frName, toName);
+            // factsFileContent.append(fact).append("\n");
+            try {
+                w.write(fact);
+            } catch (IOException exp) {
+                PrintUtils.print(String.format("Exception when writing fact:\n%s" , fact),
+                        PrintUtils.TAG.WARNING);
+                exp.printStackTrace();
+            }
+
+            nodes.get(e.getFrom().getData().getNodeType()).add(frName);
+            nodes.get(e.getTo().getData().getNodeType()).add(toName);
+        }
+    }
+
+	private static void computeDependencyFacts(BcelStaticCallGraphBuilder srcCGBuilder,
+                                                 BcelStaticCallGraphBuilder testCGBuilder,
+                                                 String depFactsFile, boolean fuzzy) {
+        // StringBuilder factsFileContent = new StringBuilder();
+        // factsFileContent.append("FACT TUPLE :\n");
+        BufferedWriter factsFileWriter;
+        try {
+            factsFileWriter = new BufferedWriter(new FileWriter(depFactsFile));
+            factsFileWriter.write("FACT TUPLE :\n");
+        } catch (IOException e) {
+            PrintUtils.print(String.format("Exception when initializing BufferedWriter for file %s", depFactsFile),
+                    PrintUtils.TAG.WARNING);
+            e.printStackTrace();
+            return;
+        }
+
+        // init nodes map
+        HashMap<CGNodeType, HashSet<String>> nodes = new HashMap<>();
+        //depsCG.outputDOTFile("/tmp/deps-graph.txt");
+        // HashMap<CGNodeType, HashSet<CGNode>> nodes = new HashMap<>();
+        for (CGNodeType t : CGNodeType.values()) {
+            if (t == CGNodeType.CGNode) { continue; }
+            nodes.put(t, new HashSet<String>());
+        }
+
+        // write facts about src classes
+        srcCGBuilder.buildCallGraph();
+        StaticCallGraph depsCG = srcCGBuilder.getCallGraph();
+
+        // writeFactsFromCGEdges(depsCG, fuzzy, );
+        writeFactsFromCGEdges(depsCG, fuzzy, factsFileWriter, nodes);
+        // write facts about test classes
+        if (testCGBuilder != null) {
+            testCGBuilder.buildCallGraph();
+            StaticCallGraph depsCGTest = testCGBuilder.getCallGraph();
+            writeFactsFromCGEdges(depsCGTest, fuzzy, factsFileWriter, nodes);
+        }
+
+        try {
+            for (Map.Entry<CGNodeType, HashSet<String>> entry : nodes.entrySet()) {
+                CGNodeType nodeType = entry.getKey();
+                for (String e : entry.getValue()) {
+                    factsFileWriter.write(String.format("CGNodeType %s \"%s\"\n", nodeType.name(), e));
+                }
+            }
+        } catch (IOException exp) {
+            PrintUtils.print(String.format("Exception when writing CGNodeType facts to %s.", depFactsFile),
+                    PrintUtils.TAG.WARNING);
+            exp.printStackTrace();
+        }
+
+        try {
+            PrintUtils.print(String.format("Flush buffered writer to %s", depFactsFile), PrintUtils.TAG.DEBUG);
+            factsFileWriter.flush();
+            factsFileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String generateCoverageFacts(ProjectConfiguration config) throws CoverageControlIOException, TestFailureException {
@@ -191,26 +279,20 @@ public class Hunker extends FactsExtr {
             initializeCoverage(config);
             FileWriter fWriter = new FileWriter(covFactsFile, false);
             fWriter.write("FACT TUPLE :\n");
-            StringBuilder plainFacts = new StringBuilder("FACT TUPLE :\n");
             CoverageDatabase cov = fCoverage.analyseCoverage();
-            Set<SourceCodeEntity> coveredEntities =cov.getAllRelevantEntities();
-            String eTag = "test";
+            Set<SourceCodeEntity> coveredEntities = cov.getAllRelevantEntities();
+            String testEntityName = "test";
+            // PrintUtils.print(String.format("Generate coverage facts on commit [%s]", endCommit));
             for (SourceCodeEntity e : coveredEntities) {
                 String origName = e.getUniqueName();
-                String fuzzyEntityName = matchWithGenericType(origName);
-                fWriter.append(String.format("Coverage %s %s\n", eTag, calcMD5(fuzzyEntityName)));
-                if (genPlainFiles) {
-                    plainFacts.append(String.format("Coverage %s %s %s %s\n", origName, fuzzyEntityName, calcMD5(origName), calcMD5(fuzzyEntityName)));
+                String entityName = origName;
+                if (fuzzyNames) {
+                    entityName = matchWithGenericType(origName);
                 }
+                fWriter.append(String.format("Coverage \"%s\" \"%s\"\n", testEntityName, entityName));
             }
             fWriter.flush();
             fWriter.close();
-            if (genPlainFiles){
-                FileWriter plainWriter = new FileWriter(covPlainStringFile, false);
-                plainWriter.write(plainFacts.toString());
-                plainWriter.flush();
-                plainWriter.close();
-            }
         } catch (IOException | CoverageDataMissingException e) {
             e.printStackTrace();
         }
@@ -222,7 +304,7 @@ public class Hunker extends FactsExtr {
         return preProcessHistory();
     }
 
-    private static String calcMD5(String input){
+    private static String calcMD5(String input) {
         String hash = md5HashMap.get(input);
         if (hash == null) {
             String md5Value = realCalcMD5(input);
@@ -249,24 +331,13 @@ public class Hunker extends FactsExtr {
         try {
             FileWriter fTupleWriter = new FileWriter(diffTupleFile, false);
             FileWriter fAttrWriter = new FileWriter(diffAttrFile, false);
-            FileWriter fPlainTupleWriter = null;
-            FileWriter fPlainAttrWriter = null;
-            if (genPlainFiles) {
-                fPlainTupleWriter = new FileWriter(plainStringDiffTupleFile, false);
-                fPlainAttrWriter = new FileWriter(plainStringDiffAttrFile, false);
-            }
             fTupleWriter.write("FACT TUPLE :\n");
             fAttrWriter.write("FACT ATTRIBUTE :\n");
-            // Set<String> fChangedClasses = new HashSet<>();
-            List<RevCommit> A = new LinkedList<>(fHistory);
-            VersionTracker fTracker = new VersionTracker(A, fComparator);
-
             ChangeExtractor extractor = new ChangeExtractor(fJGit,
                     fConfig.getProjectJDKVersion());
-
             StatsUtils.resume("history.preprocess");
-
-            int i = 0; // commit sequence number
+            PrintUtils.print("Length of history is " + fHistory.size() + "\n",
+                    PrintUtils.TAG.STATS);
             for (RevCommit c : fHistory) {
                 Set<GitRefSourceCodeChange> changes;
                 try {
@@ -279,12 +350,10 @@ public class Hunker extends FactsExtr {
                     continue;
                 }
 
-                String verA = c.getParent(0).name();
-                String verB = c.name();
+                String parentVersion = c.getParent(0).name();
+                String currentVersion = c.name();
                 StringBuilder factsTuplePerCommit = new StringBuilder();
                 StringBuilder factsAttrPerCommit = new StringBuilder();
-                StringBuilder plainStringTuplePerCommit = new StringBuilder();
-                StringBuilder plainStringAttrPerCommit = new StringBuilder();
                 for (GitRefSourceCodeChange gitChange : changes) {
                     // get change distiller change
                     SourceCodeChange change = gitChange.getSourceCodeChange();
@@ -296,27 +365,18 @@ public class Hunker extends FactsExtr {
                     SlicingResult.DEP_FLAG depType = SlicingResult.DEP_FLAG.DROP;
                     // change operation type
                     AtomicChange.CHG_TYPE chgType = null;
-
-                    // fChangedClasses.add(gitChange.getEnclosingClassName());
-
                     // parent entity is field/method/class which contains the
                     // change
                     String operand1 = "", operand2 = "", op = "";
                     if (change instanceof Delete) {
                         Delete del = (Delete) change;
                         uniqueName = del.getChangedEntity().getUniqueName();
-                        String parentUniqueName = del.getParentEntity().getUniqueName();
-                        operand1 = calcMD5(matchWithGenericType(uniqueName));
-                        operand2 = verB;
-                        chgType = AtomicChange.CHG_TYPE.DEL;
+                        // String parentUniqueName = del.getParentEntity().getUniqueName();
                         op = "Delete";
                     } else if (change instanceof Insert) {
                         Insert ins = (Insert) change;
                         uniqueName = ins.getChangedEntity().getUniqueName();
-                        String parentUniqueName = ins.getParentEntity().getUniqueName();
-                        operand1 = calcMD5(matchWithGenericType(uniqueName));
-                        operand2 = verB;
-                        chgType = AtomicChange.CHG_TYPE.INS;
+                        // String parentUniqueName = ins.getParentEntity().getUniqueName();
                         op = "Insert";
                     } else if (change instanceof Update) {
                         Update upd = (Update) change;
@@ -325,9 +385,6 @@ public class Hunker extends FactsExtr {
                         boolean signatureChange = !upd.getChangedEntity()
                                 .getUniqueName().equals(uniqueName);
                         assert !signatureChange;
-                        operand1 = calcMD5(matchWithGenericType(uniqueName));
-                        operand2 = verB;
-                        chgType = AtomicChange.CHG_TYPE.UPD;
                         op = "Update";
                     } else if (change instanceof Move) {
                         // shouldn't detect move for structure nodes
@@ -335,50 +392,30 @@ public class Hunker extends FactsExtr {
                     } else
                         assert false;
 
-                    String tuple = String.format("%s %s %s\n", op, operand1, operand2);
-                    String attr = String.format("(%s %s %s) { name_hash = \"%s\" version_a = \"%s\" version_b = \"%s\" }\n",
-                            op, operand1, operand2, operand1, verA, verB);
+                    operand1 = uniqueName;
+                    if (fuzzyNames) {
+                        operand1 = matchWithGenericType(uniqueName);
+                    }
+                    String tuple = String.format("%s \"%s\" \"%s\"\n", op, operand1, currentVersion);
+                    String attr = String.format("(%s \"%s\" \"%s\") { name = \"%s\" commit_parent = \"%s\" commit = \"%s\" }\n",
+                            op, operand1, currentVersion, operand1, parentVersion, currentVersion);
                     factsTuplePerCommit.append(tuple);
                     factsAttrPerCommit.append(attr);
-                    if (genPlainFiles) {
-                        String plainTuple = String.format("%s \"%s\" \"%s\"\n", op, uniqueName, operand2);
-                        String plainAttr = String.format("(%s \"%s\" \"%s\") { name = \"%s\" version_a = \"%s\" version_b = \"%s\" }\n",
-                                op, uniqueName, operand2, uniqueName, verA, verB);
-                        plainStringTuplePerCommit.append(plainTuple);
-                        plainStringAttrPerCommit.append(plainAttr);
-                    }
-                    // track this atomic change
-                    /*
-                    fTracker.trackAtomicChangeAdd(new AtomicChange(uniqueName,
-                            filePath, gitChange.getPreImage(),
-                            gitChange.getPostImage(), i, depType, chgType));
-                     */
                 }
                 fTupleWriter.append(factsTuplePerCommit.toString());
                 fAttrWriter.append(factsAttrPerCommit.toString());
-                if (genPlainFiles && fPlainTupleWriter!=null) {
-                    fPlainTupleWriter.append(plainStringTuplePerCommit);
-                    fPlainAttrWriter.append(plainStringAttrPerCommit);
-                }
-                i++;
             }
             fTupleWriter.flush();
             fAttrWriter.flush();
             fTupleWriter.close();
             fAttrWriter.close();
-            if (genPlainFiles && fPlainTupleWriter!=null) {
-                fPlainTupleWriter.flush();
-                fPlainAttrWriter.flush();
-                fPlainTupleWriter.close();
-                fPlainAttrWriter.close();
-            }
             return true;
-            // return factsFileContent.toString();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
     }
+
     private void initializeCoverage(ProjectConfiguration config)
             throws CoverageDataMissingException {
 
@@ -396,4 +433,11 @@ public class Hunker extends FactsExtr {
         }
     }
 
+    private static String concatVersion(String entity) {
+        return concatVersion(entity, endCommit);
+    }
+
+    private static String concatVersion(String entity, String versionStr) {
+        return entity + "@" + versionStr;
+    }
 }

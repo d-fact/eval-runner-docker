@@ -33,21 +33,13 @@ import java.io.StringWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
-import cslicer.callgraph.ClassPathInvalidException;
+import cslicer.callgraph.*;
 import cslicer.coverage.TestFailureException;
+import cslicer.utils.graph.Edge;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.json.JSONWriter;
@@ -143,6 +135,9 @@ public class HistoryAnalyzer {
 	protected String fOutputPath;
 
 	protected final ProjectConfiguration fConfig;
+
+	private final static String GENERIC_FILTER = "<[\\p{L}][\\p{L}\\p{N}]*>";
+	private final static String CLASS_PATTERN = "([a-zA-Z_$][a-zA-Z\\d_$]*\\.)*[a-zA-Z_$][a-zA-Z\\d_$]*";
 
 	public HistoryAnalyzer(ProjectConfiguration config)
 			throws RepositoryInvalidException, CommitNotFoundException,
@@ -601,20 +596,61 @@ public class HistoryAnalyzer {
 	/**
 	 * 
 	 */
-	public String generateHunkDependencyFacts() {
-		return "";
+
+	private static String replaceLast(String inputStr, String substr, String replacement) {
+		int pos = inputStr.lastIndexOf(substr);
+		if (pos > -1) {
+			return inputStr.substring(0, pos)
+					+ replacement
+					+ inputStr.substring(pos + substr.length());
+		} else {
+			return inputStr;
+		}
 	}
 
-	public String generateDependencyFacts() throws ClassPathInvalidException {
-	    return "";
+	protected static BcelStaticCallGraphBuilder buildCallGraphForTestClasses (String classRootPath)
+			throws ClassPathInvalidException {
+		String testClassRoot = replaceLast(classRootPath, "classes", "test-classes");
+		return new BcelStaticCallGraphBuilder(testClassRoot);
 	}
-	
-	public boolean generateDifferentialFacts() throws CommitNotFoundException {
-		return false;
+
+
+	/*
+	protected static void writeFactsFromCGEdges(StaticCallGraph cg, boolean fuzzy, BufferedWriter w,
+												HashMap<CGNodeType, HashSet<CGNode>> nodes) {
+		for (Edge<CGNode> e : cg.getEdges()) {
+			String frVertexName = e.getFrom().getName();
+			String toVertexName = e.getTo().getName();
+			String operator = findFactOperatorOfDepsEdge(e).toString().toLowerCase();
+			String frName, toName;
+			if (fuzzy) {
+				frName = matchWithGenericType(frVertexName);
+				toName = matchWithGenericType(toVertexName);
+			} else {
+				frName = frVertexName;
+				toName = toVertexName;
+			}
+			StringBuilder fact = new StringBuilder().append(String.format("%s \"%s\" \"%s\"", operator, frName, toName));
+			try {
+				w.write(fact.append("\n").toString());
+			} catch (IOException exp) {
+				PrintUtils.print(String.format("Exception when writing %s fact:\n%s" , depType.getName(), fact),
+						PrintUtils.TAG.WARNING);
+				exp.printStackTrace();
+			}
+
+			// factsFileContent.append(fact).append("\n");
+
+			CGNode nFrom = e.getFrom().getData();
+			CGNode nTo = e.getTo().getData();
+			nodes.get(nFrom.getNodeType()).add(nFrom);
+			nodes.get(nTo.getNodeType()).add(nTo);
+
+			nodes.get(e.getFrom().getData().getNodeType()).add(frName);
+			nodes.get(e.getTo().getData().getNodeType()).add(toName);
+		}
 	}
-	
-	public String generateCoverageFacts(ProjectConfiguration config) throws
-		CoverageControlIOException, TestFailureException {
-	    return "";
-	}
+	 */
+
+
 }

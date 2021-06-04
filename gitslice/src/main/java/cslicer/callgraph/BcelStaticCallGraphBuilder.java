@@ -25,6 +25,14 @@ package cslicer.callgraph;
  * #L%
  */
 
+import cslicer.callgraph.ClassVisitor.DependencyLevel;
+import cslicer.utils.PrintUtils;
+import cslicer.utils.PrintUtils.TAG;
+import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,14 +48,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.Function;
 
-import org.apache.bcel.classfile.ClassParser;
-import org.apache.bcel.classfile.JavaClass;
-import org.apache.commons.io.FileUtils;
-
-import cslicer.callgraph.ClassVisitor.DependencyLevel;
-import cslicer.utils.PrintUtils;
-import cslicer.utils.PrintUtils.TAG;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class BcelStaticCallGraphBuilder extends StaticCallGraphBuilder {
 
@@ -195,8 +199,22 @@ public class BcelStaticCallGraphBuilder extends StaticCallGraphBuilder {
 		return false;
 	}
 
-	public ArrayList<String> getClassNames() {
-		ArrayList<String> classNames = new ArrayList<String>();
+	interface Predicate<JavaClass> {
+		boolean test(JavaClass clazz);
+	}
+
+	/**
+	 * Return an array list of class names, with ability to filter and
+	 * convert them to Type X.
+	 * @param tester A tester for filter classes, only those satisfying tester
+	 *               would be kept
+	 * @param transformer A transformer for transform a JavaClass to an object
+	 *                    in type X
+	 * @return An ArrayList of classes represented in type X
+	 */
+	public <X> ArrayList<X> getClasses(Predicate<JavaClass> tester,
+									   Function<JavaClass, X> transformer) {
+		ArrayList<X> classes = new ArrayList<>();
 		int counter = 0;
 		try {
 			PrintUtils.print("Scanning class files ...", TAG.OUTPUT);
@@ -211,8 +229,10 @@ public class BcelStaticCallGraphBuilder extends StaticCallGraphBuilder {
 							entry.getAbsolutePath());
 					JavaClass clazz = cparser.parse();
 
-					String className = clazz.getClassName().replace("$", ".");
-					classNames.add(className);
+					if (tester.test(clazz)) {
+						X each = transformer.apply(clazz);
+						classes.add(each);
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -221,9 +241,35 @@ public class BcelStaticCallGraphBuilder extends StaticCallGraphBuilder {
 					TAG.WARNING);
 			e.printStackTrace();
 		}
-		return classNames;
+		return classes;
 	}
 
+	String getClassNameWithoutDollarSymbol(JavaClass c) {
+		return c.getClassName().replace("$", ".");
+	}
+
+	public ArrayList<String> getClassNames() {
+		return this.<String>getClasses(c->true, this::getClassNameWithoutDollarSymbol);
+	}
+
+	public ArrayList<String> getAbstractClasses() {
+		return this.getClasses(AccessFlags::isAbstract, this::getClassNameWithoutDollarSymbol);
+	}
+
+	/**
+	 * Return a HashMap encoding class inheritance information.
+	 * It uses the getClasses() generic method to get a ArrayList first.
+	 * @return a hashmap containing (subclass, superclass) pairs
+	 */
+	public HashMap<String, String> getInheritPairs() {
+		HashMap<String, String> result = new HashMap<>();
+	    ArrayList<Pair<String, String>> pairList = this.getClasses(c->true,
+				c-> new ImmutablePair<>(getClassNameWithoutDollarSymbol(c), c.getSuperclassName()));
+	    pairList.forEach(x-> result.put(x.getLeft(), x.getRight()));
+	    return result;
+	}
+
+	@Deprecated
 	public void getMoreClassInfo(HashMap<String, String> classParents, ArrayList<String> abstractClazz) {
 		int counter = 0;
 		try {
@@ -251,6 +297,28 @@ public class BcelStaticCallGraphBuilder extends StaticCallGraphBuilder {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Returns a hashmap from nested class name to its outer class (which must
+	 * not be an nested class).
+	 * It will split the nested class name by first $ appearance and check if
+	 * it is in nonNestedClasses set.
+	 * @return the hashmap containing (nested class name, outer class name), in
+	 * return value, dollar symbols ($) are replaced with dots (.)
+	 */
+	public HashMap<String, String> getNestedClass() {
+		HashMap<String, String> nestedMap = new HashMap<>();
+		HashSet<String> nonNestedClasses =  new HashSet<>(this.<String>getClasses(c -> !c.isNested(), JavaClass::getClassName));
+		ArrayList<String> nestedClasses =  this.<String>getClasses(JavaClass::isNested, JavaClass::getClassName);
+
+		for (String cs: nestedClasses) {
+			String outerName = cs.split("\\$")[0];
+			if (nonNestedClasses.contains(outerName)){
+				nestedMap.put(cs.replace("$", "."), outerName);
+			}
+		}
+		return nestedMap;
+    }
 
 	private void buildCallGraph(Set<String> entryClassNames,
 			DependencyLevel level) {

@@ -276,16 +276,16 @@ public class Main {
 				versionize = line.getOptionValue("ver", "");
 			}
 			PrintUtils.print(versionize);
-			HistoryAnalyzer runner;
+			FactsExtr runner;
 			switch (factsFormat) {
 				case TA:
-					runner = new FactsExtr(config, aux_opt, fuzzy_opt);
+					runner = new TAFactsExtr(config, aux_opt, fuzzy_opt);
 					break;
 				case SOUFFLE:
 					runner = new DatalogFactsExtr(config, versionize, aux_opt, fuzzy_opt);
 					break;
 				default:
-					runner = new FactsExtr(config, aux_opt, fuzzy_opt);
+					runner = new TAFactsExtr(config, aux_opt, fuzzy_opt);
 			}
 			String[] extractors = line.getOptionValues("extractors");
 			if (extractors == null) {

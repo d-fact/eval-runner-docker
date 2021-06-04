@@ -37,22 +37,18 @@ import cslicer.utils.DependencyCache;
 import cslicer.utils.PrintUtils;
 import cslicer.utils.StatsUtils;
 import cslicer.utils.graph.Edge;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
-public class DatalogFactsExtr extends HistoryAnalyzer {
+public class DatalogFactsExtr extends FactsExtr {
 
 	private final Path depFactsDir = Paths.get(fOutputPath, "20-deps");
 	private final Path diffFactsDir = Paths.get(fOutputPath, "30-diff");
@@ -64,12 +60,7 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 	// private String depsMD5ToPlainStringMapFile;
 	// private String depsPlainStringFile;
 	// private static boolean genPlainFiles = true;
-	private static String endCommit;
-	private static boolean fuzzyNames;
 	private static String versionize;
-
-	private final static String GENERIC_FILTER = "<[\\p{L}][\\p{L}\\p{N}]*>";
-	private final static String CLASS_PATTERN = "([a-zA-Z_$][a-zA-Z\\d_$]*\\.)*[a-zA-Z_$][a-zA-Z\\d_$]*";
 
 	public DatalogFactsExtr(ProjectConfiguration config) throws RepositoryInvalidException, CommitNotFoundException,
 			BuildScriptInvalidException, CoverageControlIOException, AmbiguousEndPointException,
@@ -82,10 +73,8 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 			throws RepositoryInvalidException, CommitNotFoundException, BuildScriptInvalidException,
 			CoverageControlIOException, AmbiguousEndPointException, ProjectConfigInvalidException,
 			BranchNotFoundException, CoverageDataMissingException, IOException, CheckoutFileFailedException {
-		super(config);
+		super(config, fuzzy);
 		fClassRootPath = config.getClassRootPath();
-		endCommit = fEnd.name();
-		fuzzyNames = fuzzy;
 		if (version == null) {
 			versionize = "";
 		} else if (version.equals("")) {
@@ -112,27 +101,85 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 		return hunkGraph.toString();
 	}
 
+	private static void writeFactsFromCGEdges(StaticCallGraph cg, boolean fuzzy, HashMap<String, BufferedWriter> m,
+											  HashMap<CGNodeType, HashSet<CGNode>> nodes) {
+		for (Edge<CGNode> e : cg.getEdges()) {
+			String frVertexName = e.getFrom().getName();
+			String toVertexName = e.getTo().getName();
 
-	public String generateDependencyFacts() throws ClassPathInvalidException {
+			DependencyType depType = findFactOperatorOfDepsEdge(e);
+			String frName, toName;
+			if (fuzzy) {
+				frName = matchWithGenericType(frVertexName);
+				toName = matchWithGenericType(toVertexName);
+			} else {
+				frName = frVertexName;
+				toName = toVertexName;
+			}
+			StringBuilder fact = new StringBuilder().append(String.format("%s\t%s", frName, toName));
+			if (!versionize.equals("")) {
+				fact.append("\t").append(versionize);
+			}
+			BufferedWriter w = m.get(depType.getName());
+			try {
+				w.write(fact.append("\n").toString());
+			} catch (IOException exp) {
+				PrintUtils.print(String.format("Exception when writing %s fact:\n%s" , depType.getName(), fact),
+						PrintUtils.TAG.WARNING);
+				exp.printStackTrace();
+			}
+			// collect CGNodes
+			CGNode nFrom = e.getFrom().getData();
+			CGNode nTo = e.getTo().getData();
+			nodes.get(nFrom.getNodeType()).add(nFrom);
+			nodes.get(nTo.getNodeType()).add(nTo);
+		}
+
+	}
+
+	private static void generateClassesFacts(BcelStaticCallGraphBuilder cgBuilder, Path outputFile) {
+		ArrayList<String> classNames = cgBuilder.getClassNames();
+		try {
+			BufferedWriter factsFileWriter = Files.newBufferedWriter(outputFile, StandardOpenOption.CREATE);
+			for (String e : classNames) {
+				String fact = String.format("%s\n", e);
+				factsFileWriter.write(fact);
+			}
+			factsFileWriter.flush();
+			factsFileWriter.close();
+		} catch (IOException e) {
+			PrintUtils.print(String.format("Exception when writing facts file [%s]", outputFile), PrintUtils.TAG.WARNING);
+			e.printStackTrace();
+		}
+	}
+
+	public void generateDependencyFacts() throws ClassPathInvalidException {
 		PrintUtils.print("COMPUTING DEPS FACTS..."); // dependency facts
 		try {
 			Files.createDirectories(depFactsDir);
 		} catch (IOException e) {
 			PrintUtils.print(String.format("Cannot create directory for dep-facts @ %s", depFactsDir),
 					PrintUtils.TAG.WARNING);
-			return "";
+			return;
 		}
 		BcelStaticCallGraphBuilder cgBuilder = new BcelStaticCallGraphBuilder(fClassRootPath);
-        generateInheritFacts(cgBuilder, depFactsDir);
-		return computeDependencyFacts(cgBuilder, depFactsDir, versionize, fuzzyNames);
+
+		BcelStaticCallGraphBuilder testCG  = buildCallGraphForTestClasses(fClassRootPath);
+		// TODO: may generate inherit facts for all classes in the future
+		generateInheritFacts(testCG, depFactsDir);
+		generateClassesFacts(testCG, depFactsDir.resolve("TestClass.facts"));
+
+		computeDependencyFacts(cgBuilder, testCG, depFactsDir, versionize, fuzzyNames);
 	}
 
+	@Deprecated
 	public static String computeDependencyFacts(BcelStaticCallGraphBuilder cgBuilder, Path depFactsDir) throws ClassPathInvalidException {
-		return computeDependencyFacts(cgBuilder, depFactsDir, "", false);
+		return computeDependencyFacts(cgBuilder, null, depFactsDir, "", false);
 	}
 
-	private static String computeDependencyFacts(BcelStaticCallGraphBuilder cgBuilder, Path depFactsDir,
-												 String versionize, boolean fuzzy) {
+	private static String computeDependencyFacts(BcelStaticCallGraphBuilder cgBuilder,
+												 BcelStaticCallGraphBuilder testCGBuilder,
+												 Path depFactsDir, String versionize, boolean fuzzy) {
 		HashMap<String, BufferedWriter> factsWritersMap = new HashMap<>();
 		HashMap<CGNodeType, HashSet<CGNode>> nodes = new HashMap<>();
 		try {
@@ -154,39 +201,24 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 			e.printStackTrace();
 		}
 
+		// get facts about src classes
 		cgBuilder.buildCallGraph();
 		StaticCallGraph depsCG = cgBuilder.getCallGraph();
 		// depsCG.outputDOTFile("/tmp/deps-graph.txt");
-		for (Edge<CGNode> e : depsCG.getEdges()) {
-			String frVertexName = e.getFrom().getName();
-			String toVertexName = e.getTo().getName();
+        writeFactsFromCGEdges(depsCG, fuzzy, factsWritersMap, nodes);
+		HashMap<String, String> nestedClassMap = cgBuilder.getNestedClass();
+		HashSet<String> abstractClasses = new HashSet<>(cgBuilder.getAbstractClasses());
+		HashSet<String> testClasses = new HashSet<>();
+		HashMap<String, String> superClassMap = new HashMap<>();
 
-			DependencyType depType = findFactOperatorOfDepsEdge(e);
-			String frName, toName;
-			if (fuzzy) {
-				frName = matchWithGenericType(frVertexName);
-				toName = matchWithGenericType(toVertexName);
-			} else {
-				frName = frVertexName;
-				toName = toVertexName;
-			}
-			StringBuilder fact = new StringBuilder().append(String.format("%s\t%s", frName, toName));
-			if (!versionize.equals("")) {
-				fact.append("\t").append(versionize);
-			}
-			BufferedWriter w = factsWritersMap.get(depType.getName());
-			try {
-				w.write(fact.append("\n").toString());
-			} catch (IOException exp) {
-				PrintUtils.print(String.format("Exception when writing %s fact:\n%s" , depType.getName(), fact),
-						PrintUtils.TAG.WARNING);
-				exp.printStackTrace();
-			}
-			// collect CGNodes
-			CGNode nFrom = e.getFrom().getData();
-			CGNode nTo = e.getTo().getData();
-			nodes.get(nFrom.getNodeType()).add(nFrom);
-			nodes.get(nTo.getNodeType()).add(nTo);
+		if (testCGBuilder != null) {
+			testCGBuilder.buildCallGraph();
+			nestedClassMap.putAll(testCGBuilder.getNestedClass());
+			abstractClasses.addAll(testCGBuilder.getAbstractClasses());
+			testClasses.addAll(testCGBuilder.getClassNames());
+			superClassMap.putAll(testCGBuilder.getInheritPairs());
+			StaticCallGraph depsCGTest = testCGBuilder.getCallGraph();
+			writeFactsFromCGEdges(depsCGTest, fuzzy, factsWritersMap, nodes);
 		}
 
 		try{
@@ -195,7 +227,7 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 				for (CGNode e: entry.getValue()) {
 					BufferedWriter w = factsWritersMap.get("Is" + nodeType.name());
 					if (nodeType == CGNodeType.Method) {
-						MethodNode method = (MethodNode)e;
+						MethodNode method = (MethodNode) e;
 						String fqName = method.getName();
 						String fqClassName = method.getFqClassName();
 						String simpleName = rmParams(method.getMethodName());
@@ -204,6 +236,15 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 						boolean isCtor = isCtor(fqName);
 						// w.write(String.format("%s\t%s\t%s\t%s\t%s", qualifiedName, simpleName, numOfParams, retType, isCtor));
 						w.write(String.format("%s\t%s\t%s\t%s\t%s\t%s", fqName, simpleName, fqClassName, numOfParams, retType, isCtor));
+					} else if (nodeType == CGNodeType.Class) {
+						ClassNode clazz = (ClassNode) e;
+						String fqName = clazz.getName();
+						boolean isNested = nestedClassMap.containsKey(fqName);
+						String outer = isNested ? nestedClassMap.get(fqName) : fqName;
+						boolean isAbstract = abstractClasses.contains(fqName);
+						boolean isTestClass = testClasses.contains(fqName);
+						String superClass = superClassMap.getOrDefault(fqName, "no-super-class");
+						w.write(String.format("%s\t%s\t%s\t%s\t%s\t%s", fqName, isAbstract, superClass, isNested, outer, isTestClass));
 					} else {
 						w.write(e.getName());
 					}
@@ -240,9 +281,9 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 	}
 
 	private static void generateInheritFacts(BcelStaticCallGraphBuilder cgBuilder, Path outputDir) {
-		HashMap<String, String> classParents = new HashMap<>();
-		ArrayList<String> abstractClazz = new ArrayList<>();
-		cgBuilder.getMoreClassInfo(classParents, abstractClazz);
+		// cgBuilder.getMoreClassInfo(classParents, abstractClazz);
+		HashMap<String, String> classParents = cgBuilder.getInheritPairs();
+		ArrayList<String> abstractClazz = cgBuilder.getAbstractClasses();
 		try {
 			BufferedWriter inheritFactsW = new BufferedWriter(
 					new FileWriter(outputDir.resolve("Inherit.facts").toString(), false));
@@ -272,7 +313,7 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 		try {
 			Files.createDirectories(depFactsDir);
 		} catch (IOException e) {
-			PrintUtils.print(String.format("Cannot create directory for cov-facts @ %s", diffFactsDir),
+			PrintUtils.print(String.format("Cannot create directory for cov-facts @ %s", depFactsDir),
 					PrintUtils.TAG.WARNING);
 			return "";
 		}
@@ -315,122 +356,109 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 	}
 
 
-	private static String realCalcMD5(String input) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] md5digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
-			return Hex.encodeHexString(md5digest);
-		} catch (NoSuchAlgorithmException e) {
-			PrintUtils.print("MD5 is not supported now.", PrintUtils.TAG.WARNING);
-			e.printStackTrace();
-			return "";
-		}
-	}
-
 	private boolean preProcessHistory() throws CommitNotFoundException {
-		HashMap<ChangeType, String> factsContents = new HashMap<>();
+		HashMap<FactsChangeType, BufferedWriter> factsWritersMap = new HashMap<>();
+		try{
+			for (FactsChangeType t : FactsChangeType.values()) {
+				Path outputFile = diffFactsDir.resolve(t + ".facts");
+				factsWritersMap.put(t, Files.newBufferedWriter(outputFile, StandardOpenOption.CREATE));
+			}
+		} catch (IOException e) {
+			PrintUtils.print(String.format("Exception when initializing BufferedWriter for " +
+					"diff facts in directory %s", diffFactsDir), PrintUtils.TAG.WARNING);
+			e.printStackTrace();
+		}
 		// for (ChangeType t : ChangeType.values()) {
 		// 	String comment = String.format("// %s\n", t);
 		// 	factsContents.put(t, comment);
 		// }
-		try {
-			ChangeExtractor extractor = new ChangeExtractor(fJGit, fConfig.getProjectJDKVersion());
-			StatsUtils.resume("history.preprocess");
-			for (RevCommit c : fHistory) {
-				Set<GitRefSourceCodeChange> changes;
+		ChangeExtractor extractor = new ChangeExtractor(fJGit, fConfig.getProjectJDKVersion());
+		StatsUtils.resume("history.preprocess");
+		for (RevCommit c : fHistory) {
+			Set<GitRefSourceCodeChange> changes;
+			try {
+				changes = extractor.extractChangesMerge(c);
+			} catch (ChangeDistillerException e) {
+				PrintUtils.print("Exception occurs in change distilling! Result will be unreliable!",
+						PrintUtils.TAG.WARNING);
+				e.printStackTrace();
+				continue;
+			}
+
+			String parentVersion = c.getParent(0).name();
+			String currentVersion = c.name();
+			for (GitRefSourceCodeChange gitChange : changes) {
+				// get change distiller change
+				SourceCodeChange change = gitChange.getSourceCodeChange();
+				// get file path to changed entity
+				String filePath = gitChange.getChangedFilePath();
+				// unique identifier of changed entity
+				String uniqueName = null;
+				// dependency type (reason for keeping)
+				SlicingResult.DEP_FLAG depType = SlicingResult.DEP_FLAG.DROP;
+				// change operation type
+				AtomicChange.CHG_TYPE chgType = null;
+				// parent entity is field/method/class containing the change
+				String parentUniqueName = change.getParentEntity().getUniqueName();
+
+				String operand1 = "";
+				FactsChangeType changeType = null;
+				if (change instanceof Delete) {
+					Delete del = (Delete) change;
+					uniqueName = del.getChangedEntity().getUniqueName();
+					// op = "Delete";
+					changeType = FactsChangeType.DELETE;
+					// row = String.format("%s\t%s\t%s\t%s\n", uniqueName, parentUniqueName, currentVersion, parentVersion);
+				} else if (change instanceof Insert) {
+					Insert ins = (Insert) change;
+					uniqueName = ins.getChangedEntity().getUniqueName();
+					// op = "Insert";
+					changeType = FactsChangeType.INSERT;
+					// row = String.format("%s\t%s\t%s\t%s\n", uniqueName, parentUniqueName, currentVersion, parentVersion);
+				} else if (change instanceof Update) {
+					Update upd = (Update) change;
+					uniqueName = upd.getNewEntity().getUniqueName();
+					// is signature updated?
+					boolean signatureChange = !upd.getChangedEntity().getUniqueName().equals(uniqueName);
+					assert !signatureChange;
+					// op = "Update";
+					changeType = FactsChangeType.UPDATE;
+					// row = String.format("%s\t%s\t%s\n", uniqueName, currentVersion, parentVersion);
+				} else if (change instanceof Move) {
+					// shouldn't detect move for structure nodes
+					assert false;
+				} else
+					assert false;
+
+				if (fuzzyNames) {
+					operand1 = matchWithGenericType(uniqueName);
+				} else {
+					operand1 = uniqueName;
+				}
+				// String tuple = String.format("%s \"%s\" \"%s\"\n", op, operand1, currentVersion);
+				String row = String.format("%s\t%s\t%s\t%s\n", operand1, parentUniqueName, currentVersion, parentVersion);
+				BufferedWriter w = factsWritersMap.get(changeType);
 				try {
-					changes = extractor.extractChangesMerge(c);
-				} catch (ChangeDistillerException e) {
-					PrintUtils.print("Exception occurs in change distilling! Result will be unreliable!",
+					w.write(row);
+				} catch (IOException e) {
+					PrintUtils.print(String.format("Exception when writing line %s into %s ", row, w),
 							PrintUtils.TAG.WARNING);
 					e.printStackTrace();
-					continue;
 				}
-
-				String parentVersion = c.getParent(0).name();
-				String currentVersion = c.name();
-				StringBuilder factsTuplePerCommit = new StringBuilder();
-				StringBuilder factsAttrPerCommit = new StringBuilder();
-				for (GitRefSourceCodeChange gitChange : changes) {
-					// get change distiller change
-					SourceCodeChange change = gitChange.getSourceCodeChange();
-					// get file path to changed entity
-					String filePath = gitChange.getChangedFilePath();
-					// unique identifier of changed entity
-					String uniqueName = null;
-					// dependency type (reason for keeping)
-					SlicingResult.DEP_FLAG depType = SlicingResult.DEP_FLAG.DROP;
-					// change operation type
-					AtomicChange.CHG_TYPE chgType = null;
-					// parent entity is field/method/class containing the change
-					String parentUniqueName = "";
-
-					String operand1 = "";
-					ChangeType changeType = null;
-					if (change instanceof Delete) {
-						Delete del = (Delete) change;
-						uniqueName = del.getChangedEntity().getUniqueName();
-						parentUniqueName = del.getParentEntity().getUniqueName();
-						// op = "Delete";
-						changeType = ChangeType.DELETE;
-						// row = String.format("%s\t%s\t%s\t%s\n", uniqueName, parentUniqueName, currentVersion, parentVersion);
-					} else if (change instanceof Insert) {
-						Insert ins = (Insert) change;
-						uniqueName = ins.getChangedEntity().getUniqueName();
-						parentUniqueName = ins.getParentEntity().getUniqueName();
-						// op = "Insert";
-						changeType = ChangeType.INSERT;
-						// row = String.format("%s\t%s\t%s\t%s\n", uniqueName, parentUniqueName, currentVersion, parentVersion);
-					} else if (change instanceof Update) {
-						Update upd = (Update) change;
-						uniqueName = upd.getNewEntity().getUniqueName();
-						// is signature updated?
-						boolean signatureChange = !upd.getChangedEntity().getUniqueName().equals(uniqueName);
-						assert !signatureChange;
-						// op = "Update";
-						changeType = ChangeType.UPDATE;
-						// row = String.format("%s\t%s\t%s\n", uniqueName, currentVersion, parentVersion);
-					} else if (change instanceof Move) {
-						// shouldn't detect move for structure nodes
-						assert false;
-					} else
-						assert false;
-
-					if (fuzzyNames) {
-						operand1 = matchWithGenericType(uniqueName);
-					} else {
-						operand1 = uniqueName;
-					}
-					// String tuple = String.format("%s \"%s\" \"%s\"\n", op, operand1, currentVersion);
-					String row = String.format("%s\t%s\t%s\t%s\n", operand1, parentUniqueName, currentVersion, parentVersion);
-					factsContents.put(changeType, row);
-					// String attr = String.format(
-					// 		"(%s \"%s\" \"%s\")" + " { name = \"%s\" commit_parent = \"%s\" commit = \"%s\" }\n", op,
-					// 		operand1, currentVersion, uniqueName, parentVersion, currentVersion);
-					// factsTuplePerCommit.append(tuple);
-					// factsAttrPerCommit.append(attr);
-				}
-				// fTupleWriter.append(factsTuplePerCommit.toString());
-				// fAttrWriter.append(factsAttrPerCommit.toString());
 			}
-			// fTupleWriter.flush();
-			// fAttrWriter.flush();
-			// fTupleWriter.close();
-			// fAttrWriter.close();
-			// write hashmap contents to files
-			for (ChangeType t : ChangeType.values()) {
-				Path outFile = diffFactsDir.resolve(t.toString()+".facts");
-				FileWriter fFactWriter = new FileWriter(outFile.toString(), false);
-				fFactWriter.append(factsContents.get(t));
-				fFactWriter.flush();
-				fFactWriter.close();
-			}
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
 		}
-	}
+		for (Map.Entry<FactsChangeType, BufferedWriter> e: factsWritersMap.entrySet()) {
+			try {
+				e.getValue().flush();
+				e.getValue().close();
+			} catch (IOException exp) {
+				PrintUtils.print(String.format("Exception when flushing and closing writer to %s",
+						e.getKey().toString()), PrintUtils.TAG.WARNING);
+				exp.printStackTrace();
+			}
+		}
+		return true;
+}
 
 	private void initializeCoverage(ProjectConfiguration config) throws CoverageDataMissingException {
 
@@ -448,39 +476,6 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 		}
 	}
 
-	private static String filterGenericType(String astName) {
-		return astName.replaceAll(GENERIC_FILTER, StringUtils.EMPTY);
-	}
-
-	/**
-	 * Simplify signature considering matching generics.
-	 */
-	private static String matchWithGenericType(final String name) {
-		String result = filterGenericType(name);
-		if (isFieldName(result)) {
-			result = result.substring(0, result.indexOf(":")).trim();
-		}
-		if (isMethodName(result)) {
-			String params = result.substring(result.indexOf("("));
-			int numOfPar = Math.min(params.split(",").length, params.replaceAll("[)|(|\\s+]", "").length());
-			result = result.substring(0, result.indexOf("(")) + "(" + numOfPar + ")";
-		}
-		return result;
-	}
-
-	private static boolean isFieldName(String sigcp1) {
-		return sigcp1.contains(" : ");
-	}
-
-	private static boolean isClassName(String key) {
-		return key.matches(CLASS_PATTERN);
-	}
-
-	private static boolean isMethodName(String key) {
-		// return key.matches(METHOD_PATTERN) ||
-		// key.matches(METHOD_PATTERN_NOP);
-		return key.indexOf("(") > 0 && key.indexOf(")") > 0;
-	}
 
 	private static String concatVersion(String entity) {
 		return concatVersion(entity, endCommit);
@@ -488,37 +483,5 @@ public class DatalogFactsExtr extends HistoryAnalyzer {
 
 	private static String concatVersion(String entity, String versionStr) {
 		return entity + "@" + versionStr;
-	}
-
-	private static DependencyType findFactOperatorOfDepsEdge(Edge<CGNode> edge) {
-		if (edge.getLabel() == CGEdgeType.FIELD_READ || edge.getLabel() == CGEdgeType.FIELD_WRITE
-				|| edge.getLabel() == CGEdgeType.STATIC_READ || edge.getLabel() == CGEdgeType.STATIC_WRITE
-				|| edge.getLabel() == CGEdgeType.CLASS_REFERENCE || edge.getLabel() == CGEdgeType.FIELD_REFERENCE) {
-			return DependencyType.REFERENCE;
-		} else if (edge.getLabel() == CGEdgeType.INVOKE_INTERFACE || edge.getLabel() == CGEdgeType.INVOKE_SPECIAL
-				|| edge.getLabel() == CGEdgeType.INVOKE_STATIC || edge.getLabel() == CGEdgeType.INVOKE_VIRTUAL) {
-			return DependencyType.CALL;
-		} else if (edge.getLabel() == CGEdgeType.CLASS_FIELD || edge.getLabel() == CGEdgeType.CLASS_METHOD) {
-			return DependencyType.CONTAIN;
-		} else { // default
-			return DependencyType.REFERENCE;
-		}
-	}
-
-	private enum ChangeType {
-		UPDATE, INSERT, DELETE;
-	}
-
-	private enum DependencyType {
-		REFERENCE ("Reference"), CALL ("Call"), CONTAIN ("Contain");
-		private final String normalName;
-
-		DependencyType(String name) {
-			this.normalName = name;
-		}
-
-		String getName() {
-			return normalName;
-		}
 	}
 }
