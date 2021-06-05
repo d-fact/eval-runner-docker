@@ -65,13 +65,17 @@ The easiest way to reproduce the experiment results is to use the provided quick
 provide two scripts for building and running docker containers, i.e., `quick-slicing.sh` and
 `quick-rts.sh`, for reproducing the two experiments described in the paper, respectively.
 
-If users want to modify something and rebuild everything again, `clean.sh` can be used to remove images and destroy the data volume. Note that users can use `docker-compose up slicing-driver` or `docker-compose up rts-driver` directly without rebuilding if changes are only made to the `commands` in `docker-compose.yml`.
+If users want to modify configurations and rebuild everything again, `clean.sh` can be used to 
+remove images and destroy the data volume. Note that users can use `docker-compose up slicing-driver` 
+or `docker-compose up rts-driver` directly without rebuilding if changes are only made to the 
+`commands` in `docker-compose.yml`.
 
-You can also check the following section for detailed step-by-step explanations.
+You can also check the following sections for detailed step-by-step explanations.
 
 ## Reproducing Experiment Results
 Assuming `docker` and `docker-compose` are installed properly and current working directory is at the
-root path of the cloned repo, we can run the following command to build the images for evaluation.
+root path of the cloned repository, we can run the following command to build the docker images for 
+evaluation.
 
 ```sh
 docker-compose -f docker-compose.yml build 
@@ -79,7 +83,7 @@ docker-compose -f docker-compose.yml build
 
 After successful completion, there will be two images--- *diffbase_slicing-driver* and
 *diffbase_rts-driver*. They should be shown in the image list, and their names are usually prefixed
-by the folder name. So you did not clone the repo as `diffbase`, the image names can be different.
+by the folder name. In case you did not clone the repo as `diffbase`, the image names can be different.
 
 ```sh
 % docker image ls
@@ -93,7 +97,7 @@ diffbase_slicing-driver    latest   <some hash>
 docker-compose up slicing-driver
 ```
 
-This takes about three minutes to finish (on my machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
+This takes about three minutes to finish (on a machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
 
 #### Inspect results in data volume
 The outputs and intermediate data are stored in the data volume created by `docker-compose up
@@ -123,12 +127,12 @@ The data volume contains the following sub-directories.
 └── slicing-results
 ```
 
-After `docker-compose up` finishes, the following directories (under the data volume) should contain
-the generated output.
+After `docker-compose up` finishes, exits, the generated outputs can be found within the 
+corresponding directories given below.
 
 #### Generated Facts
 `resources/file-level/output/facts` is the directory for facts generated.
-E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are following files.
+For example, there are following files in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6`.
 ```sh
 ├── 20-deps.ta
 ├── 25-inherit.ta
@@ -138,12 +142,7 @@ E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are f
 └── 90-test_classes.ta
 ```
 
-E.g.`20-deps.ta` contains static dependencies, such as the following snippet. It
-contains following information:
-+ the method `next()` calls `getNextRecord()` in the first anonymous inner class of `CSVParser`;
-+ `next()` is a method;
-+ `Token` is a class;
-+ `Constants.TAB` is a field.
+For example, the file `20-deps.ta` contains static dependencies, as is shown in the following snippet.
 
 ```
 call "org.apache.commons.csv.CSVParser.1.next()" "org.apache.commons.csv.CSVParser.1.getNextRecord()"
@@ -152,16 +151,24 @@ CGNodeType Class "org.apache.commons.csv.Token"
 CGNodeType Field "org.apache.commons.csv.Constants.TAB"
 ```
 
-#### Slicing Results
-`grok_run/grok_results` is the directory for slicing results. 
-They should be same with results in `data/slicing-results` in this repository. 
+The above can be interpreted as follows.
++ The method `next()` calls `getNextRecord()` in the first anonymous inner class of `CSVParser`;
++ `next()` is a method;
++ `Token` is a class;
++ `Constants.TAB` is a field.
 
-E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
+#### Slicing Results
+The slicing results are stored in `grok_run/grok_results`. 
+They should be the same as the ground truth in `data/slicing-results` in this repository. 
+
+For example, `_data/grok_run/grok_results/` should contain the same set of commits as what
+is in the file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`.
 
 
 #### Run Full Evaluation
-To save time, we only run one group of subjects in the slicing evaluation. If you want to replicate
-the evaluation on all subjects, please uncomment the command in `docker-compose.yml` and comment out the current one as shown below.
+By default, we only run one group of the subjects in the quick-start script to save time. 
+If you want to replicate the evaluation on all subjects, please uncomment the command in
+`docker-compose.yml` and comment out the current one as shown below.
 
 ```yml
 command: bash -c "
@@ -176,7 +183,7 @@ command: bash -c "
 # 	"
 ```
 	
-	
+
 ### Evaluate Regression Test Selection (Sec. 4.3)
 ```sh
 docker-compose up rts-driver
@@ -237,10 +244,10 @@ images.)
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
 
-Generated facts reside in `_data/run_grok/facts` and look similar to facts generated in the slicing evaluation above.
+The generated facts reside in `_data/run_grok/facts` and look similar to facts generated in the slicing evaluation above.
 
 The selected test classes are shown under `_data/run_grok/grok_results/`. 
-E.g., if run with `--debug` option, there would be file `Lang-28.affected` with following contents.
+E.g., if run with `--debug` option, there would be a file `Lang-28.affected` with following contents.
 
 ```
 org.apache.commons.lang3.StringEscapeUtilsTest
@@ -248,7 +255,7 @@ org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest
 ```
 
 And if run without `--debug` option (on all subjects), there would be one `.affected` file for each
-bug-id. And you can check them against expected full results in this repo at
+bug-id. And you can check them against the expected full results in this repository at
 [data/rts-results.tar](https://github.com/d-fact/eval-runner-docker/blob/main/data/rts-results.tar).
 
 ---
