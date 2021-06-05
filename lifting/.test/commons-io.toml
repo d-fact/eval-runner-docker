@@ -26,7 +26,7 @@ analysis = "1-call-site-sensitive+heap"
 sha1digits = 8
 
 [merge]
-merger_bin = "lifting/sdiff"
+merger_bin = "/lifting/sdiff"
 
 [output]
 output_dir =  ".dpad"
