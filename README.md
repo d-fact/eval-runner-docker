@@ -285,6 +285,48 @@ cloned repo should locate at `/lifting/.test/commons-csv` in the container. Then
 for the lifted version. and `/lifting/.test/commons-csv/.dpad/fse21-eval-orig` for the un-lifted
 version.
 
+```sh
+/lifting/.test/commons-csv/.dpad/fse21-eval
+├── bytecode
+├── facts
+├── logs
+├── merged
+└── stat
+    └── step-time.json
+```
+
+And the `step-time.json` contains time statistics. Note that `-1` means that we are using
+pre-compiled bytecode to reduce the time for review. And since the compile and collect stages are
+the same between lifted and un-lifted versions, Table 4 in the paper are time comparison between
+`merge` + `analysis` for lifted version and `doop` for un-lifted version.
+
+```
+{
+  "name": "commons-csv",
+  "flavor": "lifted",
+  "compile": -1,
+  "collect": 139.51318192481995,
+  "merge": 0.20537519454956055,
+  "analysis": 5.888551712036133
+}
+```
+
+```
+{
+  "name": "commons-csv",
+  "flavor": "orig",
+  "compile": -1,
+  "doop": 440.2297124862671
+}
+```
+For space usage in Table 4 in the paper, users can use following command to check the size of facts size before and after merging.
+
+```sh
+% du -s facts
+27332
+% du -s merged
+4876
+```
 
 ## Reusing Components
 Besides the replication of evaluation in the paper, all the components in the artifacts can be
