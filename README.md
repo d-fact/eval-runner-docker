@@ -252,6 +252,17 @@ And you can check the expected full results in
 
 ---
 
+### Evaluate Lifting (Sec. 4.4)
+Evaluation of lifting is under `lifting` sub-directory. Cd into `lifting` and build the docker image
+as below. The process will fetch some dependencies remotely and build them from source (in the
+docker of course), which might take some time.
+
+```sh
+cd lifting
+docker build . -t lifting-eval
+```
+
+
 
 ## Reusing Components
 Besides the replication of evaluation in the paper, all the components in the artifacts can be
