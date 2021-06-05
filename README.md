@@ -279,7 +279,7 @@ It will open a bash and there are `run-exp.sh` and `run-all.sh` in the current d
 `run-exp.sh`, it will fetch a git repo, build it and run a pointer-analysis with doop using lifted
 version as well as un-lifted version.
 
-You can check the contents of two scripts [here]() and [here]()
+You can check the contents of two scripts [here](https://github.com/d-fact/eval-runner-docker/blob/main/lifting/dpad/driver/driver/run_exp.sh) and [here](https://github.com/d-fact/eval-runner-docker/blob/main/lifting/dpad/driver/driver/run_all.sh)
 
 Users can inspect result in `.dpad/` sub-directory under each repo. E.g., for commons-csv, the
 cloned repo should locate at `/lifting/.test/commons-csv` in the container. Then there are
