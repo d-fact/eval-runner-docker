@@ -47,6 +47,7 @@ and showing the reusability of components.
 | diffbase.pdf     | Copy of the accepted paper                             |
 | quick-slicing.sh | Script for building dockers and run slicing evaluation |
 | quick-rts.sh     | Script for building dockers and run RTS evaluation     |
+| clean.sh         | Remove built containers and destroy data volume        |
 
 
 #### Pre-requisites
@@ -62,6 +63,8 @@ and showing the reusability of components.
 The easiest way to reproduce the experiment results is to use the provided quick-start scripts.  We
 provide two scripts for building and running docker containers, i.e., `quick-slicing.sh` and
 `quick-rts.sh`, for reproducing the two experiments described in the paper, respectively.
+
+If users want to modify something and rebuild everything again, `clean.sh` can be used to remove images and destroy the data volume. Note that users can use `docker-compose up slicing-driver` or `docker-compose up rts-driver` directly without rebuilding if changes are only made to the `commands` in `docker-compose.yml`.
 
 You can also check the following section for detailed step-by-step explanations.
 
@@ -199,10 +202,13 @@ facts-rts |  'starts': {'Lang': 0.011841326228537596}}
 facts-rts exited with code 0
 ```
 
-The last JSON is the percentage of testing methods selected by each tool.
-They are the same in the example output since we only run one subject here.
+The dictionary at the end of the output is the percentage of testing methods selected by each tool.
+They are the same in the example output since we only run one subject here and all tools report the
+same results on this subject.
 
 To run all examples, remove all `--debug` in the following command in the `docker-compose.yml` file.
+And the output dictionary will contain data shown in Table 3 in the paper. 
+
 
 ```
 command: bash -c "
@@ -214,28 +220,11 @@ command: bash -c "
   "
 ```
 
-If you run the experiments on all subjects (without `--debug` options), the output should be something similar to the below.
+(Readers can also specify bug-ids they prefer to run by modifying the `get_projects(bool)` method in
+`diffbase/factutils/rts/main.py`. Note that changes to source files require rebuilding docker
+images.)
 
-```
-facts-rts | {'Lang-28': 20, 'Lang-29': 1452, 'Lang-30': 1418, 'Lang-31': 1406, 'Lang-32': 62, 'Lang-33': 1387, 'Lang-34': 1387, 'Lang-35': 13, 'Lang-36': 143, 'Lang-37': 12, 'Lang-38': 59, 'Lang-39': 1337, 'Lang-40': 1287, 'Lang-41': 1191, 'Lang-42': 1640, 'Lang-43': 15, 'Lang-44': 22, 'Lang-45': 1637, 'Lang-46': 1585, 'Lang-47': 223, 'Lang-48': 1600, 'Lang-49': 27, 'Lang-50': 37, 'Lang-51': 1533, 'Lang-52': 1533, 'Lang-53': 53, 'Math-5': 1709, 'Math-6': 214, 'Math-7': 169, 'Math-8': 24, 'Math-9': 36, 'Math-10': 2968, 'Math-11': 10, 'Math-12': 1837, 'Math-13': 93, 'Math-14': 109, 'Math-15': 3413, 'Math-16': 3411, 'Math-17': 121, 'Math-18': 43, 'Math-19': 41, 'Math-20': 40, 'Math-21': 13, 'Math-22': 1495, 'Math-23': 25, 'Math-24': 24, 'Math-25': 7, 'Math-26': 2065, 'Math-27': 2065, 'Math-28': 27, 'Math-29': 4, 'Math-30': 3, 'Math-31': 1494, 'Math-32': 55, 'Math-33': 29, 'Math-34': 41, 'Math-35': 17, 'Math-36': 929, 'Math-37': 1114, 'Math-38': 40, 'Math-39': 101, 'Math-40': 177, 'Math-41': 376, 'Math-42': 27, 'Math-43': 210, 'Math-44': 156, 'Math-45': 799, 'Math-46': 989, 'Math-47': 989, 'Math-48': 161, 'Math-49': 65, 'Math-50': 161, 'Math-51': 161, 'Math-52': 33, 'Math-53': 913, 'Math-54': 66, 'Math-55': 34, 'Math-56': 5, 'Math-57': 4, 'Math-58': 8, 'Math-59': 1781, 'Math-60': 56, 'Math-61': 42, 'Math-62': 2, 'Math-63': 1869, 'Math-64': 113, 'Math-65': 151, 'Math-66': 1191, 'Math-67': 2, 'Math-68': 71, 'Math-69': 15, 'Math-70': 169, 'Math-71': 132, 'Math-72': 320, 'Math-73': 320, 'Math-74': 58, 'Math-75': 32, 'Math-76': 17, 'Math-77': 1051, 'Math-78': 132, 'Math-79': 1700, 'Math-80': 36, 'Math-81': 35, 'Math-82': 14, 'Math-83': 17, 'Math-84': 10, 'Math-85': 164, 'Math-86': 12, 'Math-87': 16, 'Math-88': 15, 'Math-89': 31, 'Math-90': 31, 'Math-91': 62, 'Math-92': 885, 'Math-93': 884, 'Math-94': 884, 'Math-95': 21, 'Math-96': 328, 'Math-97': 247, 'Math-98': 180, 'Math-99': 927, 'Math-100': 77, 'Math-101': 382, 'Math-102': 42, 'Math-103': 60, 'Math-104': 121, 'Time-1': 4192, 'Time-2': 4192, 'Time-3': 4189, 'Time-4': 863, 'Time-5': 4164, 'Time-6': 4149, 'Time-7': 4131, 'Time-8': 4122, 'Time-9': 4122, 'Time-10': 4106, 'Time-11': 11, 'Time-12': 4087, 'Time-13': 4067, 'Time-14': 4057, 'Time-15': 4045, 'Time-16': 4044, 'Time-17': 4034, 'Time-18': 4024, 'Time-19': 4022, 'Time-20': 28, 'Time-22': 4024, 'Time-23': 4022, 'Time-24': 4020, 'Time-25': 4004, 'Time-26': 4000}
-facts-rts | Read existing data in /tool/factutils/rts/rts_data/defects4j-numbers.tex
-facts-rts | {'Lang': 26, 'Math': 100, 'Time': 25}
-facts-rts | {'Lang': 26, 'Math': 100, 'Time': 25}
-facts-rts | {'Lang': 26, 'Math': 100, 'Time': 25}
-facts-rts | {'Lang': 26, 'Math': 100, 'Time': 25}
-facts-rts | {'clover': {'Lang': 0.10442886452133189,
-facts-rts |             'Math': 0.09457395642337793,
-facts-rts |             'Time': 1.0},
-facts-rts |  'ekstazi': {'Lang': 0.26403920728983915,
-facts-rts |              'Math': 0.12655773469592618,
-facts-rts |              'Time': 0.47777247822555213},
-facts-rts |  'fact': {'Lang': 0.47676445559736,
-facts-rts |           'Math': 0.17560541259225215,
-facts-rts |           'Time': 0.9899043252167427},
-facts-rts |  'starts': {'Lang': 0.5392278477185252,
-facts-rts |             'Math': 0.19836781254126096,
-facts-rts |             'Time': 1.0}
-```
+
 #### Inspect selection results
 Similar to the history slicing evaluation above, facts and results reside in the data volume after
 the execution finishes.
@@ -250,7 +239,8 @@ org.apache.commons.lang3.StringEscapeUtilsTest
 org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest
 ```
 
-
+And if run without `--debug` option (on all subjects), there would be one `.affected` file for each bug-id.
+And you can check the expected full results in 
 
 ---
 
