@@ -37,7 +37,7 @@ def main():
                 continue
             abs_jar_path = x.resolve()
             doop_run_id: str = f"{cfg.project_name}_{abs_jar_path.stem[:sha1_digit]}_{get_cur_time_str()}"
-            one_step_run(jar_path=abs_jar_path, atype=atype, doop_path=cfg.doop.get("doop_root"), doop_id=doop_run_id,
+            one_step_run(jar_path=abs_jar_path, atype=atype, doop_path=cfg.doop.path, doop_id=doop_run_id,
                          log_dir=outdirs.log, log_level=args.l)
         time_dict["doop"] = time.time() - start_time
 
