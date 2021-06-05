@@ -1,7 +1,3 @@
-🚧 **Work In Progress**
-
---- 
-
 # DiffBase
 
 
@@ -278,6 +274,9 @@ docker run --rm -it --entrypoint bash lifting-eval
 It will open a bash and there are `run-exp.sh` and `run-all.sh` in the current directory. By running
 `run-exp.sh`, it will fetch a git repo, build it and run a pointer-analysis with doop using lifted
 version as well as un-lifted version.
+
+It takes about 10 minutes to run `run-exp.sh` on the machine used for evaluation.
+And `run_all.sh` will take more than one hour in total.
 
 You can check the contents of two scripts [here](https://github.com/d-fact/eval-runner-docker/blob/main/lifting/dpad/driver/driver/run_exp.sh) and [here](https://github.com/d-fact/eval-runner-docker/blob/main/lifting/dpad/driver/driver/run_all.sh).
 
