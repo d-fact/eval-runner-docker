@@ -2,18 +2,22 @@ Badges applied:
 
 Artifacts Available
 
-Our artifact package is publicly accessible at: https://github.com/d-fact/eval-runner-docker
+Our artifact package is publicly accessible at:
+https://github.com/d-fact/eval-runner-docker
 
 Artifacts Functional
 
-Our artifact is released with a README file detailing the usage instructions.
-
+Our artifact is released with a README file detailing the usage
+instructions.  We have provided Dockerfiles for easy and reliable
+reproduction of the experimental results.
 
 Artifacts Reusable
 
-The tool is well-documented and a companion website can be found at: https://d-fact.github.io/ . We
-also provide the fact extractors and query engines as standalone toolchains to facilitate future
+The tool is well-documented and a companion website can be found at:
+https://d-fact.github.io/ . We also provide the fact extractors and
+query engines as standalone toolchains to facilitate future
 extensions.
 
 
-See README and submitted Artifact Documentation in PDF for more details.
+See README and submitted Artifact Documentation in PDF for more
+details.
