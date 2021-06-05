@@ -56,7 +56,7 @@ the paper and supporting the standalone reusable components.
   diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
   - Official Docker Installation Guide at https://docs.docker.com/get-docker/ 
-+ docker-compose (tested with version 1.25.0)
++ Docker Compose (tested with version 1.25.0)
   - Installation Guide at https://docs.docker.com/compose/install/
 
 
