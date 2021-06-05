@@ -36,8 +36,8 @@ usefulness and efficiency.
 └──📜 diffbase.pdf
 ```
 
-There are multiple Dockerfiles inside this repository, for replicating the evaluations in the paper
-and showing the reusability of components.
+There are multiple Dockerfiles inside this repository, for replicating the experiments described in
+the paper and supporting the standalone reusable components.
 
 | Files/Dirs       | Descriptions                                           |
 |------------------|--------------------------------------------------------|
@@ -68,9 +68,9 @@ If users want to modify something and rebuild everything again, `clean.sh` can b
 
 You can also check the following section for detailed step-by-step explanations.
 
-## Evaluation Replication
-Assuming `docker` and `docker-compose` is installed properly and current working directory is at the
-root path of the cloned repo, we can run the following command to build the image for evaluation.
+## Reproducing Experiment Results
+Assuming `docker` and `docker-compose` are installed properly and current working directory is at the
+root path of the cloned repo, we can run the following command to build the images for evaluation.
 
 ```sh
 docker-compose -f docker-compose.yml build 
@@ -92,16 +92,25 @@ diffbase_slicing-driver    latest   <some hash>
 docker-compose up slicing-driver
 ```
 
-This takes about three minutes (on my machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
+This takes about three minutes to finish (on my machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
 
 #### Inspect results in data volume
 The outputs and intermediate data are stored in the data volume created by `docker-compose up
 slicing-driver`.
 
-The mount point of the volume can be checked using `docker volume
-inspect diffbase_datavol`. (If there is no such data volume, you can
-check the correct name of the data volume using `docker volume ls`.)
-A typical path looks like this: `/var/lib/docker/volumes/diffbase_datavol/_data`.
+The mount point of the volume can be checked using `docker volume inspect diffbase_datavol`. (If
+there is no such data volume, you can check the correct name of the data volume using `docker volume
+ls`.)  A typical path looks like this: `/var/lib/docker/volumes/diffbase_datavol/_data`.  This
+directory can be directly accessed on Linux, but it requires some extra steps on macOS and Windows.
+
+Assuming the data volume is at the above path, we create a new Docker container with the volume mounted.
+```sh
+docker run --rm -it -v /:/docker alpine:edge
+```
+We can then access its contents with the spawned shell.
+
+A detailed guide can be found at this blog post:
+<https://www.freshblurbs.com/blog/2017/04/16/inspect-docker-volumes-on-mac.html>.
 
 The data volume contains the following sub-directories.
 ```
@@ -116,8 +125,8 @@ The data volume contains the following sub-directories.
 └── slicing-results
 ```
 
-After `docker-compose up` finished and exited, the following
-directories (under data volume) should contain the generated output.
+After `docker-compose up` finishes, the following directories (under the data volume) should contain
+the generated output.
 
 #### Generated Facts
 `resources/file-level/output/facts` is the directory for facts generated.
@@ -146,7 +155,7 @@ CGNodeType Field "org.apache.commons.csv.Constants.TAB"
 
 #### Slicing Results
 `grok_run/grok_results` is the directory for slicing results. 
-They should be same with results in `data/slicing-results` in this repo. 
+They should be same with results in `data/slicing-results` in this repository. 
 
 E.g., `_data/grok_run/grok_results/` should contain the same set of commits with file `data/slicing-results/CSV-159--b230a6f5-7310e5c6.all`
 
