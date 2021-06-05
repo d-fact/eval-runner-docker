@@ -247,8 +247,9 @@ org.apache.commons.lang3.StringEscapeUtilsTest
 org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest
 ```
 
-And if run without `--debug` option (on all subjects), there would be one `.affected` file for each bug-id.
-And you can check the expected full results in 
+And if run without `--debug` option (on all subjects), there would be one `.affected` file for each
+bug-id. And you can check them against expected full results in this repo at
+[data/rts-results.tar](https://github.com/d-fact/eval-runner-docker/blob/main/data/rts-results.tar).
 
 ---
 
