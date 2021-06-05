@@ -4,26 +4,23 @@ vcs = "git"
 build_system = "maven"
 
 [input]
-repo_path = "/lifting/.test/commons-csv"
+repo_path = "/lifting/.test/commons-lang"
 project_name = "" # if blank, will be basename of repo_path
 # rev_range = "b230a6f5..7310e5c6" # git revision selection
-#rev_range = "7310e5c6~10..7310e5c6"
-rev_range = "7310e5c6~10..7310e5c6"
+rev_range = "76cc69c~10..76cc69c"
 
 [exe-ctrl]
 # full_jar = true
 # incr_jar = true
 multi_process = 4  # if number <= 0 then os.cpu_count() is used
+# steps_to_run = ["compile", "collect", "merge", "analysis"]
 steps_to_run = ["collect", "merge", "analysis"]
-# steps_to_run = ["gumtree"]
-#steps_to_run = ["collect", "merge", "analysis"]
 
 [doop]
 flavor = "lifted"
 doop_root = "/lifting/doop"
+# analysis = "context-insensitive"
 analysis = "1-call-site-sensitive+heap"
-#analysis = "context-insensitive"
-main_class = "CSVParser"
 
 [doop.annotation]
 sha1digits = 8
