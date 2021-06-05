@@ -1,0 +1,644 @@
+Vertex.java	5	EdgeObjects /\ GEN_Edges
+Vertex.java	6	EdgeObjects /\ GEN_Edges
+Vertex.java	8	EdgeObjects /\ GEN_Edges
+Vertex.java	9	EdgeObjects /\ GEN_Edges
+Vertex.java	12	EdgeObjects /\ GEN_Edges
+Vertex.java	13	EdgeObjects /\ GEN_Edges
+Vertex.java	17	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	18	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	20	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	21	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	24	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	25	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	29	EdgeObjects /\ G_NoEdges
+Vertex.java	30	EdgeObjects /\ G_NoEdges
+Vertex.java	32	EdgeObjects /\ G_NoEdges
+Vertex.java	33	EdgeObjects /\ G_NoEdges
+Vertex.java	36	EdgeObjects /\ G_NoEdges
+Vertex.java	37	EdgeObjects /\ G_NoEdges
+Vertex.java	41	GEN_Edges
+Vertex.java	42	GEN_Edges
+Vertex.java	44	GEN_Edges
+Vertex.java	45	GEN_Edges
+Vertex.java	48	GEN_Edges
+Vertex.java	49	GEN_Edges
+Vertex.java	53	GN_OnlyNeighbors
+Vertex.java	54	GN_OnlyNeighbors
+Vertex.java	56	GN_OnlyNeighbors
+Vertex.java	57	GN_OnlyNeighbors
+Vertex.java	60	GN_OnlyNeighbors
+Vertex.java	61	GN_OnlyNeighbors
+Vertex.java	65	G_NoEdges
+Vertex.java	66	G_NoEdges
+Vertex.java	68	G_NoEdges
+Vertex.java	69	G_NoEdges
+Vertex.java	72	G_NoEdges
+Vertex.java	73	G_NoEdges
+Vertex.java	88	G_NoEdges
+Vertex.java	90	GN_OnlyNeighbors
+Vertex.java	92	G_NoEdges
+Vertex.java	93	G_NoEdges
+Vertex.java	96	G_NoEdges
+Vertex.java	97	Weighted /\ G_NoEdges
+Vertex.java	98	Weighted /\ G_NoEdges
+Vertex.java	102	G_NoEdges
+Vertex.java	103	G_NoEdges
+Vertex.java	105	GN_OnlyNeighbors
+Vertex.java	106	GN_OnlyNeighbors
+Vertex.java	108	GEN_Edges
+Vertex.java	115	G_NoEdges
+Vertex.java	116	Undirected /\ G_NoEdges
+Vertex.java	117	Undirected /\ G_NoEdges
+Vertex.java	119	Undirected /\ G_NoEdges
+Vertex.java	122	G_NoEdges
+Vertex.java	123	G_NoEdges
+Vertex.java	126	G_NoEdges
+Vertex.java	127	G_NoEdges
+Vertex.java	130	G_NoEdges
+Vertex.java	131	G_NoEdges
+Vertex.java	134	G_NoEdges
+Vertex.java	137	GN_OnlyNeighbors
+Vertex.java	138	GN_OnlyNeighbors
+Vertex.java	141	GN_OnlyNeighbors
+Vertex.java	142	Weighted /\ GN_OnlyNeighbors
+Vertex.java	145	GEN_Edges
+Vertex.java	147	GEN_Edges
+Vertex.java	148	GEN_Edges
+Vertex.java	151	EdgeObjects
+Vertex.java	153	EdgeObjects /\ G_NoEdges
+Vertex.java	154	EdgeObjects /\ G_NoEdges
+Vertex.java	156	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	157	EdgeObjects /\ GN_OnlyNeighbors
+Vertex.java	159	EdgeObjects /\ GEN_Edges
+Vertex.java	163	GN_OnlyNeighbors
+Vertex.java	164	GN_OnlyNeighbors
+Vertex.java	165	GEN_Edges
+Vertex.java	166	GEN_Edges
+Vertex.java	167	G_NoEdges
+Vertex.java	170	Weighted /\ G_NoEdges
+Vertex.java	172	Weighted
+Vertex.java	173	Weighted /\ G_NoEdges
+Vertex.java	174	Weighted /\ GN_OnlyNeighbors
+Vertex.java	177	Weighted /\ G_NoEdges
+Vertex.java	178	Weighted /\ G_NoEdges
+Vertex.java	179	Weighted /\ G_NoEdges
+Vertex.java	182	SearchBase
+Vertex.java	184	SearchBase
+Vertex.java	185	SearchBase
+Vertex.java	186	SearchBase
+Vertex.java	189	SearchBase
+Vertex.java	190	SearchBase /\ BFS
+Vertex.java	191	SearchBase
+Vertex.java	192	SearchBase /\ BFS
+Vertex.java	196	SearchBase
+Vertex.java	198	SearchBase
+Vertex.java	199	SearchBase
+Vertex.java	205	SearchBase
+Vertex.java	207	DFS /\ SearchBase
+Vertex.java	208	DFS /\ SearchBase
+Vertex.java	209	DFS /\ SearchBase
+Vertex.java	210	DFS /\ SearchBase
+Vertex.java	215	SearchBase
+Vertex.java	218	SearchBase /\ BFS
+Vertex.java	219	SearchBase /\ BFS
+Vertex.java	222	SearchBase /\ BFS
+Vertex.java	223	SearchBase /\ BFS
+Vertex.java	229	SearchBase /\ BFS
+Vertex.java	230	SearchBase /\ BFS
+Vertex.java	231	SearchBase /\ BFS
+Vertex.java	232	SearchBase /\ BFS
+Vertex.java	236	Number
+Vertex.java	238	Connected
+Vertex.java	240	StronglyConnected
+Vertex.java	242	StronglyConnected
+Vertex.java	244	Cycle
+Vertex.java	246	Cycle
+Vertex.java	248	MSTKruskal
+Vertex.java	250	MSTKruskal
+Vertex.java	252	MSTPrim
+Vertex.java	254	MSTPrim
+Vertex.java	258	Weighted /\ G_NoEdges
+Vertex.java	259	Weighted /\ G_NoEdges
+Vertex.java	260	Weighted /\ G_NoEdges
+Vertex.java	270	SearchBase
+Vertex.java	271	SearchBase
+Vertex.java	273	SearchBase
+Vertex.java	275	Number
+Vertex.java	276	Connected
+Vertex.java	277	StronglyConnected
+Vertex.java	278	StronglyConnected
+Vertex.java	279	Cycle
+Vertex.java	280	MSTKruskal
+Vertex.java	281	MSTKruskal
+Vertex.java	283	MSTKruskal
+Vertex.java	285	MSTPrim
+GlobalVarsWrapper.java	4	BFS
+GlobalVarsWrapper.java	5	BFS
+Graph.java	20	MSTPrim
+Graph.java	21	MSTPrim
+Graph.java	22	MSTPrim
+Graph.java	23	MSTPrim
+Graph.java	24	MSTPrim
+Graph.java	25	MSTPrim
+Graph.java	26	MSTPrim
+Graph.java	30	MSTKruskal
+Graph.java	31	MSTKruskal
+Graph.java	32	MSTKruskal
+Graph.java	33	MSTKruskal
+Graph.java	34	MSTKruskal
+Graph.java	35	MSTKruskal
+Graph.java	36	MSTKruskal
+Graph.java	40	StronglyConnected
+Graph.java	41	StronglyConnected
+Graph.java	42	StronglyConnected
+Graph.java	43	StronglyConnected
+Graph.java	45	StronglyConnected
+Graph.java	46	StronglyConnected
+Graph.java	47	StronglyConnected
+Graph.java	51	EdgeObjects
+Graph.java	52	EdgeObjects
+Graph.java	54	EdgeObjects
+Graph.java	55	EdgeObjects
+Graph.java	58	EdgeObjects
+Graph.java	59	EdgeObjects
+Graph.java	65	EdgeObjects
+Graph.java	69	GEN_Edges
+Graph.java	77	EdgeObjects
+Graph.java	79	EdgeObjects
+Graph.java	80	EdgeObjects
+Graph.java	81	EdgeObjects
+Graph.java	82	EdgeObjects
+Graph.java	83	EdgeObjects
+Graph.java	84	EdgeObjects
+Graph.java	86	EdgeObjects /\ GN_OnlyNeighbors
+Graph.java	87	EdgeObjects
+Graph.java	88	EdgeObjects
+Graph.java	89	EdgeObjects /\ G_NoEdges
+Graph.java	90	EdgeObjects /\ GN_OnlyNeighbors
+Graph.java	91	EdgeObjects
+Graph.java	93	EdgeObjects /\ G_NoEdges
+Graph.java	94	EdgeObjects /\ Weighted /\ G_NoEdges
+Graph.java	96	EdgeObjects /\ GN_OnlyNeighbors
+Graph.java	97	EdgeObjects /\ GN_OnlyNeighbors
+Graph.java	98	EdgeObjects /\ Weighted /\ GN_OnlyNeighbors
+Graph.java	103	EdgeObjects
+Graph.java	106	EdgeObjects
+Graph.java	112	EdgeObjects
+Graph.java	113	EdgeObjects
+Graph.java	118	Weighted
+Graph.java	121	G_NoEdges
+Graph.java	122	Undirected /\ G_NoEdges
+Graph.java	123	Weighted /\ G_NoEdges
+Graph.java	124	Undirected /\ Weighted /\ G_NoEdges
+Graph.java	125	G_NoEdges
+Graph.java	126	G_NoEdges
+Graph.java	128	GN_OnlyNeighbors
+Graph.java	129	Weighted /\ GN_OnlyNeighbors
+Graph.java	131	GN_OnlyNeighbors
+Graph.java	132	GN_OnlyNeighbors
+Graph.java	133	GN_OnlyNeighbors
+Graph.java	135	GEN_Edges
+Graph.java	136	Weighted /\ GEN_Edges
+Graph.java	138	GEN_Edges
+Graph.java	139	GEN_Edges
+Graph.java	140	GEN_Edges
+Graph.java	141	GEN_Edges
+Graph.java	142	GEN_Edges
+Graph.java	146	GN_OnlyNeighbors
+Graph.java	147	GN_OnlyNeighbors
+Graph.java	148	Undirected /\ GN_OnlyNeighbors
+Graph.java	149	Undirected /\ GN_OnlyNeighbors
+Graph.java	150	Undirected /\ Weighted /\ GN_OnlyNeighbors
+Graph.java	176	GEN_Edges
+Graph.java	177	GEN_Edges
+Graph.java	178	GEN_Edges
+Graph.java	180	GEN_Edges
+Graph.java	187	Benchmark
+Graph.java	189	Benchmark
+Graph.java	192	Benchmark
+Graph.java	194	Benchmark
+Graph.java	195	Benchmark
+Graph.java	196	Benchmark
+Graph.java	197	Benchmark
+Graph.java	198	Benchmark
+Graph.java	202	Benchmark
+Graph.java	203	Benchmark
+Graph.java	206	Benchmark
+Graph.java	207	Benchmark
+Graph.java	208	Benchmark
+Graph.java	209	Benchmark
+Graph.java	211	Benchmark
+Graph.java	212	Benchmark
+Graph.java	213	Benchmark
+Graph.java	216	Benchmark
+Graph.java	218	Benchmark
+Graph.java	219	Benchmark
+Graph.java	220	Benchmark
+Graph.java	222	Benchmark
+Graph.java	224	Benchmark
+Graph.java	226	Benchmark
+Graph.java	227	Benchmark
+Graph.java	230	Benchmark
+Graph.java	231	Benchmark
+Graph.java	232	Benchmark
+Graph.java	233	Benchmark
+Graph.java	236	Benchmark
+Graph.java	237	Benchmark
+Graph.java	238	Benchmark
+Graph.java	241	Benchmark
+Graph.java	242	Benchmark
+Graph.java	243	Benchmark
+Graph.java	246	Benchmark
+Graph.java	247	Benchmark
+Graph.java	248	Benchmark
+Graph.java	249	Benchmark
+Graph.java	253	Prog
+Graph.java	255	Prog /\ Connected
+Graph.java	257	Cycle /\ Prog
+Graph.java	259	MSTKruskal /\ Prog
+Graph.java	260	MSTKruskal /\ Prog
+Graph.java	261	MSTKruskal /\ Prog
+Graph.java	262	MSTKruskal /\ Prog
+Graph.java	264	MSTPrim /\ Prog
+Graph.java	265	MSTPrim /\ Prog
+Graph.java	266	MSTPrim /\ Prog
+Graph.java	267	MSTPrim /\ Prog
+Graph.java	269	Prog /\ Number
+Graph.java	271	Prog /\ StronglyConnected
+Graph.java	272	Prog /\ StronglyConnected
+Graph.java	273	Prog /\ StronglyConnected
+Graph.java	274	Prog /\ StronglyConnected
+Graph.java	277	EdgeObjects
+Graph.java	278	EdgeObjects
+Graph.java	279	EdgeObjects
+Graph.java	280	EdgeObjects
+Graph.java	281	EdgeObjects
+Graph.java	282	EdgeObjects
+Graph.java	283	EdgeObjects
+Graph.java	284	EdgeObjects
+Graph.java	285	EdgeObjects
+Graph.java	286	EdgeObjects
+Graph.java	288	EdgeObjects
+Graph.java	291	SearchBase
+Graph.java	293	SearchBase
+Graph.java	294	SearchBase
+Graph.java	295	SearchBase
+Graph.java	299	SearchBase
+Graph.java	300	SearchBase
+Graph.java	301	SearchBase
+Graph.java	305	SearchBase
+Graph.java	306	SearchBase
+Graph.java	307	SearchBase
+Graph.java	308	SearchBase
+Graph.java	309	SearchBase
+Graph.java	314	Number
+Graph.java	315	Number
+Graph.java	318	Connected
+Graph.java	319	Connected
+Graph.java	322	StronglyConnected
+Graph.java	324	StronglyConnected
+Graph.java	327	StronglyConnected
+Graph.java	330	StronglyConnected
+Graph.java	334	StronglyConnected
+Graph.java	337	StronglyConnected
+Graph.java	338	StronglyConnected
+Graph.java	340	StronglyConnected
+Graph.java	344	Transpose
+Graph.java	345	Transpose
+Graph.java	346	Transpose
+Graph.java	347	Transpose
+Graph.java	350	Transpose
+Graph.java	353	Transpose
+Graph.java	354	Transpose
+Graph.java	355	Transpose
+Graph.java	356	Transpose
+Graph.java	357	Transpose
+Graph.java	360	Transpose
+Graph.java	361	Transpose
+Graph.java	362	Transpose
+Graph.java	363	Transpose
+Graph.java	366	Transpose
+Graph.java	367	Transpose
+Graph.java	370	Transpose
+Graph.java	372	Transpose
+Graph.java	374	Transpose
+Graph.java	375	Transpose
+Graph.java	377	Transpose
+Graph.java	381	Transpose
+Graph.java	384	Transpose
+Graph.java	388	Transpose
+Graph.java	392	Cycle
+Graph.java	393	Cycle
+Graph.java	394	Cycle
+Graph.java	395	Cycle
+Graph.java	398	MSTKruskal
+Graph.java	401	MSTKruskal
+Graph.java	406	MSTKruskal
+Graph.java	407	MSTKruskal
+Graph.java	408	MSTKruskal
+Graph.java	409	MSTKruskal
+Graph.java	415	MSTKruskal
+Graph.java	420	MSTKruskal
+Graph.java	423	MSTKruskal
+Graph.java	426	MSTKruskal
+Graph.java	428	MSTKruskal
+Graph.java	430	MSTKruskal
+Graph.java	431	MSTKruskal
+Graph.java	432	MSTKruskal
+Graph.java	434	MSTKruskal
+Graph.java	435	MSTKruskal
+Graph.java	437	MSTKruskal
+Graph.java	440	MSTKruskal
+Graph.java	441	MSTKruskal
+Graph.java	443	MSTKruskal
+Graph.java	448	MSTKruskal
+Graph.java	449	MSTKruskal
+Graph.java	450	MSTKruskal
+Graph.java	451	MSTKruskal
+Graph.java	453	MSTKruskal
+Graph.java	454	MSTKruskal
+Graph.java	455	MSTKruskal
+Graph.java	456	MSTKruskal
+Graph.java	457	MSTKruskal
+Graph.java	458	MSTKruskal
+Graph.java	459	MSTKruskal
+Graph.java	460	MSTKruskal
+Graph.java	461	MSTKruskal
+Graph.java	462	MSTKruskal
+Graph.java	463	MSTKruskal
+Graph.java	465	MSTKruskal
+Graph.java	466	MSTKruskal
+Graph.java	467	MSTKruskal
+Graph.java	468	MSTKruskal
+Graph.java	469	MSTKruskal
+Graph.java	470	MSTKruskal
+Graph.java	480	MSTKruskal
+Graph.java	481	MSTKruskal
+Graph.java	484	MSTKruskal
+Graph.java	485	MSTKruskal
+Graph.java	486	MSTKruskal
+Graph.java	490	MSTKruskal
+Graph.java	491	MSTKruskal
+Graph.java	492	MSTKruskal
+Graph.java	497	MSTKruskal
+Graph.java	499	MSTKruskal
+Graph.java	500	MSTKruskal
+Graph.java	501	MSTKruskal
+Graph.java	504	MSTKruskal
+Graph.java	505	MSTKruskal
+Graph.java	511	MSTKruskal
+Graph.java	512	MSTKruskal
+Graph.java	513	MSTKruskal
+Graph.java	515	MSTKruskal
+Graph.java	519	MSTPrim
+Graph.java	520	MSTPrim
+Graph.java	522	MSTPrim
+Graph.java	523	MSTPrim
+Graph.java	526	MSTPrim
+Graph.java	527	MSTPrim
+Graph.java	528	MSTPrim
+Graph.java	529	MSTPrim
+Graph.java	533	MSTPrim
+Graph.java	534	MSTPrim
+Graph.java	539	MSTPrim
+Graph.java	540	MSTPrim
+Graph.java	543	MSTPrim
+Graph.java	544	MSTPrim
+Graph.java	545	MSTPrim
+Graph.java	546	MSTPrim
+Graph.java	547	MSTPrim
+Graph.java	548	MSTPrim
+Graph.java	549	MSTPrim
+Graph.java	550	MSTPrim
+Graph.java	558	MSTPrim
+Graph.java	559	MSTPrim
+Graph.java	560	MSTPrim
+Graph.java	561	MSTPrim
+Graph.java	562	MSTPrim
+Graph.java	564	MSTPrim
+Graph.java	565	MSTPrim
+Graph.java	570	MSTPrim
+Graph.java	573	MSTPrim
+Graph.java	574	MSTPrim
+Graph.java	577	MSTPrim
+Graph.java	579	MSTPrim
+Graph.java	580	MSTPrim
+Graph.java	581	MSTPrim
+Graph.java	582	MSTPrim
+Graph.java	584	MSTPrim
+Graph.java	587	MSTPrim
+Graph.java	590	MSTPrim
+Graph.java	591	MSTPrim
+Graph.java	592	MSTPrim
+Graph.java	595	MSTPrim
+Graph.java	596	MSTPrim
+Graph.java	597	MSTPrim
+Graph.java	598	MSTPrim
+Graph.java	604	MSTPrim
+Graph.java	605	MSTPrim
+Graph.java	608	MSTPrim
+Graph.java	611	MSTPrim
+Graph.java	612	MSTPrim
+Graph.java	615	MSTPrim
+Graph.java	616	MSTPrim
+Graph.java	617	MSTPrim
+Graph.java	619	MSTPrim
+Graph.java	620	MSTPrim
+Graph.java	622	MSTPrim
+Graph.java	629	MSTPrim
+Graph.java	630	MSTPrim
+Graph.java	633	MSTPrim
+Graph.java	634	MSTPrim
+Graph.java	635	MSTPrim
+Graph.java	637	MSTPrim
+Graph.java	641	MSTPrim
+Graph.java	642	MSTPrim
+Graph.java	643	MSTPrim
+Graph.java	646	MSTPrim
+Graph.java	648	MSTPrim
+Graph.java	650	MSTPrim
+Graph.java	654	MSTPrim
+Graph.java	655	MSTPrim
+Graph.java	658	MSTPrim
+Graph.java	659	MSTPrim
+Graph.java	663	MSTPrim
+Graph.java	664	MSTPrim
+Graph.java	665	MSTPrim
+Graph.java	667	MSTPrim
+CycleWorkSpace.java	3	Cycle
+CycleWorkSpace.java	5	Cycle
+CycleWorkSpace.java	7	Cycle
+CycleWorkSpace.java	9	Cycle
+CycleWorkSpace.java	11	Cycle
+CycleWorkSpace.java	13	Cycle
+CycleWorkSpace.java	15	Cycle
+CycleWorkSpace.java	16	Cycle
+CycleWorkSpace.java	17	Cycle
+CycleWorkSpace.java	20	Cycle
+CycleWorkSpace.java	21	Cycle
+CycleWorkSpace.java	22	Cycle
+CycleWorkSpace.java	25	Cycle
+CycleWorkSpace.java	28	Cycle
+CycleWorkSpace.java	30	Cycle
+CycleWorkSpace.java	31	Cycle
+CycleWorkSpace.java	35	Cycle
+CycleWorkSpace.java	36	Cycle
+CycleWorkSpace.java	37	Cycle
+CycleWorkSpace.java	40	Cycle
+CycleWorkSpace.java	48	Cycle /\ Directed
+CycleWorkSpace.java	49	Cycle /\ Directed
+CycleWorkSpace.java	52	Cycle /\ Undirected
+CycleWorkSpace.java	53	Cycle /\ Undirected
+CycleWorkSpace.java	54	Cycle /\ Undirected
+Neighbor.java	4	GN_OnlyNeighbors
+Neighbor.java	9	GN_OnlyNeighbors
+Neighbor.java	10	GEN_Edges
+Neighbor.java	11	GEN_Edges
+Neighbor.java	14	GN_OnlyNeighbors
+Neighbor.java	15	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	16	GN_OnlyNeighbors
+Neighbor.java	17	GN_OnlyNeighbors
+Neighbor.java	18	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	21	GN_OnlyNeighbors
+Neighbor.java	22	GN_OnlyNeighbors
+Neighbor.java	25	GN_OnlyNeighbors
+Neighbor.java	26	GN_OnlyNeighbors
+Neighbor.java	29	GN_OnlyNeighbors
+Neighbor.java	30	GN_OnlyNeighbors
+Neighbor.java	33	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	35	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	36	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	39	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	40	Weighted /\ GN_OnlyNeighbors
+Neighbor.java	43	GN_OnlyNeighbors
+Neighbor.java	44	GN_OnlyNeighbors
+Neighbor.java	47	GN_OnlyNeighbors
+Neighbor.java	50	GEN_Edges
+Neighbor.java	52	GEN_Edges
+Neighbor.java	54	GEN_Edges
+Neighbor.java	55	GEN_Edges
+Neighbor.java	56	GEN_Edges
+NumberWorkSpace.java	1	Number
+NumberWorkSpace.java	2	Number
+NumberWorkSpace.java	4	Number
+NumberWorkSpace.java	5	Number
+NumberWorkSpace.java	8	Number
+NumberWorkSpace.java	10	Number
+NumberWorkSpace.java	11	Number
+RegionWorkSpace.java	4	Connected
+RegionWorkSpace.java	6	Connected
+RegionWorkSpace.java	8	Connected
+RegionWorkSpace.java	9	Connected
+RegionWorkSpace.java	10	Connected
+RegionWorkSpace.java	13	Connected
+RegionWorkSpace.java	14	Connected
+RegionWorkSpace.java	15	Connected
+RegionWorkSpace.java	18	Connected
+RegionWorkSpace.java	19	Connected
+RegionWorkSpace.java	20	Connected
+RegionWorkSpace.java	23	Connected
+RegionWorkSpace.java	24	Connected
+RegionWorkSpace.java	25	Connected
+WorkSpace.java	1	SearchBase
+WorkSpace.java	2	SearchBase
+WorkSpace.java	5	SearchBase
+WorkSpace.java	8	SearchBase
+WorkSpace.java	11	SearchBase
+WorkSpace.java	14	SearchBase
+Main.java	3	Prog
+Main.java	6	Prog
+Main.java	8	Prog
+Main.java	10	Prog
+Main.java	12	Prog
+Main.java	13	Prog
+Main.java	16	Prog
+Main.java	19	Prog
+Main.java	20	Prog
+Main.java	21	Prog
+Main.java	26	Prog
+Main.java	27	Prog
+Main.java	28	Prog
+Main.java	29	Prog
+Main.java	30	Prog
+Main.java	31	Prog
+Main.java	32	Prog
+Main.java	33	Prog
+Main.java	34	Prog
+Main.java	38	Prog
+Main.java	39	Prog
+Main.java	40	Prog
+Main.java	43	Prog
+Main.java	44	Prog
+Main.java	45	Prog
+Main.java	46	Prog
+Main.java	50	Prog
+Main.java	51	Prog
+Main.java	52	Prog
+Main.java	53	Prog
+Main.java	55	Prog
+Main.java	58	Prog
+Main.java	61	Prog
+Main.java	62	Prog
+Main.java	63	Prog
+Main.java	67	Prog
+Main.java	68	Prog
+Main.java	71	Prog
+Main.java	72	Prog
+Main.java	74	Prog
+Main.java	75	Prog
+Main.java	76	Prog
+Main.java	77	Prog
+Main.java	81	Prog
+Main.java	82	Prog
+Main.java	86	Prog
+Main.java	87	Prog
+Main.java	88	Prog
+Main.java	89	Prog
+Main.java	92	Prog
+Edge.java	3	EdgeObjects
+Edge.java	4	EdgeObjects
+Edge.java	6	EdgeObjects
+Edge.java	8	EdgeObjects
+Edge.java	9	EdgeObjects
+Edge.java	10	EdgeObjects
+Edge.java	11	EdgeObjects /\ Weighted
+Edge.java	14	EdgeObjects
+Edge.java	15	EdgeObjects /\ Weighted
+Edge.java	18	EdgeObjects /\ Weighted
+Edge.java	20	EdgeObjects /\ Weighted
+Edge.java	21	EdgeObjects /\ Weighted
+Edge.java	24	EdgeObjects /\ Weighted
+Edge.java	25	EdgeObjects /\ Weighted
+Edge.java	28	EdgeObjects
+Edge.java	29	EdgeObjects
+Edge.java	30	EdgeObjects
+Edge.java	31	EdgeObjects
+Edge.java	32	EdgeObjects
+Edge.java	34	EdgeObjects
+Edge.java	37	EdgeObjects
+Edge.java	38	EdgeObjects
+Edge.java	41	EdgeObjects
+Edge.java	42	EdgeObjects
+Edge.java	45	EdgeObjects
+Edge.java	46	EdgeObjects /\ Weighted
+Edge.java	47	EdgeObjects
+Edge.java	48	EdgeObjects
+FinishTimeWorkSpace.java	5	StronglyConnected
+FinishTimeWorkSpace.java	6	StronglyConnected
+FinishTimeWorkSpace.java	8	StronglyConnected
+FinishTimeWorkSpace.java	9	StronglyConnected
+FinishTimeWorkSpace.java	12	StronglyConnected
+FinishTimeWorkSpace.java	13	StronglyConnected
+FinishTimeWorkSpace.java	14	StronglyConnected
+FinishTimeWorkSpace.java	15	StronglyConnected
+FinishTimeWorkSpace.java	18	StronglyConnected
+FinishTimeWorkSpace.java	19	StronglyConnected
+WorkSpaceTranspose.java	7	StronglyConnected
+WorkSpaceTranspose.java	9	StronglyConnected
+WorkSpaceTranspose.java	11	StronglyConnected
+WorkSpaceTranspose.java	12	StronglyConnected
+WorkSpaceTranspose.java	15	StronglyConnected
+WorkSpaceTranspose.java	16	StronglyConnected
+WorkSpaceTranspose.java	17	StronglyConnected
+WorkSpaceTranspose.java	21	StronglyConnected
+WorkSpaceTranspose.java	22	StronglyConnected

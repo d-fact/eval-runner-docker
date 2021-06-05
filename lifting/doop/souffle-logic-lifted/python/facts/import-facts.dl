@@ -1,0 +1,473 @@
+
+// NormalHeap
+
+.decl _NormalHeap(?id:symbol, ?type:symbol)
+.input _NormalHeap(IO="file", filename="NormalHeap.facts", delimiter="\t")
+
+isType(?type),
+isHeapAllocation(?id),
+isNormalHeap(?id),
+OriginalHeapAllocation_Type(?id, ?type),
+HeapAllocation_Type(?id, ?type) :-
+  _NormalHeap(?id, ?type).
+
+
+// StringConstant
+
+.decl _StringConstant(?id:symbol)
+.input _StringConstant(IO="file", filename="StringConstant.facts", delimiter="\t")
+
+isHeapAllocation(?id),
+isStringConstant(?id),
+OriginalHeapAllocation_Type(?id, "string"),
+HeapAllocation_Type(?id, "string") :-
+  _StringConstant(?id).
+
+
+// StringRaw
+
+.decl _StringRaw(?id:symbol, ?rawId:symbol)
+.input _StringRaw(IO="file", filename="StringRaw.facts", delimiter="\t")
+
+.decl String_toRaw(?id:symbol, ?rawId:symbol)
+
+isStringRaw(?id),
+String_toRaw(?id, ?rawId) :-
+  _StringRaw(?id, ?rawId).
+
+
+// AssignHeapAllocation
+
+.decl _AssignHeapAllocation(?instruction:symbol, ?index:number, ?heap:symbol, ?to:symbol, ?inFunction:symbol)
+.input _AssignHeapAllocation(IO="file", filename="AssignHeapAllocation.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignHeapAllocation_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignInstruction_To(?instruction, ?to),
+AssignHeapAllocation_Heap(?instruction, ?heap) :-
+  _AssignHeapAllocation(?instruction, ?index, ?heap, ?to, ?function).
+
+
+// AssignLocal
+
+.decl _AssignLocal(?instruction:symbol, ?index:number, ?from:symbol, ?to:symbol, ?inFunction:symbol)
+.input _AssignLocal(IO="file", filename="AssignLocal.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignOper_Insn(?instruction),
+isAssignLocal_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignLocal_From(?instruction, ?from),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignLocal(?instruction, ?index, ?from, ?to, ?function).
+
+
+// AssignBinop
+
+.decl _AssignBinop(?instruction:symbol, ?index:number, ?to:symbol, ?oper:symbol, ?inFunction:symbol)
+.input _AssignBinop(IO="file", filename="AssignBinop.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignOper_Insn(?instruction),
+isAssignBinop_Insn(?instruction),
+Assign_Operation(?instruction, ?oper),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignBinop(?instruction, ?index, ?to, ?oper, ?function).
+
+
+// AssignUnop
+
+.decl _AssignUnop(?instruction:symbol, ?index:number, ?to:symbol, ?oper:symbol, ?inFunction:symbol)
+.input _AssignUnop(IO="file", filename="AssignUnop.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignOper_Insn(?instruction),
+isAssignUnop_Insn(?instruction),
+Assign_Operation(?instruction, ?oper),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignUnop(?instruction, ?index, ?to, ?oper, ?function).
+
+
+// AssignOperFrom
+
+.decl _AssignOperFrom(?instruction:symbol, ?operNum:number, ?from:symbol)
+.input _AssignOperFrom(IO="file", filename="AssignOperFrom.facts", delimiter="\t")
+
+AssignOper_From(?instruction, ?operNum, ?from) :-
+  _AssignOperFrom(?instruction, ?operNum, ?from).
+
+
+//Import
+
+.decl _Import(?instruction:symbol, ?index: number, ?name:symbol, ?to:symbol, ?inFunct:symbol)
+.input _Import(IO="file", filename="Import.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isImportInstruction(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?inFunct),
+AssignInstruction_To(?instruction, ?to),
+ImportInsn_ModuleName(?instruction, ?name):-
+  _Import(?instruction, ?index, ?name, ?to, ?inFunct).
+
+//LexicalRead
+
+.decl _LexicalRead(?instruction:symbol, ?index: number, ?to:symbol, ?name:symbol, ?scope:symbol, ?inFunct:symbol)
+.input _LexicalRead(IO="file", filename="LexicalRead.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isLexicalAccess_Insn(?instruction),
+isLexicalRead_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?inFunct),
+AssignInstruction_To(?instruction, ?to),
+LexicalAccessInsn_Name(?instruction, ?name),
+LexicalAccessInsn_VarScope(?instruction, ?scope):-
+  _LexicalRead(?instruction, ?index, ?to, ?name, ?scope, ?inFunct).
+
+
+//LexicalWrite
+
+.decl _LexicalWrite(?instruction:symbol, ?index: number, ?name:symbol, ?scope:symbol, ?from:symbol, ?inFunct:symbol)
+.input _LexicalWrite(IO="file", filename="LexicalWrite.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isLexicalWrite_Insn(?instruction),
+isLexicalAccess_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?inFunct),
+LexicalAccessInsn_Name(?instruction, ?name),
+LexicalAccessInsn_VarScope(?instruction, ?scope),
+LexicalWriteInsn_From(?instruction, ?from):-
+  _LexicalWrite(?instruction, ?index, ?name, ?scope, ?from, ?inFunct).
+
+
+//GlobalRead
+
+.decl _GlobalRead(?instruction:symbol, ?index: number, ?to:symbol, ?name:symbol, ?inFunct:symbol)
+.input _GlobalRead(IO="file", filename="GlobalRead.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isGlobalAccess_Insn(?instruction),
+isGlobalRead_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?inFunct),
+AssignInstruction_To(?instruction, ?to),
+GlobalAccessInsn_Name(?instruction, ?name):-
+  _GlobalRead(?instruction, ?index, ?to, ?name, ?inFunct).
+
+
+//GlobalWrite
+
+.decl _GlobalWrite(?instruction:symbol, ?index: number, ?name:symbol, ?from:symbol, ?inFunct:symbol)
+.input _GlobalWrite(IO="file", filename="GlobalWrite.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isGlobalWrite_Insn(?instruction),
+isGlobalAccess_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?inFunct),
+GlobalAccessInsn_Name(?instruction, ?name),
+GlobalWriteInsn_From(?instruction, ?from):-
+  _GlobalWrite(?instruction, ?index, ?name, ?from, ?inFunct).
+
+// IfVar
+
+.decl _IfVar(?instruction:symbol, ?var:symbol)
+.input _IfVar(IO="file", filename="IfVar.facts", delimiter="\t")
+
+If_Var(?instruction, ?var) :-
+  _IfVar(?instruction, ?var).
+
+
+.decl _OriginalIntConstant(?intConst:symbol)
+.input _OriginalIntConstant(IO="file", filename="OriginalIntConstant.facts", delimiter="\t")
+
+isOriginalIntConstant(?num):-
+  _OriginalIntConstant(?num).
+
+// AssignIntConstant
+
+.decl _AssignIntConstant(?instruction:symbol, ?index:number, ?const:symbol, ?to:symbol, ?inFunction:symbol)
+.input _AssignIntConstant(IO="file", filename="AssignIntConstant.facts", delimiter="\t")
+
+isIntConstant(?const),
+isOriginalIntConstant(?const),
+isNumConstant(?const),
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignIntConstant_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignIntConstant_Id(?instruction, ?const),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignIntConstant(?instruction, ?index, ?const, ?to, ?function).
+
+// AssignFloatConstant
+
+.decl _AssignFloatConstant(?instruction:symbol, ?index:number, ?const:symbol, ?to:symbol, ?inFunction:symbol)
+.input _AssignFloatConstant(IO="file", filename="AssignFloatConstant.facts", delimiter="\t")
+
+isFloatConstant(?const),
+isNumConstant(?const),
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignFloatConstant_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignFloatConstant_Id(?instruction, ?const),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignFloatConstant(?instruction, ?index, ?const, ?to, ?function).
+
+// AssignBoolConstant
+
+.decl _AssignBoolConstant(?instruction:symbol, ?index:number, ?const:symbol, ?to:symbol, ?inFunction:symbol)
+.input _AssignBoolConstant(IO="file", filename="AssignBoolConstant.facts", delimiter="\t")
+
+isBoolConstant(?const),
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+isAssignBoolConstant_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+AssignBoolConstant_Id(?instruction, ?const),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignBoolConstant(?instruction, ?index, ?const, ?to, ?function).
+
+
+.decl _AssignNone(?instruction:symbol, ?index:number, ?to:symbol, ?inFunction:symbol)
+.input _AssignNone(IO="file", filename="AssignNone.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isAssignInstruction(?instruction),
+Instruction_Index(?instruction, ?index),
+isAssignNone_Insn(?instruction),
+Instruction_Function(?instruction, ?function),
+AssignInstruction_To(?instruction, ?to) :-
+  _AssignNone(?instruction, ?index, ?to, ?function).
+
+
+//Var-SourceName
+
+.decl _Var_SourceName(?var:symbol, ?name:symbol)
+.input _Var_SourceName(IO="file", filename="Var-SourceName.facts", delimiter="\t")
+
+Var_SourceName(?var, ?name):-
+  _Var_SourceName(?var, ?name).
+
+// Field
+
+.decl _Field(?signature:symbol, ?declaringClass:symbol, ?simplename:symbol)
+.input _Field(IO="file", filename="Field.facts", delimiter="\t")
+
+isField(?signature),
+Field_SimpleName(?signature, ?simplename) :-
+  _Field(?signature, ?declaringType, ?simplename).
+
+
+
+// Function invocation
+
+.decl _FunctionInvocation(?instruction:symbol, ?index:number, ?to:symbol, ?base:symbol, ?function:symbol)
+.input _FunctionInvocation(IO="file", filename="FunctionInvocation.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isFunctionInvocation(?instruction),
+FunctionInvocation_Base(?instruction, ?base),
+Instruction_Index(?instruction, ?index),
+AssignInstruction_To(?instruction, ?to),
+Instruction_Function(?instruction, ?function) :-
+  _FunctionInvocation(?instruction, ?index, ?to, ?base, ?function).
+
+
+// Throw
+
+.decl _Throw(?instruction:symbol, ?index:number, ?var:symbol, ?function:symbol)
+.input _Throw(IO="file", filename="Throw.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isThrow_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+Throw(?instruction, ?var),
+Throw_Var(?instruction, ?var) :-
+  _Throw(?instruction, ?index, ?var, ?function).
+
+
+// Exception handler
+
+.decl _ExceptionHandler(?handler:symbol, ?function:symbol, ?index:number, ?type:symbol, ?var:symbol, ?begin:number, ?end:number)
+.input _ExceptionHandler(IO="file", filename="ExceptionHandler.facts", delimiter="\t")
+
+isExceptionHandler(?handler),
+ExceptionHandler_Function(?handler, ?function),
+ExceptionHandler_Index(?handler, ?index),
+ExceptionHandler_Type(?handler, ?type),
+ExceptionHandler_FormalParam(?handler, ?var),
+ExceptionHandler_Begin(?handler, ?begin),
+ExceptionHandler_End(?handler, ?end) :-
+  _ExceptionHandler(?handler, ?function, ?index, ?type, ?var, ?begin, ?end).
+
+
+.decl _CollectionRead(?insn:symbol, ?index:number, ?to:symbol, ?collection:symbol, ?indexOrKey:symbol, ?function:symbol)
+.input _CollectionRead(IO="file", filename="ReflectiveRead.facts", delimiter="\t")
+
+isInstruction(?insn),
+Instruction_Index(?insn, ?index),
+Instruction_Function(?insn, ?function),
+isCollectionAccess_Insn(?insn),
+isReadFromCollection_Insn(?insn),
+CollectionAccessInsn_Base(?insn, ?base),
+CollectionAccessInsn_IndexOrKey(?insn, ?indexOrKey),
+ReadFromCollectionInsn_To(?insn, ?to):-
+  _CollectionRead(?insn, ?index, ?to, ?base, ?indexOrKey, ?function).
+
+.decl _CollectionWrite(?insn:symbol, ?index:number, ?collection:symbol, ?indexOrKey:symbol, ?from:symbol, ?function:symbol)
+.input _CollectionWrite(IO="file", filename="ReflectiveWrite.facts", delimiter="\t")
+
+isInstruction(?insn),
+Instruction_Index(?insn, ?index),
+Instruction_Function(?insn, ?function),
+isCollectionAccess_Insn(?insn),
+isWriteToCollection_Insn(?insn),
+CollectionAccessInsn_Base(?insn, ?base),
+CollectionAccessInsn_IndexOrKey(?insn, ?indexOrKey),
+WriteToCollectionInsn_From(?insn, ?from):-
+  _CollectionWrite(?insn, ?index, ?base, ?indexOrKey, ?from, ?function).
+// Function
+
+.decl _Function(?function:symbol, ?simplename:symbol, ?declaringType:symbol, ?arity:number, ?declaredInFile: File)
+.input _Function(IO="file", filename="Function.facts", delimiter="\t")
+
+Function_SimpleName(?function, ?simplename),
+Function_Arity(?function, ?arity),
+isFile(?file),
+Function_DeclaredInFile(?function, ?file):-
+  _Function(?function, ?simplename, ?declaringType, ?arity, ?file).
+
+
+// StoreInstanceField
+
+.decl _StoreInstanceField(?instruction:symbol, ?index:number, ?from:symbol, ?base:symbol, ?fieldName:symbol, ?function:symbol)
+.input _StoreInstanceField(IO="file", filename="StoreInstanceField.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isFieldInstruction(?instruction),
+isStoreInstanceField_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+FieldInstruction_Signature(?instruction, ?fieldName),
+StoreInstanceField_Base(?instruction, ?base),
+StoreInstanceField_From(?instruction, ?from) :-
+  _StoreInstanceField(?instruction, ?index, ?from, ?base, ?fieldName, ?function).
+
+
+// LoadInstanceField
+
+.decl _LoadInstanceField(?instruction:symbol, ?index:number, ?to:symbol, ?base:symbol, ?fieldName:symbol, ?function:symbol)
+.input _LoadInstanceField(IO="file", filename="LoadInstanceField.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isFieldInstruction(?instruction),
+isLoadInstanceField_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+FieldInstruction_Signature(?instruction, ?fieldName),
+LoadInstanceField_Base(?instruction, ?base),
+LoadInstanceField_To(?instruction, ?to) :-
+  _LoadInstanceField(?instruction, ?index, ?to, ?base, ?fieldName, ?function).
+
+
+// Goto
+
+.decl _Goto(?instruction:symbol, ?index:number, ?to:number, ?function:symbol)
+.input _Goto(IO="file", filename="Goto.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isGoto_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+Goto_Target(?instruction, ?to) :-
+  _Goto(?instruction, ?index, ?to, ?function).
+
+
+// If
+
+.decl _If(?instruction:symbol, ?index:number, ?to:number, ?function:symbol)
+.input _If(IO="file", filename="If.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isIf_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+If_Target(?instruction, ?to) :-
+  _If(?instruction, ?index, ?to, ?function).
+
+
+// ReturnNonNone
+
+.decl _Return(?instruction:symbol, ?index:number, ?var:symbol, ?function:symbol)
+.input _Return(IO="file", filename="Return.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isReturnInstruction(?instruction),
+isReturnNonNone_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function),
+ReturnNonNone_Var(?instruction, ?var) :-
+  _Return(?instruction, ?index, ?var, ?function).
+
+
+// ReturnNone
+
+.decl _ReturnNone(?instruction:symbol, ?index:number, ?function:symbol)
+.input _ReturnNone(IO="file", filename="ReturnNone.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isReturnInstruction(?instruction),
+isReturnNone_Insn(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function) :-
+  _ReturnNone(?instruction, ?index, ?function).
+
+
+
+// UnsupportedInstruction
+
+.decl _UnsupportedInstruction(?instruction:symbol, ?index:number, ?function:symbol)
+.input _UnsupportedInstruction(IO="file", filename="UnsupportedInstruction.facts", delimiter="\t")
+
+isInstruction(?instruction),
+isUnsupportedInstruction(?instruction),
+Instruction_Index(?instruction, ?index),
+Instruction_Function(?instruction, ?function) :-
+  _UnsupportedInstruction(?instruction, ?index, ?function).
+
+
+
+// Basic Types as nullary functional-predicates
+
+isType(?t), isPrimitiveType(?t), Type_boolean(?t) :- ?t = "boolean".
+isType(?t), isPrimitiveType(?t), Type_int(?t)     :- ?t = "int".
+isType(?t), isPrimitiveType(?t), Type_long(?t)    :- ?t = "long".
+isType(?t), isPrimitiveType(?t), Type_float(?t)   :- ?t = "float".
+
+isType(?t), Type_none(?t) :- ?t = "None".
+
+//isType(?t), isClassType(?t), Type_object(?t) :- ?t = "object".
+

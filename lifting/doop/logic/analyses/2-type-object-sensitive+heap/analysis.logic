@@ -1,0 +1,37 @@
+// In this analysis, the real context is a Type and a Value and the
+// real heap context a single Value. Keeping mapping functions is the
+// way to handle analyses where HContext = Context (since the language
+// considers them different types).
+ContextFromRealContext[?type, ?value] = ?ctx ->
+  Context(?ctx), Type(?type), Value(?value).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?type ->
+  Context(?ctx), Type(?type).
+RealContext2FromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContext1FromContext[?ctx] = ?type,
+RealContext2FromContext[?ctx] = ?value <-
+  ContextFromRealContext[?type, ?value] = ?ctx.
+
+HContextFromRealHContext[?value] = ?hctx ->
+  HContext(?hctx), Value(?value).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?value ->
+  HContext(?hctx), Value(?value).
+RealHContextFromHContext[?hctx] = ?value <-
+  HContextFromRealHContext[?value] = ?hctx.
+
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?hctx, ?value) <-
+  MergeBasis(_, _, ?hctx, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+Context(?calleeCtx),
+ContextFromRealContext[Value:DeclaringType[RealHContextFromHContext[?hctx]], ?value] = ?calleeCtx,
+CachedMerge[?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?hctx, ?value).

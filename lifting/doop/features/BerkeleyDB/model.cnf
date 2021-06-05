@@ -1,0 +1,267 @@
+p cnf 66 105 
+c c 1 SPL
+c c 2 generatedSPL
+c c 3 Logging
+c c 4 ConcurrTrans
+c c 5 Persistance
+c u 6 Statistics
+c c 7 BTree
+c c 8 Ops
+c u 9 Memory_Budget
+c u 10 _Logging
+c u 11 Logging_Finer
+c u 12 Logging_Config
+c u 13 Logging_Severe
+c u 14 Logging_Evictor
+c u 15 Logging_Cleaner
+c u 16 Logging_Recovery
+c u 17 Logging_DbLogHandler
+c u 18 Logging_ConsoleHandler
+c u 19 Logging_Info
+c c 20 Logging_Base
+c u 21 Logging_FileHandler
+c u 22 Logging_Fine
+c u 23 Logging_Finest
+c c 24 _ConcurrTrans
+c u 25 Latches
+c u 26 Transactions
+c u 27 CheckLeaks
+c u 28 FSync
+c c 29 _Persistance
+c u 30 Checksum
+c c 31 IIO
+c u 32 Environment_Locking
+c c 33 Checkpointer
+c u 34 DiskFullErro
+c u 35 FileHandleCache
+c c 36 IICleaner
+c u 37 OldIO
+c u 38 SynchronizedIO
+c c 39 IO
+c u 40 NewIO
+c c 41 NIOAccess
+c u 42 DirectNIO
+c u 43 _ChunkedNIO
+c c 44 ChunkedNIO
+c u 45 _NIO
+c c 46 NIO
+c c 47 _Checkpointer
+c u 48 CP_Bytes
+c u 49 CP_Time
+c u 50 Checkpointer_Daemon
+c c 51 _IICleaner
+c u 52 CleanerDaemon
+c c 53 Cleaner
+c u 54 LookAHEADCache
+c c 55 _BTree
+c u 56 INCompressor
+c c 57 IEvictor
+c u 58 Verifier
+c u 59 _IEvictor
+c u 60 Critical_Eviction
+c u 61 EvictorDaemon
+c c 62 Evictor
+c c 63 _Ops
+c u 64 DeleteOp
+c u 65 RenameOp
+c u 66 TruncateOp
+c (Logging iff _Logging)
+c ((not Logging or _Logging) and (not _Logging or Logging))
+c x ((not Logging or _Logging) and (not _Logging or Logging))
+-3 10  0
+-10 3  0
+c ((NIOAccess iff (_NIO or _ChunkedNIO)) and atmostone(_NIO,_ChunkedNIO))
+c ((not NIOAccess or _NIO or _ChunkedNIO) and ((not _NIO and not _ChunkedNIO) or NIOAccess) and (not _NIO or not _ChunkedNIO))
+c x ((not NIOAccess or _NIO or _ChunkedNIO) and (not _NIO or NIOAccess) and (not _ChunkedNIO or NIOAccess) and (not _NIO or not _ChunkedNIO))
+-41 45 43  0
+-45 41  0
+-43 41  0
+-45 -43  0
+c (Checkpointer iff _Checkpointer)
+c ((not Checkpointer or _Checkpointer) and (not _Checkpointer or Checkpointer))
+c x ((not Checkpointer or _Checkpointer) and (not _Checkpointer or Checkpointer))
+-33 47  0
+-47 33  0
+c (Ops iff _Ops)
+c ((not Ops or _Ops) and (not _Ops or Ops))
+c x ((not Ops or _Ops) and (not _Ops or Ops))
+-8 63  0
+-63 8  0
+c (IICleaner iff _IICleaner)
+c ((not IICleaner or _IICleaner) and (not _IICleaner or IICleaner))
+c x ((not IICleaner or _IICleaner) and (not _IICleaner or IICleaner))
+-36 51  0
+-51 36  0
+c (IEvictor iff _IEvictor)
+c ((not IEvictor or _IEvictor) and (not _IEvictor or IEvictor))
+c x ((not IEvictor or _IEvictor) and (not _IEvictor or IEvictor))
+-57 59  0
+-59 57  0
+c (BTree iff _BTree)
+c ((not BTree or _BTree) and (not _BTree or BTree))
+c x ((not BTree or _BTree) and (not _BTree or BTree))
+-7 55  0
+-55 7  0
+c (Persistance iff _Persistance)
+c ((not Persistance or _Persistance) and (not _Persistance or Persistance))
+c x ((not Persistance or _Persistance) and (not _Persistance or Persistance))
+-5 29  0
+-29 5  0
+c (SPL iff generatedSPL)
+c ((not SPL or generatedSPL) and (not generatedSPL or SPL))
+c x ((not SPL or generatedSPL) and (not generatedSPL or SPL))
+-1 2  0
+-2 1  0
+c (ConcurrTrans iff _ConcurrTrans)
+c ((not ConcurrTrans or _ConcurrTrans) and (not _ConcurrTrans or ConcurrTrans))
+c x ((not ConcurrTrans or _ConcurrTrans) and (not _ConcurrTrans or ConcurrTrans))
+-4 24  0
+-24 4  0
+c ((IIO iff (NewIO or OldIO)) and atmostone(NewIO,OldIO))
+c ((not IIO or NewIO or OldIO) and ((not NewIO and not OldIO) or IIO) and (not NewIO or not OldIO))
+c x ((not IIO or NewIO or OldIO) and (not NewIO or IIO) and (not OldIO or IIO) and (not NewIO or not OldIO))
+-31 40 37  0
+-40 31  0
+-37 31  0
+-40 -37  0
+c ((SynchronizedIO) implies (OldIO) and (OldIO iff IO))
+c ((not SynchronizedIO or OldIO) and (not OldIO or IO) and (not IO or OldIO))
+c x ((not SynchronizedIO or OldIO) and (not OldIO or IO) and (not IO or OldIO))
+-38 37  0
+-37 39  0
+-39 37  0
+c ((CP_Bytes) implies (_Checkpointer) and (CP_Time) implies (_Checkpointer) and (Checkpointer_Daemon) implies (_Checkpointer))
+c ((not CP_Bytes or _Checkpointer) and (not CP_Time or _Checkpointer) and (not Checkpointer_Daemon or _Checkpointer))
+c x ((not CP_Bytes or _Checkpointer) and (not CP_Time or _Checkpointer) and (not Checkpointer_Daemon or _Checkpointer))
+-48 47  0
+-49 47  0
+-50 47  0
+c ((INCompressor) implies (_BTree) and (IEvictor) implies (_BTree) and (Verifier) implies (_BTree))
+c ((not INCompressor or _BTree) and (not IEvictor or _BTree) and (not Verifier or _BTree))
+c x ((not INCompressor or _BTree) and (not IEvictor or _BTree) and (not Verifier or _BTree))
+-56 55  0
+-57 55  0
+-58 55  0
+c (_ChunkedNIO iff ChunkedNIO)
+c ((not _ChunkedNIO or ChunkedNIO) and (not ChunkedNIO or _ChunkedNIO))
+c x ((not _ChunkedNIO or ChunkedNIO) and (not ChunkedNIO or _ChunkedNIO))
+-43 44  0
+-44 43  0
+c ((Latches) implies (_ConcurrTrans) and (Transactions) implies (_ConcurrTrans) and (CheckLeaks) implies (_ConcurrTrans) and (FSync) implies (_ConcurrTrans))
+c ((not Latches or _ConcurrTrans) and (not Transactions or _ConcurrTrans) and (not CheckLeaks or _ConcurrTrans) and (not FSync or _ConcurrTrans))
+c x ((not Latches or _ConcurrTrans) and (not Transactions or _ConcurrTrans) and (not CheckLeaks or _ConcurrTrans) and (not FSync or _ConcurrTrans))
+-25 24  0
+-26 24  0
+-27 24  0
+-28 24  0
+c ((Logging_Finer) implies (_Logging) and (Logging_Config) implies (_Logging) and (Logging_Severe) implies (_Logging) and (Logging_Evictor) implies (_Logging) and (Logging_Cleaner) implies (_Logging) and (Logging_Recovery) implies (_Logging) and (Logging_DbLogHandler) implies (_Logging) and (Logging_ConsoleHandler) implies (_Logging) and (Logging_Info) implies (_Logging) and (_Logging iff Logging_Base) and (Logging_FileHandler) implies (_Logging) and (Logging_Fine) implies (_Logging) and (Logging_Finest) implies (_Logging))
+c ((not Logging_Finer or _Logging) and (not Logging_Config or _Logging) and (not Logging_Severe or _Logging) and (not Logging_Evictor or _Logging) and (not Logging_Cleaner or _Logging) and (not Logging_Recovery or _Logging) and (not Logging_DbLogHandler or _Logging) and (not Logging_ConsoleHandler or _Logging) and (not Logging_Info or _Logging) and (not _Logging or Logging_Base) and (not Logging_Base or _Logging) and (not Logging_FileHandler or _Logging) and (not Logging_Fine or _Logging) and (not Logging_Finest or _Logging))
+c x ((not Logging_Finer or _Logging) and (not Logging_Config or _Logging) and (not Logging_Severe or _Logging) and (not Logging_Evictor or _Logging) and (not Logging_Cleaner or _Logging) and (not Logging_Recovery or _Logging) and (not Logging_DbLogHandler or _Logging) and (not Logging_ConsoleHandler or _Logging) and (not Logging_Info or _Logging) and (not _Logging or Logging_Base) and (not Logging_Base or _Logging) and (not Logging_FileHandler or _Logging) and (not Logging_Fine or _Logging) and (not Logging_Finest or _Logging))
+-11 10  0
+-12 10  0
+-13 10  0
+-14 10  0
+-15 10  0
+-16 10  0
+-17 10  0
+-18 10  0
+-19 10  0
+-10 20  0
+-20 10  0
+-21 10  0
+-22 10  0
+-23 10  0
+c ((CleanerDaemon) implies (_IICleaner) and (_IICleaner iff Cleaner) and (LookAHEADCache) implies (_IICleaner))
+c ((not CleanerDaemon or _IICleaner) and (not _IICleaner or Cleaner) and (not Cleaner or _IICleaner) and (not LookAHEADCache or _IICleaner))
+c x ((not CleanerDaemon or _IICleaner) and (not _IICleaner or Cleaner) and (not Cleaner or _IICleaner) and (not LookAHEADCache or _IICleaner))
+-52 51  0
+-51 53  0
+-53 51  0
+-54 51  0
+c ((Logging) implies (generatedSPL) and (generatedSPL iff ConcurrTrans) and (generatedSPL iff Persistance) and (Statistics) implies (generatedSPL) and (generatedSPL iff BTree) and (generatedSPL iff Ops) and (Memory_Budget) implies (generatedSPL))
+c ((not Logging or generatedSPL) and (not generatedSPL or ConcurrTrans) and (not ConcurrTrans or generatedSPL) and (not generatedSPL or Persistance) and (not Persistance or generatedSPL) and (not Statistics or generatedSPL) and (not generatedSPL or BTree) and (not BTree or generatedSPL) and (not generatedSPL or Ops) and (not Ops or generatedSPL) and (not Memory_Budget or generatedSPL))
+c x ((not Logging or generatedSPL) and (not generatedSPL or ConcurrTrans) and (not ConcurrTrans or generatedSPL) and (not generatedSPL or Persistance) and (not Persistance or generatedSPL) and (not Statistics or generatedSPL) and (not generatedSPL or BTree) and (not BTree or generatedSPL) and (not generatedSPL or Ops) and (not Ops or generatedSPL) and (not Memory_Budget or generatedSPL))
+-3 2  0
+-2 4  0
+-4 2  0
+-2 5  0
+-5 2  0
+-6 2  0
+-2 7  0
+-7 2  0
+-2 8  0
+-8 2  0
+-9 2  0
+c (_NIO iff NIO)
+c ((not _NIO or NIO) and (not NIO or _NIO))
+c x ((not _NIO or NIO) and (not NIO or _NIO))
+-45 46  0
+-46 45  0
+c ((Critical_Eviction) implies (_IEvictor) and (EvictorDaemon) implies (_IEvictor) and (_IEvictor iff Evictor))
+c ((not Critical_Eviction or _IEvictor) and (not EvictorDaemon or _IEvictor) and (not _IEvictor or Evictor) and (not Evictor or _IEvictor))
+c x ((not Critical_Eviction or _IEvictor) and (not EvictorDaemon or _IEvictor) and (not _IEvictor or Evictor) and (not Evictor or _IEvictor))
+-60 59  0
+-61 59  0
+-59 62  0
+-62 59  0
+c ((NewIO iff NIOAccess) and (DirectNIO) implies (NewIO))
+c ((not NewIO or NIOAccess) and (not NIOAccess or NewIO) and (not DirectNIO or NewIO))
+c x ((not NewIO or NIOAccess) and (not NIOAccess or NewIO) and (not DirectNIO or NewIO))
+-40 41  0
+-41 40  0
+-42 40  0
+c ((Checksum) implies (_Persistance) and (_Persistance iff IIO) and (Environment_Locking) implies (_Persistance) and (_Persistance iff Checkpointer) and (DiskFullErro) implies (_Persistance) and (FileHandleCache) implies (_Persistance) and (_Persistance iff IICleaner))
+c ((not Checksum or _Persistance) and (not _Persistance or IIO) and (not IIO or _Persistance) and (not Environment_Locking or _Persistance) and (not _Persistance or Checkpointer) and (not Checkpointer or _Persistance) and (not DiskFullErro or _Persistance) and (not FileHandleCache or _Persistance) and (not _Persistance or IICleaner) and (not IICleaner or _Persistance))
+c x ((not Checksum or _Persistance) and (not _Persistance or IIO) and (not IIO or _Persistance) and (not Environment_Locking or _Persistance) and (not _Persistance or Checkpointer) and (not Checkpointer or _Persistance) and (not DiskFullErro or _Persistance) and (not FileHandleCache or _Persistance) and (not _Persistance or IICleaner) and (not IICleaner or _Persistance))
+-30 29  0
+-29 31  0
+-31 29  0
+-32 29  0
+-29 33  0
+-33 29  0
+-34 29  0
+-35 29  0
+-29 36  0
+-36 29  0
+c ((DeleteOp) implies (_Ops) and (RenameOp) implies (_Ops) and (TruncateOp) implies (_Ops))
+c ((not DeleteOp or _Ops) and (not RenameOp or _Ops) and (not TruncateOp or _Ops))
+c x ((not DeleteOp or _Ops) and (not RenameOp or _Ops) and (not TruncateOp or _Ops))
+-64 63  0
+-65 63  0
+-66 63  0
+c ((Evictor or EvictorDaemon or LookAHEADCache)) implies (Memory_Budget)
+c ((not Evictor and not EvictorDaemon and not LookAHEADCache) or Memory_Budget)
+c x ((not Evictor or Memory_Budget) and (not EvictorDaemon or Memory_Budget) and (not LookAHEADCache or Memory_Budget))
+-62 9  0
+-61 9  0
+-54 9  0
+c (Critical_Eviction) implies (INCompressor)
+c (not Critical_Eviction or INCompressor)
+c x (not Critical_Eviction or INCompressor)
+-60 56  0
+c (CP_Bytes) implies (CP_Time)
+c (not CP_Bytes or CP_Time)
+c x (not CP_Bytes or CP_Time)
+-48 49  0
+c (DeleteOp) implies ((Evictor and INCompressor and Memory_Budget))
+c (not DeleteOp or (Evictor and INCompressor and Memory_Budget))
+c x ((not DeleteOp or Evictor) and (not DeleteOp or INCompressor) and (not DeleteOp or Memory_Budget))
+-64 62  0
+-64 56  0
+-64 9  0
+c (Memory_Budget) implies ((Evictor and Latches))
+c (not Memory_Budget or (Evictor and Latches))
+c x ((not Memory_Budget or Evictor) and (not Memory_Budget or Latches))
+-9 62  0
+-9 25  0
+c (TruncateOp) implies (DeleteOp)
+c (not TruncateOp or DeleteOp)
+c x (not TruncateOp or DeleteOp)
+-66 64  0
+c (Verifier) implies (INCompressor)
+c (not Verifier or INCompressor)
+c x (not Verifier or INCompressor)
+-58 56  0
+c x SPL
+1 0
+

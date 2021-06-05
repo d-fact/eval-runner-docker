@@ -1,0 +1,98 @@
+#include "main-declarations.dl"
+
+.comp AbstractContextSensitivity<Configuration> {
+  #ifdef ANDROID
+  #include "android-declarations.dl"
+  #endif
+  #include "class-initialization-declarations.dl"
+  #include "exceptions-declarations.dl"
+  #include "implicit-reachable-declarations.dl"
+  #include "threads-declarations.dl"
+  #ifdef ANDROID
+    #include "android.dl"
+  #endif
+
+  #include "string-concat.dl"
+  #include "exceptions.dl"
+  #include "method-handles.dl"
+
+  #if defined(REFLECTION)
+    #include "reflection/declarations.dl"
+  #endif
+
+  #ifdef SCALER_PRE_ANALYSIS
+    #include "scaler-pre-analysis.dl"
+  #endif
+  #ifdef ZIPPER_PRE_ANALYSIS
+    #include "zipper-pre-analysis.dl"
+  #endif
+
+  .decl FakeInvocation_RegisterFinalize0(?heap:HeapAllocation, ?invo:MethodInvocation)
+
+  .decl FakeInvocation_RegisterFinalize(?value:Value, ?invo:MethodInvocation)
+
+  //-----------------------------------------------------------------------------
+  // [Value]
+  //-----------------------------------------------------------------------------
+
+  .type Value = HeapAllocation | NumConstant
+
+  .decl isValue(?value:Value)
+
+  .decl Value_isHeap(?value:Value)
+  .decl Value_isMock(?value:Value)
+
+  // Value_Num maps each numeric constant to a value while
+  // also prepending it with *num-constant-* to distinguish it
+  // from heap allocations that share the same string value.
+  .decl Value_Num(?value:Value, ?const:NumConstant)
+
+  .decl Value_isNonHeap(?value:Value)
+
+  // Special value objects are just artificial ones that we use to find where the
+  // result of a reflective call can flow to. We don't want to track them
+  // through the heap.
+  .decl NotSpecialObject(?value:Value)
+
+  .decl Value_Type(?value:Value, ?type:Type)
+  .decl Value_DeclaringType(?value:Value, ?type:Type)
+
+  // [Miscellaneous]
+  .decl Value_Null(?null:Value)
+
+  #include "context-sensitivity-declarations.dl"
+  #include "../commonMacros.dl"
+  #include "prologue.dl"
+  #include "context-sensitivity.dl"
+  #include "export.dl"
+
+  #if defined(REFLECTION)
+    #include "reflection/rules.dl"
+  #elif defined(LIGHT_REFLECTION_GLUE)
+    #include "reflection/light-Class-forName.dl"
+    #include "reflection/light-reflection-glue.dl"
+  #endif
+
+  // Dynamic proxies supports two kinds of reflection: standard reflection and
+  // light reflection (just Class object handling or light-reflection-glue).
+  #if defined(REFLECTION_DYNAMIC_PROXIES)
+    // If no reflection support is available, at least handle Class objects.
+    #if !defined(REFLECTION) && !defined(LIGHT_REFLECTION_GLUE)
+      #include "reflection/light-Class-forName.dl"
+    #endif
+    #include "reflection/dynamic-proxies.dl"
+    #include "reflection/dynamic-proxies-delta.dl"
+  #endif // REFLECTION_DYNAMIC_PROXIES
+
+  #ifdef TAMIFLEX
+     #include "../addons/tamiflex/declarations.dl"
+     #include "../addons/tamiflex/rules.dl"
+  #endif
+  #if defined(DACAPO) || defined(DACAPO_BACH)
+     #include "../addons/dacapo/rules.dl"
+  #endif
+
+  #include "phantom-dead.dl"
+
+  .init configuration = Configuration
+}

@@ -1,0 +1,36 @@
+// Context-sensitive pointer analysis with context of 1 object.
+
+// In this analysis, the real context is a Value. Keeping mapping
+// functions is the way to handle analyses where HContext = Context
+// (since the language considers them different types).
+ContextFromRealContext[?value] = ?ctx ->
+  Context(?ctx), Value(?value).
+lang:constructor(`ContextFromRealContext).
+RealContextFromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContextFromContext[?ctx] = ?value <-
+  ContextFromRealContext[?value] = ?ctx.
+
+// This analysis has no context for heap objects.  This is emulated by creating
+// a single HContext object, which is used everywhere.
+HContextFromRealHContext[] = ?hctx ->
+  HContext(?hctx).
+lang:constructor(`HContextFromRealHContext).
+
+// No need to unwrap anything. Only used for arrays, never to produce regular
+// contexts of called methods.
+HContextFromContext[?ctx] = ?hctx ->
+  Context(?ctx), HContext(?hctx).
+lang:constructor(`HContextFromContext).
+
+// Dynamic analysis
+#ifdef HEAPDL
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   RealContextFromContext[?ctx] = Value:byDynamicHeap[?heap1],
+   DynamicContextHeap1(?heap1, ?dynCtx).
+
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   !DynamicContextHeap1(_, ?dynCtx),
+   ImmutableContext(?ctx),
+   DynamicContext(?dynCtx).
+#endif             

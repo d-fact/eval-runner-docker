@@ -1,0 +1,61 @@
+// Context-sensitive pointer analysis with context of 1 object and a
+// context-sensitive heap abstraction.
+
+// In this analysis, the real context is a pair of Values and the real
+// heap context a single Value. Keeping mapping functions is the way
+// to handle analyses where HContext = Context (since the language considers
+// them different types).
+ContextFromRealContext[?value1, ?value2] = ?ctx ->
+  Context(?ctx), Value(?value1), Value(?value2).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?value1,
+RealContext2FromContext[?ctx] = ?value2 <-
+  ContextFromRealContext[?value1, ?value2] = ?ctx.
+
+HContextFromRealHContext[?value] = ?hctx ->
+  HContext(?hctx), Value(?value).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?value <-
+  HContextFromRealHContext[?value] = ?hctx.
+
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?hctx, ?value) <-
+  MergeBasis(_, _, ?hctx, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+////Context(?calleeCtx),
+////ContextFromRealContext[RealHContextFromHContext[?hctx],?value] = ?calleeCtx,
+MergeMacro(?notused, ?notused, ?hctx, ?value, ?calleeCtx),
+CachedMerge[?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?hctx, ?value).
+
+
+// Dynamic analysis
+#ifdef HEAPDL
+DynamicContextToContext(ContextFromRealContext[Value:byDynamicHeap[?heap1], Value:byDynamicHeap[?heap2]], ?dynCtx) <-
+   DynamicContextHeap1(?heap1, ?dynCtx),
+   DynamicContextHeap2(?heap2, ?dynCtx).
+
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   RealContext1FromContext[?ctx] = Value:byDynamicHeap[?heap1],
+   DynamicContextHeap1(?heap1, ?dynCtx),
+   !DynamicContextHeap2(_, ?dynCtx).
+
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   !DynamicContextHeap1(_, ?dynCtx),
+   ImmutableContext(?ctx),
+   DynamicContext(?dynCtx).
+
+DynamicContextToHContext(HContextFromRealHContext[Value:byDynamicHeap[?heap1]], ?dynCtx) <-
+   DynamicContextHeap1(?heap1, ?dynCtx).
+
+DynamicContextToHContext(?hctx, ?dynCtx) <-
+   ImmutableHContext(?hctx),
+   DynamicContext(?dynCtx),
+   !DynamicContextHeap1(_, ?dynCtx).
+#endif                    

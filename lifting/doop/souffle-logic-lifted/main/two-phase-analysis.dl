@@ -1,0 +1,6 @@
+#include "main.dl"
+#include "basic-context-sensitivity.dl"
+
+.init preAnalysis = BasicContextSensitivity<ContextInsensitiveConfiguration>
+.init mainAnalysis = BasicContextSensitivity<CONFIGURATION>
+

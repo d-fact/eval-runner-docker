@@ -1,0 +1,24 @@
+p cnf 7 8 
+c c 1 SPL
+c c 2 PrevaylerSPL
+c u 3 Replication
+c u 4 GZip
+c u 5 Censor
+c u 6 Monitor
+c u 7 Snapshot
+c (SPL iff PrevaylerSPL)
+c ((not SPL or PrevaylerSPL) and (not PrevaylerSPL or SPL))
+c x ((not SPL or PrevaylerSPL) and (not PrevaylerSPL or SPL))
+-1 2  0
+-2 1  0
+c ((Replication) implies (PrevaylerSPL) and (GZip) implies (PrevaylerSPL) and (Censor) implies (PrevaylerSPL) and (Monitor) implies (PrevaylerSPL) and (Snapshot) implies (PrevaylerSPL))
+c ((not Replication or PrevaylerSPL) and (not GZip or PrevaylerSPL) and (not Censor or PrevaylerSPL) and (not Monitor or PrevaylerSPL) and (not Snapshot or PrevaylerSPL))
+c x ((not Replication or PrevaylerSPL) and (not GZip or PrevaylerSPL) and (not Censor or PrevaylerSPL) and (not Monitor or PrevaylerSPL) and (not Snapshot or PrevaylerSPL))
+-3 2  0
+-4 2  0
+-5 2  0
+-6 2  0
+-7 2  0
+c x SPL
+1 0
+

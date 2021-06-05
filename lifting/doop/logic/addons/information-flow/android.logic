@@ -1,0 +1,26 @@
+#include "macros.logic"
+
+TaintedValueIntroduced(?declaringType, ?invocation, "java.lang.String", "PASSWORD", ?value),
+VarPointsTo(?hctx, ?value, ?ctx, ?to)
+ <-
+  PossibleLayoutGetText(?to, ?invocation, ?ctx, ?base),
+  Method:DeclaringType[Instruction:Method[?invocation]] = ?declaringType,
+  VarPointsTo(_, ?layoutControlValue, ?ctx, ?base),
+  ImmutableHContext(?hctx),
+  SensitiveLayoutControlValue(?layoutControlValue).
+
+PossibleLayoutGetText(?to, ?invocation, ?ctx, ?base) <-
+  AndroidViewType(Var:Type[?base]),
+  MethodInvocationInContext(?ctx, ?invocation, _),
+  VirtualMethodInvocation:Base[?invocation] = ?base,
+  VirtualMethodInvocation:SimpleName[?invocation] = "getText",
+  AssignReturnValue[?invocation] = ?to.
+
+
+VarIsTaintedFromVar(?str, ?ctx, ?to, ?ctx, ?base) <-
+  Type:Id(?str:"java.lang.String"),
+  VirtualMethodInvocation:Base[?invocation] = ?base,
+  AssignReturnValue[?invocation] = ?to,
+  SupertypeOf("android.text.Editable", Var:Type[?base]),
+  ReachableContext(?ctx, Instruction:Method[?invocation]),
+  VirtualMethodInvocation:SimpleName[?invocation] = "toString".

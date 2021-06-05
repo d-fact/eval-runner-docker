@@ -1,0 +1,194 @@
+p cnf 38 78 
+c c 1 SPL
+c c 2 GPL
+c u 3 Base
+c u 4 Benchmark
+c u 5 Prog
+c c 6 Edges
+c u 7 Weighted
+c c 8 BaseImpl
+c c 9 SearchI
+c c 10 Algorithms
+c u 11 _Directed
+c c 12 Directed
+c u 13 _Undirected
+c c 14 Undirected
+c c 15 _BaseImpl
+c c 16 NewCompound1
+c u 17 EdgeObjects
+c c 18 _NewCompound1
+c u 19 GN_OnlyNeighbors
+c u 20 G_NoEdges
+c u 21 GEN_Edges
+c u 22 _SearchI
+c c 23 SearchAlg
+c u 24 _DFS
+c c 25 DFS
+c u 26 _BFS
+c c 27 BFS
+c u 28 _SearchBase
+c c 29 SearchBase
+c c 30 _Algorithms
+c u 31 Number
+c u 32 Connected
+c u 33 Transpose
+c u 34 MSTPrim
+c u 35 MSTKruskal
+c u 36 Shortest
+c u 37 Cycle
+c u 38 StronglyConnected
+c (Algorithms iff _Algorithms)
+c ((not Algorithms or _Algorithms) and (not _Algorithms or Algorithms))
+c x ((not Algorithms or _Algorithms) and (not _Algorithms or Algorithms))
+-10 30  0
+-30 10  0
+c (NewCompound1 iff _NewCompound1)
+c ((not NewCompound1 or _NewCompound1) and (not _NewCompound1 or NewCompound1))
+c x ((not NewCompound1 or _NewCompound1) and (not _NewCompound1 or NewCompound1))
+-16 18  0
+-18 16  0
+c (BaseImpl iff _BaseImpl)
+c ((not BaseImpl or _BaseImpl) and (not _BaseImpl or BaseImpl))
+c x ((not BaseImpl or _BaseImpl) and (not _BaseImpl or BaseImpl))
+-8 15  0
+-15 8  0
+c ((SearchAlg iff (_SearchBase or _BFS or _DFS)) and atmostone(_SearchBase,_BFS,_DFS))
+c ((not SearchAlg or _SearchBase or _BFS or _DFS) and ((not _SearchBase and not _BFS and not _DFS) or SearchAlg) and (not _SearchBase or not _BFS) and (not _SearchBase or not _DFS) and (not _BFS or not _DFS))
+c x ((not SearchAlg or _SearchBase or _BFS or _DFS) and (not _SearchBase or SearchAlg) and (not _BFS or SearchAlg) and (not _DFS or SearchAlg) and (not _SearchBase or not _BFS) and (not _SearchBase or not _DFS) and (not _BFS or not _DFS))
+-23 28 26 24  0
+-28 23  0
+-26 23  0
+-24 23  0
+-28 -26  0
+-28 -24  0
+-26 -24  0
+c (SearchI iff _SearchI)
+c ((not SearchI or _SearchI) and (not _SearchI or SearchI))
+c x ((not SearchI or _SearchI) and (not _SearchI or SearchI))
+-9 22  0
+-22 9  0
+c ((Edges iff (_Undirected or _Directed)) and atmostone(_Undirected,_Directed))
+c ((not Edges or _Undirected or _Directed) and ((not _Undirected and not _Directed) or Edges) and (not _Undirected or not _Directed))
+c x ((not Edges or _Undirected or _Directed) and (not _Undirected or Edges) and (not _Directed or Edges) and (not _Undirected or not _Directed))
+-6 13 11  0
+-13 6  0
+-11 6  0
+-13 -11  0
+c (SPL iff GPL)
+c ((not SPL or GPL) and (not GPL or SPL))
+c x ((not SPL or GPL) and (not GPL or SPL))
+-1 2  0
+-2 1  0
+c ((Base) implies (GPL) and (Benchmark) implies (GPL) and (Prog) implies (GPL) and (GPL iff Edges) and (Weighted) implies (GPL) and (GPL iff BaseImpl) and (SearchI) implies (GPL) and (GPL iff Algorithms))
+c ((not Base or GPL) and (not Benchmark or GPL) and (not Prog or GPL) and (not GPL or Edges) and (not Edges or GPL) and (not Weighted or GPL) and (not GPL or BaseImpl) and (not BaseImpl or GPL) and (not SearchI or GPL) and (not GPL or Algorithms) and (not Algorithms or GPL))
+c x ((not Base or GPL) and (not Benchmark or GPL) and (not Prog or GPL) and (not GPL or Edges) and (not Edges or GPL) and (not Weighted or GPL) and (not GPL or BaseImpl) and (not BaseImpl or GPL) and (not SearchI or GPL) and (not GPL or Algorithms) and (not Algorithms or GPL))
+-3 2  0
+-4 2  0
+-5 2  0
+-2 6  0
+-6 2  0
+-7 2  0
+-2 8  0
+-8 2  0
+-9 2  0
+-2 10  0
+-10 2  0
+c (_Undirected iff Undirected)
+c ((not _Undirected or Undirected) and (not Undirected or _Undirected))
+c x ((not _Undirected or Undirected) and (not Undirected or _Undirected))
+-13 14  0
+-14 13  0
+c ((Number) implies (_Algorithms) and (Connected) implies (_Algorithms) and (Transpose) implies (_Algorithms) and (MSTPrim) implies (_Algorithms) and (MSTKruskal) implies (_Algorithms) and (Shortest) implies (_Algorithms) and (Cycle) implies (_Algorithms) and (StronglyConnected) implies (_Algorithms))
+c ((not Number or _Algorithms) and (not Connected or _Algorithms) and (not Transpose or _Algorithms) and (not MSTPrim or _Algorithms) and (not MSTKruskal or _Algorithms) and (not Shortest or _Algorithms) and (not Cycle or _Algorithms) and (not StronglyConnected or _Algorithms))
+c x ((not Number or _Algorithms) and (not Connected or _Algorithms) and (not Transpose or _Algorithms) and (not MSTPrim or _Algorithms) and (not MSTKruskal or _Algorithms) and (not Shortest or _Algorithms) and (not Cycle or _Algorithms) and (not StronglyConnected or _Algorithms))
+-31 30  0
+-32 30  0
+-33 30  0
+-34 30  0
+-35 30  0
+-36 30  0
+-37 30  0
+-38 30  0
+c (_SearchBase iff SearchBase)
+c ((not _SearchBase or SearchBase) and (not SearchBase or _SearchBase))
+c x ((not _SearchBase or SearchBase) and (not SearchBase or _SearchBase))
+-28 29  0
+-29 28  0
+c ((GN_OnlyNeighbors) implies (_NewCompound1) and (G_NoEdges) implies (_NewCompound1) and (GEN_Edges) implies (_NewCompound1))
+c ((not GN_OnlyNeighbors or _NewCompound1) and (not G_NoEdges or _NewCompound1) and (not GEN_Edges or _NewCompound1))
+c x ((not GN_OnlyNeighbors or _NewCompound1) and (not G_NoEdges or _NewCompound1) and (not GEN_Edges or _NewCompound1))
+-19 18  0
+-20 18  0
+-21 18  0
+c (_SearchI iff SearchAlg)
+c ((not _SearchI or SearchAlg) and (not SearchAlg or _SearchI))
+c x ((not _SearchI or SearchAlg) and (not SearchAlg or _SearchI))
+-22 23  0
+-23 22  0
+c (_BFS iff BFS)
+c ((not _BFS or BFS) and (not BFS or _BFS))
+c x ((not _BFS or BFS) and (not BFS or _BFS))
+-26 27  0
+-27 26  0
+c (_Directed iff Directed)
+c ((not _Directed or Directed) and (not Directed or _Directed))
+c x ((not _Directed or Directed) and (not Directed or _Directed))
+-11 12  0
+-12 11  0
+c ((_BaseImpl iff NewCompound1) and (EdgeObjects) implies (_BaseImpl))
+c ((not _BaseImpl or NewCompound1) and (not NewCompound1 or _BaseImpl) and (not EdgeObjects or _BaseImpl))
+c x ((not _BaseImpl or NewCompound1) and (not NewCompound1 or _BaseImpl) and (not EdgeObjects or _BaseImpl))
+-15 16  0
+-16 15  0
+-17 15  0
+c (_DFS iff DFS)
+c ((not _DFS or DFS) and (not DFS or _DFS))
+c x ((not _DFS or DFS) and (not DFS or _DFS))
+-24 25  0
+-25 24  0
+c (Prog) implies (Benchmark)
+c (not Prog or Benchmark)
+c x (not Prog or Benchmark)
+-5 4  0
+c (GEN_Edges) implies (EdgeObjects)
+c (not GEN_Edges or EdgeObjects)
+c x (not GEN_Edges or EdgeObjects)
+-21 17  0
+c ((DFS or BFS or Number or Connected)) implies (SearchBase)
+c ((not DFS and not BFS and not Number and not Connected) or SearchBase)
+c x ((not DFS or SearchBase) and (not BFS or SearchBase) and (not Number or SearchBase) and (not Connected or SearchBase))
+-25 29  0
+-27 29  0
+-31 29  0
+-32 29  0
+c (Connected) implies (Undirected)
+c (not Connected or Undirected)
+c x (not Connected or Undirected)
+-32 14  0
+c (StronglyConnected) implies ((Directed and DFS and Transpose))
+c (not StronglyConnected or (Directed and DFS and Transpose))
+c x ((not StronglyConnected or Directed) and (not StronglyConnected or DFS) and (not StronglyConnected or Transpose))
+-38 12  0
+-38 25  0
+-38 33  0
+c (Cycle) implies (DFS)
+c (not Cycle or DFS)
+c x (not Cycle or DFS)
+-37 25  0
+c ((MSTPrim or MSTKruskal)) implies ((EdgeObjects and Undirected and Weighted))
+c ((not MSTPrim and not MSTKruskal) or (EdgeObjects and Undirected and Weighted))
+c x ((not MSTPrim or EdgeObjects) and (not MSTPrim or Undirected) and (not MSTPrim or Weighted) and (not MSTKruskal or EdgeObjects) and (not MSTKruskal or Undirected) and (not MSTKruskal or Weighted))
+-34 17  0
+-34 14  0
+-34 7  0
+-35 17  0
+-35 14  0
+-35 7  0
+c (Shortest) implies ((Directed and Weighted))
+c (not Shortest or (Directed and Weighted))
+c x ((not Shortest or Directed) and (not Shortest or Weighted))
+-36 12  0
+-36 7  0
+c x SPL
+1 0
+

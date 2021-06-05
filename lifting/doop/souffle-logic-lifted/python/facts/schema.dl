@@ -1,0 +1,380 @@
+.type BoolConstant
+.decl isBoolConstant(?n:BoolConstant)
+
+.type NumConstant
+.decl isNumConstant(?n:NumConstant)
+
+.type IntConstant = NumConstant
+.decl isIntConstant(?n:IntConstant)
+.decl isOriginalIntConstant(?n:IntConstant)
+
+.type FloatConstant = NumConstant
+.decl isFloatConstant(?n:FloatConstant)
+
+.type Type
+.type PrimitiveType = Type
+.type ClassType = Type
+
+.decl isType(?t:Type)
+.decl isPrimitiveType(?t:PrimitiveType)
+.decl isClassType(?t:ClassType)
+
+.decl ApplicationClass(?ref:ClassType)
+
+// Inheritance and Subtyping
+
+.decl DirectSuperclass(?class:ClassType, ?superclass:ClassType)
+
+.decl Type_boolean(?t:PrimitiveType)
+.decl Type_int(?t:PrimitiveType)
+.decl Type_long(?t:PrimitiveType)
+.decl Type_float(?t:PrimitiveType)
+.decl Type_complex(?t:PrimitiveType)
+.decl Type_string(?t:PrimitiveType)
+.decl Type_none(?t:PrimitiveType)
+
+//-----------------------------------------------------------------------------
+
+.type Field
+.decl isField(?field:Field)
+
+.decl Field_DeclaringType(?field:Field, ?declaringClass:ClassType)
+.decl Field_SimpleName(?field:Field, ?simpleName:symbol)
+
+//-----------------------------------------------------------------------------
+
+.type File
+.decl isFile(file:File)
+
+//-----------------------------------------------------------------------------
+
+.type Module
+.type Scope = File | Function | Module
+
+//-----------------------------------------------------------------------------
+.type Function = Type
+.decl isMethod(?m:Function)
+.decl isFunction(?m:Function)
+
+
+.decl Function_SimpleName(?function:Function, ?simpleName:symbol)
+.decl Function_Arity(?function:Function, ?arity:number)
+.decl Function_DeclaredInFile(?function:Function, ?file:File)
+
+.decl FormalParam(?index:number, ?paramName:symbol, ?function:Function, ?var:Var)
+.decl FormalParam_DefaultValFrom(?function:Function,?paramName:symbol, ?from:Var)
+
+.decl ThisVar(?function:Function, ?var:Var)
+
+//-----------------------------------------------------------------------------
+
+.type Var
+.decl isVar(v:Var)
+
+.decl Var_DeclaringFunction(?var:Var, ?function:Function)
+.decl Var_SourceName(?var:Var, ?name:symbol)
+
+.decl ApplicationVar(?var:Var)
+
+
+//-----------------------------------------------------------------------------
+// [Heap Allocation]
+//-----------------------------------------------------------------------------
+
+.type HeapAllocation
+.type NormalHeap                = HeapAllocation
+.type StringConstant            = HeapAllocation
+.type ClassInstanceAllocation   = HeapAllocation
+.type ClassObjectAllocation     = HeapAllocation
+.type FunctionObjectAllocation  = HeapAllocation
+
+.decl isHeapAllocation(?h:HeapAllocation)
+.decl isNormalHeap(?h:NormalHeap)
+.decl isStringConstant(?h:StringConstant)
+.decl isStringRaw(?id:symbol)
+.decl isClassInstanceAllocation(?h: ClassInstanceAllocation)
+.decl isClassObjectAllocation(?h: ClassObjectAllocation)
+.decl isFunctionObjectAllocation(?h: FunctionObjectAllocation)
+
+.decl HeapAllocation_Type(?heap:HeapAllocation, ?type:Type)
+.decl OriginalHeapAllocation_Type(?heap:HeapAllocation, ?type:Type)
+
+//-----------------------------------------------------------------------------
+// [IR Instructions]
+//-----------------------------------------------------------------------------
+
+.type Instruction
+.decl isInstruction(?insn:Instruction)
+
+.decl Instruction_Index(?insn:Instruction, ?index:number)
+.decl Instruction_SourcePosition(?insn:Instruction, ?startLine:number, ?endLine:number, ?startColumn:number, ?endColumn:number)
+.decl Instruction_Function(?insn:Instruction, ?inFunction:Function)
+
+.type Throw_Insn                      = Instruction
+.type Goto_Insn                       = Instruction
+.type If_Insn                         = Instruction
+.type FieldInstruction                = Instruction
+.type LoadInstanceField_Insn          = FieldInstruction
+.type StoreInstanceField_Insn         = FieldInstruction
+
+.decl isThrow_Insn(?insn:Throw_Insn)
+.decl isGoto_Insn(?insn:Goto_Insn)
+.decl isIf_Insn(?insn:If_Insn)
+.decl isFieldInstruction(?insn:FieldInstruction)
+.decl isLoadInstanceField_Insn(?insn:LoadInstanceField_Insn)
+.decl isStoreInstanceField_Insn(?insn:StoreInstanceField_Insn)
+
+.type AssignInstruction               = Instruction
+.type AssignOper_Insn                 = AssignInstruction
+.type AssignBinop_Insn                = AssignOper_Insn
+.type AssignUnop_Insn                 = AssignOper_Insn
+.type AssignLocal_Insn                = AssignOper_Insn
+.type AssignIntConstant_Insn          = AssignInstruction
+.type AssignFloatConstant_Insn        = AssignInstruction
+.type AssignBoolConstant_Insn         = AssignInstruction
+.type AssignNone_Insn                 = AssignInstruction
+.type AssignHeapAllocation_Insn       = AssignInstruction
+.type ReturnInstruction               = Instruction
+.type ReturnNone_Insn                 = ReturnInstruction
+.type ReturnNonNone_Insn              = ReturnInstruction
+.type ImportInstruction               = AssignInstruction
+.type FunctionInvocation_Insn         = Instruction
+.type LexicalAccess_Insn              = AssignInstruction
+.type LexicalRead_Insn                = LexicalAccess_Insn
+.type LexicalWrite_Insn               = LexicalAccess_Insn
+.type GlobalAccess_Insn               = AssignInstruction
+.type GlobalRead_Insn                 = GlobalAccess_Insn
+.type GlobalWrite_Insn                = GlobalAccess_Insn
+.type CollectionAccess_Insn           = Instruction
+.type WriteToCollection_Insn          = CollectionAccess_Insn
+.type ReadFromCollection_Insn         = CollectionAccess_Insn
+
+.decl isAssignInstruction(?insn:AssignInstruction)
+.decl isAssignOper_Insn(?insn:AssignOper_Insn)
+.decl isAssignBinop_Insn(?insn:AssignBinop_Insn)
+.decl isAssignUnop_Insn(?insn:AssignUnop_Insn)
+.decl isAssignLocal_Insn(?insn:AssignLocal_Insn)
+.decl isAssignIntConstant_Insn(?insn:AssignIntConstant_Insn)
+.decl isAssignFloatConstant_Insn(?insn:AssignFloatConstant_Insn)
+.decl isAssignBoolConstant_Insn(?insn:AssignBoolConstant_Insn)
+.decl isAssignNone_Insn(?insn:AssignNone_Insn)
+.decl isAssignHeapAllocation_Insn(?insn:AssignHeapAllocation_Insn)
+.decl isReturnInstruction(?insn:ReturnInstruction)
+.decl isReturnNone_Insn(?insn:ReturnNone_Insn)
+.decl isReturnNonNone_Insn(?insn:ReturnNonNone_Insn)
+.decl isImportInstruction(?insn: ImportInstruction)
+.decl isLexicalAccess_Insn(?insn: LexicalAccess_Insn)
+.decl isLexicalRead_Insn(?insn: LexicalRead_Insn)
+.decl isLexicalWrite_Insn(?insn: LexicalWrite_Insn)
+.decl isGlobalAccess_Insn(?insn: GlobalAccess_Insn)
+.decl isGlobalRead_Insn(?insn: GlobalRead_Insn)
+.decl isGlobalWrite_Insn(?insn: GlobalWrite_Insn)
+.decl isCollectionAccess_Insn(?insn:CollectionAccess_Insn)
+.decl isWriteToCollection_Insn(?insn: WriteToCollection_Insn)
+.decl isReadFromCollection_Insn(?insn: ReadFromCollection_Insn)
+
+.decl isFunctionInvocation(?insn:FunctionInvocation_Insn)
+
+.type UnsupportedInstruction          = Instruction
+.type OpaqueInstruction               = Instruction
+
+.decl isUnsupportedInstruction(?insn:UnsupportedInstruction)
+.decl isOpaqueInstruction(?insn:OpaqueInstruction)
+
+//-----------------------------------------------------------------------------
+
+.decl If_Var(?insn:If_Insn, ?var:Var)
+.decl Throw_Var(?insn:Throw_Insn, ?var:Var)
+.decl Goto_Target(?insn:Goto_Insn, ?index:number)
+.decl If_Target(?insn:If_Insn, ?index:number)
+
+
+//-----------------------------------------------------------------------------
+// [Field Instructions]
+//-----------------------------------------------------------------------------
+
+// The associated *field* of this instruction. It applies to
+// all types of field instuctions.
+
+.decl FieldInstruction_Signature(?insn:FieldInstruction, ?fieldName:symbol)
+
+//------------------------------------------------
+// A LoadInstanceField instruction has the form:
+// x = y.f
+//
+// Its three components are:
+//   1. Base (y)
+//   2. Field (f)
+//   3. To (x)
+//------------------------------------------------
+
+.decl LoadInstanceField_Base(?insn:LoadInstanceField_Insn, ?var:Var)
+.decl LoadInstanceField_To(?insn:LoadInstanceField_Insn, ?var:Var)
+
+//------------------------------------------------
+// A StoreInstanceField instruction has the form:
+// x.f = y
+//
+// Its three components are:
+//   1. Base (x)
+//   2. Field (f)
+//   3. From (y)
+//------------------------------------------------
+
+.decl StoreInstanceField_From(?insn:StoreInstanceField_Insn, ?var:Var)
+.decl StoreInstanceField_Base(?insn:StoreInstanceField_Insn, ?var:Var)
+
+
+//-----------------------------------------------------------------------------
+// [Collection Access Instructions]
+//-----------------------------------------------------------------------------
+
+.decl CollectionAccessInsn_Base(?insn:CollectionAccess_Insn, ?base:Var)
+.decl CollectionAccessInsn_IndexOrKey(?insn:CollectionAccess_Insn, ?indexOrKey:Var)
+
+.decl WriteToCollectionInsn_From(?insn:WriteToCollection_Insn, ?from:Var)
+.decl ReadFromCollectionInsn_To(?insn:ReadFromCollection_Insn, ?to:Var)
+
+//-----------------------------------------------------------------------------
+// [Assign Instructions]
+//-----------------------------------------------------------------------------
+
+// The target of all assignment instructions
+.decl AssignInstruction_To(?insn:AssignInstruction, ?to:Var)
+
+// Assign numeric constant instruction
+.decl AssignIntConstant_Id(?insn:AssignIntConstant_Insn, ?const:IntConstant)
+.decl AssignFloatConstant_Id(?insn:AssignFloatConstant_Insn, ?const:FloatConstant)
+.decl AssignBoolConstant_Id(?insn:AssignBoolConstant_Insn, ?const:BoolConstant)
+
+// Assign local instruction
+.decl AssignLocal_From(?insn:AssignLocal_Insn, ?from:Var)
+
+// Assign expression vars
+.decl AssignOper_From(?insn:AssignOper_Insn, ?operNum:number, ?from:Var)
+
+// Assign operation
+.decl Assign_Operation(?insn:AssignOper_Insn, ?oper:symbol)
+
+// Assign Heap Allocation
+.decl AssignHeapAllocation_Heap(?insn:AssignHeapAllocation_Insn, ?heap:HeapAllocation)
+
+
+//-----------------------------------------------------------------------------
+// [Return Instructions]
+//-----------------------------------------------------------------------------
+
+.decl ReturnNonNone_Var(?return:ReturnNonNone_Insn, ?var:Var)
+
+
+//-----------------------------------------------------------------------------
+// [Invocation Instructions]
+//-----------------------------------------------------------------------------
+
+.decl ApplicationFunction(?function:Function)
+.output ApplicationFunction
+
+// The (call-site) variable that holds the result of the invocation
+.decl AssignReturnValue(?invocation:FunctionInvocation_Insn, ?to:Var)
+
+// The actual parameters of the invocation. Note: this does not
+// contain the receiver object (see FunctionInvocation_Insn:Base predicates).
+.decl ActualPositionalParam(?index:number, ?invocation:FunctionInvocation_Insn, ?var:Var)
+.decl ActualKeywordParam(?index:number, ?invocation:FunctionInvocation_Insn, ?keyword:symbol, ?var:Var)
+
+// Function Invocation
+.decl FunctionInvocation_Base(?invocation:FunctionInvocation_Insn, ?base:Var)
+
+//-----------------------------------------------------------------------------
+// [Import]
+//-----------------------------------------------------------------------------
+.decl ImportInsn_ModuleName(?insn: ImportInstruction, ?name:symbol)
+
+//-----------------------------------------------------------------------------
+// [LexicalAccess (LexicalRead, LexicalWrite) ]
+//-----------------------------------------------------------------------------
+.decl LexicalAccessInsn_Name(?insn: LexicalAccess_Insn, ?name:symbol)
+.decl LexicalAccessInsn_VarScope(?insn: LexicalAccess_Insn, ?scope:Function)
+.decl LexicalWriteInsn_From(?insn: LexicalAccess_Insn, ?from:Var)
+
+//-----------------------------------------------------------------------------
+// [GlobalAccess (GlobalRead, GlobalWrite) ]
+//-----------------------------------------------------------------------------
+.decl GlobalAccessInsn_Name(?insn: GlobalAccess_Insn, ?name:symbol)
+.decl GlobalAccessInsn_Scope(?insn: GlobalAccess_Insn, ?scope:Scope)
+.decl GlobalWriteInsn_From(?insn: GlobalAccess_Insn, ?from:Var)
+
+//-----------------------------------------------------------------------------
+// [Exception Handlers]
+//-----------------------------------------------------------------------------
+
+.type ExceptionHandler
+.decl isExceptionHandler(?handler:ExceptionHandler)
+
+.decl ExceptionHandler_Function(?handler:ExceptionHandler, ?inFunction:Function)
+
+// Instruction index of handling code
+.decl ExceptionHandler_Index(?handler:ExceptionHandler, ?index:number)
+.decl ExceptionHandler_Type(?handler:ExceptionHandler, ?type:Type)
+
+// Variable to which caught exceptions are assigned
+.decl ExceptionHandler_FormalParam(?handler:ExceptionHandler, ?var:Var)
+
+// First index of the bytecodes covered by this handler
+.decl ExceptionHandler_Begin(?handler:ExceptionHandler, ?index:number)
+
+// Last index (excluding this index) of the bytecodes covered by this
+// handler
+.decl ExceptionHandler_End(?handler:ExceptionHandler, ?index:number)
+
+// Previous exception handler (handlers are ordered inside a function)
+.decl ExceptionHandler_Previous(?handler:ExceptionHandler, ?previous:ExceptionHandler)
+
+
+//-----------------------------------------------------------------------------
+// [Miscellaneous]
+//-----------------------------------------------------------------------------
+
+// Return variables of native functions (no instructions exist)
+.decl NativeReturnVar(?var:Var, ?function:Function)
+
+#ifndef X_STATS_NONE
+// Predicate to store analysis statistics
+.decl Stats_Metrics(order:symbol, msg:symbol, c:number)
+#endif
+
+
+//-----------------------------------------------------------------------------
+// [Flow-insensitive Schema Layer]
+//
+// The following section contains a slightly modified schema that hides the
+// underlying instruction entities, which are irrelevant to flow-insensitive
+// analyses.
+//
+// The basic pattern is that, for each instruction entity, we introduce another
+// predicate that joins all of its properties (encoded as functional
+// predicates) but does not contain the instruction itself.
+//
+// Note that this pattern applies only to a subset of instructions that is
+// important for flow-insensitive analysis.
+//-----------------------------------------------------------------------------
+
+.decl Throw(?insn:Throw_Insn, ?var:Var)
+
+.decl LoadInstanceField(?base:Var, ?sig:Field, ?to:Var, ?inFunction:Function)
+
+.decl StoreInstanceField(?from:Var, ?base:Var, ?signature:Field, ?inFunction:Function)
+
+.decl AssignCast(?type:Type, ?from:Var, ?to:Var, ?inFunction:Function)
+
+.decl AssignLocal(?from:Var, ?to:Var, ?inFunction:Function)
+
+.decl AssignNull(?to:Var, ?inFunction:Function)
+
+.decl AssignHeapAllocation(?heap:HeapAllocation, ?to:Var, ?inFunction:Function)
+
+// Note: a function can have multiple return variables
+.decl ReturnVar(?var:Var, ?function:Function)
+
+.decl FunctionInvocation(?invocation:FunctionInvocation_Insn, ?inFunction:Function)
+

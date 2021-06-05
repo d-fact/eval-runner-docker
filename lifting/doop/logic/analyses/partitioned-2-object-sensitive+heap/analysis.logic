@@ -1,0 +1,204 @@
+#include "../../main/partitioning.logic"
+
+// Context-sensitive pointer analysis with context of 1 object and a
+// context-sensitive heap abstraction.
+
+// In this analysis, the real context is a pair of Values and the real
+// heap context a single Value. Keeping mapping functions is the way
+// to handle analyses where HContext = Context (since the language considers
+// them different types).
+ContextFromRealContext[?partitionId, ?value1, ?value2] = ?ctx ->
+  Context(?ctx), Type(?partitionId), Value(?value1), Value(?value2).
+lang:constructor(`ContextFromRealContext).
+// Some basics, for encoding-decoding
+RealContext1FromContext[?ctx] = ?value1,
+RealContext2FromContext[?ctx] = ?value2,
+PartitionFromContext[?ctx] = ?partitionId <-
+  ContextFromRealContext[?partitionId, ?value1, ?value2] = ?ctx.
+
+HContextFromRealHContext[?partitionId, ?value] = ?hctx ->
+  HContext(?hctx), Type(?partitionId), Value(?value).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?value,
+PartitionFromHContext[?hctx] = ?partitionId <-
+  HContextFromRealHContext[?partitionId, ?value] = ?hctx.
+
+// horrible indexing, but there will only be a handful of such contexts
+ImmutableContextFromHContext[?hctx] = ?ctx <-
+  ImmutableContext(?ctx),
+  PartitionFromContext[?ctx] = PartitionFromHContext[?hctx].
+ImmutableContextFromContext[?ctx1] = ?ctx2 <-
+  ImmutableContext(?ctx2),
+  PartitionFromContext[?ctx1] = PartitionFromContext[?ctx2].
+ImmutableHContextFromContext[?ctx] = ?hctx <-
+  ImmutableHContext(?hctx),
+  PartitionFromContext[?ctx] = PartitionFromHContext[?hctx].
+
+// Merge optimization hack
+
+// For this analysis, we only need three of the parameters that may influence the
+// new context object.
+MyMergeBasis(?invo, ?hctx, ?value) <-
+  MergeBasis(_, ?invo, ?hctx, ?value).
+
+MatchingMethodForInvocationAndType[?type, ?invocation] = ?tomethod <-
+  ResolveInvocation[?type, ?invocation] = ?tomethod.
+
+MatchingMethodForInvocationAndType[?type, ?invocation] = ?tomethod <-
+  SpecialMethodInvocation:Base[?invocation] = ?base,
+  Var:Type[?base] = ?basetype,
+  MethodInvocation:Method[?invocation] = ?tomethod,
+  SubtypeOf(?type, ?basetype).
+
+PartitionForValue[?value] = ?partitionId <-
+  Value:Type[?value] = ?valueClass,
+  TypeToPartitionId[?valueClass] = ?partitionId.
+
+ValueInAllPartitions(?value) <-
+  Value:DeclaringType[?value] = ?valueClass,
+  TypeInAllPartitions(?valueClass).
+
+NotValueInAllPartitions(?value) <-
+  Value:DeclaringType[?value] = ?valueClass,
+  NotTypeInAllPartitions(?valueClass).
+
+TypeInAllPartitions(?type) <-
+  Type:Id(?type:?typeName),
+  string:substring[?typeName, 0, _] = "java.util".
+
+NotTypeInAllPartitions(?type) <-
+   Type(?type),
+   !TypeInAllPartitions(?type).
+
+PartitionForInvocation[?invo] = ?partitionId <-
+  Instruction:Method[?invo] = ?inmethod,
+  Method:DeclaringType[?inmethod] = ?inClass,
+  TypeToPartitionId[?inClass] = ?partitionId.
+
+PartitionForMethod[?method] = ?partitionId <-
+  Method:DeclaringType[?method] = ?inClass,
+  TypeToPartitionId[?inClass] = ?partitionId.
+   
+MethodInAllPartitions(?method) <-
+   Method:DeclaringType[?method] = ?type,
+   TypeInAllPartitions(?type).
+
+PartitionForResolvedInvocation[?type, ?invo] = ?partitionId <-
+  MatchingMethodForInvocationAndType[?type, ?invo] = ?tomethod,
+  Method:DeclaringType[?tomethod] = ?toclass,
+  TypeToPartitionId[?toclass] = ?partitionId.
+  
+/*
+MergeMacro(?notused, ?notused, ?hctx, ?value, ?calleeCtx),
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value).
+*/
+
+
+/// Base the decision on the partition of the target method
+MergeMacro(?notused, ?notused, ?hctx, ?value, ?calleeCtx),
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  Value:Type[?value] = ?valuetype,
+  (PartitionForResolvedInvocation[?valuetype, ?invo] = PartitionForInvocation[?invo];
+   TypeInAllPartitions(?valuetype)).
+
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  Value:Type[?value] = ?valuetype,
+  !(PartitionForResolvedInvocation[?valuetype, ?invo] = _),
+  !TypeInAllPartitions(?valuetype),
+  ImmutableContextFromHContext[?hctx] = ?calleeCtx.
+
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  Value:Type[?value] = ?valuetype,
+  PartitionForResolvedInvocation[?valuetype, ?invo] = ?partId,
+  (?partId != PartitionForInvocation[?invo];
+   !(PartitionForInvocation[?invo] = _)),
+  !TypeInAllPartitions(?valuetype),
+  ImmutableContextFromHContext[?hctx] = ?calleeCtx.
+// and for static methods
+
+CachedMergeStatic[?callerCtx, ?invo] = ?calleeCtx -> Context(?callerCtx), Instruction(?invo), Context(?calleeCtx).
+
+
+MergeStaticMacro(?callerCtx, ?invo, ?calleeCtx),
+CachedMergeStatic[?callerCtx, ?invo] = ?calleeCtx <-
+   MergeStaticBasis(?callerCtx, ?invo),
+   MethodInvocation:Method[?invo] = ?tomethod,
+   (PartitionForMethod[?tomethod] = PartitionForInvocation[?invo];
+    MethodInAllPartitions(?tomethod)).
+
+
+CachedMergeStatic[?callerCtx, ?invo] = ?calleeCtx <-
+   MergeStaticBasis(?callerCtx, ?invo),
+   MethodInvocation:Method[?invo] = ?tomethod,
+   !(PartitionForMethod[?tomethod] = _),
+   !MethodInAllPartitions(?tomethod),
+   ImmutableContextFromContext[?callerCtx] = ?calleeCtx.
+
+CachedMergeStatic[?callerCtx, ?invo] = ?calleeCtx <-
+   MergeStaticBasis(?callerCtx, ?invo),
+   MethodInvocation:Method[?invo] = ?tomethod,
+   (PartitionForMethod[?tomethod] != PartitionForInvocation[?invo];
+   !(PartitionForInvocation[?invo] = _)),
+   !MethodInAllPartitions(?tomethod),
+   ImmutableContextFromContext[?callerCtx] = ?calleeCtx.
+
+
+
+
+/*
+/// Base the decision on the partition that allocated the receiver object
+MergeMacro(?notused, ?notused, ?hctx, ?value, ?calleeCtx),
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  (PartitionForInvocation[?invo] = PartitionForValue[?value];
+   ValueInAllPartitions(?value)).
+
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  !(PartitionForValue[?value] = _),
+  NotValueInAllPartitions(?value),
+  ImmutableContextFromHContext[?hctx] = ?calleeCtx.
+
+CachedMerge[?invo, ?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?invo, ?hctx, ?value),
+  PartitionForValue[?value] = ?partId,
+  (?partId != PartitionForInvocation[?invo];
+   !(PartitionForInvocation[?invo] = _)),
+  NotValueInAllPartitions(?value),
+  ImmutableContextFromHContext[?hctx] = ?calleeCtx.
+*/
+
+// What are the necessary parameters for this analysis?
+MyRecordBasis(?ctx, ?value) <-
+  RecordBasis(_, ?ctx, ?value).
+
+RecordMacro(?ctx, ?value, ?hctx),
+CachedRecord[?ctx, ?value] = ?hctx <-
+  MyRecordBasis(?ctx, ?value),
+  (PartitionFromContext[?ctx] = PartitionForValue[?value];
+   ValueInAllPartitions(?value)).
+
+
+CachedRecord[?ctx, ?value] = ?hctx <-
+  MyRecordBasis(?ctx, ?value),
+  PartitionForValue[?value] = ?partId,
+  ?partId != PartitionFromContext[?ctx],
+  NotValueInAllPartitions(?value),
+  ImmutableHContextFromContext[?ctx] = ?hctx.
+
+// Post-processing
+_ValidCtxVar(?ctx, ?var)
+  <-
+  ReachableContext(?ctx, ?meth),
+  Method:DeclaringType[?meth] = ?intype,
+  Var:DeclaringMethod(?var,?meth),
+  (!(TypeToPartitionId[?intype] = _);
+   TypeToPartitionId[?intype] = PartitionFromContext[?ctx]).
+
+CollapsedVarPointsTo(?hctx, ?heap, ?ctx, ?var) <-
+   VarPointsTo(?hctx, ?heap, ?ctx, ?var),
+   _ValidCtxVar(?ctx, ?var).

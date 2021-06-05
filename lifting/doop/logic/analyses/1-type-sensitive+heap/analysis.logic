@@ -1,0 +1,19 @@
+// Context-sensitive pointer analysis with context of 1 type and a
+// context-sensitive heap abstraction.
+
+// In this analysis, both the real context and the real heap context are Types.
+// Keeping mapping functions is the way to handle analyses where HContext =
+// Context (since the language considers them different types).  The type is
+// not always a class type, because of arrays currently being a non-class
+// subtype of Object
+ContextFromRealContext[?type] = ?ctx ->
+  Context(?ctx), Type(?type).
+lang:constructor(`ContextFromRealContext).
+RealContextFromContext[?ctx] = ?type ->
+  Context(?ctx), Type(?type).
+RealContextFromContext[?ctx] = ?type <-
+  ContextFromRealContext[?type] = ?ctx.
+
+HContextFromRealHContext[?type] = ?hctx ->
+  HContext(?hctx), Type(?type).
+lang:constructor(`HContextFromRealHContext).

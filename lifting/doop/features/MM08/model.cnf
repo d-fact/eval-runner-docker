@@ -1,0 +1,210 @@
+p cnf 35 100 
+c c 1 NewCompound1
+c c 2 MobilMedia
+c c 3 Media
+c u 4 includeSorting
+c u 5 includeFavourites
+c u 6 includeCopyPhoto
+c c 7 Derivatives
+c u 8 includePrivacy
+c u 9 Photo
+c c 10 includePhotoAlbum
+c u 11 includeSmsFeature
+c u 12 capturePhoto
+c u 13 _includeMMAPI
+c c 14 includeMMAPI
+c u 15 Video
+c c 16 includeVideo
+c u 17 captureVideo
+c u 18 simulatePlayVideo
+c c 19 _Derivatives
+c u 20 x_CopyPhotoOrSMS
+c u 21 x_PhotoAlbumOrMusic
+c u 22 x_NotPhotoAlbum
+c u 23 x_notMisc
+c u 24 x_MusicAndVideo
+c u 25 x_NotMusic
+c u 26 x_PhotoAlbumAndVideoOrMusic
+c u 27 x_CapturePhotoOrVideo
+c u 28 x_NotPrivacy
+c u 29 x_SMSOrCapturePhoto
+c u 30 x_misc
+c u 31 x_MusicOrVideo
+c u 32 x_SMSOrCapturePhotoOrCaptureVideo
+c u 33 x_PhotoAlbumOrMusicOrVideo
+c u 34 x_CopyPhotoOrSMSOrCapturePhoto
+c u 35 x_notSimulatePlayVideo
+c (NewCompound1 iff MobilMedia)
+c ((not NewCompound1 or MobilMedia) and (not MobilMedia or NewCompound1))
+c x ((not NewCompound1 or MobilMedia) and (not MobilMedia or NewCompound1))
+-1 2  0
+-2 1  0
+c (Media iff (Video or _includeMMAPI or Photo))
+c ((not Media or Video or _includeMMAPI or Photo) and ((not Video and not _includeMMAPI and not Photo) or Media))
+c x ((not Media or Video or _includeMMAPI or Photo) and (not Video or Media) and (not _includeMMAPI or Media) and (not Photo or Media))
+-3 15 13 9  0
+-15 3  0
+-13 3  0
+-9 3  0
+c (Derivatives iff _Derivatives)
+c ((not Derivatives or _Derivatives) and (not _Derivatives or Derivatives))
+c x ((not Derivatives or _Derivatives) and (not _Derivatives or Derivatives))
+-7 19  0
+-19 7  0
+c ((Video iff includeVideo) and (captureVideo) implies (Video) and (simulatePlayVideo) implies (Video))
+c ((not Video or includeVideo) and (not includeVideo or Video) and (not captureVideo or Video) and (not simulatePlayVideo or Video))
+c x ((not Video or includeVideo) and (not includeVideo or Video) and (not captureVideo or Video) and (not simulatePlayVideo or Video))
+-15 16  0
+-16 15  0
+-17 15  0
+-18 15  0
+c (_includeMMAPI iff includeMMAPI)
+c ((not _includeMMAPI or includeMMAPI) and (not includeMMAPI or _includeMMAPI))
+c x ((not _includeMMAPI or includeMMAPI) and (not includeMMAPI or _includeMMAPI))
+-13 14  0
+-14 13  0
+c ((Photo iff includePhotoAlbum) and (includeSmsFeature) implies (Photo) and (capturePhoto) implies (Photo))
+c ((not Photo or includePhotoAlbum) and (not includePhotoAlbum or Photo) and (not includeSmsFeature or Photo) and (not capturePhoto or Photo))
+c x ((not Photo or includePhotoAlbum) and (not includePhotoAlbum or Photo) and (not includeSmsFeature or Photo) and (not capturePhoto or Photo))
+-9 10  0
+-10 9  0
+-11 9  0
+-12 9  0
+c ((MobilMedia iff Media) and (includeSorting) implies (MobilMedia) and (includeFavourites) implies (MobilMedia) and (includeCopyPhoto) implies (MobilMedia) and (MobilMedia iff Derivatives) and (includePrivacy) implies (MobilMedia))
+c ((not MobilMedia or Media) and (not Media or MobilMedia) and (not includeSorting or MobilMedia) and (not includeFavourites or MobilMedia) and (not includeCopyPhoto or MobilMedia) and (not MobilMedia or Derivatives) and (not Derivatives or MobilMedia) and (not includePrivacy or MobilMedia))
+c x ((not MobilMedia or Media) and (not Media or MobilMedia) and (not includeSorting or MobilMedia) and (not includeFavourites or MobilMedia) and (not includeCopyPhoto or MobilMedia) and (not MobilMedia or Derivatives) and (not Derivatives or MobilMedia) and (not includePrivacy or MobilMedia))
+-2 3  0
+-3 2  0
+-4 2  0
+-5 2  0
+-6 2  0
+-2 7  0
+-7 2  0
+-8 2  0
+c ((x_CopyPhotoOrSMS) implies (_Derivatives) and (x_PhotoAlbumOrMusic) implies (_Derivatives) and (x_NotPhotoAlbum) implies (_Derivatives) and (x_notMisc) implies (_Derivatives) and (x_MusicAndVideo) implies (_Derivatives) and (x_NotMusic) implies (_Derivatives) and (x_PhotoAlbumAndVideoOrMusic) implies (_Derivatives) and (x_CapturePhotoOrVideo) implies (_Derivatives) and (x_NotPrivacy) implies (_Derivatives) and (x_SMSOrCapturePhoto) implies (_Derivatives) and (x_misc) implies (_Derivatives) and (x_MusicOrVideo) implies (_Derivatives) and (x_SMSOrCapturePhotoOrCaptureVideo) implies (_Derivatives) and (x_PhotoAlbumOrMusicOrVideo) implies (_Derivatives) and (x_CopyPhotoOrSMSOrCapturePhoto) implies (_Derivatives) and (x_notSimulatePlayVideo) implies (_Derivatives))
+c ((not x_CopyPhotoOrSMS or _Derivatives) and (not x_PhotoAlbumOrMusic or _Derivatives) and (not x_NotPhotoAlbum or _Derivatives) and (not x_notMisc or _Derivatives) and (not x_MusicAndVideo or _Derivatives) and (not x_NotMusic or _Derivatives) and (not x_PhotoAlbumAndVideoOrMusic or _Derivatives) and (not x_CapturePhotoOrVideo or _Derivatives) and (not x_NotPrivacy or _Derivatives) and (not x_SMSOrCapturePhoto or _Derivatives) and (not x_misc or _Derivatives) and (not x_MusicOrVideo or _Derivatives) and (not x_SMSOrCapturePhotoOrCaptureVideo or _Derivatives) and (not x_PhotoAlbumOrMusicOrVideo or _Derivatives) and (not x_CopyPhotoOrSMSOrCapturePhoto or _Derivatives) and (not x_notSimulatePlayVideo or _Derivatives))
+c x ((not x_CopyPhotoOrSMS or _Derivatives) and (not x_PhotoAlbumOrMusic or _Derivatives) and (not x_NotPhotoAlbum or _Derivatives) and (not x_notMisc or _Derivatives) and (not x_MusicAndVideo or _Derivatives) and (not x_NotMusic or _Derivatives) and (not x_PhotoAlbumAndVideoOrMusic or _Derivatives) and (not x_CapturePhotoOrVideo or _Derivatives) and (not x_NotPrivacy or _Derivatives) and (not x_SMSOrCapturePhoto or _Derivatives) and (not x_misc or _Derivatives) and (not x_MusicOrVideo or _Derivatives) and (not x_SMSOrCapturePhotoOrCaptureVideo or _Derivatives) and (not x_PhotoAlbumOrMusicOrVideo or _Derivatives) and (not x_CopyPhotoOrSMSOrCapturePhoto or _Derivatives) and (not x_notSimulatePlayVideo or _Derivatives))
+-20 19  0
+-21 19  0
+-22 19  0
+-23 19  0
+-24 19  0
+-25 19  0
+-26 19  0
+-27 19  0
+-28 19  0
+-29 19  0
+-30 19  0
+-31 19  0
+-32 19  0
+-33 19  0
+-34 19  0
+-35 19  0
+c (x_CopyPhotoOrSMS iff (includeCopyPhoto or includeSmsFeature))
+c ((not x_CopyPhotoOrSMS or includeCopyPhoto or includeSmsFeature) and ((not includeCopyPhoto and not includeSmsFeature) or x_CopyPhotoOrSMS))
+c x ((not x_CopyPhotoOrSMS or includeCopyPhoto or includeSmsFeature) and (not includeCopyPhoto or x_CopyPhotoOrSMS) and (not includeSmsFeature or x_CopyPhotoOrSMS))
+-20 6 11  0
+-6 20  0
+-11 20  0
+c (x_PhotoAlbumOrMusic iff (includePhotoAlbum or includeMMAPI))
+c ((not x_PhotoAlbumOrMusic or includePhotoAlbum or includeMMAPI) and ((not includePhotoAlbum and not includeMMAPI) or x_PhotoAlbumOrMusic))
+c x ((not x_PhotoAlbumOrMusic or includePhotoAlbum or includeMMAPI) and (not includePhotoAlbum or x_PhotoAlbumOrMusic) and (not includeMMAPI or x_PhotoAlbumOrMusic))
+-21 10 14  0
+-10 21  0
+-14 21  0
+c (x_NotPhotoAlbum iff not includePhotoAlbum)
+c ((not x_NotPhotoAlbum or not includePhotoAlbum) and (includePhotoAlbum or x_NotPhotoAlbum))
+c x ((not x_NotPhotoAlbum or not includePhotoAlbum) and (includePhotoAlbum or x_NotPhotoAlbum))
+-22 -10  0
+10 22  0
+c (x_NotMusic iff not includeMMAPI)
+c ((not x_NotMusic or not includeMMAPI) and (includeMMAPI or x_NotMusic))
+c x ((not x_NotMusic or not includeMMAPI) and (includeMMAPI or x_NotMusic))
+-25 -14  0
+14 25  0
+c (x_misc iff ((includeMMAPI and includePhotoAlbum) or (includeMMAPI and includeVideo) or (includeVideo and includePhotoAlbum)))
+c ((not x_misc or (includeMMAPI and includePhotoAlbum) or (includeMMAPI and includeVideo) or (includeVideo and includePhotoAlbum)) and (((not includeMMAPI or not includePhotoAlbum) and (not includeMMAPI or not includeVideo) and (not includeVideo or not includePhotoAlbum)) or x_misc))
+c x ((not x_misc or includeMMAPI or includeMMAPI or includeVideo) and (not x_misc or includeMMAPI or includeMMAPI or includePhotoAlbum) and (not x_misc or includeMMAPI or includeVideo or includeVideo) and (not x_misc or includeMMAPI or includeVideo or includePhotoAlbum) and (not x_misc or includePhotoAlbum or includeMMAPI or includeVideo) and (not x_misc or includePhotoAlbum or includeMMAPI or includePhotoAlbum) and (not x_misc or includePhotoAlbum or includeVideo or includeVideo) and (not x_misc or includePhotoAlbum or includeVideo or includePhotoAlbum) and (not includeMMAPI or not includePhotoAlbum or x_misc) and (not includeMMAPI or not includeVideo or x_misc) and (not includeVideo or not includePhotoAlbum or x_misc))
+-30 14 14 16  0
+-30 14 14 10  0
+-30 14 16 16  0
+-30 14 16 10  0
+-30 10 14 16  0
+-30 10 14 10  0
+-30 10 16 16  0
+-30 10 16 10  0
+-14 -10 30  0
+-14 -16 30  0
+-16 -10 30  0
+c (x_notMisc iff not x_misc)
+c ((not x_notMisc or not x_misc) and (x_misc or x_notMisc))
+c x ((not x_notMisc or not x_misc) and (x_misc or x_notMisc))
+-23 -30  0
+30 23  0
+c (x_PhotoAlbumAndVideoOrMusic iff ((includeMMAPI and includePhotoAlbum) or (includePhotoAlbum and includeVideo)))
+c ((not x_PhotoAlbumAndVideoOrMusic or (includeMMAPI and includePhotoAlbum) or (includePhotoAlbum and includeVideo)) and (((not includeMMAPI or not includePhotoAlbum) and (not includePhotoAlbum or not includeVideo)) or x_PhotoAlbumAndVideoOrMusic))
+c x ((not x_PhotoAlbumAndVideoOrMusic or includeMMAPI or includePhotoAlbum) and (not x_PhotoAlbumAndVideoOrMusic or includeMMAPI or includeVideo) and (not x_PhotoAlbumAndVideoOrMusic or includePhotoAlbum or includePhotoAlbum) and (not x_PhotoAlbumAndVideoOrMusic or includePhotoAlbum or includeVideo) and (not includeMMAPI or not includePhotoAlbum or x_PhotoAlbumAndVideoOrMusic) and (not includePhotoAlbum or not includeVideo or x_PhotoAlbumAndVideoOrMusic))
+-26 14 10  0
+-26 14 16  0
+-26 10 10  0
+-26 10 16  0
+-14 -10 26  0
+-10 -16 26  0
+c (x_CapturePhotoOrVideo iff (capturePhoto or captureVideo))
+c ((not x_CapturePhotoOrVideo or capturePhoto or captureVideo) and ((not capturePhoto and not captureVideo) or x_CapturePhotoOrVideo))
+c x ((not x_CapturePhotoOrVideo or capturePhoto or captureVideo) and (not capturePhoto or x_CapturePhotoOrVideo) and (not captureVideo or x_CapturePhotoOrVideo))
+-27 12 17  0
+-12 27  0
+-17 27  0
+c (x_NotPrivacy iff not includePrivacy)
+c ((not x_NotPrivacy or not includePrivacy) and (includePrivacy or x_NotPrivacy))
+c x ((not x_NotPrivacy or not includePrivacy) and (includePrivacy or x_NotPrivacy))
+-28 -8  0
+8 28  0
+c (x_MusicOrVideo iff (includeMMAPI or includeVideo))
+c ((not x_MusicOrVideo or includeMMAPI or includeVideo) and ((not includeMMAPI and not includeVideo) or x_MusicOrVideo))
+c x ((not x_MusicOrVideo or includeMMAPI or includeVideo) and (not includeMMAPI or x_MusicOrVideo) and (not includeVideo or x_MusicOrVideo))
+-31 14 16  0
+-14 31  0
+-16 31  0
+c (x_SMSOrCapturePhotoOrCaptureVideo iff (includeSmsFeature or capturePhoto or captureVideo))
+c ((not x_SMSOrCapturePhotoOrCaptureVideo or includeSmsFeature or capturePhoto or captureVideo) and ((not includeSmsFeature and not capturePhoto and not captureVideo) or x_SMSOrCapturePhotoOrCaptureVideo))
+c x ((not x_SMSOrCapturePhotoOrCaptureVideo or includeSmsFeature or capturePhoto or captureVideo) and (not includeSmsFeature or x_SMSOrCapturePhotoOrCaptureVideo) and (not capturePhoto or x_SMSOrCapturePhotoOrCaptureVideo) and (not captureVideo or x_SMSOrCapturePhotoOrCaptureVideo))
+-32 11 12 17  0
+-11 32  0
+-12 32  0
+-17 32  0
+c (x_PhotoAlbumOrMusicOrVideo iff (includePhotoAlbum or includeMMAPI or includeVideo))
+c ((not x_PhotoAlbumOrMusicOrVideo or includePhotoAlbum or includeMMAPI or includeVideo) and ((not includePhotoAlbum and not includeMMAPI and not includeVideo) or x_PhotoAlbumOrMusicOrVideo))
+c x ((not x_PhotoAlbumOrMusicOrVideo or includePhotoAlbum or includeMMAPI or includeVideo) and (not includePhotoAlbum or x_PhotoAlbumOrMusicOrVideo) and (not includeMMAPI or x_PhotoAlbumOrMusicOrVideo) and (not includeVideo or x_PhotoAlbumOrMusicOrVideo))
+-33 10 14 16  0
+-10 33  0
+-14 33  0
+-16 33  0
+c (x_CopyPhotoOrSMSOrCapturePhoto iff (includeCopyPhoto or includeSmsFeature or capturePhoto))
+c ((not x_CopyPhotoOrSMSOrCapturePhoto or includeCopyPhoto or includeSmsFeature or capturePhoto) and ((not includeCopyPhoto and not includeSmsFeature and not capturePhoto) or x_CopyPhotoOrSMSOrCapturePhoto))
+c x ((not x_CopyPhotoOrSMSOrCapturePhoto or includeCopyPhoto or includeSmsFeature or capturePhoto) and (not includeCopyPhoto or x_CopyPhotoOrSMSOrCapturePhoto) and (not includeSmsFeature or x_CopyPhotoOrSMSOrCapturePhoto) and (not capturePhoto or x_CopyPhotoOrSMSOrCapturePhoto))
+-34 6 11 12  0
+-6 34  0
+-11 34  0
+-12 34  0
+c (x_notSimulatePlayVideo iff not simulatePlayVideo)
+c ((not x_notSimulatePlayVideo or not simulatePlayVideo) and (simulatePlayVideo or x_notSimulatePlayVideo))
+c x ((not x_notSimulatePlayVideo or not simulatePlayVideo) and (simulatePlayVideo or x_notSimulatePlayVideo))
+-35 -18  0
+18 35  0
+c (x_MusicAndVideo iff (includeMMAPI and includeVideo))
+c ((not x_MusicAndVideo or (includeMMAPI and includeVideo)) and (not includeMMAPI or not includeVideo or x_MusicAndVideo))
+c x ((not x_MusicAndVideo or includeMMAPI) and (not x_MusicAndVideo or includeVideo) and (not includeMMAPI or not includeVideo or x_MusicAndVideo))
+-24 14  0
+-24 16  0
+-14 -16 24  0
+c (x_SMSOrCapturePhoto iff (includeSmsFeature or capturePhoto))
+c ((not x_SMSOrCapturePhoto or includeSmsFeature or capturePhoto) and ((not includeSmsFeature and not capturePhoto) or x_SMSOrCapturePhoto))
+c x ((not x_SMSOrCapturePhoto or includeSmsFeature or capturePhoto) and (not includeSmsFeature or x_SMSOrCapturePhoto) and (not capturePhoto or x_SMSOrCapturePhoto))
+-29 11 12  0
+-11 29  0
+-12 29  0
+c x NewCompound1
+1 0
+

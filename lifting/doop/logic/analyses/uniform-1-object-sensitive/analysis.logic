@@ -1,0 +1,33 @@
+// Context-sensitive pointer analysis with context of 1 object and 1 call-site.
+
+ContextFromRealContext[?value, ?invo] = ?ctx ->
+  Context(?ctx), Value(?value), MethodInvocation(?invo).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContext2FromContext[?ctx] = ?invo ->
+  Context(?ctx), MethodInvocation(?invo).
+RealContext1FromContext[?ctx] = ?value,
+RealContext2FromContext[?ctx] = ?invo <-
+  ContextFromRealContext[?value, ?invo] = ?ctx.
+
+HContextFromRealHContext[] = ?hctx -> HContext(?hctx).
+lang:constructor(`HContextFromRealHContext).
+
+
+ImmutableInvValue[] = ?invo <-
+  MethodInvocationValue(?invo, "<<immutable-context>>").
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+//MyMergeBasis(?value, ?invocation) <-
+//  MergeBasis(_, _, ?value, ?invocation).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+//Context(?calleeCtx),
+//ContextFromRealContext[?value, ?invocation] = ?calleeCtx,
+//CachedMerge[?value, ?invocation] = ?calleeCtx <-
+//  MyMergeBasis(?value, ?invocation).

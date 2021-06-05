@@ -1,0 +1,160 @@
+/**
+ * Dynamic analysis
+ */
+
+/*
+ Default handling of context sensitivity
+*/
+
+DynamicContextToContext(?ctx, ?dctx) -> Context(?ctx), DynamicContext(?dctx).
+DynamicContextToHContext(?hctx, ?dctx) -> HContext(?hctx), DynamicContext(?dctx).
+
+DynamicContextToContext(?ctx, ?dctx) <- DynamicContextToContext(?ctx, ?dctx).
+DynamicContextToHContext(?ctx, ?dctx) <- DynamicContextToHContext(?ctx, ?dctx).
+#ifndef DYNAMIC_CONTEXT_SENSITIVITY
+//DynamicContextToContext(?ctx, ?dctx) <-
+//   ImmutableContext(?ctx),
+//   DynamicContext(?dctx).
+
+//DynamicContextToHContext(?hctx, ?dctx) <-
+//   DynamicContext(?dctx),
+//   ImmutableHContext(?hctx).
+#endif
+
+
+/*
+ matching dynamic facts
+*/
+
+
+HeapAllocation:Dynamic(?heap) <- DynamicHeapAllocation(_, ?heap).
+
+Value:byDynamicHeap[?heap] = Value:byHeap[?mergeHeap] <-
+   HeapAllocation:Merge[?heap] = ?mergeHeap,
+   HeapAllocation:Dynamic(?heap).
+
+Value:byDynamicHeap[?heap] = Value:byHeap[?heap] <-
+   !HeapAllocation:Merge[?heap] = _,
+   !HeapRepresentative(_, ?heap),
+   HeapAllocation:Dynamic(?heap).
+
+// Context sensitive allocations
+ImpreciseDynamicStaticFieldPointsTo(?signature, ?immutableDCTX, ?heap) <-   DynamicStaticFieldPointsTo(?signature, ?dctx, ?heap),   DynamicStaticFieldPointsTo(?signature, ?immutableDCTX, ?heap),   ?dctx != ?immutableDCTX,   ImmutableDCTX(?immutableDCTX).
+
+StaticFieldPointsTo(?hctx, ?value, ?signature) <-
+   DynamicStaticFieldPointsTo(?signature, ?dctx, ?heap),
+   !ImpreciseDynamicStaticFieldPointsTo(?signature, ?dctx, ?heap),
+   FromDynamicHeapObject(?hctx, ?value, ?dctx, ?heap).
+
+ImpreciseDynamicInstanceFieldPointsTo(?fld, ?immutableDCTX1, ?heap, ?immutableDCTX2, ?baseHeap) <-
+   DynamicInstanceFieldPointsTo(?fld, ?dctx, ?heap, ?baseDCtx, ?baseHeap),
+   DynamicInstanceFieldPointsTo(?fld, ?immutableDCTX1, ?heap, ?immutableDCTX2, ?baseHeap),
+   ?dctx != ?immutableDCTX,
+   ?baseDCtx != ?immutableDCTX,
+   ImmutableDCTX(?immutableDCTX),
+   (?immutableDCTX = ?immutableDCTX2 ; ?immutableDCTX = ?immutableDCTX1).
+
+InstanceFieldPointsTo(?hctx, ?value, ?fld, ?baseHctx, ?baseValue) <-
+   DynamicInstanceFieldPointsTo(?fld, ?dctx, ?heap, ?baseDCtx, ?baseHeap),
+   !ImpreciseDynamicInstanceFieldPointsTo(?fld, ?dctx, ?heap, ?baseDCtx, ?baseHeap),
+   FromDynamicHeapObject(?hctx, ?value, ?dctx, ?heap),
+   FromDynamicHeapObject(?baseHctx, ?baseValue, ?baseDCtx, ?baseHeap).
+   
+ArrayIndexPointsTo(?hctx, ?value, ?baseHctx, ?baseValue) <-
+   DynamicArrayIndexPointsTo(?dctx, ?heap, ?baseDCtx, ?baseHeap),
+   FromDynamicHeapObject(?hctx, ?value, ?dctx, ?heap),
+   FromDynamicHeapObject(?baseHctx, ?baseValue, ?baseDCtx, ?baseHeap).
+
+// Context insensitive allocations
+FromDynamicHeapObject(?hctx, Value:byHeap[?mergeHeap], ?dctx, ?dheap) <-
+   ImmutableHContext(?hctx),
+   HeapAllocation:Merge[?dheap] = ?mergeHeap,
+   DynamicHeapObject(?dctx, ?dheap).
+
+
+FromDynamicHeapObject(?hctx, Value:byHeap[?dheap], ?dctx, ?dheap) <-
+   DynamicContextToHContext(?hctx, ?dctx),
+   !HeapAllocation:Merge[?dheap] = _,
+   DynamicHeapObject(?dctx, ?dheap).
+
+
+OptClassInitializer(?class, ?method) <- ClassInitializer[?class] = ?method.
+
+
+InitializedClass(?class) <-
+   (TamiflexDynamicallyReachableMethod(?method) ;
+   DynamicReachableMethod(?method)),
+   OptClassInitializer(?class, ?method).
+
+ProbablyReachable(?method) <-
+   !DynamicMethodInvocation:Insn(?invocation),
+   SanitizedDynamicCallGraphEdge(_, ?method, ?invocation, _, _).
+
+ProbablyReachable(?tomethod) <-
+   StaticMethodInvocation(_, ?tomethod, ?fromMethod),
+   ProbablyReachable(?fromMethod).
+
+ForcedImplicitReachable(?method),
+ReachableContext(?ctx, ?method) <-
+   (TamiflexDynamicallyReachableMethod(?method) ;
+   DynamicReachableMethod(?method)),
+   !ProbablyReachable(?method),
+   !OptClassInitializer(_, ?method),
+   ImmutableContext(?ctx).
+
+TamiflexDynamicallyReachableMethod(?inmethod) -> Method(?inmethod).
+
+#ifdef TAMIFLEX
+TamiflexDynamicallyReachableMethod(?inmethod) <-
+    Tamiflex:ReflectionMap(_, ?invocation),
+    Instruction:Method[?invocation] = ?inmethod.
+#endif
+
+ImmutableDCTX(?dctx) <-
+   DynamicContext:Id(?dctx:"<Immutable dctx>").
+
+ImpreciseDynamicCallGraphEdge(?immutableDCTX, ?toMethod, ?invocation, ?immutableDCTX, ?fromMethod) <-
+   SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),
+   SanitizedDynamicCallGraphEdge(?immutableDCTX, ?toMethod, ?invocation, ?immutableDCTX, ?fromMethod),
+   !(?ctxFrom = ?immutableDCTX,  ?ctxTo = ?immutableDCTX),
+   ImmutableDCTX(?immutableDCTX).
+
+ImpreciseDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod) <-
+  SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),
+  StaticMethodInvocation:Insn(?invocation).
+
+// For comparison only, the following implementation ignores context information in call graphs
+//MostPreciseDynamicCallGraphEdge(?immutableDCTX, ?toMethod, ?invocation, ?immutableDCTX, ?fromMethod) <-
+//   SanitizedDynamicCallGraphEdge(_, ?toMethod, ?invocation, _, ?fromMethod),
+//   ImmutableDCTX(?immutableDCTX).
+
+MostPreciseDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod) <-
+   SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),
+   !ImpreciseDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod).
+                                
+SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod) <-
+   DynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),
+   ResolveInvocation[_, ?invocation] = ?toMethod.
+
+SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod) <-
+   DynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),
+   MethodInvocation:Method[?invocation] = ?toMethod.
+
+SanitizedDynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod) <-
+   DynamicCallGraphEdge(?ctxTo, ?toMethod, ?invocation, ?ctxFrom, ?fromMethod),      
+   DynamicMethodInvocation:Insn(?invocation).
+
+CallGraphEdge(?ctxFrom, ?invocation, ?ctxTo, ?toMethod) <-
+   DynamicContextToContext(?ctxTo, ?dctxTo),
+   DynamicContextToContext(?ctxFrom, ?dctxFrom),
+   !(?dctxTo = ?immutableDCTX, ?dctxFrom = ?immutableDCTX),
+   ImmutableDCTX(?immutableDCTX),
+   MostPreciseDynamicCallGraphEdge(?dctxTo, ?toMethod, ?invocation, ?dctxFrom, _).
+
+CallGraphEdge(?ctxFrom, ?invocation, ?ctxTo, ?toMethod) <-
+   ?dctxTo = ?immutableDCTX,
+   ?dctxFrom = ?immutableDCTX,
+   ImmutableDCTX(?immutableDCTX),
+   ReachableContext(?ctxFrom, ?fromMethod),
+   ImmutableContextFromContext[?ctxFrom] = ?ctxTo,
+   MostPreciseDynamicCallGraphEdge(?dctxTo, ?toMethod, ?invocation, ?dctxFrom, ?fromMethod).

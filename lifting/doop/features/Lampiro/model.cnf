@@ -1,0 +1,97 @@
+p cnf 22 39 
+c c 1 Project
+c c 2 _Project
+c u 3 Timing
+c u 4 Motorola
+c u 5 Screensaver
+c u 6 Send_debug1
+c u 7 UI
+c c 8 derivatives
+c u 9 TLS
+c u 10 Compression
+c u 11 BXMPP
+c u 12 Glider
+c u 13 not_plain_socket
+c u 14 Bludeno
+c c 15 _derivatives
+c u 16 x_notTiming
+c u 17 x_notUI
+c u 18 x_notBXMPP
+c u 19 x_notCompression
+c u 20 x_notTLS
+c u 21 x_notGlider
+c u 22 x_not_Bludeno
+c (Project iff _Project)
+c ((not Project or _Project) and (not _Project or Project))
+c x ((not Project or _Project) and (not _Project or Project))
+-1 2  0
+-2 1  0
+c (derivatives iff _derivatives)
+c ((not derivatives or _derivatives) and (not _derivatives or derivatives))
+c x ((not derivatives or _derivatives) and (not _derivatives or derivatives))
+-8 15  0
+-15 8  0
+c ((Timing) implies (_Project) and (Motorola) implies (_Project) and (Screensaver) implies (_Project) and (Send_debug1) implies (_Project) and (UI) implies (_Project) and (_Project iff derivatives) and (TLS) implies (_Project) and (Compression) implies (_Project) and (BXMPP) implies (_Project) and (Glider) implies (_Project) and (not_plain_socket) implies (_Project) and (Bludeno) implies (_Project))
+c ((not Timing or _Project) and (not Motorola or _Project) and (not Screensaver or _Project) and (not Send_debug1 or _Project) and (not UI or _Project) and (not _Project or derivatives) and (not derivatives or _Project) and (not TLS or _Project) and (not Compression or _Project) and (not BXMPP or _Project) and (not Glider or _Project) and (not not_plain_socket or _Project) and (not Bludeno or _Project))
+c x ((not Timing or _Project) and (not Motorola or _Project) and (not Screensaver or _Project) and (not Send_debug1 or _Project) and (not UI or _Project) and (not _Project or derivatives) and (not derivatives or _Project) and (not TLS or _Project) and (not Compression or _Project) and (not BXMPP or _Project) and (not Glider or _Project) and (not not_plain_socket or _Project) and (not Bludeno or _Project))
+-3 2  0
+-4 2  0
+-5 2  0
+-6 2  0
+-7 2  0
+-2 8  0
+-8 2  0
+-9 2  0
+-10 2  0
+-11 2  0
+-12 2  0
+-13 2  0
+-14 2  0
+c ((x_notTiming) implies (_derivatives) and (x_notUI) implies (_derivatives) and (x_notBXMPP) implies (_derivatives) and (x_notCompression) implies (_derivatives) and (x_notTLS) implies (_derivatives) and (x_notGlider) implies (_derivatives) and (x_not_Bludeno) implies (_derivatives))
+c ((not x_notTiming or _derivatives) and (not x_notUI or _derivatives) and (not x_notBXMPP or _derivatives) and (not x_notCompression or _derivatives) and (not x_notTLS or _derivatives) and (not x_notGlider or _derivatives) and (not x_not_Bludeno or _derivatives))
+c x ((not x_notTiming or _derivatives) and (not x_notUI or _derivatives) and (not x_notBXMPP or _derivatives) and (not x_notCompression or _derivatives) and (not x_notTLS or _derivatives) and (not x_notGlider or _derivatives) and (not x_not_Bludeno or _derivatives))
+-16 15  0
+-17 15  0
+-18 15  0
+-19 15  0
+-20 15  0
+-21 15  0
+-22 15  0
+c (x_notTiming iff not Timing)
+c ((not x_notTiming or not Timing) and (Timing or x_notTiming))
+c x ((not x_notTiming or not Timing) and (Timing or x_notTiming))
+-16 -3  0
+3 16  0
+c (x_notUI iff not UI)
+c ((not x_notUI or not UI) and (UI or x_notUI))
+c x ((not x_notUI or not UI) and (UI or x_notUI))
+-17 -7  0
+7 17  0
+c (x_notBXMPP iff not BXMPP)
+c ((not x_notBXMPP or not BXMPP) and (BXMPP or x_notBXMPP))
+c x ((not x_notBXMPP or not BXMPP) and (BXMPP or x_notBXMPP))
+-18 -11  0
+11 18  0
+c (x_notCompression iff not Compression)
+c ((not x_notCompression or not Compression) and (Compression or x_notCompression))
+c x ((not x_notCompression or not Compression) and (Compression or x_notCompression))
+-19 -10  0
+10 19  0
+c (x_notTLS iff not TLS)
+c ((not x_notTLS or not TLS) and (TLS or x_notTLS))
+c x ((not x_notTLS or not TLS) and (TLS or x_notTLS))
+-20 -9  0
+9 20  0
+c (x_notGlider iff not Glider)
+c ((not x_notGlider or not Glider) and (Glider or x_notGlider))
+c x ((not x_notGlider or not Glider) and (Glider or x_notGlider))
+-21 -12  0
+12 21  0
+c (x_not_Bludeno iff not Bludeno)
+c ((not x_not_Bludeno or not Bludeno) and (Bludeno or x_not_Bludeno))
+c x ((not x_not_Bludeno or not Bludeno) and (Bludeno or x_not_Bludeno))
+-22 -14  0
+14 22  0
+c x Project
+1 0
+

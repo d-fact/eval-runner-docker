@@ -1,0 +1,60 @@
+/*
+Deploy the contents of the lib directory to the ext-snapshot-local repo @ artifactory.
+
+Each local jar has to follow the pattern:
+<NAME>-<VERSION_PART>.jar
+It is made available as a dependency using the pattern:
+groupId: 'ext', artifactId:<NAME>, version:<VERSION_PART>
+If the <VERSION_PART> doesn't exist it defaults to '1.<current time in milliseconds>'
+
+For example, DIR_NAME/sootclasses-trunk-1.0.jar turns into ext:sootclasses-trunk:1.0.
+
+Invoke this file using: ./gradlew -b lib-local-deploy.gradle publish -Pdir=<DIR_NAME>
+If -Pdir is not provided, it defaults to the 'lib' directory located in the
+directory where this script was invoked from.
+*/
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        def gradleInvocationDir = System.getProperty('user.dir')
+        def libDirName = project.hasProperty('dir')? project.property('dir') : "lib"
+        if (!project.hasProperty('dir')) {
+            logger.warn("No directory was given, using default: '" + libDirName + "'")
+        }
+        file("${gradleInvocationDir}/${libDirName}").eachFile { File f ->
+            def initName = f.name - '.jar'
+            def parts = initName.split('-')
+            String namePart, versionPart
+            if (parts.size() > 1 && parts.last() == "SNAPSHOT") {
+                namePart = parts.dropRight(2).join('-')
+                versionPart = parts.takeRight(2).join('-')
+            } else if (parts.size() > 1) {
+                namePart = parts.dropRight(1).join('-')
+                versionPart = parts.last()
+            } else {
+                namePart = initName
+                versionPart = '1.' + new Date().time
+            }
+            create(initName, MavenPublication) {
+                groupId 'ext'
+                artifactId namePart
+                version versionPart
+
+                artifact f
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            credentials {
+                username artifactory_user
+                password artifactory_password
+            }
+
+            url "${artifactory_contextUrl}/ext-snapshot-local"
+        }
+    }
+}

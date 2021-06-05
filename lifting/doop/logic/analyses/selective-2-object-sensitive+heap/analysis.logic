@@ -1,0 +1,54 @@
+// Context-sensitive pointer analysis with context of 2 objects
+// (AND for static calls 1 call-site).
+
+// The real context is a pair of Value AND a MethodInvocation (for
+// static calls) sometimes.  The real heap context is a single Value.
+// Keeping mapping functions is the way to handle analyses where HContext =
+// Context (since the language considers them different types).
+ContextFromRealContext[?valueComp1, ?valueComp2] = ?ctx ->
+  Context(?ctx), ContextComponent(?valueComp1), ContextComponent(?valueComp2).
+lang:constructor(`ContextFromRealContext).
+
+// NOTE: Use the following when using both the normal (caller's) context and
+// the invoComp site for static calls.
+SpecialContextFromRealContext[?valueComp1, ?invoComp, ?valueComp2] = ?ctx ->
+  ContextComponent(?valueComp1), ContextComponent(?valueComp2),
+  ContextComponent(?invoComp), Context(?ctx).
+lang:constructor(`SpecialContextFromRealContext).
+RealContext1FromContext[?ctx] = ?valueComp ->
+  Context(?ctx), ContextComponent(?valueComp).
+RealContext2FromContext[?ctx] = ?valueComp ->
+  Context(?ctx), ContextComponent(?valueComp).
+RealContext1FromContext[?ctx] = ?valueComp1,
+RealContext2FromContext[?ctx] = ?valueComp2 <-
+  ContextFromRealContext[?valueComp1, ?valueComp2] = ?ctx.
+// NOTE: Use the following when using both the normal (caller's) context
+// and the invocation site for static calls.
+RealContext1FromContext[?ctx] = ?invoComp,
+RealContext2FromContext[?ctx] = ?valueComp2 <-
+  SpecialContextFromRealContext[_, ?invoComp, ?valueComp2] = ?ctx.
+
+HContextFromRealHContext[?valueComp] = ?hctx ->
+  HContext(?hctx), ContextComponent(?valueComp).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?valueComp ->
+  HContext(?hctx), ContextComponent(?valueComp).
+RealHContextFromHContext[?hctx] = ?valueComp <-
+  HContextFromRealHContext[?valueComp] = ?hctx.
+
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?hctx, ?value) <-
+  MergeBasis(_, _, ?hctx, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+Context(?calleeCtx),
+ContextFromRealContext[RealHContextFromHContext[?hctx],?valueComp] = ?calleeCtx,
+ContextComponent(?valueComp),
+ContextComponent:Value[?value] = ?valueComp,
+CachedMerge[?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?hctx, ?value).

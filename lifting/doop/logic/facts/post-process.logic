@@ -1,0 +1,111 @@
+// NOTE: should be separate rules so the engine can treat them as alternative
+// indexes
+HeapAllocation:byId[?id] = ?heap <-
+   HeapAllocation:Normal:Cons[?id] = ?heap ;
+   HeapAllocation:String:Cons[?id] = ?heap ;
+   HeapAllocation:Class:Cons[?id]  = ?heap ;
+   HeapAllocation:MethodHandle:Cons[?id] = ?heap ;
+   HeapAllocation:Mock:Cons[?id]   = ?heap.
+HeapAllocation:Id[?heap] = ?id <-
+   HeapAllocation:byId[?id] = ?heap.
+
+
+NormalHeapConsMacro(?id, ?type, ?heap) <-
+   HeapAllocation0:Normal(?id, ?type).
+
+StringConstantConsMacro(?id, ?type, ?heap) <-
+   HeapAllocation0:String(?id),
+   Type:Id(?type:"java.lang.String").
+
+MethodHandleConstantConsMacro(?id, ?type, ?heap, ?method),
+MethodHandleConstant:Method[?heap] = ?method
+ <-
+   HeapAllocation0:MethodHandleConstant(?id, ?method),
+   Type:Id(?type:"java.lang.invoke.MethodHandle").
+
+ClassHeapConsMacro(?id, ?type, ?heap),
+ClassHeap:InstanceType[?heap] = ?instanceType <-
+   HeapAllocation0:Class(?id, ?instanceType),
+   Type:Id(?type:"java.lang.Class").
+
+HeapAllocation:EmptyArray(?heap) <-
+   HeapAllocation0:EmptyArray(?id),
+   HeapAllocation:byId[?id] = ?heap.
+
+MockHeapConsMacro(?id, ?type, ?null),
+HeapAllocation:Null[] = ?null <-
+   ?id = "<<null pseudo heap>>",
+   ?type = Type:null[].
+
+MockHeapConsMacro(?id, ?type, ?heap),
+MainMethodArgArray[] = ?heap <-
+   ?id = "<<main method array>>",
+   ?type = "java.lang.String[]".
+
+MockHeapConsMacro(?id, ?type, ?heap),
+MainMethodArgArrayContent[] = ?heap <-
+   ?id = "<<main method array content>>",
+   ?type = "java.lang.String".
+
+AssignHeapAllocation:Heap[?instr] = ?heap <-
+   AssignHeapAllocation0(?instr, ?heapId),
+   HeapAllocation:byId[?heapId] = ?heap.
+
+
+MethodInvocation:Method:Opt(?invocation, ?signature) <-
+  MethodInvocation:Method[?invocation] = ?signature.
+
+ApplicationMethod(?method) <-
+   Method:DeclaringType[?method] = ?class,
+   ApplicationClass(?class).
+ApplicationVar(?var) <-
+   Var:DeclaringMethod(?var, ?method),
+   ApplicationMethod(?method).
+
+ConcreteClass(?class) <-
+   ClassType(?class), !ClassModifier("abstract", ?class).
+
+VirtualMethodInvocation:SimpleName[?invocation] = ?simplename,
+VirtualMethodInvocation:Descriptor[?invocation] = ?descriptor <-
+   VirtualMethodInvocation:Insn(?invocation),
+   MethodInvocation:Method[?invocation] = ?signature,
+   Method:SimpleName[?signature] = ?simplename,
+   Method:Descriptor[?signature] = ?descriptor.
+
+StaticMethodInvocation:SimpleName[?invocation] = ?simplename,
+StaticMethodInvocation:Descriptor[?invocation] = ?descriptor <-
+   StaticMethodInvocation:Insn(?invocation),
+   MethodInvocation:Method[?invocation] = ?signature,
+   Method:SimpleName[?signature] = ?simplename,
+   Method:Descriptor[?signature] = ?descriptor.
+
+SpecialMethodInvocation:SimpleName[?invocation] = ?simplename,
+SpecialMethodInvocation:Descriptor[?invocation] = ?descriptor <-
+   SpecialMethodInvocation:Insn(?invocation),
+   MethodInvocation:Method[?invocation] = ?signature,
+   Method:SimpleName[?signature] = ?simplename,
+   Method:Descriptor[?signature] = ?descriptor.
+
+SuperMethodInvocation:SimpleName[?invocation] = ?simplename,
+SuperMethodInvocation:Descriptor[?invocation] = ?descriptor <-
+   SuperMethodInvocation:Insn(?invocation),
+   MethodInvocation:Method[?invocation] = ?signature,
+   Method:SimpleName[?signature] = ?simplename,
+   Method:Descriptor[?signature] = ?descriptor.
+
+// Combining the three
+MethodInvocation:SimpleName[?invocation] = ?simplename <-
+  VirtualMethodInvocation:SimpleName[?invocation] = ?simplename ;
+  SpecialMethodInvocation:SimpleName[?invocation] = ?simplename ;
+  StaticMethodInvocation:SimpleName[?invocation] = ?simplename.
+
+// Note that this is more than a straightforward import of generated
+// facts into a DB relation. It filters out the guessed control
+// types that do not correspond to existing types.
+LayoutControl(?id, ?type, ?parent) <-
+   LayoutControl0(?id, ?typename, ?parent),
+   Type:Id(?type:?typename).
+
+SensitiveLayoutControl(?id, ?type, ?parent) <-
+   SensitiveLayoutControl0(?id, ?typename, ?parent),
+   Type:Id(?type:?typename).

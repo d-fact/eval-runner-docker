@@ -1,0 +1,15 @@
+Value:DeclaringType[?value] = "java.lang.System" <-
+   Value:byId["<<string-constant>>"] = ?value ;
+   Value:byId["<<reflection-string-constant>>"] = ?value ;
+   Value:byId["<<string-buffer>>"] = ?value ;
+   Value:byId["<<string-builder>>"] = ?value ;
+   Value:byId["<<initial-context>>"] = ?value ;
+   Value:byId["<<jvm-startup-context>>"] = ?value ;
+   Value:byId["<<jvm-startup-hcontext>>"] = ?value ;
+   Value:byId["<<clinit-context>>"] = ?value ;
+   Value:byId["<<system-thread-group>>"] = ?value ;
+   Value:byId["<<main-thread-group>>"] = ?value ;
+   Value:byId["<<main-thread>>"] = ?value ;
+   Value:byId["<<immutable-context>>"] = ?value ;
+   Value:byId["<<immutable-hcontext>>"] = ?value ;
+   Value:byId["<<immutable>>"] = ?value.

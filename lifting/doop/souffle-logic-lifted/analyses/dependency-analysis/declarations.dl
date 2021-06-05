@@ -1,0 +1,195 @@
+#include "../../addons/cfg-analysis/declarations.dl"
+
+/* Methods for instruction-by-instruction analysis */
+
+
+/**
+ * AllCtxDependentStoreHeapFld(?fld, ?value)
+ * Dependent instruction stores to object field
+ * Provides optimization for TaintedLoad
+ *
+ * ?fld         The field that gets stored to
+ * ?hctx        The heap context
+ * ?value       The value containing the field
+ */
+.decl AllCtxDependentStoreHeapFld(?fld: Field, ?hctx: mainAnalysis.configuration.HContext, ?value: mainAnalysis.Value)
+
+/**
+ * LoadArrayHeapInsn(?ctx, ?insn, ?value)
+ * Instruction loads heap
+ * Provides optimization for TaintedLoad
+ *
+ * ?ctx         The calling context in which the load happens
+ * ?insn        The load instruction
+ * ?hctx        The heap context
+ * ?value       The value that can be loaded
+ */
+.decl LoadArrayHeapInsn(?ctx: mainAnalysis.configuration.Context, ?insn: Instruction, ?hctx: mainAnalysis.configuration.HContext, ?value: mainAnalysis.Value)
+
+/**
+ * Load instruction that loads dependent data
+ *
+ * ?ctx         The calling context in which the instruction is dependent
+ * ?insn        The dependent instruction
+ */
+.decl TaintedLoad(?ctx: mainAnalysis.configuration.Context, ?insn: Instruction)
+.output TaintedLoad
+
+/**
+ * Data dependency between instructions in different methods
+ * Either a dependency caused by passing parameters to a method call,
+ * or by returning a value from a call
+ *
+ * (?next depends on ?prev)
+ *
+ * ?nextCtx     Calling context of the destination instruction
+ * ?next        Destination instruction
+ * ?prevCtx     Calling context of the source instruction
+ * ?prev        Data source instruction
+ */
+.decl CallReturnDependency(?nextCtx: mainAnalysis.configuration.Context, ?next: Instruction, ?prevCtx: mainAnalysis.configuration.Context, ?prev: Instruction)
+
+
+/**
+ * Instructions found to be data/control dependent on the initial dependent instructions
+ *
+ * ?ctx         The calling context of the dependent instruction
+ * ?insn        The dependent instruction
+ */
+.decl DependentInstruction(?ctx: mainAnalysis.configuration.Context, ?insn: Instruction)
+.output DependentInstruction
+
+/**
+ * Instructions that can be considered secure 
+ * Therefore, these will never be considered dependent
+ *
+ * ?insn        The secure instruction
+ */
+.decl SecureInstruction(?insn: Instruction)
+
+/**
+ * A method that DependentInstruction will never propagate to
+ *
+ * ?meth        The secure method
+ */
+.decl SecureMethod(?meth: Method)
+
+/**
+ * An instruction storing to an object's field
+ *
+ * ?base        The object base
+ * ?fld         The field being stored
+ * ?insn        The store instruction
+ */
+.decl StoreFldTo(?base: Var, ?fld: Field, ?insn: Instruction)
+
+/**
+ * An instruction loading from an object's field
+ *
+ * ?insn        The load instruction
+ * ?base        The object base
+ * ?fld         The field being loaded
+ */
+.decl LoadFldFrom(?insn: Instruction, ?base: Var, ?fld: Field)
+
+/**
+ * Instruction reads from var
+ *
+ * ?instruction The instruction using the var
+ * ?var         The var being used
+ */
+.decl InstructionUsesVar(?instruction: Instruction, ?var: Var)
+
+/**
+ * Instruction writes to var
+ *
+ * ?instruction The instruction defining the var
+ * ?var         The var being defined
+ */
+.decl InstructionDefinesVar(?instruction: Instruction, ?var: Var)
+
+/**
+ * A basic block that is a leaf in its method's CFG
+ *
+ * ?headInsn    The leaf basic block's first instruction
+ * ?method      The method containing the basic block
+ */
+.decl CFGLeaf(?headInsn: Instruction, ?method: Method)
+
+/**
+ * A basic block does not dominate another one
+ *
+ * ?dominator   The non-dominating basic block's first instruction
+ * ?insn        The first instruction of the basic block not being dominated
+ */
+.decl DoesNotPostDominate(?postDomCandidate: Instruction, ?insn: Instruction)
+
+/**
+ * A basic block dominates another one
+ *
+ * ?dominator   The dominating basic block's first instruction
+ * ?insn        The first instruction of basic block being dominated
+ */
+.decl PostDominates(?dominator: Instruction, ?insn: Instruction)
+
+/**
+ * Intra procedural data dependency, requires SSA
+ * (?next depends on ?prev)
+ *
+ * e.g. i=j;i=k;l=i;
+ *
+ * l=i depends on the i=k instruction
+ *
+ * ?next        Data destination instruction
+ * ?prev        Data source instruction
+ */
+.decl IntraProceduralDataDep(?next: Instruction, ?prev: Instruction)
+
+/**
+ * Basic block depends on instruction
+ * (all instructions in ?nextBlock basic block depend on ?prev)
+ *
+ * e.g. if (prev) {nextBlock}
+ *
+ * nextBlock's execution depends on the "if (prev)" instruction
+ *
+ * ?nextBlock   The dependent basic block's first instruction
+ * ?prev        The instruction that the basic block depends on
+ */
+.decl IntraProceduralBlockControlDep(?nextBlock: Instruction, ?prev: Instruction)
+
+/**
+ * Instruction is control dependent on another instruction
+ * Same as above, but for each instruction in the BB
+ *
+ * ?next        The dependent instruction
+ * ?prev        The instruction that the other instruction depends on
+ */
+.decl IntraProceduralControlDep(?next: Instruction, ?prev: Instruction)
+
+/**
+ * Intra procedural dependency base, for dependencies such as
+ * call parameters and return values
+ *
+ * (?next depends on ?prev)
+ *
+ * ?next        Data destination instruction
+ * ?prev        Data source instruction
+ */
+.decl IntraProceduralDependencyBase(?next: Instruction, ?prev: Instruction)
+
+/**
+ * Intra procedural dependency - transitively closed
+ * (?next depends on ?prev)
+ *
+ * ?prev        Data source instruction
+ * ?next        Data destination instruction
+ */
+.decl IntraProceduralDependency(?prev: Instruction, ?next: Instruction)
+
+/**
+ * Instructions to perform a forward slice on
+ *
+ * ?insn        The instruction that will be considered tha taint source
+ */
+.decl DependencySourceInstruction(?insn: Instruction)

@@ -1,0 +1,50 @@
+// Context-sensitive pointer analysis with context of 2 types and 1 call-site
+// and a context-sensitive heap abstraction.
+
+ClassHasInstr(?class, ?instr) <-
+  Method:DeclaringType[?method] = ?class,
+  Instruction:Method[?instr] = ?method.
+
+ClassToInstr[?class] = ?instr <-
+  agg<<?instr = min(?otherInstr)>> ClassHasInstr(?class, ?otherInstr).
+
+ContextFromRealContext[?type1, ?invocation, ?type2] = ?ctx ->
+  Instruction(?type1), Instruction(?invocation), Instruction(?type2), Context(?ctx).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?type ->
+  Context(?ctx), Instruction(?type).
+RealContext2FromContext[?ctx] = ?invocation ->
+  Context(?ctx), Instruction(?invocation).
+RealContext3FromContext[?ctx] = ?type ->
+  Context(?ctx), Instruction(?type).
+RealContext1FromContext[?ctx] = ?type1,
+RealContext2FromContext[?ctx] = ?invocation,
+RealContext3FromContext[?ctx] = ?type2 <-
+  ContextFromRealContext[?type1, ?invocation, ?type2] = ?ctx.
+
+HContextFromRealHContext[?type] = ?hctx ->
+  HContext(?hctx), Instruction(?type).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?type ->
+  HContext(?hctx), Instruction(?type).
+RealHContextFromHContext[?hctx] = ?type <-
+  HContextFromRealHContext[?type] = ?hctx.
+
+
+// Creating special immutable heap allocation constant
+ImmutableInvValue[] = ?immInv <-
+  MethodInvocationValue(?immInv, "<<immutable-context>>").
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?hctx, ?invocation, ?value) <-
+  MergeBasis(_, ?hctx, ?invocation, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+Context(?calleeCtx),
+ContextFromRealContext[RealHContextFromHContext[?hctx], ?invocation, ClassToInstr[Value:DeclaringType[?value]]] = ?calleeCtx,
+CachedMerge[?hctx, ?invocation, ?value] = ?calleeCtx <-
+  MyMergeBasis(?hctx, ?invocation, ?value).

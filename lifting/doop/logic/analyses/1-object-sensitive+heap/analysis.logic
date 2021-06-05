@@ -1,0 +1,38 @@
+// Context-sensitive pointer analysis with context of 1 object and a
+// context-sensitive heap abstraction.
+
+// In this analysis, both the real context and the real heap context are
+// Values. Keeping mapping functions is the way to handle analyses
+// where HContext = Context (since the language considers them different
+// types).
+ContextFromRealContext[?value] = ?ctx ->
+  Context(?ctx), Value(?value).
+lang:constructor(`ContextFromRealContext).
+RealContextFromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContextFromContext[?ctx] = ?value <-
+  ContextFromRealContext[?value] = ?ctx.
+
+HContextFromRealHContext[?value] = ?hctx ->
+  HContext(?hctx), Value(?value).
+lang:constructor(`HContextFromRealHContext).
+
+// Dynamic analysis
+#ifdef HEAPDL
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   RealContextFromContext[?ctx] = Value:byDynamicHeap[?heap1],
+   DynamicContextHeap1(?heap1, ?dynCtx).
+
+DynamicContextToContext(?ctx, ?dynCtx) <-
+   !DynamicContextHeap1(_, ?dynCtx),
+   ImmutableContext(?ctx),
+   DynamicContext(?dynCtx).
+
+DynamicContextToHContext(HContextFromRealHContext[Value:byDynamicHeap[?heap1]], ?dynCtx) <-
+   DynamicContextHeap1(?heap1, ?dynCtx).
+
+DynamicContextToHContext(?hctx, ?dynCtx) <-
+   ImmutableHContext(?hctx),
+   DynamicContext(?dynCtx),
+   !DynamicContextHeap1(_, ?dynCtx).
+#endif

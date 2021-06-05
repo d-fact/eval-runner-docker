@@ -1,0 +1,46 @@
+Dacapo(?classNameHeap, ?method) ->
+  StringConstant(?classNameHeap), Method(?method).
+
+StringConstantConsMacro(?id, "java.lang.String", ?heap),
+HeapAllocation:Keep(?heap),
+Dacapo(?heap, ?method) <-
+  Dacapo0(?id, ?method).
+
+/**
+ * Extra logic to handle a specific value read from a configuration file for
+ * the DaCapo benchmarks. The value is used afterwards reflectively to create a
+ * new object.
+ */
+VarPointsTo(?hctx, ?classNameValue, ?ctx, ?to) <-
+  Dacapo(?classNameHeap, ?dacapoMethod),
+  Value:byHeap[?classNameHeap] = ?classNameValue,
+  MethodInvocation:Method:Opt(?invo, ?dacapoMethod),
+  VirtualMethodInvocation:Base[?invo] = ?base,
+  Var:DeclaringMethod(?base, ?method),
+  ActualParam[0, ?invo] = ?to,
+  ReachableContext(?ctx, ?method),
+  ImmutableHContextFromContext[?ctx] = ?hctx.
+
+StringsInDacapoHarness(HeapAllocation:Id[?heap]) <-
+   AssignHeapAllocation:Heap[?insn] = ?heap,
+   Method:DeclaringType[Instruction:Method[?insn]] = ?id,
+   StringConstant(?heap),
+   Dacapo0(?id, _).
+
+DacapoEntryPoint(?method),
+ReachableContext(?ctx,?method) <-
+   Method:DeclaringType[?method] = ?strClass,
+   StringsInDacapoHarness(?strClass),
+   StringsInDacapoHarness(?strMethod),
+   Method:SimpleName[?method] = ?strMethod,
+   Method:Modifier("public", ?method),
+   ImmutableContext(?ctx).
+
+MockValueConsMacro("Dacapo entrypoint receiver "+?classStr, ?class, ?receiver),
+VarPointsTo(?hctx, ?receiver, ?ctx, ?this) <-
+   Type:Id(?class:?classStr),
+   ThisVar[?method] = ?this,
+   Method:DeclaringType[?method] = ?class,
+   DacapoEntryPoint(?method),
+   ImmutableContext(?ctx),
+   ImmutableHContext(?hctx).

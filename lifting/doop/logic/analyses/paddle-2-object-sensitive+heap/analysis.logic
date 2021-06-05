@@ -1,0 +1,40 @@
+// Context-sensitive pointer analysis with context of 1 object and a
+// context-sensitive heap abstraction.
+
+// In this analysis, the real context is a pair of Values and the real
+// heap context a single Value. Keeping mapping functions is the way
+// to handle analyses where HContext = Context (since the language considers
+// them different types).
+ContextFromRealContext[?value1, ?value2] = ?ctx ->
+  Context(?ctx), Value(?value1), Value(?value2).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContext2FromContext[?ctx] = ?value ->
+  Context(?ctx), Value(?value).
+RealContext1FromContext[?ctx] = ?value1,
+RealContext2FromContext[?ctx] = ?value2 <-
+  ContextFromRealContext[?value1, ?value2] = ?ctx.
+
+HContextFromRealHContext[?value] = ?hctx ->
+  HContext(?hctx), Value(?value).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?value ->
+  HContext(?hctx), Value(?value).
+RealHContextFromHContext[?hctx] = ?value <-
+  HContextFromRealHContext[?value] = ?hctx.
+
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?callerCtx, ?value) <-
+  MergeBasis(_, _, ?callerCtx, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+Context(?calleeCtx),
+ContextFromRealContext[RealContext2FromContext[?callerCtx], ?value] = ?calleeCtx,
+CachedMerge[?callerCtx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?callerCtx, ?value).

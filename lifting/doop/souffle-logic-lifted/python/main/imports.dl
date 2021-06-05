@@ -1,0 +1,46 @@
+.decl isModule(?module:Module)
+
+.decl Module_DeclaringModule(?module: Module, ?declModule: Module)
+.decl Function_Module(?function:Function, ?module: Module)
+.decl ClassType_Module(?class:ClassType, ?module: Module)
+
+.decl VarPointsToModule(?hctx:configuration.HContext, ?val: Value, ?ctx:configuration.Context, ?var:Var)
+
+.decl VarPointsToFunction(?hctx:configuration.HContext, ?val: Value, ?ctx:configuration.Context, ?var:Var)
+.output VarPointsToFunction
+.output isFunction
+
+.output VarPointsToModule
+.output isModule
+
+VarPointsToModule(?hctx, ?module, ?ctx, ?var):-
+  VarPointsTo(?hctx, ?module, ?ctx, ?var),
+  isModule(?module).
+
+VarPointsTo(?hctx, ?module, ?ctx, ?var):-
+  Reachable(?function),
+  ReachableContext(?ctx, ?function),
+  Instruction_Function(?insn, ?function),
+  isImportInstruction(?insn),
+  ImportInsn_ModuleName(?insn, ?name),
+  AssignInstruction_To(?insn, ?var),
+  ?module = cat(cat("<",?name),">"),
+  isModule(?module),
+  isImmutableHContext(?hctx).
+
+VarPointsTo(?hctx, ?heap, ?ctx, ?to):-
+  isLoadInstanceField_Insn(?insn),
+  FieldInstruction_Signature(?insn, ?signature),
+  LoadInstanceField_Base(?insn, ?base),
+  LoadInstanceField_To(?insn, ?to),
+  VarPointsToModule(_, ?parModule, ?ctx, ?base),
+  GlobalNamePointsTo(?hctx, ?heap, ?parModule, ?signature).
+
+//One thing to be considered in the future is the difference between:
+//1) from file import var
+//   var = 5
+//
+//2) import file
+//   file.var = 5
+//
+// The first creates a copy of the variable in your scope while the second modifies the original var

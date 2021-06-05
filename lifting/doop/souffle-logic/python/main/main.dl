@@ -1,0 +1,285 @@
+.type NumConstantValue
+.type BoolConstantValue
+.type NoneConstantValue
+
+.type Value = HeapAllocation | NumConstantValue | BoolConstantValue | Module | NoneConstantValue
+
+.comp BasicContextSensitivity<Configuration> {
+
+  #include "main-declarations.dl"
+  #include "export.dl"
+  #include "imports.dl"
+  #include "function-resolution.dl"
+  #include "lists.dl"
+  #include "dictionaries.dl"
+  #include "const-int.dl"
+  #include "../lib-specific/modeled.dl"
+  #include "../lib-specific/numpy.dl"
+  #include "../lib-specific/tensorflow/tensorflow.dl"
+  #include "../lib-specific/tensorflow/general-tensor-modeling.dl"
+  #include "../lib-specific/tensorflow/tensor-creation-ops.dl"
+  #include "../lib-specific/tensorflow/shape-mod-ops.dl"
+  #include "../lib-specific/tensorflow/arithmetic-ops.dl"
+  #include "../lib-specific/tensorflow/pooling-conv-ops.dl"
+  #include "../lib-specific/tensorflow/shape-pass-through-ops.dl"
+
+  /**
+   * Reachable
+   */
+  ReachableContext(?ctx, ?method) :-
+    CallGraphEdge(_, _, ?ctx, ?method).
+
+  Reachable(?method) :-
+    ReachableContext(_, ?method).
+
+  Reachable(?function),
+  ReachableContext(?initialContext, ?function) :-
+    isInitialContext(?initialContext),
+    isFunction(?function),
+    match(".*\.py>", ?function).
+
+  configuration.InitContextRequest("<<immutable-context>>").
+  configuration.InitContextRequest("<<initial-context>>").
+  isImmutableContext(?ctx),
+  isContext(?ctx) :-
+    ?s = "<<immutable-context>>",
+    configuration.InitContextRequest(?s),
+    configuration.InitContextResponse(?s, ?ctx).
+
+  isInitialContext(?ctx),
+  isContext(?ctx) :-
+    ?s = "<<initial-context>>",
+    configuration.InitContextRequest(?s),
+    configuration.InitContextResponse(?s, ?ctx).
+
+  configuration.InitHContextRequest("<<immutable-hcontext>>").
+
+  isImmutableHContext(?hctx),
+  isHContext(?hctx) :-
+    ?s = "<<immutable-hcontext>>",
+    configuration.InitHContextRequest(?s),
+    configuration.InitHContextResponse(?s, ?hctx).
+
+  isNoneValue("<None>").
+
+  isValue(?value):-
+    isHeapValue(?value);
+    isNoneValue(?value);
+    isConstantValue(?value).
+
+  isConstantValue(?value):-
+    Value_Num(?value, _);
+    Value_String(?value, _);
+    isNoneValue(?value).
+
+  isNonHeapValue(?value):-
+    Value_Num(?value, _);
+    isNoneValue(?value).
+
+  InstanceFieldPointsTo(?hctx, ?value, ?signature, ?basehctx, ?basevalue) :-
+    Reachable(?function),
+    Instruction_Function(?insn, ?function),
+    StoreInstanceField_Base(?insn, ?base),
+    VarPointsTo(?basehctx, ?basevalue, ?ctx, ?base),
+    StoreInstanceField_From(?insn, ?from),
+    FieldInstruction_Signature(?insn, ?signature),
+    VarPointsTo(?hctx, ?value, ?ctx, ?from).
+
+  VarPointsTo(?hctx, ?value, ?ctx, ?to):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    LoadInstanceField_Base(?insn, ?base),
+    VarPointsTo(?basehctx, ?basevalue, ?ctx, ?base),
+    LoadInstanceField_To(?insn, ?to),
+    FieldInstruction_Signature(?insn, ?signature),
+    InstanceFieldPointsTo(?hctx, ?value, ?signature, ?basehctx, ?basevalue).
+
+  GlobalNamePointsTo(?hctx, ?value, ?scope, ?name):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    isGlobalWrite_Insn(?insn),
+    GlobalAccessInsn_Name(?insn, ?name),
+    GlobalAccessInsn_Scope(?insn, ?scope),
+    GlobalWriteInsn_From(?insn, ?from),
+    VarPointsTo(?hctx, ?value, ?ctx, ?from).
+
+  VarPointsTo(?hctx, ?value, ?ctx, ?var) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    isGlobalRead_Insn(?insn),
+    GlobalAccessInsn_Name(?insn, ?name),
+    GlobalAccessInsn_Scope(?insn, ?scope),
+    AssignInstruction_To(?insn, ?var),
+    GlobalNamePointsTo(?hctx, ?value, ?scope, ?name).
+
+  //This rule is probably redundant
+  VarPointsTo(?hctx, ?value, ?ctx, ?to) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    isLexicalRead_Insn(?insn),
+    AssignInstruction_To(?insn, ?to),
+    LexicalAccessInsn_Name(?insn, ?name),
+    LexicalAccessInsn_VarScope(?insn, ?scope),
+    isLexicalWrite_Insn(?writeInstr),
+    LexicalAccessInsn_Name(?writeInstr, ?name),
+    LexicalAccessInsn_VarScope(?writeInstr, ?scope),
+    LexicalWriteInsn_From(?writeInstr, ?from),
+    VarPointsTo(?hctx, ?value, _, ?from).
+
+
+  VarPointsTo(?hctx, ?value, ?ctx, ?to) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    isLexicalRead_Insn(?insn),
+    AssignInstruction_To(?insn, ?to),
+    LexicalAccessInsn_Name(?insn, ?name),
+    LexicalAccessInsn_VarScope(?insn, ?scope),
+    Var_DeclaringFunction(?from, ?scope),
+    Var_SourceName(?from, ?name),
+    VarPointsTo(?hctx, ?value, ?ctx, ?from).
+
+  isFunctionObjectAllocation(?value),
+  VarPointsTo(?hctx, ?value, ?ctx, ?var):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    AssignHeapAllocation_Heap(?insn, ?value),
+    isNormalHeap(?value),
+    AssignInstruction_To(?insn, ?var),
+    HeapAllocation_Type(?value, ?type),
+    ?type != "list",
+    ?type != "object",
+    isFunction(?type),
+    configuration.RecordContextResponse(?ctx, ?heap, ?var, ?hctx).
+
+  isClassObjectAllocation(?value),
+  VarPointsTo(?hctx, ?value, ?ctx, ?var):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    AssignHeapAllocation_Heap(?insn, ?value),
+    isNormalHeap(?value),
+    AssignInstruction_To(?insn, ?var),
+    HeapAllocation_Type(?value, ?type),
+    ?type != "list",
+    ?type != "tuple",
+    ?type != "object",
+    isClassType(?type),
+    configuration.RecordContextResponse(?ctx, ?heap, ?var, ?hctx).
+
+  IsPyListOrTuple(?heap),
+  ListInitialAssignVar(?heap, ?var, ?ctx),
+  VarPointsTo(?hctx, ?heap, ?ctx, ?var) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?instr, ?function),
+    AssignInstruction_To(?instr, ?var),
+    AssignHeapAllocation_Heap(?instr, ?heap),
+    OriginalHeapAllocation_Type(?heap, ?type),
+    (?type = "list"; ?type = "tuple"),
+    configuration.RecordContextResponse(?ctx, ?heap, ?var, ?hctx).
+
+  isPyDict(?heap),
+  DictInitialAssignVar(?heap, ?var, ?ctx),
+  VarPointsTo(?hctx, ?heap, ?ctx, ?var) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?instr, ?function),
+    AssignInstruction_To(?instr, ?var),
+    AssignHeapAllocation_Heap(?instr, ?heap),
+    OriginalHeapAllocation_Type(?heap, ?type),
+    ?type = "dict",
+    configuration.RecordContextResponse(?ctx, ?heap, ?var, ?hctx).
+
+  configuration.RecordContextRequest(?ctx, ?heap, ?var) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?instr, ?function),
+    AssignInstruction_To(?instr, ?var),
+    isNormalHeap(?heap),
+    AssignHeapAllocation_Heap(?instr, ?heap).
+
+  Value_String(?value, ?str),
+  VarPointsTo(?hctx, ?value, ?ctx, ?var):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    Instruction_Function(?insn, ?function),
+    AssignHeapAllocation_Heap(?insn, ?str),
+    isStringConstant(?str),
+    AssignInstruction_To(?insn, ?var),
+    ?value = cat("<string constant:",cat(?str,">")),
+    isImmutableHContext(?hctx).
+
+  #define NewAllocMacro(fun,type, index) cat("<", cat(fun, cat("/newinstanceof", cat(type, cat("/", cat( to_string(index),">"))))))
+
+  HeapAllocation_Type(?heap, ?type),
+  isHeapAllocation(?heap),
+  configuration.RecordContextRequest(?ctx, ?heap, ?var) :-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    isFunctionInvocation(?insn),
+    AssignInstruction_To(?insn, ?var),
+    FunctionInvocation_Base(?insn, ?base),
+    VarPointsTo(?baseHctx, ?baseVal, ?ctx, ?base),
+    isClassObjectAllocation(?baseVal),
+    HeapAllocation_Type(?baseVal, ?type),
+    isClassType(?type),
+    Instruction_Function(?insn, ?function),
+    Instruction_Index(?insn, ?index),
+    ?heap = NewAllocMacro(?function, ?type, ?index).
+
+
+  isClassInstanceAllocation(?value),
+  ClassInstanceAllocationInitializingClassObject(?hctx, ?value, ?baseHctx, ?baseVal),
+  VarPointsTo(?hctx, ?value, ?ctx, ?var):-
+    Reachable(?function),
+    ReachableContext(?ctx, ?function),
+    isFunctionInvocation(?insn),
+    AssignInstruction_To(?insn, ?var),
+    FunctionInvocation_Base(?insn, ?base),
+    VarPointsTo(?baseHctx, ?baseVal, ?ctx, ?base),
+    isClassObjectAllocation(?baseVal),
+    HeapAllocation_Type(?baseVal, ?type),
+    isClassType(?type),
+    Instruction_Function(?insn, ?function),
+    Instruction_Index(?insn, ?index),
+    ?value = NewAllocMacro(?function, ?type, ?index),
+    configuration.RecordContextResponse(?ctx, ?value, ?var, ?hctx).
+
+  VarPointsTo(?hctx, ?value, ?ctx, ?to):-
+    isLoadInstanceField_Insn(?insn),
+    FieldInstruction_Signature(?insn, ?signature),
+    LoadInstanceField_Base(?insn, ?base),
+    LoadInstanceField_To(?insn, ?to),
+    VarPointsTo(?classInstanceHctx, ?classInstance, ?ctx, ?base),
+    isClassInstanceAllocation(?classInstance),
+    InstanceFieldPointsTo(?hctx, ?value, ?signature, ?classInstanceHctx, ?classInstance).
+
+  VarPointsTo(?hctx, ?value, ?ctx, ?to):-
+    isLoadInstanceField_Insn(?insn),
+    FieldInstruction_Signature(?insn, ?signature),
+    LoadInstanceField_Base(?insn, ?base),
+    LoadInstanceField_To(?insn, ?to),
+    VarPointsTo(?classInstanceHctx, ?classInstance, ?ctx, ?base),
+    isClassInstanceAllocation(?classInstance),
+    ClassInstanceAllocationInitializingClassObject(?classInstanceHctx, ?classInstance, ?classObjectHctx, ?classObject),
+    InstanceFieldPointsTo(?hctx, ?value, ?signature, ?classObjectHctx, ?classObject).
+
+  VarPointsToFunction(?hctx, ?value, ?ctx, ?var):-
+    VarPointsTo(?hctx, ?value, ?ctx, ?var),
+    HeapAllocation_Type(?value, ?type),
+    isFunction(?type).
+
+  .init configuration = Configuration
+}
+
+.init mainAnalysis = BasicContextSensitivity<CONFIGURATION>
+
+
+
+

@@ -1,0 +1,74 @@
+// Context-sensitive pointer analysis with context of 1 object.
+
+#include "../../main/single-phase-analysis.dl"
+#include "../../main/configuration.dl"
+
+.comp OneObjectSensitiveConfiguration : AbstractConfiguration {
+
+// In this analysis, the real context is a Value.
+.type Context = [ value:mainAnalysis.Value ]
+
+// This analysis has no context for heap objects.
+// This is emulated by creating a single HContext object,
+// which is used everywhere.
+.type HContext
+
+// This analysis treats arrays specially (deeper context).
+// Only used for arrays. Maps each context to a *potential* hcontext.
+.decl ContextToHContext(?ctx:Context, ?hctx:HContext)
+
+  ContextResponse(?callerCtx, ?hctx, ?invo, ?value, ?calleeCtx) :-
+    ContextRequest(?callerCtx, ?hctx, ?invo, ?value, ?tomethod),
+    ?calleeCtx = [?value],
+    ?tomethod = ?tomethod.             
+
+  StaticContextResponse(?callerCtx, ?invo, ?calleeCtx) :-
+    StaticContextRequest(?callerCtx, ?invo),
+    ?calleeCtx = ?callerCtx.
+
+  ContextToHContext(?ctx, cat("<<constructed-hctx-", cat(?value, ">>"))) :-
+    isContext(?ctx),
+    ?ctx = [?value].
+
+  #define UNIQUE_HCONTEXT "<<unique-hcontext>>"
+
+  RecordContextResponse(?ctx, ?value, ?var, ?hctx) :-
+    RecordContextRequest(?ctx, ?value, ?var),      
+    ?hctx = UNIQUE_HCONTEXT.
+
+  // For this analysis the context of a method call corresponds to the
+  // invocation site of the method.
+
+  ThreadStartContextResponse(?callerCtx, ?hctx, ?value, ?newCtx) :-
+    ThreadStartContextRequest(?callerCtx, ?hctx, ?value),
+    ?newCtx = [?value].
+
+  StartupContextResponse(?hctx, ?value, ?newCtx) :-
+    StartupContextRequest(?hctx, ?value),
+    ?newCtx = [?value].
+
+  FinalizerRegisterContextResponse(?callerCtx, ?inmethod, ?value, ?newCtx) :-
+    FinalizerRegisterContextRequest(?callerCtx, ?inmethod, ?value),
+    ?newCtx = [?value].
+
+  InitContextResponse(?value, ?ctx) :-
+    InitContextRequest(?value),
+    ?ctx = [?value].
+
+  InitHContextResponse(?s, ?hctx) :-
+    InitHContextRequest(?s),
+    ?hctx = UNIQUE_HCONTEXT.
+
+#ifdef HEAPDLS
+  DynamicContextToContext([?value], ?dynCtx) :-
+    Value_byDynamicHeap(?heap1, ?value),
+    DynamicContextHeap1(?heap1, ?dynCtx).
+
+  DynamicContextToContext(?ctx, ?dynCtx) :-
+    isDynamicContext(?dynCtx),
+    !DynamicContextHeap1(_, ?dynCtx),
+    isImmutableContext(?ctx).
+#endif           
+
+
+}

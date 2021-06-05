@@ -1,0 +1,59 @@
+// Context-sensitive pointer analysis with context of 2 types and a
+// context-sensitive heap abstraction.
+
+// In this analysis, the real context is a pair of Types and the real heap
+// context a single Type. Keeping mapping functions is the way to handle
+// analyses where HContext = Context (since the language considers them
+// different types).  The type is not always a class type, because of arrays
+// currently being a non-class subtype of Object
+ContextFromRealContext[?type1, ?type2] = ?ctx ->
+  Context(?ctx), Type(?type1), Type(?type2).
+lang:constructor(`ContextFromRealContext).
+RealContext1FromContext[?ctx] = ?type ->
+  Context(?ctx), Type(?type).
+RealContext2FromContext[?ctx] = ?type ->
+  Context(?ctx), Type(?type).
+RealContext1FromContext[?ctx] = ?type1,
+RealContext2FromContext[?ctx] = ?type2 <-
+  ContextFromRealContext[?type1, ?type2] = ?ctx.
+
+HContextFromRealHContext[?type] = ?hctx ->
+  HContext(?hctx), Type(?type).
+lang:constructor(`HContextFromRealHContext).
+RealHContextFromHContext[?hctx] = ?type ->
+  HContext(?hctx), Type(?type).
+RealHContextFromHContext[?hctx] = ?type <-
+  HContextFromRealHContext[?type] = ?hctx.
+
+
+// Merge optimization hack
+
+// For this analysis, we only need two of the parameters that may influence the
+// new context object.
+MyMergeBasis(?hctx, ?value) <-
+  MergeBasis(_, _, ?hctx, ?value).
+
+// We create new context objects sparingly, because of the high cost.  We also
+// cache them, so they can be looked up without a join.
+Context(?calleeCtx),
+ContextFromRealContext[RealHContextFromHContext[?hctx], Value:DeclaringType[?value]] = ?calleeCtx,
+CachedMerge[?hctx, ?value] = ?calleeCtx <-
+  MyMergeBasis(?hctx, ?value).
+
+
+//// ---- Leftovers from experiment below ----
+//// What if we had context-sensitive reflective calls but separated from
+//// regular ones (with unique context constructors)
+//ReflectiveContextFromRealContext[?type1, ?type2] = ?ctx ->
+//  Context(?ctx), Type(?type1), Type(?type2).
+//lang:constructor(`ReflectiveContextFromRealContext).
+//
+//RealContext1FromContext[?ctx] = ?type1,
+//RealContext2FromContext[?ctx] = ?type2 <-
+//  ReflectiveContextFromRealContext[?type1, ?type2] = ?ctx.
+//
+//ReflectiveHContextFromRealHContext[?type] = ?hctx ->
+//  HContext(?hctx), Type(?type).
+//lang:constructor(`ReflectiveHContextFromRealHContext).
+//RealHContextFromHContext[?hctx] = ?type <-
+//  ReflectiveHContextFromRealHContext[?type] = ?hctx.

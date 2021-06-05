@@ -1,0 +1,61 @@
+// Context-sensitive pointer analysis with context of One call site.
+
+#include "../../main/single-phase-analysis.dl"
+#include "../../main/configuration.dl"
+
+#define UNIQUE_HCONTEXT "<<unique-hcontext>>"
+
+.comp OneCallSiteSensitiveConfiguration : AbstractConfiguration {
+
+  // In this analysis, the real context is a MethodInvocation.
+  .type Context = [ invocation:MethodInvocation ]
+
+  // This analysis has no context for heap objects.
+  // This is emulated by creating a single HContext object,
+  // which is used everywhere.
+  .type HContext
+
+  ContextResponse(?callerCtx, ?hctx, ?invo, ?value, ?calleeCtx) :-
+    ContextRequest(?callerCtx, ?hctx, ?invo, ?value, ?tomethod),
+    ?calleeCtx = [?invo],
+    ?tomethod = ?tomethod.
+
+  StaticContextResponse(?callerCtx, ?invo, ?calleeCtx) :-
+    StaticContextRequest(?callerCtx, ?invo),
+    ?calleeCtx = [?invo].
+
+  RecordContextResponse(?ctx, ?value, ?var, ?hctx) :-
+  RecordContextRequest(?ctx, ?value, ?var),      
+    ?hctx = UNIQUE_HCONTEXT.
+
+  // For this analysis the context of a method call corresponds to the
+  // invocation site of the method.
+
+  ThreadStartContextResponse(?callerCtx, ?hctx, ?value, ?newCtx) :-
+    ThreadStartContextRequest(?callerCtx, ?hctx, ?value),
+    ?newCtx = ?callerCtx.
+
+  StartupContextResponse(?hctx, ?value, ?newCtx) :-
+    StartupContextRequest(?hctx, ?value),
+    StartupInvocation(?invocation),
+    ?newCtx = [?invocation].
+
+  FinalizerRegisterContextResponse(?callerCtx, ?inmethod, ?value, ?newCtx) :-
+    FinalizerRegisterContextRequest(?callerCtx, ?inmethod, ?value),
+    FakeInvocation_RegisterFinalize(?value, ?invocation),
+    ?newCtx = [?invocation].
+
+  InitContextResponse(?invocation, ?ctx) :-
+    InitContextRequest(?invocation),
+    ?ctx = [?invocation].
+
+  InitHContextResponse(?s, ?hctx) :-
+    InitHContextRequest(?s),
+    ?hctx = UNIQUE_HCONTEXT.
+
+  .decl StartupInvocation(?invocation:MethodInvocation)
+
+  StartupInvocation("<<jvm-startup-context>>").
+
+
+}

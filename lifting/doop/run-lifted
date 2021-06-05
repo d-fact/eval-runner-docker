@@ -1,0 +1,22 @@
+#!/bin/bash
+declare -a BENCHMARKS=(GPL BerkeleyDB Lampiro MM08 Prevayler)
+ANALYSIS=context-insensitive
+#ANALYSIS=1-call-site-sensitive+heap --information-flow minimal
+#ANALYSIS=1-type-sensitive+heap 
+
+MODE=lifted
+
+rm -rf output/*
+rm -f /tmp/annotations.tsv
+rm -f /tmp/model.prop
+
+for b in "${BENCHMARKS[@]}"; 
+do
+	echo "Benchmark: " $b
+	cp features/${b}/annotations.tsv /tmp
+
+	./doop --id ${MODE} -a ${ANALYSIS} -i benchmarks/${b}.jar --dont-report-phantoms --Xunique-facts --Xignore-factgen-errors --Xfacts-subset APP_N_DEPS > out.txt
+	rm -rf out/${ANALYSIS}/${MODE}/facts
+	mv out/${ANALYSIS}/${MODE} output/${b}
+	mv out.txt output/${b}
+done
