@@ -12,6 +12,7 @@ with a focus on their changes and tractability across versions throughout softwa
 Multiple software evolution management tasks have been implemented with DiffBase, demonstrating its
 usefulness and efficiency.
 
+A companion website with more detailed documentation can be found at: <https://d-fact.github.io/use/cslicer/>.
 
 #### Directory Structure
 ```
