@@ -100,16 +100,13 @@ slicing-driver`.
 
 The mount point of the volume can be checked using `docker volume inspect diffbase_datavol`. (If
 there is no such data volume, you can check the correct name of the data volume using `docker volume
-ls`.)  A typical path looks like this: `/var/lib/docker/volumes/diffbase_datavol/_data`.  This
-directory can be directly accessed on Linux, but it requires some extra steps on macOS and Windows.
+ls`.)  A typical path looks like this: `/var/lib/docker/volumes/diffbase_datavol/_data`.  
 
-Assuming the data volume is at the above path, we create a new Docker container with the volume mounted.
-```sh
-docker run --rm -it -v /:/docker alpine:edge
-```
-We can then access its contents with the spawned shell.
-
-A detailed guide can be found at this blog post:
+This directory can be directly accessed on Linux, but it requires some extra steps on macOS and
+Windows.  Assuming the data volume is at the above path, we create a new Docker container with the
+volume mounted: `docker run --rm -it -v /:/docker alpine:edge`. 
+We can then access its contents within the spawned shell.
+A detailed guide for inspecting data volumes on macOS/Windows can be found in this blog post:
 <https://www.freshblurbs.com/blog/2017/04/16/inspect-docker-volumes-on-mac.html>.
 
 The data volume contains the following sub-directories.
@@ -140,7 +137,8 @@ E.g., in `resources/file-level/output/facts/CSV##b230a6f5##7310e5c6` there are f
 └── 90-test_classes.ta
 ```
 
-E.g.`20-deps.ta` contains static dependencies, such as the following snippet. It contains following information:
+E.g.`20-deps.ta` contains static dependencies, such as the following snippet. It
+contains following information:
 + the method `next()` calls `getNextRecord()` in the first anonymous inner class of `CSVParser`;
 + `next()` is a method;
 + `Token` is a class;
