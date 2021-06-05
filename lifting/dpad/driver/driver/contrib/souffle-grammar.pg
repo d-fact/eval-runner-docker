@@ -1,0 +1,393 @@
+// Grammar for parsing programs written in (a subset of the) Souffle Datalog language.
+// https://souffle-lang.github.io
+// This grammar is written in the syntax of the Python Parglare parser generator.
+
+Program: DeclarationList ;
+
+DeclarationList: EMPTY
+               | Declaration DeclarationList
+               ;
+
+Declaration: TypeDecl
+           | InputDecl
+           | OutputDecl
+           | RelationDecl
+           | Rule
+           | Init
+           | Fact
+           | Component
+           | FunctorDecl
+           | CompInit
+           | Pragma
+           | Override
+           ;
+
+Override: OVERRIDE Identifier
+        ;
+
+FunctorDecl: FUNCTOR Identifier "(" IdentifierList ")" ":" Identifier
+    ;
+
+Init: INIT Identifier "=" CompType
+    ;
+
+CompInit: INSTANTIATE Identifier "=" CompType
+        ;
+
+CompType: Identifier TypeParameters
+        ;
+
+TypeParameters: EMPTY
+              | "<" TypeParameterList ">"
+              ;
+
+TypeParameterList: TypeId
+                 | TypeId "," TypeParameterList
+                 ;
+
+TypeId: Identifier
+      | TypeId DOT Identifier
+      ;
+
+Pragma: PRAGMA String String
+      | PRAGMA String
+      ;
+
+ComponentType: Identifier TypeParameters
+             ;
+
+Component: COMP ComponentType ComponentBody
+         | COMP ComponentType ":" ComponentTypeList ComponentBody
+         ;
+
+ComponentTypeList : ComponentType
+                  | ComponentType "," ComponentTypeList
+                  ;
+
+ComponentBody: "{" DeclarationList "}"
+             ;
+
+TypeDecl: TYPE Identifier
+        | TYPE Identifier "<:" PredefinedType
+        | TYPE Identifier "=" UnionType
+        | TYPE Identifier "=" "[" "]"
+        | TYPE Identifier "=" "[" RecordType "]"
+        | SYMBOL_TYPE Identifier
+        | NUMBER_TYPE Identifier
+        ;
+
+PredefinedType: TNUMBER
+              | TFLOAT
+              | TSYMBOL
+              | TUNSIGNED
+              ;
+
+UnionType : TypeId
+          | TypeId "|" UnionType
+          ;
+
+RecordType: Identifier ":" TypeId
+          | Identifier ":" TypeId "," RecordType
+          ;
+
+RelationDecl: DECL RelationList RelationBody Qualifiers
+            ;
+
+RelationList: Identifier
+            | Identifier "," RelationList
+            ;
+
+RelationBody: "(" ParameterList ")"
+            ;
+
+Qualifiers: EMPTY
+          | Qualifier Qualifiers
+          ;
+
+Qualifier: OUTPUT_QUALIFIER
+         | INPUT_QUALIFIER
+         | PRINTSIZE_QUALIFIER
+         | OVERRIDABLE_QUALIFIER
+         | INLINE_QUALIFIER
+         | BRIE_QUALIFIER
+         | BTREE_QUALIFIER
+         | EQREL_QUALIFIER
+         ;
+
+KVValue : String
+        | "True"
+        | Identifier
+        ;
+
+KeyValuePairs : EMPTY
+              | Identifier "=" KVValue
+              | Identifier "=" KVValue "," KeyValuePairs
+              ;
+
+// load_head in the souffle grammar
+InputDecl: INPUT IodirectiveList
+         ;
+
+// store_head in the souffle grammar
+OutputDecl: OUTPUT IodirectiveList
+          | PRINTSIZE IodirectiveList
+          ;
+
+IodirectiveList : IoRelationList
+                | IoRelationList "(" KeyValuePairs ")"
+                ;
+
+IoRelationList : RelId
+               | RelId "," IoRelationList
+               ;
+
+ParameterList: Parameter "," ParameterList
+             | Parameter
+             | EMPTY
+             ;
+
+Parameter: Identifier ":" Identifier
+         ;
+
+IdentifierList: EMPTY
+              | IdentifierList "," Identifier
+              ;
+
+ArgumentList: Argument
+            | Argument "," ArgumentList
+            ;
+
+Argument: Identifier "=" String
+        ;
+
+Fact: Atom DOT
+    ;
+
+Head: Atom
+    | Head "," Atom
+    ;
+
+Term: Literal
+    | "!" Term
+    | "(" Disjunction ")"
+    ;
+
+Disjunction: Conjunction
+           | Conjunction OR Disjunction
+           ;
+
+Conjunction: Term
+           | Term "," Conjunction
+           ;
+
+Arg: String
+   | "_"
+   | "$"
+   | "@" Identifier FunctorList
+   | Identifier
+   | FLOAT
+   | NUMBER
+   | UNUMBER
+   | "(" Arg ")"
+   | Arg "lor" Arg  {0, left}
+   | Arg "land" Arg {1, left}
+   | Arg "bor" Arg  {2, left}
+   | Arg "bxor" Arg {3, left}
+   | Arg "band" Arg {4, left}
+   | Arg "+" Arg    {5, left}
+   | Arg "-" Arg    {5, left}
+   | Arg "*" Arg    {6, left}
+   | Arg "/" Arg    {6, left}
+   | Arg "%" Arg    {6, left}
+   | Arg "^" Arg    {9, right}
+   | FunctionCall
+   | Arg AS Identifier
+   | "bnot" Arg     {7}
+   | "lnot" Arg     {7}
+   | "-" Arg        {8}
+   | "[" "]"
+   | "[" RecordList "]"
+   | Aggregate
+   | NIL
+   ;
+
+FunctorList : "(" ")"
+            | "(" FunctorArgs ")"
+            ;
+
+FunctorArgs : Arg
+            | Arg "," FunctorArgs
+            ;
+
+RecordList : Arg
+           | Arg "," RecordList
+           ;
+
+ArgList : EMPTY
+        | Arg
+        | Arg "," ArgList
+        ;
+
+Atom : RelId "(" ArgList ")"
+     ;
+
+RelId : Identifier
+      | Identifier DOT RelId
+      ;
+
+Attributes : EMPTY
+           | Identifier ":" TypeId
+           | Identifier ":" TypeId "," Attributes
+           ;
+
+Literal : Arg Relop Arg
+        | Atom
+        | "match" "(" Arg "," Arg ")"
+        | "contains" "(" Arg "," Arg ")"
+        | TRUE
+        | FALSE
+        ;
+
+Relop: "<" | ">" | "=" | "!=" | ">=" | "<=" ;
+
+Aggregate : "min" Arg ":" AggregateBody
+          | "max" Arg ":" AggregateBody
+          | "sum" Arg ":" AggregateBody
+          | "mean" Arg ":" AggregateBody
+          | "count" ":" AggregateBody
+          ;
+
+AggregateBody :  Atom
+              // | "{" Body "}" // TODO
+              | "{" Conjunction "}"
+              ;
+
+Body : Conjunction
+     | Conjunction OR Body;
+
+FunctionCall: "min" "(" FunctionArgumentList ")"
+            | "max" "(" FunctionArgumentList ")"
+            | "cat" "(" FunctionArgumentList ")"
+            | "ord" "(" FunctionArgumentList ")"
+            | "strlen" "(" FunctionArgumentList ")"
+            | "tonumber" "(" FunctionArgumentList ")"
+            | "tostring" "(" FunctionArgumentList ")"
+            | "substr" "(" FunctionArgumentList ")"
+            | "match" "(" FunctionArgumentList ")"
+            | "contains" "(" FunctionArgumentList ")"
+            | "to_string" "(" FunctionArgumentList ")"
+            | "to_number" "(" FunctionArgumentList ")"
+            | "to_float" "(" FunctionArgumentList ")"
+            | "to_unsigned" "(" FunctionArgumentList ")"
+            | "ftoi" "(" FunctionArgumentList ")"
+            | "itof" "(" FunctionArgumentList ")"
+            | "itou" "(" FunctionArgumentList ")"
+            | "utoi" "(" FunctionArgumentList ")"
+            | "utof" "(" FunctionArgumentList ")"
+            | "ftou" "(" FunctionArgumentList ")"
+            | "sin" "(" FunctionArgumentList ")"
+            | "cos" "(" FunctionArgumentList ")"
+            | "tan" "(" FunctionArgumentList ")"
+            | "asin" "(" FunctionArgumentList ")"
+            | "acos" "(" FunctionArgumentList ")"
+            | "atan" "(" FunctionArgumentList ")"
+            | "sinh" "(" FunctionArgumentList ")"
+            | "cosh" "(" FunctionArgumentList ")"
+            | "tanh" "(" FunctionArgumentList ")"
+            | "asinh" "(" FunctionArgumentList ")"
+            | "acosh" "(" FunctionArgumentList ")"
+            | "atanh" "(" FunctionArgumentList ")"
+            | "log" "(" FunctionArgumentList ")"
+            | "exp" "(" FunctionArgumentList ")"
+            ;
+
+FunctorCall: "@" Identifier "(" FunctionArgumentList ")"
+           ;
+
+FunctionArgumentList: Arg
+                    | Arg "," FunctionArgumentList
+                    ;
+
+Plan_or_Empty: EMPTY
+             | Plan
+             ;
+
+Plan: PLAN PlanList
+    ;
+
+PlanList: PlanNumList
+        | PlanNumList "," PlanList
+        ;
+
+PlanNumList: NUMBER ":" "(" NumberList ")"
+           ;
+
+NumberList: NUMBER
+          | NUMBER "," NumberList
+          ;
+
+Rule : Head ":-" Body DOT Plan_or_Empty
+     ;
+
+////// Special stuff
+
+LAYOUT: LayoutItem
+      | LAYOUT LayoutItem
+      ;
+
+LayoutItem: WS
+          | LineComment
+          | Comment
+          | EMPTY
+          ;
+
+CorNCs: CorNC | CorNCs CorNC | EMPTY;
+CorNC: Comment | NotComment | WS;
+Comment: "/*" CorNCs "*/" ;
+
+terminals
+DOT: "." ;
+IO: "IO" ;
+FILE: "\"file\"" ;
+FILENAME: "filename" ;
+DELIMITER: "delimiter" ;
+TYPE: ".type" ;
+SYMBOL_TYPE: ".symbol_type" ;
+NUMBER_TYPE: ".number_type" ;
+FUNCTOR: ".functor" ;
+INIT: ".init" ;
+COMP: ".comp" ;
+DECL: ".decl" ;
+INPUT: ".input" ;
+OUTPUT: ".output" ;
+OUTPUT_QUALIFIER: "output" ;
+INPUT_QUALIFIER: "input" ;
+PRINTSIZE_QUALIFIER: "printsize" ;
+OVERRIDABLE_QUALIFIER: "overridable" ;
+INLINE_QUALIFIER: "inline" ;
+BRIE_QUALIFIER: "brie" ;
+BTREE_QUALIFIER: "btree" ;
+EQREL_QUALIFIER: "eqrel" ;
+OR: ";" ;
+WS: /\s+/ ;
+LineComment: /\/\/.*/ ;
+String: /\"[^"]*\"/ ;
+INSTANTIATE: "instantiate" ;
+PRAGMA: ".pragma" ;
+PRINTSIZE: ".printsize" ;
+AS: "as" ;
+NIL: "nil" ;
+TRUE: "true" ;
+FALSE: "false" ;
+FLOAT: /([0-9]+)[.]([0-9]+)/ ;
+NUMBER: /([1-9][0-9]*)|(0x[a-fA-F0-9]+)|(0b[0-1][0-1]*)|(0)/ ;
+UNUMBER: /([1-9][0-9]*u)|(0x[a-fA-F0-9]+u)|(0b[0-1][0-1]*)u|(0u)/ ;
+Identifier: /[_a-zA-Z\?][_\d\w\?]*/;
+NotComment: /((\*[^\/])|[^\s*\/]|\/[^\*])+/ ;
+PLAN: ".plan" ;
+KEYWORD: /\w+/ ;  // special Parglare rule: match keywords entirely
+OVERRIDE: ".override" ;
+TNUMBER: "number" ;
+TSYMBOL: "symbol" ;
+TUNSIGNED: "unsigned" ;
+TFLOAT: "float" ;

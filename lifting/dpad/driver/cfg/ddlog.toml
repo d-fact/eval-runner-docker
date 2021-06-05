@@ -1,0 +1,41 @@
+# configuration
+[mode]
+vcs = "git"
+build_system = "maven"
+
+[input]
+repo_path = ""
+project_name = "" # if blank, will be basename of repo_path
+rev_range = "b230a6f5..c20cd95c" # git revision selection
+
+[exe-ctrl]
+# full_jar = true
+# incr_jar = true
+multi_process = 4  # if number <= 0 then os.cpu_count() is used
+# steps_to_run = ["collect", "facts-diff", "incr-analysis"]
+steps_to_run = ["collect", "convert-base-facts", "ddlog-base-version", "facts-diff"]
+
+[doop]
+flavor = "orig"
+doop_root = "~/Projects/doop/doop-orig/doop"
+analysis = "micro"
+main_class = ""
+
+[doop.ddlog]
+doop_program = "~/Projects/ddlog/program/micro/self-contained-expand-disjunc.dl"
+
+[doop.annotation]
+annotate = false
+sha1digits = 8
+
+[ddlog]
+pe_bin = "~/Projects/ddlog/program/micro/converted_ddlog/target/release/converted_cli"
+
+[facts-diff]
+diff_bin = "~/Projects/playground/rust/sdiff/target/release/sdiff"
+
+[output]
+output_dir =  ".dpad"
+time_suffix = true
+store_metadata = true
+

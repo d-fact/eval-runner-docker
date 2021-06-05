@@ -1,0 +1,31 @@
+#+TITLE: README
+#+DATE:
+#+AUTHOR:
+#+OPTIONS: timestamp:nil
+#+OPTIONS: ^:{}
+
+
+** Configuration
++ Refer to =cfg/= for configurations
++ Setup =repo_path= and =rev_range= 
+
+** Jar generation
+#+BEGIN_SRC sh
+python3 main.py -h
+usage: main.py [-h] -c config [-l loglevel] [--full] [--incr]
+
+D-Pad driver: utilities for program analysis on multiple versions
+
+optional arguments:
+  -h, --help   show this help message and exit
+  -c config    configuration file
+  -l loglevel  logging level, default WARNING
+  --incr       override configuration, build incrementally
+  -o, --out    specify output path
+#+END_SRC
+For example, generate full bytecode with configuration file =example.toml=.
+#+BEGIN_SRC sh
+python3 main.py -c example.toml
+#+END_SRC
+
+** Run doop

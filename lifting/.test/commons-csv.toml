@@ -1,0 +1,37 @@
+# configuration
+[mode]
+vcs = "git"
+build_system = "maven"
+
+[input]
+repo_path = "/lifting/.test/commons-csv"
+project_name = "" # if blank, will be basename of repo_path
+# rev_range = "b230a6f5..7310e5c6" # git revision selection
+#rev_range = "7310e5c6~10..7310e5c6"
+rev_range = "7310e5c6~10..7310e5c6"
+
+[exe-ctrl]
+# full_jar = true
+# incr_jar = true
+multi_process = 1  # if number <= 0 then os.cpu_count() is used
+steps_to_run = ["collect", "merge", "analysis"]
+# steps_to_run = ["gumtree"]
+#steps_to_run = ["collect", "merge", "analysis"]
+
+[doop]
+flavor = "lifted"
+doop_root = "/lifting/doop"
+analysis = "1-call-site-sensitive+heap"
+#analysis = "context-insensitive"
+main_class = "CSVParser"
+
+[doop.annotation]
+sha1digits = 8
+
+[merge]
+merger_bin = "/lifting/sdiff"
+
+[output]
+output_dir =  ".dpad"
+time_suffix = true
+store_metadata = true

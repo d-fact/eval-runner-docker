@@ -183,6 +183,7 @@ command: bash -c "
 # 	"
 ```
 	
+--- 
 
 ### Evaluate Regression Test Selection (Sec. 4.3)
 ```sh
@@ -278,6 +279,7 @@ It will open a bash and there are `run-exp.sh` and `run-all.sh` in the current d
 `run-exp.sh`, it will fetch a git repo, build it and run a pointer-analysis with doop using lifted
 version as well as un-lifted version.
 
+You can check the contents of two scripts [here]() and [here]()
 
 Users can inspect result in `.dpad/` sub-directory under each repo. E.g., for commons-csv, the
 cloned repo should locate at `/lifting/.test/commons-csv` in the container. Then there are
@@ -327,6 +329,9 @@ For space usage in Table 4 in the paper, users can use following command to chec
 % du -s merged
 4876
 ```
+
+---
+
 
 ## Reusing Components
 Besides the replication of evaluation in the paper, all the components in the artifacts can be

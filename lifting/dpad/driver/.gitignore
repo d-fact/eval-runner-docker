@@ -1,0 +1,18 @@
+# build
+__pycache__
+
+# IDE 
+.idea/
+
+# misc
+tags
+etags
+*.html
+
+# temp files
+\#*\#
+.\#*
+*~
+
+# parglare
+*.pgt

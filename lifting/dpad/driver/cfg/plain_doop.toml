@@ -1,0 +1,30 @@
+# configuration
+# for baseline doop
+[mode]
+vcs = "git"
+build_system = "maven"
+
+[input]
+repo_path = ""
+project_name = "" # if blank, will be basename of repo_path
+rev_range = "b230a6f5..c20cd95" # git revision selection
+
+[exe-ctrl]
+# full_jar = true
+# incr_jar = true
+multi_process = 4  # if number <= 0 then os.cpu_count() is used
+steps_to_run = ["compile", "doop"]  # only two steps for baseline
+
+[doop]
+flavor = "orig"
+doop_root = "~/Projects/doop/doop-orig/doop"
+analysis = "context-insensitive"
+
+[doop.annotation]
+sha1digits = 8
+
+[output]
+output_dir =  ".dpad"
+time_suffix = true
+store_metadata = true
+
