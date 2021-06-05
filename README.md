@@ -262,14 +262,28 @@ bug-id. And you can check them against the expected full results in this reposit
 
 ### Evaluate Lifting (Sec. 4.4)
 Evaluation of lifting is under `lifting` sub-directory. Cd into `lifting` and build the docker image
-as below. The process will fetch some dependencies remotely and build them from source (in the
-docker of course), which might take some time.
+as below. 
 
 ```sh
 cd lifting
 docker build . -t lifting-eval
 ```
 
+After successful build, users can start container with entrypoint set as bash. 
+```sh
+docker run --rm -it --entrypoint bash lifting-eval
+```
+
+It will open a bash and there are `run-exp.sh` and `run-all.sh` in the current directory. By running
+`run-exp.sh`, it will fetch a git repo, build it and run a pointer-analysis with doop using lifted
+version as well as un-lifted version.
+
+
+Users can inspect result in `.dpad/` sub-directory under each repo. E.g., for commons-csv, the
+cloned repo should locate at `/lifting/.test/commons-csv` in the container. Then there are
+`/lifting/.test/commons-csv/.dpad/fse21-eval/` containing generated facts, logs and time statistics
+for the lifted version. and `/lifting/.test/commons-csv/.dpad/fse21-eval-orig` for the un-lifted
+version.
 
 
 ## Reusing Components
