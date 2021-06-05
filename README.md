@@ -5,13 +5,12 @@
 # DiffBase
 
 
-**DiffBase** is a toolset for extracting, storing and supporting efficient querying and
-manipulation of differential facts, a uniform exchangeable representation of information extracted
-from software artifacts. Differential facts can be any information about software artifacts and
-especially highlight their changes and linkage between versions along the software evolution.
-
-We implement multiple software evolution management tasks with our tools to prove its usefulness and
-efficiency.
+**DiffBase** is a toolset for extracting, storing and supporting efficient querying and manipulation
+of *differential facts*, a uniform exchangeable representation of information extracted from
+software development artifacts.  Differential facts can be any information about software artifacts
+with a focus on their changes and tractability across versions throughout software evolution.
+Multiple software evolution management tasks have been implemented with DiffBase, demonstrating its
+usefulness and efficiency.
 
 
 #### Directory Structure
@@ -37,8 +36,8 @@ efficiency.
 └──📜 diffbase.pdf
 ```
 
-There are multiple Dockerfiles inside this repo, for replicating the evaluations in the paper and
-showing the reusability of components.
+There are multiple Dockerfiles inside this repository, for replicating the evaluations in the paper
+and showing the reusability of components.
 
 | Files/Dirs       | Descriptions                                           |
 |------------------|--------------------------------------------------------|
@@ -51,7 +50,8 @@ showing the reusability of components.
 
 
 #### Pre-requisites
-+ Clone this repo `git clone --depth 1 https://github.com/d-fact/eval-runner-docker diffbase`
++ Clone this repository using: `git clone --depth 1 https://github.com/d-fact/eval-runner-docker
+  diffbase`
 + Docker (tested with version 20.10.5, recent version should also work)
   - Official Docker Installation Guide at https://docs.docker.com/get-docker/ 
 + docker-compose (tested with version 1.25.0)
@@ -59,7 +59,9 @@ showing the reusability of components.
 
 
 ## Scripts for Quick Start
-We provide quick scripts for building and running dockers, you can use `quick-slicing.sh` and `quick-rts.sh`.
+The easiest way to reproduce the experiment results is to use the provided quick-start scripts.  We
+provide two scripts for building and running docker containers, i.e., `quick-slicing.sh` and
+`quick-rts.sh`, for reproducing the two experiments described in the paper, respectively.
 
 You can also check the following section for detailed step-by-step explanations.
 
@@ -71,10 +73,9 @@ root path of the cloned repo, we can run the following command to build the imag
 docker-compose -f docker-compose.yml build 
 ```
 
-If successfully built, there would be two images built --- *diffbase_slicing-driver* and
-*diffbase_rts-driver*. (They should be shown in the image list if issuing `docker image ls` on
-cmdline, and their names are usually prefixed by the folder name. So you did not clone the repo as
-`diffbase`, the image names can be different.)
+After successful completion, there will be two images--- *diffbase_slicing-driver* and
+*diffbase_rts-driver*. They should be shown in the image list, and their names are usually prefixed
+by the folder name. So you did not clone the repo as `diffbase`, the image names can be different.
 
 ```sh
 % docker image ls
@@ -91,14 +92,15 @@ docker-compose up slicing-driver
 This takes about three minutes (on my machine with Xeon(R) E5-1650 v3, 16GB RAM and HDD).
 
 #### Inspect results in data volume
-Outputs and intermediate data are in the data volume created during `docker-compose up
+The outputs and intermediate data are stored in the data volume created by `docker-compose up
 slicing-driver`.
 
-Mountpoint of the volume can be checked using `docker volume inspect diffbase_datavol`. (If there is
-no such data volume, you can check the correct name of the data volume using `docker volume ls`.) 
-The path is `/var/lib/docker/volumes/diffbase_datavol/_data` on my system.
+The mount point of the volume can be checked using `docker volume
+inspect diffbase_datavol`. (If there is no such data volume, you can
+check the correct name of the data volume using `docker volume ls`.)
+A typical path looks like this: `/var/lib/docker/volumes/diffbase_datavol/_data`.
 
-The data volume contains following subdirs.
+The data volume contains the following sub-directories.
 ```
 % tree -L 1 /var/lib/docker/volumes/diffbase_datavol/_data
 .
@@ -111,8 +113,8 @@ The data volume contains following subdirs.
 └── slicing-results
 ```
 
-After `docker-compose up` finished and exited, following directories (under data volume) should
-contain output.
+After `docker-compose up` finished and exited, the following
+directories (under data volume) should contain the generated output.
 
 #### Generated Facts
 `resources/file-level/output/facts` is the directory for facts generated.
