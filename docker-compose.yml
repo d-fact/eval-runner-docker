@@ -10,16 +10,22 @@ services:
     # tty: true        # docker run -t
     volumes:
       - datavol:/data
+    # ----------------------------------
+    # Uncomment the following block to enable full-scale evaluation:
     # command: bash -c "
     #   python3 -m hislicing.main --prepare /data/json/name_eval.json -l info
     #   && python3 -m hislicing.main --fact /data/json/group_eval.json -l info
     #   && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_eval.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
     #   "
+    # ----------------------------------
+    # ----------------------------------
+    # Comment the following block to disable sample run:
     command: bash -c "
       python3 -m hislicing.main --prepare /data/json/name_one.json -l info
       && python3 -m hislicing.main --fact /data/json/group_one.json -l info
       && python3 -m run_grok -p /data/resources/file-level/output/facts -g /data/json/group_one.json -s /data/grok-scripts/slice_ver.ql -o slice.out -l info
       "
+    # ----------------------------------
   rts-driver:
     environment:
       - PYTHONUNBUFFERED=1
@@ -27,6 +33,17 @@ services:
     container_name: facts-rts
     volumes:
       - datavol:/data
+    # ----------------------------------
+    # Uncomment the following block to enable full-scale evaluation:
+    # command: bash -c "
+    #   tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
+    #   && python3 -m rts.main -l info --alt-config rts/config/docker.cfg -f --ensure-all-change-types
+    #   && python3 -m rts.main -l INFO --alt-config rts/config/docker.cfg -s /data/grok-scripts/rts5-imprecise.ql
+    #   && python3 -m rts.main -l INFO --alt-config rts/config/docker.cfg -v --count-method-json /data/rts-exp/results.json
+    #   && python3 -m rts.main -l INFO --alt-config rts/config/docker.cfg --percent /data/rts-exp/results.json
+    #   "
+    # ----------------------------------
+    # Comment the following block to disable sample run:
     command: bash -c "
       tar xf /data/defects4j/rts-repos.tar.xz -C /data/defects4j/project_repos
       && python3 -m rts.main --debug -l info --alt-config rts/config/docker.cfg -f --ensure-all-change-types
@@ -34,5 +51,6 @@ services:
       && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg -v --count-method-json /data/rts-exp/results.json
       && python3 -m rts.main --debug -l INFO --alt-config rts/config/docker.cfg --percent /data/rts-exp/results.json
       "
+    # ---------------------------------
 volumes:
   datavol: {}
