@@ -380,6 +380,20 @@ usage:
 ```
 
 ### History Facts Extractor
-Check [ext-gitfacts](ext-gitfacts) for details. Note that we have not provided a docker for this
-extractor and user need rust/cargo toolchains to use it.
+There is a `Dockerfile` inside `ext-gitfacts` sub-directory which can be used to build a docker for
+illustrating the usage this extractor.
 
+```sh
+docker build . -t ext-gitfacts
+```
+
+For example, if you want to use this extractor on a git repo located at `/tmp/repos/the-repo` on the
+host machine (outside of docker containers), the following command can be used.
+
+```sh
+docker run -it --rm -v /tmp/repos:/data ext-gitfacts /data/the-repo -o /data/history.fact
+```
+
+Then generated facts would reside at `/tmp/repos/history.fact`.
+
+You can also check [ext-gitfacts](ext-gitfacts) for more details on usages. 
